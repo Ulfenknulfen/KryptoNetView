@@ -1,0 +1,3427 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="html-title">KryptoNetView – Heimnetzwerk Topologie</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            darkbg: '#0f0f12',
+            panelbg: '#18181c',
+            cardbg: '#222228',
+            ciscocyan: '#00bcef',
+            guestamber: '#f59e0b',
+            serverindigo: '#818cf8',
+            iotpurple: '#c084fc',
+            phonegreen: '#34d399',
+            printpink: '#f472b6',
+            sensoremerald: '#10b981'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body { font-family: 'Inter', sans-serif; background-color: #0f0f12; color: #d4d4d8; user-select: none; }
+    code, .font-mono { font-family: 'JetBrains Mono', monospace; }
+    
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f0f12; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+
+    .node-element {
+      cursor: pointer;
+      transition: filter 0.15s ease, stroke 0.15s ease;
+    }
+    .node-element.dragging {
+      cursor: grabbing;
+      filter: drop-shadow(0 0 12px rgba(0, 188, 239, 0.8));
+    }
+    .node-element:hover rect.node-box {
+      stroke: #00bcef !important;
+      filter: drop-shadow(0 0 8px rgba(0, 188, 239, 0.5));
+    }
+    .frame-element.editable {
+      cursor: move;
+    }
+    .frame-resize-handle {
+      cursor: nwse-resize;
+    }
+    .drawing-canvas {
+      cursor: crosshair !important;
+    }
+    select option { background-color: #18181b; color: #e4e4e7; }
+    .pulse-glow {
+      animation: pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .edit-active-banner {
+      background: linear-gradient(90deg, rgba(0, 188, 239, 0.15), rgba(245, 158, 11, 0.15));
+      border-bottom: 1px solid rgba(0, 188, 239, 0.3);
+    }
+    .custom-dropdown-list {
+      max-height: 220px;
+      overflow-y: auto;
+    }
+  </style>
+  <!-- KRYPTONETVIEW-EMBEDDED-STATE: wird automatisch beim Speichern ueberschrieben -->
+  <script id="embedded-state" type="application/json">{"format":"kryptonetview-embedded-v1","savedAt":1793200788195,"config":{"title":"Familie B. – Heimnetzwerk Topologie","subnet":"192.168.178.0/24","switchModel":"Cisco WS-C2960S-48LPS-L","switchIp":"192.168.178.8"},"categories":[{"id":"router","nameKey":"cat_label_router","name":"Router","icon":"fa-network-wired","color":"#00bcef"},{"id":"gateways","nameKey":"cat_label_gateways","name":"Gateways","icon":"fa-tower-broadcast","color":"#f59e0b"},{"id":"wlan_ap","nameKey":"cat_label_wlanap","name":"WLAN Access Point","icon":"fa-wifi","color":"#38bdf8"},{"id":"switch","nameKey":"cat_label_switch","name":"Switch","icon":"fa-sitemap","color":"#00bcef"},{"id":"server","nameKey":"cat_label_server","name":"Server","icon":"fa-server","color":"#818cf8"},{"id":"endgeraet","nameKey":"cat_label_endgeraet","name":"End Device","icon":"fa-laptop","color":"#06b6d4"},{"id":"infrastructure","nameKey":"cat_label_infra","name":"Infrastructure","icon":"fa-sitemap","color":"#38bdf8"},{"id":"sensors","nameKey":"cat_label_sensors","name":"Sensors","icon":"fa-gauge-high","color":"#10b981"},{"id":"voice","nameKey":"cat_label_voice","name":"VoIP Phones","icon":"fa-phone-flip","color":"#34d399"},{"id":"cameras","nameKey":"cat_label_cameras","name":"Smart IoT & Cam","icon":"fa-video","color":"#c084fc"},{"id":"printers","nameKey":"cat_label_printers","name":"Printers","icon":"fa-print","color":"#f472b6"},{"id":"guest","nameKey":"cat_label_guest","name":"Guest Network (179.x)","icon":"fa-shield-halved","color":"#f59e0b"},{"id":"smarttv","nameKey":"cat_label_smarttv","name":"Smart TVs & Streaming","icon":"fa-tv","color":"#38bdf8"},{"id":"gaming","nameKey":"cat_label_gaming","name":"Gaming & Consoles","icon":"fa-gamepad","color":"#ec4899"},{"id":"smarthome","nameKey":"cat_label_smarthome","name":"Smart Home Hubs","icon":"fa-house-signal","color":"#f59e0b"},{"id":"nas","nameKey":"cat_label_nas","name":"NAS & Backup Storage","icon":"fa-database","color":"#6366f1"},{"id":"firewall","nameKey":"cat_label_firewall","name":"Firewall & Security","icon":"fa-shield-halved","color":"#ef4444"},{"id":"solar","nameKey":"cat_label_solar","name":"Solar & Photovoltaic","icon":"fa-solar-panel","color":"#eab308"},{"id":"wallbox","nameKey":"cat_label_wallbox","name":"Wallbox & E-Mobility","icon":"fa-charging-station","color":"#10b981"},{"id":"audio","nameKey":"cat_label_audio","name":"Audio & Multiroom","icon":"fa-music","color":"#a855f7"}],"frames":[{"id":"frame_apeg","title":"📡 AP-EG WLAN Hub (Xiaomi / Android / Sensoren)","x":726,"y":363,"width":340,"height":550,"strokeColor":"#00bcef","strokeDash":"5 3","headerBg":"#083344","textColor":"#38bdf8"},{"id":"frame_guest","title":"🛡️ GASTNETZ (VPN / VLAN 192.168.179.x)","x":726,"y":80,"width":343,"height":264,"strokeColor":"#f59e0b","strokeDash":"6 4","headerBg":"#78350f","textColor":"#fbbf24"}],"devices":[{"id":"switch","parentId":null,"name":"Cisco WS-C2960S-48LPS-L","ip":"192.168.178.8","cat":"switch","icon":"fa-sitemap","color":"#00bcef","desc":"Zentraler Gigabit 48-Port PoE+ Managed Switch der Familie Bonner.","poe":true,"loginUser":"{\"iv\":\"zBOut2EHvpav/12a\",\"ciphertext\":\"86K6DXPx4lfRl9ayfpblaZi3UugR\"}","loginPass":"{\"iv\":\"rHAiLpqQSfLtLkXK\",\"ciphertext\":\"feNtxWlsnerw1xEwvJIuJMEvrN4+Y+bU3q4v3MGnG7FhNck=\"}","pos":{"x":371,"y":404}},{"id":"gateway_main","parentId":"switch","name":"Fritz!Box 7590","ip":"192.168.178.1","cat":"gateways","icon":"fa-network-wired","color":"#f59e0b","desc":"Haupt-Internet Gateway & VDSL-Router an Cisco Switch.","poe":false,"loginUser":"{\"iv\":\"hvA6v00vEJUMuIje\",\"ciphertext\":\"urlAvNckbaPkdrcf7FIPzDi1Hw==\"}","loginPass":"{\"iv\":\"N2ec0EGhA/K7xsoW\",\"ciphertext\":\"HavUaN3oKZJrmEf+ToMjb/4HjL/uEZi1/KXYYXgdrb1B\"}","pos":{"x":400,"y":114},"wlanNets":"{\"iv\":\"P/6/UCpTE+F2DTc2\",\"ciphertext\":\"I45sbiyEzbdqvN9g45H5/IrA\"}"},{"id":"router_core","parentId":"gateway_main","name":"Core Router","ip":"192.168.178.2","cat":"router","icon":"fa-network-wired","color":"#00bcef","desc":"Zentraler Core Router zur internen Subnetz-Verteilung.","poe":false,"loginUser":"{\"iv\":\"ZxztWpmvKdCf8wHE\",\"ciphertext\":\"TNk94ttbuCb6FR4Ti/sYHOUPxrJn\"}","loginPass":"{\"iv\":\"PDB1+csl0Tq3MhzU\",\"ciphertext\":\"tlvvc8QjAvy711egS22rCoxZdPTouLtKjdGrBbqDWzw=\"}","pos":{"x":251,"y":114},"wlanNets":"{\"iv\":\"llUh6LF2PsZTbOcv\",\"ciphertext\":\"gi4mD40y+RbdxuNUXgNN2zDhgJWnBUdjzWRTFloUkQH/DscxMWmFUo9DDJpXm9VctbJa+NQbRw136C+zRWaor7KrxzxHAPY=\"}"},{"id":"server_main","parentId":"switch","name":"Hauptserver","ip":"192.168.178.10","cat":"server","icon":"fa-server","color":"#818cf8","desc":"Zentraler Server & Speichersystem der Familie Bonner.","poe":false,"loginUser":"{\"iv\":\"e20pQqDcqvoK2iSM\",\"ciphertext\":\"9wZS2DL4n/GcPKUZCGok9AGDiPk=\"}","loginPass":"{\"iv\":\"kasJJ5vwjNV2INFH\",\"ciphertext\":\"67DaYeiu1H8/lRfj72cbaL9h1w9C3uDop8TEZQg=\"}","pos":{"x":100,"y":200}},{"id":"server_ipmi","parentId":"switch","name":"IPMI Remote Mgmt","ip":"192.168.178.15","cat":"server","icon":"fa-server","color":"#818cf8","desc":"Out-of-Band Remote Management Controller.","poe":false,"loginUser":"{\"iv\":\"mNxvJPMyH6+9Lnvk\",\"ciphertext\":\"yr5Lsxe6hxL7If27P+rt3Z1fba8B\"}","loginPass":"{\"iv\":\"QKV3UBJ9wHqNP/bJ\",\"ciphertext\":\"ulp8BJpweIOAKGeLyn3P9r3nhyXOO09YDsxBzjQFVPA=\"}","pos":{"x":250,"y":200}},{"id":"ap_og","parentId":"switch","name":"Cisco AP OG","ip":"192.168.178.90","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Obergeschoss (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"2abM4VHFFX3fQ+DV\",\"ciphertext\":\"flDpKrR341pIf5r3c6Ub1ilJUQLr\"}","loginPass":"{\"iv\":\"sYJk8eKCl71cexo/\",\"ciphertext\":\"A5E/0QCGgF+4/xejHnkoifWk7RNbzOFYn0A=\"}","pos":{"x":100,"y":340},"wlanNets":"{\"iv\":\"NKqbZ0HKacZH3pZL\",\"ciphertext\":\"IvibSAekblxDLX5dXAGLIpk7ABaOY+UcwM1dWkqCW8LZdR1mR4mzX73n698h1f8uDIaFC/UHGZcsZXUv\"}"},{"id":"ap_eg","parentId":"switch","name":"Cisco AP EG","ip":"192.168.178.92","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Erdgeschoss (Zentraler WLAN Hub).","poe":true,"loginUser":"{\"iv\":\"i6n629eA7KHSYR62\",\"ciphertext\":\"J7ceblxb0hC7xdXpT6giyELGpZP6\"}","loginPass":"{\"iv\":\"/pIM1nS619hYM19h\",\"ciphertext\":\"S2+oxyER1tFGzprXhZMyrj2H8Qw3qlN35CY=\"}","pos":{"x":890,"y":460},"wlanNets":"{\"iv\":\"cyk6JUrabOV861Rb\",\"ciphertext\":\"gH4X57yvwSUVAFYeP5meQveFA5pOxIXEUSs3jo2gnjuXoLrbYwvlpNFue9sp2MyEt9RTi1YTw3xfikeM\"}"},{"id":"ap_gh","parentId":"switch","name":"Cisco AP GH","ip":"192.168.178.94","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Gartenhaus (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"VgniBLWFIZ3fDxih\",\"ciphertext\":\"vbpUA16RUr/0JjAIM9gT1RaSdJ5S\"}","loginPass":"{\"iv\":\"RGYLE6EgWPoy0OeE\",\"ciphertext\":\"mMGOZ9TbHLYoJjI27I98CkHxrcCZ5U2I51I=\"}","pos":{"x":100,"y":480},"wlanNets":"{\"iv\":\"Bd3IWDRkM0ORyEVQ\",\"ciphertext\":\"W43yzruSQTztzuWwMKdtK843M3tT+t6RUNMwfZGB6YkK8o2WBxvRXaMfhjsExTDYJfET+MwZtRJJeW+8VET4QA==\"}"},{"id":"gas_sensor","parentId":"ap_eg","name":"GasSensor","ip":"192.168.178.100","cat":"sensors","icon":"fa-gauge-high","color":"#10b981","desc":"Sicherheits-GasSensor. Drahtlos angebunden an Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","pos":{"x":795,"y":530},"wlanNets":"{\"iv\":\"XZ4tn205a6eLhvnw\",\"ciphertext\":\"xf3Z8Xe/1ISKfKTooyUzpqjj\"}"},{"id":"zisterne_sensor","parentId":"ap_eg","name":"Zisterne Sensor","ip":"192.168.178.101","cat":"sensors","icon":"fa-gauge-high","color":"#10b981","desc":"Wasserstands-Zisterne Sensor. Drahtlos angebunden an Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","pos":{"x":795,"y":590}},{"id":"poco_x4","parentId":"ap_eg","name":"POCO X4 Pro 5G","ip":"192.168.178.154","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"POCO X4 Pro Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","pos":{"x":795,"y":650}},{"id":"patrick_redmi9","parentId":"ap_eg","name":"Redmi 9","ip":"192.168.178.177","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"Patrick Redmi 9 Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","pos":{"x":795,"y":710},"wlanNets":"{\"iv\":\"M7MScrN+SJK0VupF\",\"ciphertext\":\"o9HMRPiili7EmnW5yvoxl+Zs\"}"},{"id":"andrea_pocof1","parentId":"ap_eg","name":"POCO F1","ip":"192.168.178.241","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"Andrea Poco F1 Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","pos":{"x":795,"y":770},"wlanNets":"{\"iv\":\"Pfd8e8YTtcbReIeM\",\"ciphertext\":\"rNOwjQ/ZjpAsCJV95IYHpow4\"}"},{"id":"andrea_nb_wlan","parentId":"ap_eg","name":"Notebook (WLAN)","ip":"192.168.178.190","cat":"endgeraet","icon":"fa-laptop","color":"#06b6d4","desc":"Andrea Notebook WLAN-Verbindung über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","pos":{"x":795,"y":830},"wlanNets":"{\"iv\":\"krCLB/OW6izI59u7\",\"ciphertext\":\"ldWAOGnTNVrZdTXeDxYFYVw2\"}"},{"id":"lee_pad","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.233","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Lee Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","pos":{"x":995,"y":650},"wlanNets":"{\"iv\":\"4E1S7IAMyftcL9nE\",\"ciphertext\":\"FUIyEhTz0xJTyuVM8fjTnIJS\"}"},{"id":"andrea_pad","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.234","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Andrea Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","pos":{"x":995,"y":710},"wlanNets":"{\"iv\":\"keibZNE+8hgFhkH8\",\"ciphertext\":\"YBS71RGVzQfY7+n2N94eGR+v\"}"},{"id":"redmi_pad_se","parentId":"ap_eg","name":"Redmi Pad SE","ip":"192.168.178.235","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Redmi Pad SE Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","pos":{"x":995,"y":770}},{"id":"redmi_pad_2pro","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.249","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","pos":{"x":995,"y":830}},{"id":"phone_gh","parentId":"switch","name":"Cisco Phone GH","ip":"192.168.178.80","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Gartenhaus (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","pos":{"x":100,"y":620}},{"id":"phone_sz","parentId":"switch","name":"Cisco Phone SZ","ip":"192.168.178.81","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Schlafzimmer (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","pos":{"x":230,"y":620}},{"id":"phone_wz2","parentId":"switch","name":"Cisco Phone WZ2","ip":"192.168.178.82","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Wohnzimmer 2 (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","pos":{"x":360,"y":620}},{"id":"phone_wz1","parentId":"switch","name":"Cisco Phone WZ1","ip":"192.168.178.83","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Wohnzimmer 1 (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","pos":{"x":490,"y":620}},{"id":"print_hp","parentId":"switch","name":"hpp3015drucker","ip":"192.168.178.30","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"HP LaserJet P3015 Netzdrucker.","poe":false,"loginUser":"","loginPass":"","pos":{"x":100,"y":760}},{"id":"print_ricoh","parentId":"switch","name":"Drucker-Ricoh","ip":"192.168.178.31","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"Ricoh Multifunktionsdrucker.","poe":false,"loginUser":"","loginPass":"","pos":{"x":230,"y":760}},{"id":"print_brother","parentId":"switch","name":"Drucker-BROTHER","ip":"192.168.178.32","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"Brother Netzdrucker.","poe":false,"loginUser":"","loginPass":"","pos":{"x":360,"y":760}},{"id":"cam_door","parentId":"switch","name":"Haustuer","ip":"192.168.178.20","cat":"cameras","icon":"fa-gauge-high","color":"#c084fc","desc":"IP-Kamera Haustür (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"t8UJiJHE1GE+gDnH\",\"ciphertext\":\"V1MniWg0Fdl7E2stMA+Thx4xQBY/\"}","loginPass":"{\"iv\":\"d70Hoj6Llq0F8zt5\",\"ciphertext\":\"WopdXgLv0Z7Uf6nEOiAvGCNxTTGbLpUPshw=\"}","pos":{"x":517,"y":199},"wlanNets":"{\"iv\":\"Qeyc1TlK5uJg8NT/\",\"ciphertext\":\"a7huKol/DnPCCVvqAfZwieml\"}"},{"id":"cam_yard","parentId":"switch","name":"Hof","ip":"192.168.178.21","cat":"cameras","icon":"fa-gauge-high","color":"#c084fc","desc":"IP-Kamera Hof (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"9VqvBQKJQO5/hlo3\",\"ciphertext\":\"zZDDg7E5UgPY+2b53SJFNAfeG9SK\"}","loginPass":"{\"iv\":\"gMuNR6O70za/eNfX\",\"ciphertext\":\"/kMOUI01oIxKwv5W+LhmubZQmXTGj362xBU=\"}","pos":{"x":646,"y":198},"wlanNets":"{\"iv\":\"/cXKU7Wc9pWTT9ms\",\"ciphertext\":\"oX0M4+WGpY5taR8oTaz5g3cJ\"}"},{"id":"cam_gh","parentId":"switch","name":"Gartenhaus","ip":"192.168.178.22","cat":"cameras","icon":"fa-video","color":"#c084fc","desc":"IP-Kamera Gartenhaus (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"2dm2iwF9wwORJkpK\",\"ciphertext\":\"N2ajWhPLqP0SrFAumO9hAmAzR6vY\"}","loginPass":"{\"iv\":\"B9L79ZHpadKP7fQo\",\"ciphertext\":\"W9+91BqSlR8P+ZOP10iJn0omEztipGWOkoc=\"}","pos":{"x":600,"y":313},"wlanNets":"{\"iv\":\"+lKYmyMhDewLzZOz\",\"ciphertext\":\"ublFMxH6O406ouG4RlLdpv15\"}"},{"id":"gateway_guest","parentId":"switch","name":"Fritz!Box Gast-Gateway","ip":"192.168.179.1","cat":"gateways","icon":"fa-tower-broadcast","color":"#f59e0b","desc":"Fritz!Box Gastnetz (VPN / Subnetz 192.168.179.1).","poe":false,"loginUser":"{\"iv\":\"iI11MrJhxUJ/Pj2R\",\"ciphertext\":\"MONelVkk6V5ZXx7/qhDMVNF/NQ==\"}","loginPass":"{\"iv\":\"utJmwQouIabrTyxN\",\"ciphertext\":\"cIT5fua8cvr+KI4T+HDCd7688Vn9MBgEF8Rf2A==\"}","pos":{"x":803,"y":170},"wlanNets":"{\"iv\":\"w30v/5zlCJpCG3j4\",\"ciphertext\":\"/dohkXrjYIdyCbjxWqpog+hC\"}"},{"id":"ap_eg_guest","parentId":"gateway_guest","name":"Cisco AP EG (Gast-Trunk)","ip":"192.168.179.20","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Gast-VLAN Trunk vom Cisco Switch an Cisco EG.","poe":true,"loginUser":"","loginPass":"","pos":{"x":962,"y":170},"wlanNets":"{\"iv\":\"iI0GiFVKNQm9IysK\",\"ciphertext\":\"HZWXluJ+XTqKx1cKZTpK1fIfC9wrXP9i1GLQ2pwcWmJWLfHaxZ1QU/jKuHLvb7RQInDMitYwl+QEdDKA4SqMklDtjS8DXg==\"}"},{"id":"school_tab_1","parentId":"ap_eg_guest","name":"Schultablet 1","ip":"192.168.179.20","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Schultablet 1 im Gastnetzwerk.","poe":false,"loginUser":"","loginPass":"","pos":{"x":805,"y":284}},{"id":"school_tab_2","parentId":"ap_eg_guest","name":"Schultablet 2","ip":"192.168.179.21","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Schultablet 2 im Gastnetzwerk.","poe":false,"loginUser":"","loginPass":"","pos":{"x":962,"y":283}}],"crypto":{"salt":"VqJSFtOUB3yjQ4RK/hacWA==","verifier":"vbOwMZT19M8fkxnlUK3S3cpVss8m36Mt8gHkdY1AlxM="}}</script>
+</head>
+<body class="bg-darkbg text-zinc-300 min-h-screen flex flex-col overflow-x-hidden">
+
+  <!-- Header Navigation with KryptoNetView branding -->
+  <header class="bg-panelbg border-b border-zinc-800 sticky top-0 z-40 px-4 lg:px-8 py-2.5 flex flex-wrap justify-between items-center gap-4 shadow-xl">
+    <div class="flex items-center space-x-3.5">
+      <div class="p-2 bg-ciscocyan/10 text-ciscocyan rounded-lg border border-ciscocyan/20">
+        <i class="fa-solid fa-network-wired text-base"></i>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-mono tracking-widest text-ciscocyan/80 uppercase font-semibold">KryptoNetView</span>
+          <span class="text-zinc-600">/</span>
+          <h1 class="font-bold text-sm lg:text-base text-white flex items-center gap-2">
+            <span id="topology-title-text">Familie Bonner – Heimnetzwerk Topologie</span>
+            <span id="topology-subnet-text" class="text-xs bg-cyan-950 text-ciscocyan border border-cyan-800 px-2 py-0.5 rounded-full font-mono">192.168.178.0/24</span>
+          </h1>
+        </div>
+        <p class="text-[11px] text-zinc-400 flex items-center gap-2 mt-0.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block pulse-glow"></span>
+          <span data-i18n="header_central_switch">Zentralswitch</span>: <strong id="header-switch-model" class="text-white font-mono">Cisco WS-C2960S-48LPS-L</strong> (<span id="header-switch-ip" class="font-mono">192.168.178.8</span>) | AES-256 Vault
+        </p>
+      </div>
+    </div>
+
+    <!-- Stats, Language Toggle, Auth, Edit Mode & Actions -->
+    <div class="flex flex-wrap items-center gap-2 text-xs">
+      <!-- Language Toggle Button -->
+      <button id="btn-lang-toggle" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold px-2 py-1 rounded-lg border border-zinc-700 transition flex items-center gap-1 shadow-md cursor-pointer" title="Sprache wechseln / Switch Language">
+        <i class="fa-solid fa-globe text-ciscocyan"></i>
+        <span id="lang-btn-text" class="font-bold">DE</span>
+      </button>
+
+      <!-- Datei-Verbindung: Aenderungen direkt in diese HTML-Datei speichern -->
+      <button id="btn-file-link" class="bg-zinc-800 hover:bg-zinc-700 text-amber-400 font-semibold px-2.5 py-1 rounded-lg border border-amber-500/40 transition flex items-center gap-1.5 shadow-md" title="">
+        <i id="file-link-icon" class="fa-solid fa-link-slash"></i>
+        <span id="file-link-text">Mit Datei verbinden</span>
+      </button>
+
+      <div class="bg-cardbg px-2.5 py-1 rounded-lg border border-zinc-700/60">
+        <span class="text-zinc-400" data-i18n="devices_count">Geräte:</span>
+        <span id="total-count" class="font-bold text-white ml-1 font-mono">0</span>
+      </div>
+
+      <!-- User Auth State Button -->
+      <button id="btn-auth-toggle" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold px-2.5 py-1 rounded-lg border border-zinc-700 transition flex items-center gap-1.5 shadow-md">
+        <i id="auth-btn-icon" class="fa-solid fa-lock text-amber-400"></i>
+        <span id="auth-btn-text" data-i18n="btn_login">Anmelden</span>
+      </button>
+
+      <!-- Change Master Password -->
+      <button id="btn-change-pw-header" class="hidden bg-zinc-800 hover:bg-zinc-700 text-ciscocyan font-semibold px-2.5 py-1 rounded-lg border border-ciscocyan/40 transition items-center gap-1.5 shadow-md" title="Master-Passwort ändern">
+        <i class="fa-solid fa-key"></i> <span data-i18n="btn_change_pw">Passwort ändern</span>
+      </button>
+
+      <!-- Edit Topology Settings Button -->
+      <button id="btn-edit-header-settings" class="bg-zinc-800/50 text-zinc-500 font-semibold px-2.5 py-1 rounded-lg border border-zinc-800 transition flex items-center gap-1.5 shadow-md cursor-not-allowed" title="Erfordert Administrator-Anmeldung" disabled>
+        <i class="fa-solid fa-pen-to-square"></i> <span data-i18n="btn_settings">Titel & Switch</span>
+      </button>
+
+      <!-- Manage Categories Button -->
+      <button id="btn-manage-categories" class="bg-zinc-800/50 text-zinc-500 font-semibold px-2.5 py-1 rounded-lg border border-zinc-800 transition flex items-center gap-1.5 shadow-md cursor-not-allowed" title="Erfordert Administrator-Anmeldung" disabled>
+        <i class="fa-solid fa-tags"></i> <span data-i18n="btn_categories">Kategorien</span>
+      </button>
+
+      <!-- Draw Frame Mode Toggle Button -->
+      <button id="btn-draw-frame-mode" class="bg-zinc-800/50 text-zinc-500 font-semibold px-2.5 py-1 rounded-lg border border-zinc-800 transition flex items-center gap-1.5 shadow-md cursor-not-allowed" title="Erfordert Administrator-Anmeldung" disabled>
+        <i class="fa-solid fa-draw-polygon"></i> <span id="draw-frame-btn-text" data-i18n="btn_draw_frame">+ Rahmen aufziehen</span>
+      </button>
+
+      <!-- Manage Frames/Groups Button -->
+      <button id="btn-manage-frames" class="bg-zinc-800/50 text-zinc-500 font-semibold px-2.5 py-1 rounded-lg border border-zinc-800 transition flex items-center gap-1.5 shadow-md cursor-not-allowed" title="Erfordert Administrator-Anmeldung" disabled>
+        <i class="fa-solid fa-vector-square"></i> <span data-i18n="btn_frames">Gruppen/Rahmen</span>
+      </button>
+
+      <!-- Edit Mode Toggle Button -->
+      <button id="btn-toggle-edit" class="bg-zinc-800/50 text-zinc-500 font-bold px-2.5 py-1 rounded-lg border border-zinc-800 transition flex items-center gap-1.5 shadow-md cursor-not-allowed" title="Erfordert Administrator-Anmeldung" disabled>
+        <i class="fa-solid fa-sliders"></i> <span id="edit-btn-text" data-i18n="btn_edit_mode">Editiermodus</span>
+      </button>
+
+      <!-- Add Device Button -->
+      <button id="btn-add-device" class="bg-emerald-900/30 text-zinc-500 font-semibold px-2.5 py-1 rounded-lg border border-zinc-800 transition flex items-center gap-1.5 shadow-md cursor-not-allowed hidden" disabled>
+        <i class="fa-solid fa-plus"></i> <span data-i18n="btn_new_device">Neues Gerät</span>
+      </button>
+
+      <div class="h-4 w-px bg-zinc-700/80 mx-0.5 hidden sm:block"></div>
+
+      <!-- File System Access API & JSON Actions -->
+      <button id="btn-save-direct-file" class="bg-zinc-800/50 text-zinc-500 px-2.5 py-1 rounded-lg border border-zinc-800 transition flex items-center gap-1.5 shadow-md cursor-not-allowed" title="Direkt in die lokale Datei speichern (File System API)" disabled>
+        <i class="fa-solid fa-floppy-disk text-ciscocyan"></i> <span data-i18n="btn_save_file">Direkt speichern</span>
+      </button>
+      <button id="btn-export-json" class="bg-zinc-800/50 text-zinc-500 px-2 py-1 rounded-lg border border-zinc-800 transition flex items-center gap-1 cursor-not-allowed" title="Erfordert Administrator-Anmeldung" disabled>
+        <i class="fa-solid fa-file-export"></i> JSON
+      </button>
+      <label id="btn-import-json-label" class="bg-zinc-800/50 text-zinc-500 px-2 py-1 rounded-lg border border-zinc-800 transition cursor-not-allowed pointer-events-none flex items-center gap-1" title="Erfordert Administrator-Anmeldung">
+        <i class="fa-solid fa-file-import"></i> <span data-i18n="btn_load">Laden</span>
+        <input type="file" id="input-import-json" accept=".json,.html" class="hidden" disabled>
+      </label>
+
+    </div>
+  </header>
+
+  <!-- Edit Mode Active Indicator Banner -->
+  <div id="edit-mode-banner" class="edit-active-banner px-4 py-2 text-xs text-amber-300 hidden items-center justify-between">
+    <div class="flex items-center gap-2">
+      <i class="fa-solid fa-triangle-exclamation text-amber-400"></i>
+      <span id="banner-status-text" data-i18n="banner_edit_active"><strong>EDITIERMODUS AKTIV:</strong> Drag & Drop Knoten/Rahmen. Klicke auf "+ Rahmen aufziehen", um freie Zonen per Maus zu zeichnen.</span>
+    </div>
+    <span class="text-[11px] text-zinc-400">KryptoNetView Graph</span>
+  </div>
+
+  <!-- Main Layout Container -->
+  <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+
+    <!-- Sidebar Filter & Device Navigation -->
+    <aside class="w-full lg:w-96 bg-panelbg border-r border-zinc-800 p-4 flex flex-col space-y-4 max-h-screen lg:max-h-[calc(100vh-53px)] overflow-y-auto">
+      <!-- Search Input -->
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-zinc-400 text-sm"></i>
+        <input type="text" id="search-input" data-i18n-placeholder="search_placeholder" placeholder="Gerät, IP oder Hostname suchen..." class="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg pl-9 pr-4 py-2 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-ciscocyan transition">
+      </div>
+
+      <!-- Category Filters -->
+      <div>
+        <div class="flex justify-between items-center mb-1.5">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400" data-i18n="label_categories">Kategorien</span>
+          <button id="sidebar-btn-manage-cats" class="text-[11px] text-zinc-600 transition flex items-center gap-1 cursor-not-allowed" disabled title="Erfordert Administrator-Anmeldung">
+            <i class="fa-solid fa-pen-to-square"></i> <span data-i18n="btn_manage">Verwalten</span>
+          </button>
+        </div>
+        <div class="flex flex-wrap gap-1.5 text-xs font-medium max-h-56 overflow-y-auto pr-1" id="category-filters">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Device List Container -->
+      <div class="flex-1 space-y-2 overflow-y-auto pr-1" id="device-list-container">
+        <!-- Populated by JS -->
+      </div>
+    </aside>
+
+    <!-- Main Topology Canvas View -->
+    <main class="flex-1 flex flex-col bg-zinc-950 relative p-3 overflow-hidden min-h-[750px]">
+      
+      <!-- Top Action Controls -->
+      <div class="flex justify-between items-center mb-2 z-10">
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-semibold uppercase tracking-wider text-zinc-400" data-i18n="canvas_header_title">Grafische Netzwerktopologie & Systemübersicht</span>
+        </div>
+        <div class="flex items-center space-x-1.5">
+          <button id="btn-zoom-in" class="bg-cardbg hover:bg-zinc-700 text-zinc-200 p-1.5 rounded-lg text-xs border border-zinc-700/60" title="Vergrößern"><i class="fa-solid fa-plus w-4 h-4 flex items-center justify-center"></i></button>
+          <button id="btn-zoom-out" class="bg-cardbg hover:bg-zinc-700 text-zinc-200 p-1.5 rounded-lg text-xs border border-zinc-700/60" title="Verkleinern"><i class="fa-solid fa-minus w-4 h-4 flex items-center justify-center"></i></button>
+          <button id="btn-reset-view" class="bg-cardbg hover:bg-zinc-700 text-zinc-200 px-2.5 py-1.5 rounded-lg text-xs border border-zinc-700/60" title="Ansicht zurücksetzen"><i class="fa-solid fa-rotate-left mr-1"></i> <span data-i18n="btn_reset">Reset</span></button>
+        </div>
+      </div>
+
+      <!-- SVG Viewport -->
+      <div class="flex-1 w-full h-full relative overflow-hidden border border-zinc-800 rounded-xl bg-[#0b0b0e] flex items-center justify-center p-2" id="svg-viewport">
+        
+        <svg id="topology-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1480 960" class="w-full h-full" style="touch-action:none; min-height:640px; cursor:grab;">
+          <defs>
+            <filter id="node-shadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000000" flood-opacity="0.6"></feDropShadow>
+            </filter>
+          </defs>
+
+          <!-- Dynamic Frames Layer -->
+          <g id="frames-layer"></g>
+
+          <!-- SVG Dynamic Layers -->
+          <g id="connections-layer"></g>
+          <g id="nodes-layer"></g>
+
+          <!-- Frame Drawing Preview Layer -->
+          <rect id="draw-preview-rect" x="0" y="0" width="0" height="0" fill="rgba(192, 132, 252, 0.15)" stroke="#c084fc" stroke-width="1.5" stroke-dasharray="4 4" class="hidden"></rect>
+        </svg>
+
+      </div>
+
+      <!-- Legend Footer with GitHub Link in Bottom Right -->
+      <div class="mt-2.5 bg-panelbg border border-zinc-800 rounded-xl p-3 flex flex-wrap justify-between items-center text-xs gap-3">
+        <div class="flex flex-wrap items-center gap-4">
+          <span class="font-semibold text-zinc-400" data-i18n="legend_title">Verbindungs-Legende:</span>
+          <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-ciscocyan inline-block"></span> <span data-i18n="legend_gigabit">Gigabit Ethernet</span></span>
+          <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-sky-400 stroke-dasharray-2 inline-block"></span> <span data-i18n="legend_wlan">AP-EG WLAN Funk</span></span>
+          <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-amber-500 stroke-dasharray-2 inline-block"></span> <span data-i18n="legend_guest">Gastnetz-VLAN (179.x)</span></span>
+          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> <span data-i18n="legend_iot">IoT-Sensoren</span></span>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="text-zinc-400 text-[11px]" id="footer-hint"><i class="fa-solid fa-hand-pointer text-ciscocyan mr-1"></i> <span data-i18n="footer_hint">Gerät anklicken für Details</span></div>
+          <a href="https://github.com/ulfenknulfen/kryptonetview" target="_blank" rel="noopener noreferrer" class="text-[11px] font-mono text-zinc-400 hover:text-ciscocyan transition flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="GitHub Repository">
+            <i class="fa-brands fa-github text-sm"></i> \github\ulfenknulfen\kryptonetview
+          </a>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- JSON EXPORT WARNING MODAL -->
+  <div id="export-warning-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div class="w-full max-w-md bg-panelbg rounded-2xl border border-amber-500/50 shadow-2xl p-6 relative">
+      <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-2xl flex items-center justify-center text-xl border border-amber-500/30 mx-auto mb-3">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <h3 class="text-base font-bold text-white text-center mb-1" data-i18n="export_warn_title">Sicherheitswarnung: JSON-Export</h3>
+      <p class="text-xs text-zinc-300 text-center mb-4 leading-relaxed" data-i18n="export_warn_text">
+        Die exportierte Konfigurationsdatei enthält sämtliche Geräte-Zugangsdaten (Benutzername und Passwörter) im <strong>Klartext</strong>! Bitte bewahren Sie diese Datei an einem sicheren Ort auf und geben Sie sie nicht ungeschützt weiter.
+      </p>
+      <div class="flex gap-2">
+        <button id="btn-cancel-export" class="w-1/2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 py-2.5 rounded-lg text-xs font-semibold transition" data-i18n="btn_cancel">
+          Abbrechen
+        </button>
+        <button id="btn-confirm-export" class="w-1/2 bg-amber-600 hover:bg-amber-500 text-white font-bold py-2.5 rounded-lg text-xs transition shadow-md flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-file-export"></i> <span data-i18n="btn_confirm_export">Dennoch Exportieren</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES MANAGEMENT MODAL -->
+  <div id="categories-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div class="w-full max-w-2xl bg-panelbg rounded-2xl border border-zinc-700 shadow-2xl p-6 relative max-h-[90vh] flex flex-col">
+      <button id="categories-modal-close" class="absolute top-4 right-4 text-zinc-400 hover:text-white text-xl">×</button>
+
+      <div class="text-center mb-4 flex-shrink-0">
+        <div class="w-10 h-10 bg-teal-500/10 text-teal-400 rounded-xl flex items-center justify-center text-lg border border-teal-500/30 mx-auto mb-2">
+          <i class="fa-solid fa-tags"></i>
+        </div>
+        <h3 class="text-base font-bold text-white" data-i18n="cat_modal_title">Kategorien verwalten</h3>
+        <p class="text-xs text-zinc-400 mt-0.5" data-i18n="cat_modal_subtitle">Erstelle neue Gerätetypen, ändere Farben & Bezeichnungen oder lösche ungenutzte Kategorien.</p>
+      </div>
+
+      <div class="bg-zinc-900 border border-zinc-700/80 p-3.5 rounded-xl mb-4 flex-shrink-0 space-y-3">
+        <span class="text-xs font-bold text-teal-400 flex items-center gap-1.5">
+          <i class="fa-solid fa-plus-circle"></i> <span data-i18n="cat_add_new_title">Neue Kategorie hinzufügen</span>
+        </span>
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 text-xs">
+          <div>
+            <label class="block text-[10px] text-zinc-400 mb-1" data-i18n="cat_col_id">Kategorie ID / Key</label>
+            <input type="text" id="new-cat-id" placeholder="z.B. router" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-teal-400">
+          </div>
+          <div>
+            <label class="block text-[10px] text-zinc-400 mb-1" data-i18n="cat_col_name">Name / Label</label>
+            <input type="text" id="new-cat-name" placeholder="z.B. Router" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-teal-400">
+          </div>
+          <div class="relative">
+            <label class="block text-[10px] text-zinc-400 mb-1" data-i18n="cat_col_icon">FontAwesome Icon</label>
+            <div id="new-cat-custom-dropdown-trigger" class="w-full bg-zinc-950 border border-zinc-700 hover:border-teal-400 rounded-lg px-2.5 py-1.5 text-xs text-white flex items-center justify-between cursor-pointer">
+              <span id="new-cat-selected-display" class="flex items-center gap-2 truncate text-white">
+                <i class="fa-solid fa-network-wired text-teal-400"></i> <span class="font-medium text-white">Router</span>
+              </span>
+              <i class="fa-solid fa-chevron-down text-[10px] text-zinc-400"></i>
+            </div>
+            <input type="hidden" id="new-cat-icon" value="fa-network-wired">
+            
+            <div id="new-cat-dropdown-popup" class="hidden absolute left-0 right-0 top-full mt-1 z-50 bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl p-2 space-y-2">
+              <input type="text" id="new-cat-icon-search" data-i18n-placeholder="search_placeholder_icon" placeholder="Icon suchen..." class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-teal-400">
+              <div id="new-cat-icon-options-list" class="custom-dropdown-list space-y-1 pr-1"></div>
+            </div>
+          </div>
+          <div>
+            <label class="block text-[10px] text-zinc-400 mb-1" data-i18n="cat_col_color">Farbe / Akzent</label>
+            <input type="color" id="new-cat-color" value="#00bcef" class="w-full h-8 bg-zinc-950 border border-zinc-700 rounded-lg p-0.5 cursor-pointer">
+          </div>
+        </div>
+        <button id="btn-add-category" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-1.5 rounded-lg text-xs transition flex items-center justify-center gap-1.5 shadow-md">
+          <i class="fa-solid fa-plus"></i> <span data-i18n="btn_save_category">Kategorie Speichern</span>
+        </button>
+      </div>
+
+      <span class="text-xs font-semibold text-zinc-400 mb-2" data-i18n="cat_existing_title">Vorhandene Kategorien:</span>
+      <div id="categories-list-editor" class="flex-1 overflow-y-auto space-y-2 pr-1 mb-4"></div>
+
+      <div class="pt-3 border-t border-zinc-800 flex justify-end gap-2 flex-shrink-0">
+        <button id="btn-close-categories-modal" class="bg-ciscocyan hover:bg-cyan-400 text-zinc-950 font-bold px-5 py-2 rounded-lg text-xs transition shadow-md" data-i18n="btn_done">
+          Fertig / Anwenden
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTHENTICATION DIALOG MODAL -->
+  <div id="auth-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div class="w-full max-w-sm bg-panelbg rounded-2xl border border-zinc-700 shadow-2xl p-6 relative">
+      <button id="auth-modal-close" class="absolute top-4 right-4 text-zinc-400 hover:text-white text-xl">×</button>
+      
+      <!-- DEFAULT LOGIN VIEW -->
+      <div id="auth-view-login">
+        <div class="text-center mb-5">
+          <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-2xl flex items-center justify-center text-xl border border-amber-500/30 mx-auto mb-3">
+            <i class="fa-solid fa-user-shield"></i>
+          </div>
+          <h3 class="text-base font-bold text-white" data-i18n="auth_modal_title">Administrator Login</h3>
+          <p class="text-xs text-zinc-400 mt-1"><span data-i18n="auth_modal_desc">Master-Passwort eingeben, um den Editiermodus und Zugangsdaten freizuschalten. (Standard:</span> <code class="text-amber-300 font-mono">admin</code>)</p>
+        </div>
+
+        <form id="auth-form" onsubmit="return false;" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 mb-1" data-i18n="auth_label_pw">Master-Passwort</label>
+            <div class="relative flex items-center">
+              <input type="password" id="auth-password-input" data-i18n-placeholder="auth_ph_pw" placeholder="Passwort eingeben..." class="w-full bg-zinc-900 border border-zinc-700 rounded-lg pl-3 pr-10 py-2 text-xs text-white focus:outline-none focus:border-ciscocyan">
+              <button type="button" id="btn-toggle-login-pw" class="absolute right-2.5 text-zinc-400 hover:text-ciscocyan p-1 text-xs" title="Passwort anzeigen/verbergen">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <p id="auth-error-msg" class="text-[11px] text-rose-400 mt-1 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> <span data-i18n="auth_err_wrong">Falsches Master-Passwort!</span></p>
+          </div>
+
+          <button id="btn-login-submit" type="button" class="w-full bg-ciscocyan hover:bg-cyan-400 text-zinc-950 font-bold py-2.5 rounded-lg text-xs transition shadow-md" data-i18n="auth_btn_submit">
+            Anmelden & Editiermodus Freischalten
+          </button>
+        </form>
+
+        <div id="auth-change-pw-trigger-wrapper" class="mt-4 pt-4 border-t border-zinc-800 text-center">
+          <button id="btn-show-change-pw-view" class="text-[11px] text-zinc-400 hover:text-ciscocyan transition flex items-center justify-center gap-1.5 mx-auto font-medium">
+            <i class="fa-solid fa-key text-amber-400"></i> <span data-i18n="auth_link_changepw">Master-Passwort ändern</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- CHANGE MASTER PASSWORD VIEW -->
+      <div id="auth-view-change-pw" class="hidden">
+        <div class="text-center mb-4">
+          <div class="w-10 h-10 bg-ciscocyan/10 text-ciscocyan rounded-xl flex items-center justify-center text-lg border border-ciscocyan/30 mx-auto mb-2">
+            <i class="fa-solid fa-key"></i>
+          </div>
+          <h3 class="text-sm font-bold text-white" data-i18n="changepw_title">Master-Passwort ändern</h3>
+          <p class="text-[11px] text-zinc-400 mt-0.5" data-i18n="changepw_subtitle">Alle Vaults werden mit dem neuen Key re-verschlüsselt.</p>
+        </div>
+
+        <form onsubmit="return false;" class="space-y-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-zinc-400 mb-1" data-i18n="changepw_old">Aktuelles Passwort</label>
+            <div class="relative flex items-center">
+              <input type="password" id="change-pw-old" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg pl-3 pr-10 py-1.5 text-xs text-white focus:outline-none focus:border-ciscocyan">
+              <button type="button" id="btn-toggle-change-old-pw" class="absolute right-2.5 text-zinc-400 hover:text-ciscocyan p-1 text-xs" title="Passwort anzeigen/verbergen">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-zinc-400 mb-1" data-i18n="changepw_new">Neues Master-Passwort</label>
+            <div class="relative flex items-center">
+              <input type="password" id="change-pw-new" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg pl-3 pr-10 py-1.5 text-xs text-white focus:outline-none focus:border-ciscocyan">
+              <button type="button" id="btn-toggle-change-new-pw" class="absolute right-2.5 text-zinc-400 hover:text-ciscocyan p-1 text-xs" title="Passwort anzeigen/verbergen">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-zinc-400 mb-1" data-i18n="changepw_confirm">Neues Passwort bestätigen</label>
+            <div class="relative flex items-center">
+              <input type="password" id="change-pw-confirm" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg pl-3 pr-10 py-1.5 text-xs text-white focus:outline-none focus:border-ciscocyan">
+              <button type="button" id="btn-toggle-change-confirm-pw" class="absolute right-2.5 text-zinc-400 hover:text-ciscocyan p-1 text-xs" title="Passwort anzeigen/verbergen">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <p id="change-pw-error-msg" class="text-[11px] text-rose-400 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> <span id="change-pw-error-text">Fehler</span></p>
+
+          <div class="pt-2 flex gap-2">
+            <button id="btn-cancel-change-pw" class="w-1/2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 py-2 rounded-lg text-xs font-semibold transition" data-i18n="btn_cancel">
+              Abbrechen
+            </button>
+            <button id="btn-submit-change-pw" class="w-1/2 bg-ciscocyan hover:bg-cyan-400 text-zinc-950 font-bold py-2 rounded-lg text-xs transition shadow-md" data-i18n="btn_save">
+              Speichern
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EDIT TOPOLOGY & SWITCH SETTINGS MODAL -->
+  <div id="header-settings-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div class="w-full max-w-md bg-panelbg rounded-2xl border border-zinc-700 shadow-2xl p-6 relative">
+      <button id="header-settings-close" class="absolute top-4 right-4 text-zinc-400 hover:text-white text-xl">×</button>
+      
+      <div class="text-center mb-4">
+        <div class="w-10 h-10 bg-ciscocyan/10 text-ciscocyan rounded-xl flex items-center justify-center text-lg border border-ciscocyan/30 mx-auto mb-2">
+          <i class="fa-solid fa-sliders"></i>
+        </div>
+        <h3 class="text-base font-bold text-white" data-i18n="settings_title">Topologie & Switch konfigurieren</h3>
+        <p class="text-xs text-zinc-400 mt-0.5" data-i18n="settings_subtitle">Globale Parameter für das Dashboard anpassen.</p>
+      </div>
+
+      <form onsubmit="return false;" class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-semibold text-zinc-400 mb-1" data-i18n="settings_label_topotitle">Topologie-Titel</label>
+          <input type="text" id="setting-title-input" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-ciscocyan">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-zinc-400 mb-1" data-i18n="settings_label_subnet">Hauptnetz Subnetz-CIDR</label>
+          <input type="text" id="setting-subnet-input" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono text-ciscocyan focus:outline-none focus:border-ciscocyan">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 mb-1" data-i18n="settings_label_switchmodel">Switch-Modell</label>
+            <input type="text" id="setting-switch-model-input" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-ciscocyan">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 mb-1" data-i18n="settings_label_switchip">Switch IP-Adresse</label>
+            <input type="text" id="setting-switch-ip-input" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono text-ciscocyan focus:outline-none focus:border-ciscocyan">
+          </div>
+        </div>
+
+        <div class="pt-3 flex gap-2">
+          <button id="btn-cancel-header-settings" class="w-1/2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 py-2.5 rounded-lg text-xs font-semibold transition" data-i18n="btn_cancel">
+            Abbrechen
+          </button>
+          <button id="btn-save-header-settings" class="w-1/2 bg-ciscocyan hover:bg-cyan-400 text-zinc-950 font-bold py-2.5 rounded-lg text-xs transition shadow-md" data-i18n="btn_save">
+            Speichern
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MANAGE FRAMES / GROUPS MODAL -->
+  <div id="frames-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div class="w-full max-w-xl bg-panelbg rounded-2xl border border-zinc-700 shadow-2xl p-6 relative max-h-[90vh] flex flex-col">
+      <button id="frames-modal-close" class="absolute top-4 right-4 text-zinc-400 hover:text-white text-xl">×</button>
+
+      <div class="text-center mb-4 flex-shrink-0">
+        <div class="w-10 h-10 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center text-lg border border-purple-500/30 mx-auto mb-2">
+          <i class="fa-solid fa-vector-square"></i>
+        </div>
+        <h3 class="text-base font-bold text-white" data-i18n="frames_modal_title">Gruppen & Rahmen verwalten</h3>
+        <p class="text-xs text-zinc-400 mt-0.5" data-i18n="frames_modal_subtitle">Visuelle Netzwerkgruppen auf der SVG-Zeichenfläche bearbeiten, löschen oder neu anlegen.</p>
+      </div>
+
+      <div class="flex justify-between items-center mb-3">
+        <span class="text-xs font-semibold text-zinc-400" data-i18n="frames_existing_title">Vorhandene Zonen:</span>
+        <button id="btn-add-new-frame" class="bg-purple-600 hover:bg-purple-500 text-white font-semibold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1.5 shadow-md">
+          <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_frame">Neuen Rahmen hinzufügen</span>
+        </button>
+      </div>
+
+      <div id="frames-list-editor" class="flex-1 overflow-y-auto space-y-3 pr-1 mb-4"></div>
+
+      <div class="pt-3 border-t border-zinc-800 flex justify-end gap-2 flex-shrink-0">
+        <button id="btn-close-frames-modal" class="bg-ciscocyan hover:bg-cyan-400 text-zinc-950 font-bold px-5 py-2 rounded-lg text-xs transition shadow-md" data-i18n="btn_done">
+          Fertig / Anwenden
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Device Detail / Edit Modal -->
+  <div id="device-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex justify-end transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div class="w-full max-w-md bg-panelbg h-full shadow-2xl border-l border-zinc-700/80 p-6 flex flex-col justify-between overflow-y-auto" id="modal-content">
+      <div>
+        <div class="flex justify-between items-start border-b border-zinc-700/80 pb-4 mb-4">
+          <div class="flex items-center space-x-3.5">
+            <div id="modal-icon-bg" class="p-3 bg-ciscocyan/10 text-ciscocyan rounded-xl border border-ciscocyan/30">
+              <i id="modal-icon" class="fa-solid fa-network-wired text-2xl"></i>
+            </div>
+            <div>
+              <h3 id="modal-title-display" class="font-bold text-base text-white" data-i18n="dev_modal_title">Gerätedetails</h3>
+              <p id="modal-subtitle" class="text-xs text-zinc-400 font-semibold uppercase tracking-wider" data-i18n="dev_modal_subtitle">Infrastruktur</p>
+            </div>
+          </div>
+          <button id="modal-close" class="text-zinc-400 hover:text-white text-2xl p-1 leading-none">×</button>
+        </div>
+
+        <!-- READ ONLY MODE VIEW -->
+        <div id="view-mode-container" class="space-y-4">
+          <div class="bg-zinc-900 p-4 rounded-xl border border-zinc-700/60 space-y-2.5">
+            <div class="flex justify-between text-xs">
+              <span class="text-zinc-400" data-i18n="dev_label_ip">IP-Adresse:</span>
+              <span id="modal-ip" class="font-mono text-ciscocyan font-bold">192.168.178.132</span>
+            </div>
+            <div class="flex justify-between text-xs">
+              <span class="text-zinc-400" data-i18n="dev_label_subnet">Subnetz / VLAN:</span>
+              <span id="modal-subnet" class="font-mono text-zinc-300">192.168.178.0/24</span>
+            </div>
+            <div class="flex justify-between text-xs">
+              <span class="text-zinc-400" data-i18n="dev_label_parent">Angebunden an:</span>
+              <span id="modal-parent-display" class="text-emerald-400 font-semibold">Cisco WS-C2960S-48LPS-L</span>
+            </div>
+            <div class="flex justify-between text-xs">
+              <span class="text-zinc-400" data-i18n="dev_label_poe">Power over Ethernet:</span>
+              <span id="modal-poe" class="text-emerald-400 font-medium"><span class="text-zinc-500">Inaktiv / Kein PoE</span></span>
+            </div>
+          </div>
+
+          <div class="bg-zinc-900/90 p-4 rounded-xl border border-zinc-700/60 space-y-3 relative overflow-hidden">
+            <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
+              <span class="text-xs font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-key text-amber-400"></i> <span data-i18n="dev_sec_login">Zugangsdaten / Login</span>
+              </span>
+              <span id="cred-status-badge" class="text-[10px] px-2 py-0.5 rounded font-semibold bg-zinc-800 text-zinc-400" data-i18n="badge_encrypted">AES Verschlüsselt</span>
+            </div>
+
+            <div id="cred-view-masked" class="text-center py-3 space-y-2">
+              <p class="text-xs text-zinc-400"><i class="fa-solid fa-lock mr-1 text-amber-400"></i> <span data-i18n="dev_enc_msg">Zugangsdaten per AES-256 geschützt.</span></p>
+              <button id="btn-trigger-login-modal" class="bg-zinc-800 hover:bg-zinc-700 text-amber-400 border border-amber-500/30 px-3 py-1.5 rounded-lg text-xs font-semibold transition inline-flex items-center gap-1.5">
+                <i class="fa-solid fa-shield-halved"></i> <span data-i18n="btn_unlock_login">Anmelden zum Freischalten</span>
+              </button>
+            </div>
+
+            <div id="cred-view-unlocked" class="hidden space-y-2.5">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-zinc-400" data-i18n="dev_label_username">Benutzername:</span>
+                <div class="flex items-center gap-1">
+                  <span id="modal-username" class="font-mono text-zinc-200 font-semibold">admin</span>
+                  <button id="btn-copy-user" class="text-zinc-400 hover:text-ciscocyan p-1" title="Kopieren"><i class="fa-regular fa-copy"></i></button>
+                </div>
+              </div>
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-zinc-400" data-i18n="dev_label_pass">Passwort:</span>
+                <div class="flex items-center gap-1">
+                  <span id="modal-password" class="font-mono text-amber-400 font-semibold">••••••••</span>
+                  <button id="btn-toggle-pw-visibility" class="text-zinc-400 hover:text-ciscocyan p-1" title="Anzeigen/Verbergen"><i id="eye-icon" class="fa-regular fa-eye"></i></button>
+                  <button id="btn-copy-pass" class="text-zinc-400 hover:text-ciscocyan p-1" title="Kopieren"><i class="fa-regular fa-copy"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DYNAMIC READ-ONLY WLAN VIEW (ONLY FOR ROUTER & WLAN ACCESS POINT) -->
+          <div id="wlan-view-block" class="hidden bg-zinc-900/90 p-4 rounded-xl border border-zinc-700/60 space-y-3">
+            <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
+              <span class="text-xs font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-wifi text-sky-400"></i> <span data-i18n="dev_sec_wlan">WLAN-Zugang (SSID)</span>
+              </span>
+              <span id="wlan-status-badge" class="text-[10px] px-2 py-0.5 rounded font-semibold bg-zinc-800 text-zinc-400" data-i18n="badge_encrypted">AES Verschlüsselt</span>
+            </div>
+            <div id="wlan-view-masked" class="text-center py-3 space-y-2">
+              <p class="text-xs text-zinc-400"><i class="fa-solid fa-lock mr-1 text-amber-400"></i> <span data-i18n="dev_wlan_enc_msg">SSID und WLAN-Passwort per AES-256 geschützt.</span></p>
+              <button id="btn-trigger-login-modal-wlan" class="bg-zinc-800 hover:bg-zinc-700 text-amber-400 border border-amber-500/30 px-3 py-1.5 rounded-lg text-xs font-semibold transition inline-flex items-center gap-1.5">
+                <i class="fa-solid fa-shield-halved"></i> <span data-i18n="btn_unlock_login">Anmelden zum Freischalten</span>
+              </button>
+            </div>
+            <div id="wlan-view-unlocked" class="hidden space-y-2.5">
+              <div id="wlan-view-list" class="space-y-2.5"></div>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-semibold uppercase text-zinc-400 tracking-wider mb-2" data-i18n="dev_label_desc">Beschreibung & Funktion</h4>
+            <p id="modal-desc" class="text-xs text-zinc-300 bg-zinc-900 p-3.5 rounded-xl border border-zinc-700/60 leading-relaxed">Netzwerkgerät.</p>
+          </div>
+        </div>
+
+        <!-- EDITABLE FORM VIEW -->
+        <form id="edit-mode-form" class="space-y-3.5 hidden" onsubmit="return false;">
+          <div>
+            <label class="block text-xs text-zinc-400 font-semibold mb-1" data-i18n="edit_label_name">Gerätename / Hostname</label>
+            <input type="text" id="edit-name" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-ciscocyan">
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs text-zinc-400 font-semibold mb-1" data-i18n="edit_label_ip">IP-Adresse</label>
+              <input type="text" id="edit-ip" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono text-ciscocyan focus:outline-none focus:border-ciscocyan">
+            </div>
+            <div>
+              <label class="block text-xs text-zinc-400 font-semibold mb-1" data-i18n="edit_label_cat">Kategorie</label>
+              <select id="edit-cat" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-2.5 py-2 text-xs text-white focus:outline-none focus:border-ciscocyan"></select>
+            </div>
+          </div>
+
+          <div class="bg-zinc-900/90 p-3 rounded-xl border border-zinc-700/80 space-y-3">
+            <label class="block text-xs font-bold text-amber-400 flex items-center justify-between">
+              <span data-i18n="edit_label_loginedit"><i class="fa-solid fa-key mr-1"></i> Login Zugangsdaten bearbeiten:</span>
+            </label>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-zinc-400 mb-1" data-i18n="dev_label_username">Benutzername</label>
+                <input type="text" id="edit-username" placeholder="z.B. admin" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-3 py-1.5 text-xs text-zinc-200 focus:outline-none focus:border-ciscocyan">
+              </div>
+              <div>
+                <label class="block text-[11px] text-zinc-400 mb-1" data-i18n="dev_label_pass">Passwort</label>
+                <div class="relative flex items-center">
+                  <input type="password" id="edit-password" placeholder="Passwort" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg pl-3 pr-8 py-1.5 text-xs text-amber-400 font-mono focus:outline-none focus:border-ciscocyan">
+                  <button type="button" id="btn-toggle-edit-pw" class="absolute right-2 text-zinc-400 hover:text-ciscocyan p-1 text-xs" title="Passwort anzeigen/verbergen">
+                    <i class="fa-regular fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DYNAMIC EDITABLE SSID/WLAN SECTION -->
+          <div id="edit-wlan-container" class="bg-zinc-900/90 p-3 rounded-xl border border-sky-500/30 space-y-3 hidden">
+            <label class="flex items-center space-x-2 text-xs font-bold text-sky-400">
+              <span data-i18n="edit_label_wlanedit"><i class="fa-solid fa-wifi mr-1"></i> SSID &amp; WLAN-Konfiguration (Router / AP)</span>
+            </label>
+            <div id="edit-wlan-fields" class="space-y-2">
+              <div id="edit-wlan-list" class="space-y-2"></div>
+              <button type="button" id="btn-add-wlan-row" class="w-full bg-zinc-800 hover:bg-zinc-700 text-sky-400 border border-sky-500/30 rounded-lg py-1.5 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_ssid">Weitere SSID hinzufügen</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-cyan-950/40 p-3 rounded-xl border border-cyan-800/60">
+            <label class="block text-xs text-ciscocyan font-bold mb-1 flex items-center gap-1.5" data-i18n="edit_label_parent">
+              <i class="fa-solid fa-diagram-next"></i> Angebunden an (Eltern-Knoten):
+            </label>
+            <select id="edit-parent" class="w-full bg-zinc-900 border border-cyan-700/70 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-ciscocyan font-medium"></select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs text-zinc-400 font-semibold mb-1" data-i18n="edit_label_icon">Icon (FontAwesome)</label>
+              <div class="relative">
+                <div id="edit-dev-custom-dropdown-trigger" class="w-full bg-zinc-900 border border-zinc-700 hover:border-ciscocyan rounded-lg px-3 py-2 text-xs text-white flex items-center justify-between cursor-pointer">
+                  <span id="edit-dev-selected-display" class="flex items-center gap-2 truncate text-white">
+                    <i class="fa-solid fa-network-wired text-ciscocyan"></i> <span class="font-medium text-white">Router</span>
+                  </span>
+                  <i class="fa-solid fa-chevron-down text-[10px] text-zinc-400"></i>
+                </div>
+                <input type="hidden" id="edit-icon" value="fa-network-wired">
+
+                <div id="edit-dev-dropdown-popup" class="hidden absolute left-0 right-0 top-full mt-1 z-50 bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl p-2 space-y-2">
+                  <input type="text" id="edit-dev-icon-search" data-i18n-placeholder="search_placeholder_icon" placeholder="Icon suchen..." class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-ciscocyan">
+                  <div id="edit-dev-icon-options-list" class="custom-dropdown-list space-y-1 pr-1"></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs text-zinc-400 font-semibold mb-1" data-i18n="edit_label_color">Akzentfarbe</label>
+              <input type="color" id="edit-color" class="w-full h-9 bg-zinc-900 border border-zinc-700 rounded-lg p-1 cursor-pointer">
+            </div>
+          </div>
+
+          <div>
+            <label class="flex items-center space-x-2 text-xs text-zinc-300 cursor-pointer pt-1">
+              <input type="checkbox" id="edit-poe" class="rounded bg-zinc-900 border-zinc-700 text-ciscocyan focus:ring-0 w-4 h-4">
+              <span data-i18n="edit_label_poe">Power over Ethernet (PoE)</span>
+            </label>
+          </div>
+
+          <div>
+            <label class="block text-xs text-zinc-400 font-semibold mb-1" data-i18n="edit_label_desc">Beschreibung</label>
+            <textarea id="edit-desc" rows="3" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg p-2.5 text-xs text-zinc-200 focus:outline-none focus:border-ciscocyan"></textarea>
+          </div>
+        </form>
+      </div>
+
+      <div class="pt-4 border-t border-zinc-700/80 flex gap-2">
+        <button id="btn-delete-device" class="bg-rose-950/80 hover:bg-rose-900 text-rose-300 border border-rose-800 px-3 py-2.5 rounded-lg text-xs font-semibold transition hidden items-center gap-1.5">
+          <i class="fa-solid fa-trash"></i> <span data-i18n="btn_delete">Löschen</span>
+        </button>
+        <button id="modal-save-btn" class="flex-1 bg-ciscocyan hover:bg-cyan-400 text-zinc-950 py-2.5 rounded-lg text-xs font-bold transition shadow-md hidden" data-i18n="btn_save_changes">
+          Änderungen Speichern
+        </button>
+        <button id="modal-close-btn" class="flex-1 bg-zinc-700 hover:bg-zinc-600 text-white py-2.5 rounded-lg text-xs font-semibold transition" data-i18n="btn_close">
+          Schließen
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentLang = localStorage.getItem("kryptonetview_lang") || "de";
+    let fileHandle = null; // File System Access API Handle
+
+    const translations = {
+      de: {
+        app_title: "KryptoNetView – Familie Bonner",
+        header_central_switch: "Zentralswitch",
+        devices_count: "Geräte:",
+        btn_login: "Anmelden",
+        btn_logout: "Abmelden (Admin Aktiv)",
+        btn_change_pw: "Passwort ändern",
+        btn_settings: "Titel & Switch",
+        btn_categories: "Kategorien",
+        btn_draw_frame: "+ Rahmen aufziehen",
+        btn_draw_cancel: "Zeichnen abbrechen",
+        btn_frames: "Gruppen/Rahmen",
+        btn_edit_mode: "Editiermodus",
+        btn_edit_off: "Modus beenden",
+        btn_new_device: "Neues Gerät",
+        btn_load: "Laden",
+        btn_save_file: "Direkt speichern",
+        banner_edit_active: "EDITIERMODUS AKTIV: Drag & Drop Knoten/Rahmen. Klicke auf '+ Rahmen aufziehen', um freie Zonen per Maus zu zeichnen.",
+        banner_draw_active: "RAHMEN ZEICHNEN: Klicke und ziehe mit der Maus auf der Zeichenfläche, um einen neuen Rahmen aufzuspannen.",
+        search_placeholder: "Gerät, IP oder Hostname suchen...",
+        label_categories: "Kategorien",
+        btn_manage: "Verwalten",
+        canvas_header_title: "Grafische Netzwerktopologie & Systemübersicht",
+        btn_reset: "Reset",
+        legend_title: "Verbindungs-Legende:",
+        legend_gigabit: "Gigabit Ethernet",
+        legend_wlan: "AP-EG WLAN Funk",
+        legend_guest: "Gastnetz-VLAN (179.x)",
+        legend_iot: "IoT-Sensoren",
+        footer_hint: "Gerät anklicken für Details",
+        footer_hint_edit: "Editiermodus Aktiv: Drag & Drop & Anklicken zum Bearbeiten",
+        export_warn_title: "Sicherheitswarnung: JSON-Export",
+        export_warn_text: "Die exportierte Konfigurationsdatei enthält sämtliche Geräte-Zugangsdaten (Benutzername und Passwörter) im <strong>Klartext</strong>! Bitte bewahren Sie diese Datei an einem sicheren Ort auf und geben Sie sie nicht ungeschützt weiter.",
+        btn_cancel: "Abbrechen",
+        btn_confirm_export: "Dennoch Exportieren",
+        cat_modal_title: "Kategorien verwalten",
+        cat_modal_subtitle: "Erstelle neue Gerätetypen, ändere Farben & Bezeichnungen oder lösche ungenutzte Kategorien.",
+        cat_add_new_title: "Neue Kategorie hinzufügen",
+        cat_col_id: "Kategorie ID / Key",
+        cat_col_name: "Name / Label",
+        cat_col_icon: "FontAwesome Icon",
+        cat_col_color: "Farbe / Akzent",
+        search_placeholder_icon: "Icon suchen...",
+        btn_save_category: "Kategorie Speichern",
+        cat_existing_title: "Vorhandene Kategorien:",
+        btn_done: "Fertig / Anwenden",
+        auth_modal_title: "Administrator Login",
+        auth_modal_desc: "Master-Passwort eingeben, um den Editiermodus und Zugangsdaten freizuschalten. (Standard:",
+        auth_label_pw: "Master-Passwort",
+        auth_ph_pw: "Passwort eingeben...",
+        auth_err_wrong: "Falsches Master-Passwort!",
+        auth_btn_submit: "Anmelden & Editiermodus Freischalten",
+        auth_link_changepw: "Master-Passwort ändern",
+        changepw_title: "Master-Passwort ändern",
+        changepw_subtitle: "Alle Vaults werden mit dem neuen Key re-verschlüsselt.",
+        changepw_old: "Aktuelles Passwort",
+        changepw_new: "Neues Master-Passwort",
+        changepw_confirm: "Neues Passwort bestätigen",
+        btn_save: "Speichern",
+        settings_title: "Topologie & Switch konfigurieren",
+        settings_subtitle: "Globale Parameter für das Dashboard anpassen.",
+        settings_label_topotitle: "Topologie-Titel",
+        settings_label_subnet: "Hauptnetz Subnetz-CIDR",
+        settings_label_switchmodel: "Switch-Modell",
+        settings_label_switchip: "Switch IP-Adresse",
+        frames_modal_title: "Gruppen & Rahmen verwalten",
+        frames_modal_subtitle: "Visuelle Netzwerkgruppen auf der SVG-Zeichenfläche bearbeiten, löschen oder neu anlegen.",
+        frames_existing_title: "Vorhandene Zonen:",
+        btn_add_frame: "Neuen Rahmen hinzufügen",
+        dev_modal_title: "Gerätedetails",
+        dev_modal_subtitle: "Infrastruktur",
+        dev_label_ip: "IP-Adresse:",
+        dev_label_subnet: "Subnetz / VLAN:",
+        dev_label_parent: "Angebunden an:",
+        dev_label_poe: "Power over Ethernet:",
+        dev_sec_login: "Zugangsdaten / Login",
+        badge_encrypted: "AES Verschlüsselt",
+        badge_unlocked: "AES-256 Entsperrt",
+        dev_enc_msg: "Zugangsdaten per AES-256 geschützt.",
+        btn_unlock_login: "Anmelden zum Freischalten",
+        dev_label_username: "Benutzername:",
+        dev_label_pass: "Passwort:",
+        dev_sec_wlan: "WLAN-Zugang (SSID)",
+        dev_wlan_enc_msg: "SSID und WLAN-Passwort per AES-256 geschützt.",
+        dev_label_desc: "Beschreibung & Funktion:",
+        edit_label_name: "Gerätename / Hostname",
+        edit_label_ip: "IP-Adresse",
+        edit_label_cat: "Kategorie",
+        edit_label_loginedit: "Login Zugangsdaten bearbeiten:",
+        edit_label_wlanedit: "SSID & WLAN-Konfiguration (Router / AP)",
+        btn_add_ssid: "Weitere SSID hinzufügen",
+        edit_label_parent: "Angebunden an (Eltern-Knoten):",
+        edit_label_icon: "Icon (FontAwesome)",
+        edit_label_color: "Akzentfarbe",
+        edit_label_poe: "Power over Ethernet (PoE)",
+        edit_label_desc: "Beschreibung",
+        btn_delete: "Löschen",
+        btn_save_changes: "Änderungen Speichern",
+        btn_close: "Schließen",
+        notif_login_ok: "Erfolgreich angemeldet. Editiermodus kann jetzt aktiviert werden.",
+        notif_logout: "Erfolgreich abgemeldet.",
+        notif_saved: "Konfiguration gespeichert.",
+        notif_pw_changed: "Master-Passwort wurde erfolgreich geändert!",
+        notif_device_saved: "Gerätedetails gespeichert.",
+        notif_device_created: "Neues Gerät erstellt.",
+        notif_device_deleted: "Gerät gelöscht.",
+        notif_exported: "Konfiguration als JSON exportiert.",
+        notif_imported: "Topologie erfolgreich geladen.",
+        notif_file_saved: "Änderungen direkt in die lokale Datei gespeichert!",
+        file_link_off: "Mit Datei verbinden",
+        file_link_on: "In Datei speichern: aktiv",
+        file_link_perm: "Schreibzugriff freigeben",
+        file_link_unsupported: "Nur Browser-Speicher",
+        file_link_off_tip: "Einmalig die HTML-Datei auswählen, damit alle Änderungen automatisch direkt darin gespeichert werden.",
+        file_link_on_tip: "Alle Änderungen werden automatisch in die HTML-Datei geschrieben. Zuletzt gespeichert:",
+        file_link_perm_tip: "Der Browser braucht nach dem Neuladen einmal eine Bestätigung für den Schreibzugriff auf die Datei.",
+        file_link_unsupported_tip: "Dieser Browser kann Dateien nicht direkt überschreiben (nur Chrome/Edge). Nutze den JSON-Export als Sicherung.",
+        notif_file_linked: "Datei verbunden. Änderungen werden ab jetzt automatisch direkt in der HTML-Datei gespeichert.",
+        notif_file_wrong: "Das ist keine KryptoNetView-HTML-Datei. Bitte die richtige Datei auswählen.",
+        notif_file_write_error: "Speichern in die HTML-Datei fehlgeschlagen. Bitte Datei neu verbinden.",
+        cat_label_router: "Router",
+        cat_label_gateways: "Gateways",
+        cat_label_wlanap: "WLAN Access Point",
+        cat_label_switch: "Switch",
+        cat_label_server: "Server",
+        cat_label_endgeraet: "Endgerät",
+        cat_label_infra: "Infrastruktur",
+        cat_label_sensors: "Sensoren",
+        cat_label_voice: "VoIP Phones",
+        cat_label_cameras: "Smart IoT & Cam",
+        cat_label_printers: "Drucker",
+        cat_label_guest: "Gastnetz (179.x)",
+        cat_label_smarttv: "Smart TVs & Streaming",
+        cat_label_gaming: "Gaming & Konsolen",
+        cat_label_smarthome: "Smart Home Hubs",
+        cat_label_nas: "NAS & Backup-Speicher",
+        cat_label_firewall: "Firewall & Security",
+        cat_label_solar: "Solar & Photovoltaik",
+        cat_label_wallbox: "Wallbox & E-Mobilität",
+        cat_label_audio: "Audio & Multiroom"
+      },
+      en: {
+        app_title: "KryptoNetView – Bonner Family",
+        header_central_switch: "Central Switch",
+        devices_count: "Devices:",
+        btn_login: "Login",
+        btn_logout: "Logout (Admin Active)",
+        btn_change_pw: "Change Password",
+        btn_settings: "Title & Switch",
+        btn_categories: "Categories",
+        btn_draw_frame: "+ Draw Frame",
+        btn_draw_cancel: "Cancel Drawing",
+        btn_frames: "Groups/Frames",
+        btn_edit_mode: "Edit Mode",
+        btn_edit_off: "Disable Mode",
+        btn_new_device: "New Device",
+        btn_load: "Load",
+        btn_save_file: "Save Directly",
+        banner_edit_active: "EDIT MODE ACTIVE: Drag & Drop nodes/frames. Click '+ Draw Frame' to draw free zones with the mouse.",
+        banner_draw_active: "DRAW FRAME: Click and drag on the canvas to span a new visual frame.",
+        search_placeholder: "Search device, IP or hostname...",
+        label_categories: "Categories",
+        btn_manage: "Manage",
+        canvas_header_title: "Graphical Network Topology & System Overview",
+        btn_reset: "Reset",
+        legend_title: "Connection Legend:",
+        legend_gigabit: "Gigabit Ethernet",
+        legend_wlan: "AP-EG WLAN Radio",
+        legend_guest: "Guest Network VLAN (179.x)",
+        legend_iot: "IoT Sensors",
+        footer_hint: "Click device for details",
+        footer_hint_edit: "Edit Mode Active: Drag & Drop & Click to Edit",
+        export_warn_title: "Security Warning: JSON Export",
+        export_warn_text: "The exported configuration file contains all device credentials (usernames and passwords) in <strong>plain text</strong>! Please store this file securely and do not share it unprotected.",
+        btn_cancel: "Cancel",
+        btn_confirm_export: "Export Anyway",
+        cat_modal_title: "Manage Categories",
+        cat_modal_subtitle: "Create new device types, change colors & labels or delete unused categories.",
+        cat_add_new_title: "Add New Category",
+        cat_col_id: "Category ID / Key",
+        cat_col_name: "Name / Label",
+        cat_col_icon: "FontAwesome Icon",
+        cat_col_color: "Color / Accent",
+        search_placeholder_icon: "Search icon...",
+        btn_save_category: "Save Category",
+        cat_existing_title: "Existing Categories:",
+        btn_done: "Done / Apply",
+        auth_modal_title: "Administrator Login",
+        auth_modal_desc: "Enter master password to unlock edit mode and credentials. (Default:",
+        auth_label_pw: "Master Password",
+        auth_ph_pw: "Enter password...",
+        auth_err_wrong: "Incorrect master password!",
+        auth_btn_submit: "Login & Unlock Edit Mode",
+        auth_link_changepw: "Change Master Password",
+        changepw_title: "Change Master Password",
+        changepw_subtitle: "All vaults will be re-encrypted with the new key.",
+        changepw_old: "Current Password",
+        changepw_new: "New Master Password",
+        changepw_confirm: "Confirm New Password",
+        btn_save: "Save",
+        settings_title: "Configure Topology & Switch",
+        settings_subtitle: "Adjust global parameters for the dashboard.",
+        settings_label_topotitle: "Topology Title",
+        settings_label_subnet: "Main Subnet CIDR",
+        settings_label_switchmodel: "Switch Model",
+        settings_label_switchip: "Switch IP Address",
+        frames_modal_title: "Manage Groups & Frames",
+        frames_modal_subtitle: "Edit, delete or create visual network groups on the SVG canvas.",
+        frames_existing_title: "Existing Zones:",
+        btn_add_frame: "Add New Frame",
+        dev_modal_title: "Device Details",
+        dev_modal_subtitle: "Infrastructure",
+        dev_label_ip: "IP Address:",
+        dev_label_subnet: "Subnet / VLAN:",
+        dev_label_parent: "Connected to:",
+        dev_label_poe: "Power over Ethernet:",
+        dev_sec_login: "Credentials / Login",
+        badge_encrypted: "AES Encrypted",
+        badge_unlocked: "AES-256 Unlocked",
+        dev_enc_msg: "Credentials protected via AES-256.",
+        btn_unlock_login: "Login to Unlock",
+        dev_label_username: "Username:",
+        dev_label_pass: "Password:",
+        dev_sec_wlan: "WLAN Access (SSID)",
+        dev_wlan_enc_msg: "SSID and WLAN password protected via AES-256.",
+        dev_label_desc: "Description & Function:",
+        edit_label_name: "Device Name / Hostname",
+        edit_label_ip: "IP Address",
+        edit_label_cat: "Category",
+        edit_label_loginedit: "Edit Login Credentials:",
+        edit_label_wlanedit: "SSID & WLAN Configuration (Router / AP)",
+        btn_add_ssid: "Add Another SSID",
+        edit_label_parent: "Connected to (Parent Node):",
+        edit_label_icon: "Icon (FontAwesome)",
+        edit_label_color: "Accent Color",
+        edit_label_poe: "Power over Ethernet (PoE)",
+        edit_label_desc: "Description",
+        btn_delete: "Delete",
+        btn_save_changes: "Save Changes",
+        btn_close: "Close",
+        notif_login_ok: "Successfully logged in. Edit mode can now be enabled.",
+        notif_logout: "Successfully logged out.",
+        notif_saved: "Configuration saved.",
+        notif_pw_changed: "Master password successfully changed!",
+        notif_device_saved: "Device details saved.",
+        notif_device_created: "New device created.",
+        notif_device_deleted: "Device deleted.",
+        notif_exported: "Configuration exported as JSON.",
+        notif_imported: "Topology successfully loaded.",
+        notif_file_saved: "Changes saved directly into the local file!",
+        file_link_off: "Link to file",
+        file_link_on: "Saving to file: active",
+        file_link_perm: "Allow write access",
+        file_link_unsupported: "Browser storage only",
+        file_link_off_tip: "Select the HTML file once so that all changes are saved directly into it automatically.",
+        file_link_on_tip: "All changes are written to the HTML file automatically. Last saved:",
+        file_link_perm_tip: "After a reload the browser needs one confirmation for write access to the file.",
+        file_link_unsupported_tip: "This browser cannot overwrite files directly (Chrome/Edge only). Use the JSON export as a backup.",
+        notif_file_linked: "File linked. Changes are now saved automatically directly into the HTML file.",
+        notif_file_wrong: "This is not a KryptoNetView HTML file. Please choose the correct file.",
+        notif_file_write_error: "Saving to the HTML file failed. Please link the file again.",
+        cat_label_router: "Router",
+        cat_label_gateways: "Gateways",
+        cat_label_wlanap: "WLAN Access Point",
+        cat_label_switch: "Switch",
+        cat_label_server: "Server",
+        cat_label_endgeraet: "End Device",
+        cat_label_infra: "Infrastructure",
+        cat_label_sensors: "Sensors",
+        cat_label_voice: "VoIP Phones",
+        cat_label_cameras: "Smart IoT & Cam",
+        cat_label_printers: "Printers",
+        cat_label_guest: "Guest Network (179.x)",
+        cat_label_smarttv: "Smart TVs & Streaming",
+        cat_label_gaming: "Gaming & Consoles",
+        cat_label_smarthome: "Smart Home Hubs",
+        cat_label_nas: "NAS & Backup Storage",
+        cat_label_firewall: "Firewall & Security",
+        cat_label_solar: "Solar & Photovoltaic",
+        cat_label_wallbox: "Wallbox & E-Mobility",
+        cat_label_audio: "Audio & Multiroom"
+      }
+    };
+
+    function t(key) {
+      if (translations[currentLang] && translations[currentLang][key]) {
+        return translations[currentLang][key];
+      }
+      if (translations['de'] && translations['de'][key]) {
+        return translations['de'][key];
+      }
+      return key;
+    }
+
+    function updateAllTranslations() {
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        el.innerHTML = t(key);
+      });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        const key = el.getAttribute("data-i18n-placeholder");
+        el.placeholder = t(key);
+      });
+      document.getElementById("lang-btn-text").innerText = currentLang.toUpperCase();
+      document.documentElement.setAttribute("lang", currentLang);
+
+      const htmlTitle = document.getElementById("html-title");
+      if (htmlTitle) htmlTitle.innerText = t("app_title");
+
+      renderCategoryFiltersUI();
+      renderDeviceList();
+      renderTopologySVG();
+      if (activeDevice) {
+        openModal(activeDevice);
+      }
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === "de" ? "en" : "de";
+      localStorage.setItem("kryptonetview_lang", currentLang);
+      updateAllTranslations();
+      updateFileStatusUI();
+      showNotification(currentLang === "de" ? "Sprache zu Deutsch gewechselt." : "Language switched to English.");
+    }
+
+    let activeCryptoKey = null;
+    let cryptoSalt = null;
+    let authVerifierHash = null;
+
+    function showNotification(message, isError = false) {
+      let notif = document.getElementById("custom-notification");
+      if (!notif) {
+        notif = document.createElement("div");
+        notif.id = "custom-notification";
+        notif.className = "fixed bottom-5 right-5 z-50 bg-zinc-900 border border-zinc-700 text-white px-4 py-3 rounded-xl shadow-2xl text-xs flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0";
+        document.body.appendChild(notif);
+      }
+      notif.innerHTML = `<i class="fa-solid ${isError ? 'fa-circle-exclamation text-rose-400' : 'fa-circle-check text-emerald-400'} text-base"></i><span>${message}</span>`;
+      setTimeout(() => { notif.classList.remove("translate-y-20", "opacity-0"); }, 10);
+      setTimeout(() => { notif.classList.add("translate-y-20", "opacity-0"); }, 3500);
+    }
+
+    const availableIcons = [
+      { class: "fa-network-wired", name: "Router" },
+      { class: "fa-tower-broadcast", name: "Gateways" },
+      { class: "fa-wifi", name: "WLAN Access Point" },
+      { class: "fa-sitemap", name: "Switch" },
+      { class: "fa-server", name: "Server" },
+      { class: "fa-laptop", name: "End Device" },
+      { class: "fa-gauge-high", name: "Sensor" },
+      { class: "fa-phone-flip", name: "VoIP Phone" },
+      { class: "fa-video", name: "IP Cam / Security" },
+      { class: "fa-print", name: "Printer" },
+      { class: "fa-shield-halved", name: "Firewall" },
+      { class: "fa-tv", name: "Smart TV" },
+      { class: "fa-gamepad", name: "Console / Gaming" },
+      { class: "fa-house-signal", name: "Smart Home Hub" },
+      { class: "fa-database", name: "NAS / Storage" },
+      { class: "fa-solar-panel", name: "Solar / Inverter" },
+      { class: "fa-charging-station", name: "Wallbox" },
+      { class: "fa-music", name: "Audio" },
+      { class: "fa-bolt", name: "Smart Plug" },
+      { class: "fa-microchip", name: "Microcontroller" },
+      { class: "fa-desktop", name: "PC" },
+      { class: "fa-tablet-screen-button", name: "Tablet" },
+      { class: "fa-mobile-screen-button", name: "Smartphone" }
+    ];
+
+    let globalConfig = {
+      title: "Familie Bonner – Heimnetzwerk Topologie",
+      subnet: "192.168.178.0/24",
+      switchModel: "Cisco WS-C2960S-48LPS-L",
+      switchIp: "192.168.178.8"
+    };
+
+    let defaultCategories = [
+      { id: "router", nameKey: "cat_label_router", icon: "fa-network-wired", color: "#00bcef" },
+      { id: "gateways", nameKey: "cat_label_gateways", icon: "fa-tower-broadcast", color: "#f59e0b" },
+      { id: "wlan_ap", nameKey: "cat_label_wlanap", icon: "fa-wifi", color: "#38bdf8" },
+      { id: "switch", nameKey: "cat_label_switch", icon: "fa-sitemap", color: "#00bcef" },
+      { id: "server", nameKey: "cat_label_server", icon: "fa-server", color: "#818cf8" },
+      { id: "endgeraet", nameKey: "cat_label_endgeraet", icon: "fa-laptop", color: "#06b6d4" },
+      { id: "infrastructure", nameKey: "cat_label_infra", icon: "fa-sitemap", color: "#38bdf8" },
+      { id: "sensors", nameKey: "cat_label_sensors", icon: "fa-gauge-high", color: "#10b981" },
+      { id: "voice", nameKey: "cat_label_voice", icon: "fa-phone-flip", color: "#34d399" },
+      { id: "cameras", nameKey: "cat_label_cameras", icon: "fa-video", color: "#c084fc" },
+      { id: "printers", nameKey: "cat_label_printers", icon: "fa-print", color: "#f472b6" },
+      { id: "guest", nameKey: "cat_label_guest", icon: "fa-shield-halved", color: "#f59e0b" },
+      { id: "smarttv", nameKey: "cat_label_smarttv", icon: "fa-tv", color: "#38bdf8" },
+      { id: "gaming", nameKey: "cat_label_gaming", icon: "fa-gamepad", color: "#ec4899" },
+      { id: "smarthome", nameKey: "cat_label_smarthome", icon: "fa-house-signal", color: "#f59e0b" },
+      { id: "nas", nameKey: "cat_label_nas", icon: "fa-database", color: "#6366f1" },
+      { id: "firewall", nameKey: "cat_label_firewall", icon: "fa-shield-halved", color: "#ef4444" },
+      { id: "solar", nameKey: "cat_label_solar", icon: "fa-solar-panel", color: "#eab308" },
+      { id: "wallbox", nameKey: "cat_label_wallbox", icon: "fa-charging-station", color: "#10b981" },
+      { id: "audio", nameKey: "cat_label_audio", icon: "fa-music", color: "#a855f7" }
+    ];
+
+    let categories = defaultCategories.map(c => ({ ...c, name: t(c.nameKey) }));
+
+    let defaultFrames = [
+      {
+        id: "frame_apeg",
+        title: "📡 AP-EG WLAN Hub (Xiaomi / Android / Sensoren)",
+        x: 730, y: 380, width: 340, height: 550,
+        strokeColor: "#00bcef", strokeDash: "5 3",
+        headerBg: "#083344", textColor: "#38bdf8"
+      },
+      {
+        id: "frame_guest",
+        title: "🛡️ GASTNETZ (VPN / VLAN 192.168.179.x)",
+        x: 1090, y: 60, width: 360, height: 870,
+        strokeColor: "#f59e0b", strokeDash: "6 4",
+        headerBg: "#78350f", textColor: "#fbbf24"
+      }
+    ];
+
+    let frames = [...defaultFrames];
+
+    function getCategoryDisplayName(catId) {
+      const cat = categories.find(c => c.id === catId);
+      if (cat) {
+        if (cat.nameKey && translations[currentLang][cat.nameKey]) {
+          return t(cat.nameKey);
+        }
+        return cat.name || catId;
+      }
+      return catId;
+    }
+
+    function bufferToBase64(buf) {
+      return btoa(String.fromCharCode(...new Uint8Array(buf)));
+    }
+    function base64ToBuffer(base64) {
+      const binaryStr = atob(base64);
+      const bytes = new Uint8Array(binaryStr.length);
+      for (let i = 0; i < binaryStr.length; i++) {
+        bytes[i] = binaryStr.charCodeAt(i);
+      }
+      return bytes.buffer;
+    }
+
+    async function deriveKeyAndVerifier(password, saltUint8 = null) {
+      const enc = new TextEncoder();
+      if (!saltUint8) {
+        saltUint8 = window.crypto.getRandomValues(new Uint8Array(16));
+      }
+
+      const keyMaterial = await window.crypto.subtle.importKey(
+        "raw",
+        enc.encode(password),
+        { name: "PBKDF2" },
+        false,
+        ["deriveBits", "deriveKey"]
+      );
+
+      const aesKey = await window.crypto.subtle.deriveKey(
+        {
+          name: "PBKDF2",
+          salt: saltUint8,
+          iterations: 100000,
+          hash: "SHA-256"
+        },
+        keyMaterial,
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["encrypt", "decrypt"]
+      );
+
+      const verifierBits = await window.crypto.subtle.deriveBits(
+        {
+          name: "PBKDF2",
+          salt: saltUint8,
+          iterations: 100001,
+          hash: "SHA-256"
+        },
+        keyMaterial,
+        256
+      );
+
+      return {
+        key: aesKey,
+        salt: saltUint8,
+        verifier: bufferToBase64(verifierBits)
+      };
+    }
+
+    async function encryptText(plainText, cryptoKey) {
+      if (!plainText || !cryptoKey) return plainText;
+      const enc = new TextEncoder();
+      const iv = window.crypto.getRandomValues(new Uint8Array(12));
+      const encryptedBuffer = await window.crypto.subtle.encrypt(
+        { name: "AES-GCM", iv: iv },
+        cryptoKey,
+        enc.encode(plainText)
+      );
+      return JSON.stringify({
+        iv: bufferToBase64(iv),
+        ciphertext: bufferToBase64(encryptedBuffer)
+      });
+    }
+
+    async function decryptText(encryptedJsonStr, cryptoKey) {
+      if (!encryptedJsonStr || !cryptoKey) return encryptedJsonStr;
+      try {
+        const data = JSON.parse(encryptedJsonStr);
+        if (!data.iv || !data.ciphertext) return encryptedJsonStr;
+        const dec = new TextDecoder();
+        const iv = new Uint8Array(base64ToBuffer(data.iv));
+        const ciphertext = base64ToBuffer(data.ciphertext);
+
+        const decryptedBuffer = await window.crypto.subtle.decrypt(
+          { name: "AES-GCM", iv: iv },
+          cryptoKey,
+          ciphertext
+        );
+        return dec.decode(decryptedBuffer);
+      } catch (err) {
+        return encryptedJsonStr;
+      }
+    }
+
+    async function encryptAllDevices(key) {
+      for (let dev of devices) {
+        if (dev._unlockedUser !== undefined) {
+          dev.loginUser = await encryptText(dev._unlockedUser, key);
+        }
+        if (dev._unlockedPass !== undefined) {
+          dev.loginPass = await encryptText(dev._unlockedPass, key);
+        }
+        if (dev._unlockedWlan !== undefined) {
+          dev.wlanNets = await encryptText(JSON.stringify(dev._unlockedWlan), key);
+          delete dev.wlanSsid;
+          delete dev.wlanPass;
+        }
+      }
+      saveToLocalStorage();
+    }
+
+    async function decryptAllDevices(key) {
+      for (let dev of devices) {
+        dev._unlockedUser = await decryptText(dev.loginUser, key);
+        dev._unlockedPass = await decryptText(dev.loginPass, key);
+        let nets = [];
+        const rawNets = await decryptText(dev.wlanNets, key);
+        if (rawNets) {
+          try { const parsed = JSON.parse(rawNets); if (Array.isArray(parsed)) nets = parsed; } catch (e) {}
+        }
+        if (nets.length === 0) {
+          const oldSsid = await decryptText(dev.wlanSsid, key);
+          const oldPass = await decryptText(dev.wlanPass, key);
+          if (oldSsid || oldPass) nets = [{ ssid: oldSsid || "", pass: oldPass || "" }];
+        }
+        dev._unlockedWlan = nets;
+      }
+    }
+
+    let defaultDevices = [
+      { id: "switch", parentId: null, name: "Cisco WS-C2960S-48LPS-L", ip: "192.168.178.8", cat: "switch", icon: "fa-sitemap", color: "#00bcef", desc: "Zentraler Gigabit 48-Port PoE+ Managed Switch der Familie Bonner.", poe: true, loginUser: "admin", loginPass: "cisco_password_2026", pos: { x: 440, y: 480 } },
+      { id: "gateway_main", parentId: "switch", name: "Fritz!Box 7590", ip: "192.168.178.1", cat: "gateways", icon: "fa-tower-broadcast", color: "#f59e0b", desc: "Haupt-Internet Gateway & VDSL-Router an Cisco Switch.", poe: false, loginUser: "admin", loginPass: "fritz_secret_7590", pos: { x: 440, y: 110 } },
+      { id: "router_core", parentId: "gateway_main", name: "Core Router", ip: "192.168.178.2", cat: "router", icon: "fa-network-wired", color: "#00bcef", desc: "Zentraler Core Router zur internen Subnetz-Verteilung.", poe: false, loginUser: "admin", loginPass: "router_core_2026", _unlockedWlan: [{ ssid: "Bonner-Core-WLAN", pass: "core_wlan_secret" }], pos: { x: 280, y: 110 } },
+      { id: "server_main", parentId: "switch", name: "Hauptserver", ip: "192.168.178.10", cat: "server", icon: "fa-server", color: "#818cf8", desc: "Zentraler Server & Speichersystem der Familie Bonner.", poe: false, loginUser: "root", loginPass: "srv_pass_2026", pos: { x: 100, y: 200 } },
+      { id: "server_ipmi", parentId: "switch", name: "IPMI Remote Mgmt", ip: "192.168.178.15", cat: "server", icon: "fa-server", color: "#818cf8", desc: "Out-of-Band Remote Management Controller.", poe: false, loginUser: "ADMIN", loginPass: "ipmi_pass_secure", pos: { x: 250, y: 200 } },
+      { id: "ap_og", parentId: "switch", name: "Cisco AP OG", ip: "192.168.178.90", cat: "wlan_ap", icon: "fa-wifi", color: "#38bdf8", desc: "Cisco Access Point Obergeschoss (PoE am Switch).", poe: true, loginUser: "cisco", loginPass: "ap_pass_og", _unlockedWlan: [{ ssid: "Bonner-OG", pass: "og_wlan_2026" }], pos: { x: 100, y: 340 } },
+      { id: "ap_eg", parentId: "switch", name: "Cisco AP EG", ip: "192.168.178.92", cat: "wlan_ap", icon: "fa-wifi", color: "#38bdf8", desc: "Cisco Access Point Erdgeschoss (Zentraler WLAN Hub).", poe: true, loginUser: "cisco", loginPass: "ap_pass_eg", _unlockedWlan: [{ ssid: "Bonner-EG", pass: "eg_wlan_2026" }], pos: { x: 890, y: 460 } },
+      { id: "ap_gh", parentId: "switch", name: "Cisco AP GH", ip: "192.168.178.94", cat: "wlan_ap", icon: "fa-wifi", color: "#38bdf8", desc: "Cisco Access Point Gartenhaus (PoE am Switch).", poe: true, loginUser: "cisco", loginPass: "ap_pass_gh", _unlockedWlan: [{ ssid: "Bonner-Garten", pass: "gh_wlan_2026" }], pos: { x: 100, y: 480 } },
+
+      { id: "gas_sensor", parentId: "ap_eg", name: "GasSensor", ip: "192.168.178.100", cat: "sensors", icon: "fa-gauge-high", color: "#10b981", desc: "Sicherheits-GasSensor. Drahtlos angebunden an Cisco AP-EG.", poe: false, loginUser: "", loginPass: "", pos: { x: 795, y: 530 } },
+      { id: "zisterne_sensor", parentId: "ap_eg", name: "Zisterne Sensor", ip: "192.168.178.101", cat: "sensors", icon: "fa-gauge-high", color: "#10b981", desc: "Wasserstands-Zisterne Sensor. Drahtlos angebunden an Cisco AP-EG.", poe: false, loginUser: "", loginPass: "", pos: { x: 795, y: 590 } },
+      { id: "poco_x4", parentId: "ap_eg", name: "POCO X4 Pro 5G", ip: "192.168.178.154", cat: "endgeraet", icon: "fa-mobile-screen-button", color: "#06b6d4", desc: "POCO X4 Pro Smartphone. Drahtlos über Cisco AP-EG.", poe: false, loginUser: "", loginPass: "", pos: { x: 795, y: 650 } },
+      { id: "patrick_redmi9", parentId: "ap_eg", name: "Patrick Redmi 9", ip: "192.168.178.177", cat: "endgeraet", icon: "fa-mobile-screen-button", color: "#06b6d4", desc: "Patrick Redmi 9 Smartphone. Drahtlos über Cisco AP-EG.", poe: false, loginUser: "", loginPass: "", pos: { x: 795, y: 710 } },
+      { id: "andrea_pocof1", parentId: "ap_eg", name: "Andrea POCO F1", ip: "192.168.178.241", cat: "endgeraet", icon: "fa-mobile-screen-button", color: "#06b6d4", desc: "Andrea Poco F1 Smartphone. Drahtlos über Cisco AP-EG.", poe: false, loginUser: "", loginPass: "", pos: { x: 795, y: 770 } },
+      { id: "andrea_nb_wlan", parentId: "ap_eg", name: "Andrea-Notebook (WLAN)", ip: "192.168.178.190", cat: "endgeraet", icon: "fa-laptop", color: "#06b6d4", desc: "Andrea Notebook WLAN-Verbindung über Cisco AP-EG.", poe: false, loginUser: "", loginPass: "", pos: { x: 795, y: 830 } },
+
+      { id: "lee_pad", parentId: "ap_eg", name: "Lee Redmi Pad 2 Pro", ip: "192.168.178.233", cat: "endgeraet", icon: "fa-tablet-screen-button", color: "#06b6d4", desc: "Lee Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.", poe: false, loginUser: "", loginPass: "", pos: { x: 995, y: 650 } },
+      { id: "andrea_pad", parentId: "ap_eg", name: "Andrea Redmi Pad 2 Pro", ip: "192.168.178.234", cat: "endgeraet", icon: "fa-tablet-screen-button", color: "#06b6d4", desc: "Andrea Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.", poe: false, loginUser: "", loginPass: "", pos: { x: 995, y: 710 } },
+      { id: "redmi_pad_se", parentId: "ap_eg", name: "Redmi Pad SE", ip: "192.168.178.235", cat: "endgeraet", icon: "fa-tablet-screen-button", color: "#06b6d4", desc: "Redmi Pad SE Tablet. Drahtlos über Cisco AP-EG.", poe: false, loginUser: "", loginPass: "", pos: { x: 995, y: 770 } },
+      { id: "redmi_pad_2pro", parentId: "ap_eg", name: "Redmi Pad 2 Pro", ip: "192.168.178.249", cat: "endgeraet", icon: "fa-tablet-screen-button", color: "#06b6d4", desc: "Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.", poe: false, loginUser: "", loginPass: "", pos: { x: 995, y: 830 } },
+
+      { id: "phone_gh", parentId: "switch", name: "Cisco Phone GH", ip: "192.168.178.80", cat: "voice", icon: "fa-phone-flip", color: "#34d399", desc: "Cisco SIP Telefon Gartenhaus (PoE am Switch).", poe: true, loginUser: "", loginPass: "", pos: { x: 100, y: 620 } },
+      { id: "phone_sz", parentId: "switch", name: "Cisco Phone SZ", ip: "192.168.178.81", cat: "voice", icon: "fa-phone-flip", color: "#34d399", desc: "Cisco SIP Telefon Schlafzimmer (PoE am Switch).", poe: true, loginUser: "", loginPass: "", pos: { x: 230, y: 620 } },
+      { id: "phone_wz2", parentId: "switch", name: "Cisco Phone WZ2", ip: "192.168.178.82", cat: "voice", icon: "fa-phone-flip", color: "#34d399", desc: "Cisco SIP Telefon Wohnzimmer 2 (PoE am Switch).", poe: true, loginUser: "", loginPass: "", pos: { x: 360, y: 620 } },
+      { id: "phone_wz1", parentId: "switch", name: "Cisco Phone WZ1", ip: "192.168.178.83", cat: "voice", icon: "fa-phone-flip", color: "#34d399", desc: "Cisco SIP Telefon Wohnzimmer 1 (PoE am Switch).", poe: true, loginUser: "", loginPass: "", pos: { x: 490, y: 620 } },
+
+      { id: "print_hp", parentId: "switch", name: "hpp3015drucker", ip: "192.168.178.30", cat: "printers", icon: "fa-print", color: "#f472b6", desc: "HP LaserJet P3015 Netzdrucker.", poe: false, loginUser: "", loginPass: "", pos: { x: 100, y: 760 } },
+      { id: "print_ricoh", parentId: "switch", name: "Drucker-Ricoh", ip: "192.168.178.31", cat: "printers", icon: "fa-print", color: "#f472b6", desc: "Ricoh Multifunktionsdrucker.", poe: false, loginUser: "", loginPass: "", pos: { x: 230, y: 760 } },
+      { id: "print_brother", parentId: "switch", name: "Drucker-BROTHER", ip: "192.168.178.32", cat: "printers", icon: "fa-print", color: "#f472b6", desc: "Brother Netzdrucker.", poe: false, loginUser: "", loginPass: "", pos: { x: 360, y: 760 } },
+
+      { id: "cam_door", parentId: "switch", name: "Cam-Haustuer", ip: "192.168.178.20", cat: "cameras", icon: "fa-video", color: "#c084fc", desc: "IP-Kamera Haustür (PoE am Switch).", poe: true, loginUser: "admin", loginPass: "cam_pass_1", pos: { x: 620, y: 200 } },
+      { id: "cam_yard", parentId: "switch", name: "Cam-Hof", ip: "192.168.178.21", cat: "cameras", icon: "fa-video", color: "#c084fc", desc: "IP-Kamera Hof (PoE am Switch).", poe: true, loginUser: "admin", loginPass: "cam_pass_2", pos: { x: 740, y: 200 } },
+      { id: "cam_gh", parentId: "switch", name: "Cam-Gartenhaus", ip: "192.168.178.22", cat: "cameras", icon: "fa-video", color: "#c084fc", desc: "IP-Kamera Gartenhaus (PoE am Switch).", poe: true, loginUser: "admin", loginPass: "cam_pass_3", pos: { x: 620, y: 340 } },
+
+      { id: "gateway_guest", parentId: "switch", name: "Fritz!Box Gast-Gateway", ip: "192.168.179.1", cat: "gateways", icon: "fa-tower-broadcast", color: "#f59e0b", desc: "Fritz!Box Gastnetz (VPN / Subnetz 192.168.179.1).", poe: false, loginUser: "admin", loginPass: "guest_pw_179", _unlockedWlan: [{ ssid: "Bonner-Gastnetz", pass: "guest_wifi_2026" }], pos: { x: 1160, y: 160 } },
+      { id: "ap_eg_guest", parentId: "gateway_guest", name: "Cisco AP EG (Gast-Trunk)", ip: "192.168.179.20", cat: "wlan_ap", icon: "fa-wifi", color: "#38bdf8", desc: "Gast-VLAN Trunk vom Cisco Switch an Cisco EG.", poe: true, loginUser: "", loginPass: "", _unlockedWlan: [{ ssid: "Bonner-Gastnetz-EG", pass: "guest_eg_2026" }], pos: { x: 1160, y: 340 } },
+      { id: "school_tab_1", parentId: "ap_eg_guest", name: "Schultablet 1", ip: "192.168.179.20", cat: "endgeraet", icon: "fa-tablet-screen-button", color: "#06b6d4", desc: "Schultablet 1 im Gastnetzwerk.", poe: false, loginUser: "", loginPass: "", pos: { x: 1160, y: 540 } },
+      { id: "school_tab_2", parentId: "ap_eg_guest", name: "Schultablet 2", ip: "192.168.179.21", cat: "endgeraet", icon: "fa-tablet-screen-button", color: "#06b6d4", desc: "Schultablet 2 im Gastnetzwerk.", poe: false, loginUser: "", loginPass: "", pos: { x: 1330, y: 540 } }
+    ];
+
+    let devices = [...defaultDevices];
+
+    let isLoggedIn = false;
+    let isEditMode = false;
+    let isDrawFrameMode = false;
+    let drawingStart = null;
+    let draggingFrame = null;
+    let resizingFrame = null;
+    let frameDragOffset = { x: 0, y: 0 };
+
+    let activeDevice = null;
+    let draggingNode = null;
+    let dragOffset = { x: 0, y: 0 };
+    let currentFilterCat = "all";
+    let currentSearchTerm = "";
+    let isPasswordVisible = false;
+    let wlanVisible = {};
+
+    function isRouterOrWlanAp(catId, dev) {
+      const id = String(catId || "").toLowerCase();
+      if (id === "router" || id === "wlan_ap") return true;
+      if (/router|wlan|wifi|wi-fi|accesspoint|access_point|access-point|(^|[_-])ap($|[_-])/.test(id)) return true;
+      const cat = categories.find(c => c.id === catId);
+      const catName = ((cat && cat.name) || "").toLowerCase();
+      if (/router|wlan|wifi|wi-fi|access\s?-?point|(^|[^a-z])ap([^a-z]|$)/.test(catName)) return true;
+      if (dev) {
+        if (dev.icon === "fa-wifi" || dev.icon === "fa-network-wired") return true;
+        if (/(^|[^a-z])(ap|router|access\s?-?point)([^a-z]|$)/i.test(dev.name || "")) return true;
+      }
+      return false;
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      loadStoredSettings();
+      await initializeCryptoState();
+      updateAllTranslations();
+      setupEventListeners();
+      updateAuthUIState();
+      setupCustomIconDropdowns();
+      await restoreFileHandle();
+    });
+
+    // ===== Speicherung direkt in der HTML-Datei =====
+    const EMBED_FORMAT = "kryptonetview-embedded-v1";
+    let htmlFileStatus = "off"; // off | on | perm | unsupported
+    let lastFileSaveTime = null;
+    let fileSaveTimer = null;
+    let fileSaveChain = Promise.resolve();
+
+    function readEmbeddedState() {
+      try {
+        const el = document.getElementById("embedded-state");
+        if (!el) return null;
+        const parsed = JSON.parse(el.textContent || "null");
+        if (parsed && parsed.format === EMBED_FORMAT && Array.isArray(parsed.devices)) return parsed;
+      } catch (e) { console.error(e); }
+      return null;
+    }
+
+    // Uebernimmt den in der Datei gespeicherten Stand, sofern er neuer ist als der Browser-Speicher.
+    function syncFromEmbedded() {
+      const emb = readEmbeddedState();
+      if (!emb) return;
+      const localTs = parseInt(localStorage.getItem("kryptonetview_savedAt") || "0", 10);
+      const hasLocal = Boolean(localStorage.getItem("kryptonetview_devices"));
+      if (hasLocal && localTs > (emb.savedAt || 0)) return;
+      if (emb.config) localStorage.setItem("kryptonetview_config", JSON.stringify(emb.config));
+      if (emb.categories) localStorage.setItem("kryptonetview_categories", JSON.stringify(emb.categories));
+      if (emb.frames) localStorage.setItem("kryptonetview_frames", JSON.stringify(emb.frames));
+      localStorage.setItem("kryptonetview_devices", JSON.stringify(emb.devices));
+      if (emb.crypto && emb.crypto.salt && emb.crypto.verifier) {
+        localStorage.setItem("kryptonetview_crypto_salt", emb.crypto.salt);
+        localStorage.setItem("kryptonetview_crypto_verifier", emb.crypto.verifier);
+      }
+      localStorage.setItem("kryptonetview_savedAt", String(emb.savedAt || 0));
+    }
+
+    function collectPersistState() {
+      return {
+        format: EMBED_FORMAT,
+        savedAt: parseInt(localStorage.getItem("kryptonetview_savedAt") || String(Date.now()), 10),
+        config: globalConfig,
+        categories: categories,
+        frames: frames,
+        devices: serializableDevices(),
+        crypto: {
+          salt: localStorage.getItem("kryptonetview_crypto_salt"),
+          verifier: localStorage.getItem("kryptonetview_crypto_verifier")
+        }
+      };
+    }
+
+    // --- Datei-Handle dauerhaft in IndexedDB merken ---
+    function idbOpen() {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open("kryptonetview_fs", 1);
+        req.onupgradeneeded = () => req.result.createObjectStore("kv");
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+    async function idbGet(key) {
+      const db = await idbOpen();
+      return new Promise((resolve, reject) => {
+        const r = db.transaction("kv").objectStore("kv").get(key);
+        r.onsuccess = () => resolve(r.result);
+        r.onerror = () => reject(r.error);
+      });
+    }
+    async function idbSet(key, value) {
+      const db = await idbOpen();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction("kv", "readwrite");
+        tx.objectStore("kv").put(value, key);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+    }
+
+    function fileApiSupported() {
+      return typeof window.showOpenFilePicker === "function";
+    }
+
+    function updateFileStatusUI() {
+      const btn = document.getElementById("btn-file-link");
+      const icon = document.getElementById("file-link-icon");
+      const text = document.getElementById("file-link-text");
+      if (!btn) return;
+      const base = "font-semibold px-2.5 py-1 rounded-lg border transition flex items-center gap-1.5 shadow-md ";
+      if (htmlFileStatus === "on") {
+        btn.className = base + "bg-emerald-950/60 hover:bg-emerald-900/80 text-emerald-300 border-emerald-700/80";
+        icon.className = "fa-solid fa-link";
+        text.innerText = t("file_link_on");
+        btn.title = t("file_link_on_tip") + " " + (lastFileSaveTime ? lastFileSaveTime.toLocaleTimeString() : "—");
+      } else if (htmlFileStatus === "perm") {
+        btn.className = base + "bg-amber-600 hover:bg-amber-500 text-zinc-950 border-amber-300 pulse-glow";
+        icon.className = "fa-solid fa-lock-open";
+        text.innerText = t("file_link_perm");
+        btn.title = t("file_link_perm_tip");
+      } else if (htmlFileStatus === "unsupported") {
+        btn.className = base + "bg-zinc-800/50 text-zinc-500 border-zinc-800 cursor-not-allowed";
+        icon.className = "fa-solid fa-link-slash";
+        text.innerText = t("file_link_unsupported");
+        btn.title = t("file_link_unsupported_tip");
+      } else {
+        btn.className = base + "bg-zinc-800 hover:bg-zinc-700 text-amber-400 border-amber-500/40";
+        icon.className = "fa-solid fa-link-slash";
+        text.innerText = t("file_link_off");
+        btn.title = t("file_link_off_tip");
+      }
+    }
+
+    async function restoreFileHandle() {
+      if (!fileApiSupported()) {
+        htmlFileStatus = "unsupported";
+        updateFileStatusUI();
+        return;
+      }
+      try {
+        const h = await idbGet("htmlHandle");
+        if (h) {
+          fileHandle = h;
+          const perm = await h.queryPermission({ mode: "readwrite" });
+          htmlFileStatus = perm === "granted" ? "on" : "perm";
+        }
+      } catch (e) { console.error(e); }
+      updateFileStatusUI();
+    }
+
+    // Klick auf den Datei-Button: verbinden bzw. Schreibzugriff erneut freigeben
+    async function handleFileLinkClick() {
+      if (htmlFileStatus === "unsupported") return;
+      try {
+        if (fileHandle) {
+          const perm = await fileHandle.requestPermission({ mode: "readwrite" });
+          if (perm === "granted") {
+            htmlFileStatus = "on";
+            updateFileStatusUI();
+            await writeStateToHtmlFile();
+            showNotification(t("notif_file_linked"));
+            return;
+          }
+        }
+        const [h] = await window.showOpenFilePicker({
+          multiple: false,
+          types: [{ description: "KryptoNetView HTML", accept: { "text/html": [".html", ".htm"] } }]
+        });
+        const perm = await h.requestPermission({ mode: "readwrite" });
+        if (perm !== "granted") return;
+        const txt = await (await h.getFile()).text();
+        if (!txt.includes("KryptoNetView")) {
+          showNotification(t("notif_file_wrong"), true);
+          return;
+        }
+        fileHandle = h;
+        await idbSet("htmlHandle", h);
+        htmlFileStatus = "on";
+        updateFileStatusUI();
+        await writeStateToHtmlFile();
+        showNotification(t("notif_file_linked"));
+      } catch (err) {
+        if (err && err.name !== "AbortError") {
+          console.error(err);
+          showNotification(t("notif_file_write_error"), true);
+        }
+      }
+    }
+
+    // Schreibt den aktuellen Stand in den Datenblock der verbundenen HTML-Datei
+    function writeStateToHtmlFile() {
+      fileSaveChain = fileSaveChain.then(async () => {
+        if (!fileHandle) return;
+        const salt = localStorage.getItem("kryptonetview_crypto_salt");
+        const ver = localStorage.getItem("kryptonetview_crypto_verifier");
+        if (!salt || !ver) return; // erst speichern, wenn der Tresor initialisiert ist
+        try {
+          const perm = await fileHandle.queryPermission({ mode: "readwrite" });
+          if (perm !== "granted") {
+            htmlFileStatus = "perm";
+            updateFileStatusUI();
+            return;
+          }
+          const html = await (await fileHandle.getFile()).text();
+          const json = JSON.stringify(collectPersistState()).replace(/</g, "\\u003c");
+          const block = '<script id="embedded-state" type="application/json">' + json + '<' + '/script>';
+          const re = /<script id="embedded-state" type="application\/json">[\s\S]*?<\/script>/;
+          let out;
+          if (re.test(html)) out = html.replace(re, () => block);
+          else out = html.replace("</head>", () => block + "\n</head>");
+          const w = await fileHandle.createWritable();
+          await w.write(out);
+          await w.close();
+          lastFileSaveTime = new Date();
+          htmlFileStatus = "on";
+          updateFileStatusUI();
+        } catch (err) {
+          console.error(err);
+          showNotification(t("notif_file_write_error"), true);
+        }
+      });
+      return fileSaveChain;
+    }
+
+    function scheduleFileSave() {
+      if (!fileHandle) return;
+      clearTimeout(fileSaveTimer);
+      fileSaveTimer = setTimeout(writeStateToHtmlFile, 300);
+    }
+
+    function loadStoredSettings() {
+      syncFromEmbedded();
+      const savedConfig = localStorage.getItem("kryptonetview_config");
+      if (savedConfig) {
+        try { globalConfig = JSON.parse(savedConfig); } catch(e){}
+      }
+      const savedCats = localStorage.getItem("kryptonetview_categories");
+      if (savedCats) {
+        try {
+          const parsed = JSON.parse(savedCats);
+          if (Array.isArray(parsed)) {
+            categories = parsed.map(c => ({
+              id: c.id,
+              nameKey: c.nameKey || null,
+              name: c.nameKey && translations[currentLang][c.nameKey] ? t(c.nameKey) : (c.name || c.id),
+              icon: c.icon || "fa-tag",
+              color: c.color || "#38bdf8"
+            }));
+          }
+        } catch(e){}
+      }
+      const savedFrames = localStorage.getItem("kryptonetview_frames");
+      if (savedFrames) {
+        try { frames = JSON.parse(savedFrames); } catch(e){}
+      }
+      const savedDevices = localStorage.getItem("kryptonetview_devices");
+      if (savedDevices) {
+        try {
+          devices = JSON.parse(savedDevices);
+          devices.forEach(d => Object.keys(d).forEach(k => { if (k.startsWith("_")) delete d[k]; }));
+        } catch(e){}
+      }
+
+      devices.forEach(d => {
+        if (d.cat && !categories.some(c => c.id === d.cat)) {
+          const def = defaultCategories.find(c => c.id === d.cat);
+          categories.push(def ? { ...def, name: t(def.nameKey) } : { id: d.cat, name: d.cat, icon: "fa-tag", color: "#38bdf8" });
+        }
+      });
+    }
+
+    function serializableDevices() {
+      return devices.map(d => {
+        const c = {};
+        Object.keys(d).forEach(k => { if (!k.startsWith("_")) c[k] = d[k]; });
+        return c;
+      });
+    }
+
+    function saveToLocalStorage() {
+      localStorage.setItem("kryptonetview_config", JSON.stringify(globalConfig));
+      localStorage.setItem("kryptonetview_categories", JSON.stringify(categories));
+      localStorage.setItem("kryptonetview_frames", JSON.stringify(frames));
+      localStorage.setItem("kryptonetview_devices", JSON.stringify(serializableDevices()));
+      localStorage.setItem("kryptonetview_savedAt", String(Date.now()));
+      scheduleFileSave();
+    }
+
+    function renderHeaderSettings() {
+      document.getElementById("topology-title-text").innerText = globalConfig.title;
+      document.getElementById("topology-subnet-text").innerText = globalConfig.subnet;
+      document.getElementById("header-switch-model").innerText = globalConfig.switchModel;
+      document.getElementById("header-switch-ip").innerText = globalConfig.switchIp;
+
+      const sw = devices.find(d => d.id === "switch");
+      if (sw) {
+        sw.name = globalConfig.switchModel;
+        sw.ip = globalConfig.switchIp;
+      }
+    }
+
+    function setupCustomIconDropdowns() {
+      const devTrigger = document.getElementById("edit-dev-custom-dropdown-trigger");
+      const devPopup = document.getElementById("edit-dev-dropdown-popup");
+      const devSearch = document.getElementById("edit-dev-icon-search");
+      const devList = document.getElementById("edit-dev-icon-options-list");
+      const devHidden = document.getElementById("edit-icon");
+      const devDisplay = document.getElementById("edit-dev-selected-display");
+
+      function renderDevIconOptions(filter = "") {
+        devList.innerHTML = "";
+        const filtered = availableIcons.filter(i => i.class.toLowerCase().includes(filter.toLowerCase()) || i.name.toLowerCase().includes(filter.toLowerCase()));
+        if (filtered.length === 0) {
+          devList.innerHTML = `<div class="text-[11px] text-zinc-500 text-center py-2">Keine Icons gefunden</div>`;
+          return;
+        }
+        filtered.forEach(item => {
+          const opt = document.createElement("div");
+          const isSelected = devHidden.value === item.class;
+          opt.className = `flex items-center gap-3 px-3 py-2 rounded-lg text-xs cursor-pointer transition text-white ${isSelected ? 'bg-cyan-950 border border-cyan-800' : 'hover:bg-zinc-800'}`;
+          opt.innerHTML = `<i class="fa-solid ${item.class} w-4 text-center text-ciscocyan"></i><span class="font-medium text-white">${item.name}</span>`;
+          opt.onclick = (e) => {
+            e.stopPropagation();
+            devHidden.value = item.class;
+            devDisplay.innerHTML = `<i class="fa-solid ${item.class} text-ciscocyan"></i> <span class="font-medium text-white">${item.name}</span>`;
+            devPopup.classList.add("hidden");
+          };
+          devList.appendChild(opt);
+        });
+      }
+
+      devTrigger.onclick = (e) => {
+        e.stopPropagation();
+        devPopup.classList.toggle("hidden");
+        if (!devPopup.classList.contains("hidden")) {
+          devSearch.value = "";
+          renderDevIconOptions("");
+          devSearch.focus();
+        }
+      };
+
+      devSearch.oninput = (e) => {
+        renderDevIconOptions(e.target.value);
+      };
+
+      const catTrigger = document.getElementById("new-cat-custom-dropdown-trigger");
+      const catPopup = document.getElementById("new-cat-dropdown-popup");
+      const catSearch = document.getElementById("new-cat-icon-search");
+      const catList = document.getElementById("new-cat-icon-options-list");
+      const catHidden = document.getElementById("new-cat-icon");
+      const catDisplay = document.getElementById("new-cat-selected-display");
+
+      function renderCatIconOptions(filter = "") {
+        catList.innerHTML = "";
+        const filtered = availableIcons.filter(i => i.class.toLowerCase().includes(filter.toLowerCase()) || i.name.toLowerCase().includes(filter.toLowerCase()));
+        if (filtered.length === 0) {
+          catList.innerHTML = `<div class="text-[11px] text-zinc-500 text-center py-2">Keine Icons gefunden</div>`;
+          return;
+        }
+        filtered.forEach(item => {
+          const opt = document.createElement("div");
+          const isSelected = catHidden.value === item.class;
+          opt.className = `flex items-center gap-3 px-3 py-2 rounded-lg text-xs cursor-pointer transition text-white ${isSelected ? 'bg-teal-950 border border-teal-800' : 'hover:bg-zinc-800'}`;
+          opt.innerHTML = `<i class="fa-solid ${item.class} w-4 text-center text-teal-400"></i><span class="font-medium text-white">${item.name}</span>`;
+          opt.onclick = (e) => {
+            e.stopPropagation();
+            catHidden.value = item.class;
+            catDisplay.innerHTML = `<i class="fa-solid ${item.class} text-teal-400"></i> <span class="font-medium text-white">${item.name}</span>`;
+            catPopup.classList.add("hidden");
+          };
+          catList.appendChild(opt);
+        });
+      }
+
+      catTrigger.onclick = (e) => {
+        e.stopPropagation();
+        catPopup.classList.toggle("hidden");
+        if (!catPopup.classList.contains("hidden")) {
+          catSearch.value = "";
+          renderCatIconOptions("");
+          catSearch.focus();
+        }
+      };
+
+      catSearch.oninput = (e) => {
+        renderCatIconOptions(e.target.value);
+      };
+
+      document.addEventListener("click", () => {
+        devPopup.classList.add("hidden");
+        catPopup.classList.add("hidden");
+      });
+    }
+
+    function setDeviceIconValue(iconClass) {
+      const devHidden = document.getElementById("edit-icon");
+      const devDisplay = document.getElementById("edit-dev-selected-display");
+      if (devHidden && devDisplay) {
+        devHidden.value = iconClass;
+        const found = availableIcons.find(i => i.class === iconClass);
+        const name = found ? found.name : iconClass;
+        devDisplay.innerHTML = `<i class="fa-solid ${iconClass} text-ciscocyan"></i> <span class="font-medium text-white">${name}</span>`;
+      }
+    }
+
+    function renderCategoryFiltersUI() {
+      const filterContainer = document.getElementById("category-filters");
+      filterContainer.innerHTML = "";
+
+      const sel = document.createElement("select");
+      sel.id = "category-filter-select";
+      sel.className = "w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-2 text-xs text-zinc-200 focus:outline-none focus:border-ciscocyan transition cursor-pointer";
+
+      const optAll = document.createElement("option");
+      optAll.value = "all";
+      optAll.textContent = `${currentLang === 'de' ? 'Alle Kategorien' : 'All Categories'} (${devices.length})`;
+      sel.appendChild(optAll);
+
+      categories.forEach(cat => {
+        const opt = document.createElement("option");
+        opt.value = cat.id;
+        const count = devices.filter(d => d.cat === cat.id).length;
+        opt.textContent = `${getCategoryDisplayName(cat.id)} (${count})`;
+        sel.appendChild(opt);
+      });
+
+      sel.value = currentFilterCat;
+      if (sel.value !== currentFilterCat) { currentFilterCat = "all"; sel.value = "all"; }
+      sel.onchange = () => selectCategoryFilter(sel.value);
+      filterContainer.appendChild(sel);
+
+      populateEditCategoryDropdown();
+    }
+
+    function populateEditCategoryDropdown() {
+      const editCatSelect = document.getElementById("edit-cat");
+      if (!editCatSelect) return;
+      const keep = editCatSelect.value;
+      editCatSelect.innerHTML = "";
+      categories.forEach(cat => {
+        const opt = document.createElement("option");
+        opt.value = cat.id;
+        opt.innerText = getCategoryDisplayName(cat.id);
+        editCatSelect.appendChild(opt);
+      });
+      const optNew = document.createElement("option");
+      optNew.value = "__new__";
+      optNew.innerText = currentLang === 'de' ? "＋ Neue Kategorie anlegen…" : "＋ Add new category…";
+      editCatSelect.appendChild(optNew);
+      if (keep && keep !== "__new__" && categories.some(c => c.id === keep)) editCatSelect.value = keep;
+    }
+
+    function selectCategoryFilter(catId) {
+      currentFilterCat = catId;
+      renderCategoryFiltersUI();
+      renderDeviceList();
+      renderTopologySVG();
+    }
+
+    function openCategoriesModal() {
+      if (!isLoggedIn) {
+        openAuthModal();
+        return;
+      }
+      renderCategoriesListEditor();
+      const modal = document.getElementById("categories-modal");
+      modal.classList.remove("pointer-events-none", "opacity-0");
+      modal.classList.add("opacity-100");
+    }
+
+    function closeCategoriesModal() {
+      const modal = document.getElementById("categories-modal");
+      modal.classList.remove("opacity-100");
+      modal.classList.add("opacity-0", "pointer-events-none");
+      saveToLocalStorage();
+      renderCategoryFiltersUI();
+      renderDeviceList();
+      renderTopologySVG();
+    }
+
+    function renderCategoriesListEditor() {
+      const container = document.getElementById("categories-list-editor");
+      container.innerHTML = "";
+
+      if (categories.length === 0) {
+        container.innerHTML = `<div class="text-center text-zinc-500 py-6 text-xs">Keine Kategorien definiert.</div>`;
+        return;
+      }
+
+      categories.forEach((cat) => {
+        const item = document.createElement("div");
+        item.className = "bg-zinc-900 border border-zinc-700/80 p-3 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs";
+
+        const displayName = getCategoryDisplayName(cat.id);
+        const isStandard = ['router', 'gateways', 'wlan_ap', 'switch', 'server', 'endgeraet'].includes(cat.id);
+
+        item.innerHTML = `
+          <div class="flex items-center gap-3 w-full sm:w-auto">
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm" style="background: ${cat.color}20; color: ${cat.color}; border: 1px solid ${cat.color}40">
+              <i class="fa-solid ${cat.icon}"></i>
+            </div>
+            <div>
+              <div class="font-bold text-white flex items-center gap-2">
+                ${displayName} <span class="text-[10px] text-zinc-500 font-mono">(${cat.id})</span>
+              </div>
+              <div class="text-[10px] text-zinc-400 font-mono">Icon: ${cat.icon} | Akzent: <span style="color: ${cat.color}">${cat.color}</span></div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+            ${!isStandard ? `
+              <button onclick="deleteCategory('${cat.id}')" class="bg-rose-950/80 hover:bg-rose-900 text-rose-300 border border-rose-800 px-2.5 py-1.5 rounded-lg text-xs transition flex items-center gap-1">
+                <i class="fa-solid fa-trash"></i> ${currentLang === 'de' ? 'Löschen' : 'Delete'}
+              </button>
+            ` : `<span class="text-[10px] text-zinc-500 italic px-2 py-1 bg-zinc-950 rounded">Standard</span>`}
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function addNewCategory() {
+      const idInput = document.getElementById("new-cat-id");
+      const nameInput = document.getElementById("new-cat-name");
+      const iconInput = document.getElementById("new-cat-icon");
+      const colorInput = document.getElementById("new-cat-color");
+
+      const rawId = idInput.value.trim().toLowerCase().replace(/[^a-z0-9_]/g, '');
+      const name = nameInput.value.trim();
+      const icon = iconInput.value || "fa-tag";
+      const color = colorInput.value;
+
+      if (!rawId || !name) {
+        showNotification(currentLang === 'de' ? "Bitte ID und Namen angeben." : "Please provide ID and name.", true);
+        return;
+      }
+
+      if (categories.some(c => c.id === rawId)) {
+        showNotification(currentLang === 'de' ? "Kategorie existiert bereits!" : "Category already exists!", true);
+        return;
+      }
+
+      categories.push({
+        id: rawId,
+        name: name,
+        icon: icon,
+        color: color || "#00bcef"
+      });
+
+      idInput.value = "";
+      nameInput.value = "";
+
+      saveToLocalStorage();
+      renderCategoriesListEditor();
+      renderCategoryFiltersUI();
+      showNotification(currentLang === 'de' ? "Kategorie hinzugefügt." : "Category added.");
+    }
+
+    function deleteCategory(catId) {
+      if (['router', 'gateways', 'wlan_ap', 'switch', 'server', 'endgeraet'].includes(catId)) {
+        showNotification("Standardkategorien können nicht gelöscht werden.", true);
+        return;
+      }
+
+      categories = categories.filter(c => c.id !== catId);
+      devices.forEach(d => {
+        if (d.cat === catId) {
+          d.cat = "endgeraet";
+        }
+      });
+
+      if (currentFilterCat === catId) {
+        currentFilterCat = "all";
+      }
+
+      saveToLocalStorage();
+      renderCategoriesListEditor();
+      renderCategoryFiltersUI();
+      renderDeviceList();
+      renderTopologySVG();
+      showNotification("Kategorie erfolgreich gelöscht.");
+    }
+
+    async function initializeCryptoState() {
+      const savedSalt = localStorage.getItem("kryptonetview_crypto_salt");
+      const savedVerifier = localStorage.getItem("kryptonetview_crypto_verifier");
+
+      if (savedSalt && savedVerifier) {
+        cryptoSalt = new Uint8Array(base64ToBuffer(savedSalt));
+        authVerifierHash = savedVerifier;
+      } else {
+        const derived = await deriveKeyAndVerifier("admin");
+        cryptoSalt = derived.salt;
+        authVerifierHash = derived.verifier;
+        activeCryptoKey = derived.key;
+
+        for (let dev of devices) {
+          dev._unlockedUser = dev.loginUser;
+          dev._unlockedPass = dev.loginPass;
+        }
+        await encryptAllDevices(activeCryptoKey);
+
+        localStorage.setItem("kryptonetview_crypto_salt", bufferToBase64(cryptoSalt));
+        localStorage.setItem("kryptonetview_crypto_verifier", authVerifierHash);
+        activeCryptoKey = null;
+      }
+    }
+
+    async function handleLoginSubmit() {
+      if (window.__loginBusy) return;
+      const inputPw = document.getElementById("auth-password-input").value;
+      const errorMsg = document.getElementById("auth-error-msg");
+
+      if (!inputPw) return;
+      window.__loginBusy = true;
+      errorMsg.classList.add("hidden");
+
+      let ok = false;
+      try {
+        const derived = await deriveKeyAndVerifier(inputPw, cryptoSalt);
+        if (derived.verifier === authVerifierHash) {
+          activeCryptoKey = derived.key;
+          await decryptAllDevices(activeCryptoKey);
+          ok = true;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+
+      if (!ok) {
+        window.__loginBusy = false;
+        errorMsg.classList.remove("hidden");
+        return;
+      }
+
+      isLoggedIn = true;
+      isEditMode = false;
+      document.getElementById("auth-password-input").value = "";
+      closeAuthModal();
+      window.__loginBusy = false;
+
+      try {
+        updateAuthUIState();
+        renderDeviceList();
+        renderTopologySVG();
+        showNotification(t("notif_login_ok"));
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function updateJsonButtonsState() {
+      const exp = document.getElementById("btn-export-json");
+      const directSaveBtn = document.getElementById("btn-save-direct-file");
+      const impLabel = document.getElementById("btn-import-json-label");
+      const impInput = document.getElementById("input-import-json");
+      
+      if (isLoggedIn) {
+        exp.disabled = false;
+        exp.className = "bg-cardbg hover:bg-zinc-700 text-zinc-200 px-2 py-1 rounded-lg border border-zinc-700/60 transition flex items-center gap-1";
+        exp.title = "Topologie-Konfiguration speichern";
+
+        directSaveBtn.disabled = false;
+        directSaveBtn.className = "bg-cardbg hover:bg-zinc-700 text-zinc-200 px-2.5 py-1 rounded-lg border border-zinc-700/60 transition flex items-center gap-1.5 shadow-md cursor-pointer";
+        directSaveBtn.title = "Änderungen direkt in die lokale Datei speichern";
+
+        impInput.disabled = false;
+        impLabel.className = "bg-cardbg hover:bg-zinc-700 text-zinc-200 px-2 py-1 rounded-lg border border-zinc-700/60 transition cursor-pointer flex items-center gap-1";
+        impLabel.title = "Topologie-Konfiguration laden";
+      } else {
+        exp.disabled = true;
+        exp.className = "bg-zinc-800/50 text-zinc-500 px-2 py-1 rounded-lg border border-zinc-800 transition flex items-center gap-1 cursor-not-allowed";
+        exp.title = "Erfordert Administrator-Anmeldung";
+
+        directSaveBtn.disabled = true;
+        directSaveBtn.className = "bg-zinc-800/50 text-zinc-500 px-2.5 py-1 rounded-lg border border-zinc-800 transition flex items-center gap-1.5 shadow-md cursor-not-allowed";
+        directSaveBtn.title = "Erfordert Administrator-Anmeldung";
+
+        impInput.disabled = true;
+        impLabel.className = "bg-zinc-800/50 text-zinc-500 px-2 py-1 rounded-lg border border-zinc-800 transition cursor-not-allowed pointer-events-none flex items-center gap-1";
+        impLabel.title = "Erfordert Administrator-Anmeldung";
+      }
+    }
+
+    function updateAuthUIState() {
+      updateJsonButtonsState();
+      const pwBtn = document.getElementById("btn-change-pw-header");
+      if (pwBtn) {
+        pwBtn.classList.toggle("hidden", !isLoggedIn);
+        pwBtn.classList.toggle("flex", isLoggedIn);
+      }
+      const btnText = document.getElementById("auth-btn-text");
+      const btnIcon = document.getElementById("auth-btn-icon");
+      const btnToggle = document.getElementById("btn-auth-toggle");
+
+      const btnEditHeader = document.getElementById("btn-edit-header-settings");
+      const btnManageCats = document.getElementById("btn-manage-categories");
+      const sidebarManageCats = document.getElementById("sidebar-btn-manage-cats");
+      const btnDrawFrame = document.getElementById("btn-draw-frame-mode");
+      const btnManageFrames = document.getElementById("btn-manage-frames");
+      const btnToggleEdit = document.getElementById("btn-toggle-edit");
+      const editBtnText = document.getElementById("edit-btn-text");
+      const btnAddDev = document.getElementById("btn-add-device");
+      const banner = document.getElementById("edit-mode-banner");
+      const footerHint = document.getElementById("footer-hint");
+
+      if (isLoggedIn) {
+        btnText.innerText = t("btn_logout");
+        btnIcon.className = "fa-solid fa-unlock text-emerald-400";
+        btnToggle.className = "bg-emerald-950/60 hover:bg-emerald-900/80 text-emerald-300 font-semibold px-2.5 py-1 rounded-lg border border-emerald-700/80 transition flex items-center gap-1.5 shadow-md";
+
+        const unlockBtn = (el, activeClass, borderColor) => {
+          if (!el) return;
+          el.disabled = false;
+          el.classList.remove("bg-zinc-800/50", "text-zinc-500", "border-zinc-800", "cursor-not-allowed", "bg-emerald-900/30", "hidden");
+          el.classList.add(...activeClass.split(" ").filter(Boolean), borderColor, "shadow-md");
+        };
+
+        unlockBtn(btnEditHeader, "bg-zinc-800 hover:bg-zinc-700 text-ciscocyan", "border-ciscocyan/40");
+        unlockBtn(btnManageCats, "bg-zinc-800 hover:bg-zinc-700 text-teal-400", "border-teal-500/40");
+        if (sidebarManageCats) {
+          sidebarManageCats.disabled = false;
+          sidebarManageCats.classList.remove("text-zinc-600", "cursor-not-allowed");
+          sidebarManageCats.classList.add("text-teal-400", "hover:text-teal-300");
+        }
+        unlockBtn(btnDrawFrame, "bg-zinc-800 hover:bg-zinc-700 text-purple-400", "border-purple-500/40");
+        unlockBtn(btnManageFrames, "bg-zinc-800 hover:bg-zinc-700 text-purple-400", "border-purple-500/40");
+        
+        btnToggleEdit.disabled = false;
+        btnToggleEdit.classList.remove("bg-zinc-800/50", "text-zinc-500", "border-zinc-800", "cursor-not-allowed");
+        
+        if (isEditMode) {
+          btnToggleEdit.className = "bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold px-2.5 py-1 rounded-lg border border-amber-300 transition flex items-center gap-1.5 shadow-md";
+          editBtnText.innerText = t("btn_edit_off");
+          banner.classList.remove("hidden");
+          banner.classList.add("flex");
+          if (btnAddDev) {
+            btnAddDev.classList.remove("hidden");
+            btnAddDev.disabled = false;
+            btnAddDev.className = "bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-2.5 py-1 rounded-lg transition flex items-center gap-1.5 shadow-md";
+          }
+          footerHint.innerHTML = `<span class="text-amber-400 font-bold"><i class="fa-solid fa-up-down-left-right mr-1"></i> ${t("footer_hint_edit")}</span>`;
+        } else {
+          btnToggleEdit.className = "bg-zinc-800 hover:bg-zinc-700 text-amber-400 font-semibold px-2.5 py-1 rounded-lg border border-amber-500/40 transition flex items-center gap-1.5 shadow-md";
+          editBtnText.innerText = t("btn_edit_mode");
+          banner.classList.remove("flex");
+          banner.classList.add("hidden");
+          if (btnAddDev) btnAddDev.classList.add("hidden");
+          footerHint.innerHTML = `<i class="fa-solid fa-hand-pointer text-ciscocyan mr-1"></i> ${t("footer_hint")}`;
+        }
+
+      } else {
+        isEditMode = false;
+        if (isDrawFrameMode) toggleDrawFrameMode();
+        
+        btnText.innerText = t("btn_login");
+        btnIcon.className = "fa-solid fa-lock text-amber-400";
+        btnToggle.className = "bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold px-2.5 py-1 rounded-lg border border-zinc-700 transition flex items-center gap-1.5 shadow-md";
+
+        const lockBtn = (el) => {
+          if (!el) return;
+          el.disabled = true;
+          el.className = "bg-zinc-800/50 text-zinc-500 font-semibold px-2.5 py-1 rounded-lg border border-zinc-800 transition flex items-center gap-1.5 shadow-md cursor-not-allowed";
+        };
+
+        lockBtn(btnEditHeader);
+        lockBtn(btnManageCats);
+        if (sidebarManageCats) {
+          sidebarManageCats.disabled = true;
+          sidebarManageCats.className = "text-[11px] text-zinc-600 transition flex items-center gap-1 cursor-not-allowed";
+        }
+        lockBtn(btnDrawFrame);
+        lockBtn(btnManageFrames);
+        lockBtn(btnToggleEdit);
+        if (btnAddDev) {
+          btnAddDev.classList.add("hidden");
+          btnAddDev.disabled = true;
+        }
+
+        banner.classList.add("hidden");
+        footerHint.innerHTML = `<i class="fa-solid fa-hand-pointer text-ciscocyan mr-1"></i> ${t("footer_hint")}`;
+      }
+
+      if (activeDevice) {
+        openModal(activeDevice);
+      }
+    }
+
+    function openAuthModal() {
+      showLoginView();
+      document.getElementById("change-pw-error-msg").classList.add("hidden");
+      const modal = document.getElementById("auth-modal");
+      modal.classList.remove("pointer-events-none", "opacity-0");
+      modal.classList.add("opacity-100");
+    }
+
+    function closeAuthModal() {
+      const modal = document.getElementById("auth-modal");
+      modal.classList.remove("opacity-100");
+      modal.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    function showLoginView() {
+      document.getElementById("auth-view-login").classList.remove("hidden");
+      document.getElementById("auth-view-change-pw").classList.add("hidden");
+    }
+
+    function showChangePwView() {
+      document.getElementById("auth-view-login").classList.add("hidden");
+      document.getElementById("auth-view-change-pw").classList.remove("hidden");
+    }
+
+    async function submitChangeMasterPassword() {
+      const oldPw = document.getElementById("change-pw-old").value;
+      const newPw = document.getElementById("change-pw-new").value;
+      const confirmPw = document.getElementById("change-pw-confirm").value;
+      const errorMsg = document.getElementById("change-pw-error-msg");
+      const errorText = document.getElementById("change-pw-error-text");
+      const fail = (msg) => { errorText.innerText = msg; errorMsg.classList.remove("hidden"); };
+      errorMsg.classList.add("hidden");
+
+      if (!oldPw) return fail(currentLang === 'de' ? "Bitte aktuelles Passwort eingeben." : "Please enter current password.");
+      const derivedOld = await deriveKeyAndVerifier(oldPw, cryptoSalt);
+      if (derivedOld.verifier !== authVerifierHash) return fail(currentLang === 'de' ? "Aktuelles Passwort ist falsch." : "Current password is incorrect.");
+      if (!newPw || newPw.trim() === "") return fail(currentLang === 'de' ? "Neues Passwort darf nicht leer sein." : "New password cannot be empty.");
+      if (newPw !== confirmPw) return fail(currentLang === 'de' ? "Passwörter stimmen nicht überein." : "Passwords do not match.");
+
+      await decryptAllDevices(derivedOld.key);
+      const newDerived = await deriveKeyAndVerifier(newPw);
+      cryptoSalt = newDerived.salt;
+      authVerifierHash = newDerived.verifier;
+      await encryptAllDevices(newDerived.key);
+      localStorage.setItem("kryptonetview_crypto_salt", bufferToBase64(cryptoSalt));
+      localStorage.setItem("kryptonetview_crypto_verifier", authVerifierHash);
+
+      localStorage.setItem("kryptonetview_savedAt", String(Date.now()));
+      scheduleFileSave();
+
+      if (isLoggedIn) {
+        activeCryptoKey = newDerived.key;
+      } else {
+        activeCryptoKey = null;
+        devices.forEach(d => Object.keys(d).forEach(k => { if (k.startsWith("_")) delete d[k]; }));
+      }
+
+      ["change-pw-old", "change-pw-new", "change-pw-confirm"].forEach(id => { document.getElementById(id).value = ""; });
+      errorMsg.classList.add("hidden");
+      showNotification(t("notif_pw_changed"));
+      showLoginView();
+      closeAuthModal();
+      updateAuthUIState();
+      renderDeviceList();
+    }
+
+    function openHeaderSettingsModal() {
+      if (!isLoggedIn) {
+        openAuthModal();
+        return;
+      }
+      document.getElementById("setting-title-input").value = globalConfig.title;
+      document.getElementById("setting-subnet-input").value = globalConfig.subnet;
+      document.getElementById("setting-switch-model-input").value = globalConfig.switchModel;
+      document.getElementById("setting-switch-ip-input").value = globalConfig.switchIp;
+
+      const modal = document.getElementById("header-settings-modal");
+      modal.classList.remove("pointer-events-none", "opacity-0");
+      modal.classList.add("opacity-100");
+    }
+
+    function closeHeaderSettingsModal() {
+      const modal = document.getElementById("header-settings-modal");
+      modal.classList.remove("opacity-100");
+      modal.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    function saveHeaderSettings() {
+      globalConfig.title = document.getElementById("setting-title-input").value || "Familie Bonner – Heimnetzwerk Topologie";
+      globalConfig.subnet = document.getElementById("setting-subnet-input").value || "192.168.178.0/24";
+      globalConfig.switchModel = document.getElementById("setting-switch-model-input").value || "Cisco WS-C2960S-48LPS-L";
+      globalConfig.switchIp = document.getElementById("setting-switch-ip-input").value || "192.168.178.8";
+
+      saveToLocalStorage();
+      renderHeaderSettings();
+      renderDeviceList();
+      renderTopologySVG();
+      closeHeaderSettingsModal();
+      showNotification(t("notif_saved"));
+    }
+
+    function openFramesModal() {
+      if (!isLoggedIn) {
+        openAuthModal();
+        return;
+      }
+      renderFramesListEditor();
+      const modal = document.getElementById("frames-modal");
+      modal.classList.remove("pointer-events-none", "opacity-0");
+      modal.classList.add("opacity-100");
+    }
+
+    function closeFramesModal() {
+      const modal = document.getElementById("frames-modal");
+      modal.classList.remove("opacity-100");
+      modal.classList.add("opacity-0", "pointer-events-none");
+      saveToLocalStorage();
+      renderTopologySVG();
+    }
+
+    function renderFramesListEditor() {
+      const container = document.getElementById("frames-list-editor");
+      container.innerHTML = "";
+
+      if (frames.length === 0) {
+        container.innerHTML = `<div class="text-center text-zinc-500 py-6 text-xs">Keine Rahmen vorhanden.</div>`;
+        return;
+      }
+
+      frames.forEach((f, idx) => {
+        const item = document.createElement("div");
+        item.className = "bg-zinc-900 border border-zinc-700/80 p-3.5 rounded-xl space-y-3 relative";
+
+        item.innerHTML = `
+          <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
+            <span class="text-xs font-bold text-purple-300">Rahmen #${idx + 1}</span>
+            <button onclick="deleteFrame('${f.id}')" class="text-rose-400 hover:text-rose-300 text-xs px-2 py-1 rounded bg-rose-950/60 border border-rose-800 transition flex items-center gap-1">
+              <i class="fa-solid fa-trash"></i> ${currentLang === 'de' ? 'Löschen' : 'Delete'}
+            </button>
+          </div>
+
+          <div>
+            <label class="block text-[11px] text-zinc-400 font-semibold mb-1">Titel / Beschriftung</label>
+            <input type="text" value="${f.title}" onchange="updateFrameProp('${f.id}', 'title', this.value)" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-purple-400">
+          </div>
+
+          <div class="grid grid-cols-4 gap-2 text-xs">
+            <div>
+              <label class="block text-[10px] text-zinc-400 mb-0.5">X-Pos</label>
+              <input type="number" value="${f.x}" onchange="updateFrameProp('${f.id}', 'x', parseInt(this.value))" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg p-1 text-center text-zinc-200">
+            </div>
+            <div>
+              <label class="block text-[10px] text-zinc-400 mb-0.5">Y-Pos</label>
+              <input type="number" value="${f.y}" onchange="updateFrameProp('${f.id}', 'y', parseInt(this.value))" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg p-1 text-center text-zinc-200">
+            </div>
+            <div>
+              <label class="block text-[10px] text-zinc-400 mb-0.5">Breite</label>
+              <input type="number" value="${f.width}" onchange="updateFrameProp('${f.id}', 'width', parseInt(this.value))" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg p-1 text-center text-zinc-200">
+            </div>
+            <div>
+              <label class="block text-[10px] text-zinc-400 mb-0.5">Höhe</label>
+              <input type="number" value="${f.height}" onchange="updateFrameProp('${f.id}', 'height', parseInt(this.value))" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg p-1 text-center text-zinc-200">
+            </div>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function updateFrameProp(frameId, prop, value) {
+      const frame = frames.find(f => f.id === frameId);
+      if (frame) {
+        frame[prop] = value;
+        saveToLocalStorage();
+        renderTopologySVG();
+      }
+    }
+
+    function deleteFrame(frameId) {
+      frames = frames.filter(f => f.id !== frameId);
+      saveToLocalStorage();
+      renderFramesListEditor();
+      renderTopologySVG();
+      showNotification("Rahmen gelöscht.");
+    }
+
+    function addNewFrame() {
+      const newFrame = {
+        id: "frame_" + Date.now(),
+        title: "⚡ Neue Zone",
+        x: 500, y: 100, width: 300, height: 300,
+        strokeColor: "#c084fc", strokeDash: "4 4",
+        headerBg: "#3b0764", textColor: "#e9d5ff"
+      };
+      frames.push(newFrame);
+      saveToLocalStorage();
+      renderFramesListEditor();
+      renderTopologySVG();
+      showNotification("Rahmen hinzugefügt.");
+    }
+
+    function renderDeviceList() {
+      const container = document.getElementById("device-list-container");
+      container.innerHTML = "";
+
+      let filtered = devices;
+      if (currentFilterCat !== "all") {
+        filtered = devices.filter(d => d.cat === currentFilterCat || d.id === "switch");
+      }
+      if (currentSearchTerm) {
+        filtered = filtered.filter(d => 
+          d.name.toLowerCase().includes(currentSearchTerm) || d.ip.toLowerCase().includes(currentSearchTerm)
+        );
+      }
+
+      document.getElementById("total-count").innerText = devices.length;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="text-center text-zinc-500 py-8 text-xs">Keine Geräte gefunden.</div>`;
+        return;
+      }
+
+      filtered.forEach(dev => {
+        const item = document.createElement("div");
+        item.className = "bg-cardbg hover:bg-zinc-700/70 border border-zinc-700/60 p-2.5 rounded-lg cursor-pointer transition flex items-center justify-between group";
+        item.onclick = () => openModal(dev);
+
+        const parentDev = devices.find(p => p.id === dev.parentId);
+        const hasCredentials = Boolean((dev._unlockedPass && dev._unlockedPass.trim() !== "") || (dev.loginPass && dev.loginPass.trim() !== ""));
+
+        item.innerHTML = `
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center text-xs" style="background: ${dev.color}15; color: ${dev.color}; border: 1px solid ${dev.color}35">
+              <i class="fa-solid ${dev.icon}"></i>
+            </div>
+            <div>
+              <div class="text-xs font-semibold text-zinc-200 group-hover:text-ciscocyan transition-colors">${dev.name}</div>
+              <div class="text-[10px] font-semibold" style="color: ${dev.color}">${escapeHtml(getCategoryDisplayName(dev.cat))}</div>
+              <div class="text-[10px] font-mono text-zinc-400 flex items-center gap-1.5">
+                ${dev.ip}
+                ${parentDev ? `<span class="text-zinc-500 font-sans">via ${parentDev.name.substring(0, 10)}</span>` : ''}
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-1">
+            ${hasCredentials ? '<span class="text-[9px] bg-amber-950/80 text-amber-400 border border-amber-800/80 px-1.5 py-0.5 rounded" title="Passwort hinterlegt"><i class="fa-solid fa-key"></i></span>' : ''}
+            ${dev.poe ? '<span class="text-[9px] bg-amber-950/80 text-amber-400 border border-amber-800/80 px-1.5 py-0.5 rounded" title="Power over Ethernet"><i class="fa-solid fa-bolt"></i> PoE</span>' : ''}
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    const DEFAULT_VIEW = { x: 0, y: 0, w: 1480, h: 960 };
+    let view = { ...DEFAULT_VIEW };
+    let panState = null;
+    let panMoved = false;
+
+    function applyView() {
+      document.getElementById("topology-svg").setAttribute("viewBox", `${view.x} ${view.y} ${view.w} ${view.h}`);
+    }
+
+    function getSVGCoords(e) {
+      const svg = document.getElementById("topology-svg");
+      const ctm = svg.getScreenCTM();
+      if (!ctm) return { x: 0, y: 0 };
+      const pt = svg.createSVGPoint();
+      pt.x = e.clientX;
+      pt.y = e.clientY;
+      const p = pt.matrixTransform(ctm.inverse());
+      return { x: Math.round(p.x), y: Math.round(p.y) };
+    }
+
+    function zoomAt(px, py, factor) {
+      const newW = Math.min(8000, Math.max(150, view.w * factor));
+      const f = newW / view.w;
+      view.x = px - (px - view.x) * f;
+      view.y = py - (py - view.y) * f;
+      view.w *= f;
+      view.h *= f;
+      applyView();
+    }
+
+    function zoomCenter(factor) {
+      zoomAt(view.x + view.w / 2, view.y + view.h / 2, factor);
+    }
+
+    function startPan(e) {
+      if (e.button !== undefined && e.button !== 0) return;
+      const ctm = document.getElementById("topology-svg").getScreenCTM();
+      if (!ctm) return;
+      panState = { sx: e.clientX, sy: e.clientY, vx: view.x, vy: view.y, scale: ctm.a };
+      panMoved = false;
+      window.addEventListener("mousemove", doPan);
+      window.addEventListener("mouseup", stopPan);
+    }
+
+    function doPan(e) {
+      if (!panState) return;
+      const dx = e.clientX - panState.sx;
+      const dy = e.clientY - panState.sy;
+      if (Math.abs(dx) + Math.abs(dy) > 3) {
+        panMoved = true;
+        document.getElementById("topology-svg").style.cursor = "grabbing";
+      }
+      view.x = panState.vx - dx / panState.scale;
+      view.y = panState.vy - dy / panState.scale;
+      applyView();
+    }
+
+    function stopPan() {
+      panState = null;
+      document.getElementById("topology-svg").style.cursor = "grab";
+      window.removeEventListener("mousemove", doPan);
+      window.removeEventListener("mouseup", stopPan);
+      setTimeout(() => { panMoved = false; }, 0);
+    }
+
+    function renderTopologySVG() {
+      const framesLayer = document.getElementById("frames-layer");
+      const connLayer = document.getElementById("connections-layer");
+      const nodesLayer = document.getElementById("nodes-layer");
+
+      framesLayer.innerHTML = "";
+      connLayer.innerHTML = "";
+      nodesLayer.innerHTML = "";
+
+      frames.forEach(f => {
+        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        g.setAttribute("id", `frame_group_${f.id}`);
+        if (isEditMode && isLoggedIn) {
+          g.setAttribute("class", "frame-element editable");
+          g.onmousedown = (e) => startFrameDrag(e, f, g);
+        }
+
+        g.innerHTML = `
+          <rect x="${f.x}" y="${f.y}" width="${f.width}" height="${f.height}" rx="14" fill="${f.headerBg || '#083344'}" fill-opacity="0.25" stroke="${f.strokeColor || '#00bcef'}" stroke-width="1.2" stroke-dasharray="${f.strokeDash || '5 3'}" opacity="0.85"></rect>
+          <rect x="${f.x + 15}" y="${f.y + 12}" width="${Math.max(20, f.width - 30)}" height="26" rx="5" fill="${f.headerBg || '#083344'}" fill-opacity="0.85" stroke="${f.strokeColor || '#00bcef'}" stroke-width="0.8"></rect>
+          <text x="${f.x + 25}" y="${f.y + 29}" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="${f.textColor || '#38bdf8'}">
+            ${f.title}
+          </text>
+        `;
+
+        if (isEditMode && isLoggedIn) {
+          const resizeHandle = document.createElementNS("http://www.w3.org/2000/svg", "g");
+          resizeHandle.setAttribute("class", "frame-resize-handle");
+          resizeHandle.innerHTML = `
+            <rect x="${f.x + f.width - 16}" y="${f.y + f.height - 16}" width="16" height="16" rx="4" fill="${f.strokeColor || '#00bcef'}" fill-opacity="0.8" />
+            <text x="${f.x + f.width - 8}" y="${f.y + f.height - 4}" text-anchor="middle" font-family="FontAwesome" font-size="9" fill="#0">&#xf31e;</text>
+          `;
+          resizeHandle.onmousedown = (e) => startFrameResize(e, f);
+          g.appendChild(resizeHandle);
+        }
+
+        framesLayer.appendChild(g);
+      });
+
+      let filtered = devices;
+      if (currentFilterCat !== "all") {
+        filtered = devices.filter(d => d.cat === currentFilterCat || d.id === "switch" || d.id === "gateway_main" || d.id === "ap_eg");
+      }
+      if (currentSearchTerm) {
+        filtered = devices.filter(d => 
+          d.name.toLowerCase().includes(currentSearchTerm) || d.ip.toLowerCase().includes(currentSearchTerm)
+        );
+      }
+
+      filtered.forEach(dev => {
+        if (!dev.parentId) return;
+        const parentDev = devices.find(p => p.id === dev.parentId);
+        if (!parentDev) return;
+
+        let strokeColor = "#3f3f46";
+        let strokeDash = "0";
+        let strokeWidth = "1.2";
+        let opacity = "0.75";
+
+        if (dev.parentId === "ap_eg") {
+          strokeColor = "#38bdf8";
+          strokeDash = "3 3";
+          opacity = "0.85";
+        } else if (dev.id === "gateway_main" || dev.cat === "router") {
+          strokeColor = "#00bcef";
+          strokeWidth = "2";
+        } else if (dev.cat === "gateways" || dev.cat === "guest") {
+          strokeColor = "#f59e0b";
+          strokeDash = "4 3";
+        } else if (dev.poe) {
+          strokeColor = "#00bcef";
+          strokeWidth = "1.5";
+        }
+
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", parentDev.pos.x);
+        line.setAttribute("y1", parentDev.pos.y);
+        line.setAttribute("x2", dev.pos.x);
+        line.setAttribute("y2", dev.pos.y);
+        line.setAttribute("stroke", strokeColor);
+        line.setAttribute("stroke-width", strokeWidth);
+        line.setAttribute("stroke-dasharray", strokeDash);
+        line.setAttribute("opacity", opacity);
+        connLayer.appendChild(line);
+      });
+
+      filtered.forEach(dev => {
+        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        g.setAttribute("class", "node-element");
+        g.setAttribute("transform", `translate(${dev.pos.x - 55}, ${dev.pos.y - 20})`);
+        
+        g.onclick = (e) => {
+          if (!g.classList.contains("was-dragged")) {
+            openModal(dev);
+          }
+        };
+
+        if (isEditMode && isLoggedIn) {
+          g.onmousedown = (e) => startNodeDrag(e, dev, g);
+        }
+
+        const isSwitch = dev.id === "switch";
+        const width = isSwitch ? 150 : 115;
+        const height = isSwitch ? 56 : 48;
+        const offsetX = isSwitch ? -18 : 0;
+        const hasCredentials = Boolean((dev._unlockedPass && dev._unlockedPass.trim() !== "") || (dev.loginPass && dev.loginPass.trim() !== ""));
+
+        g.innerHTML = `
+          <rect class="node-box" x="${offsetX}" y="0" width="${width}" height="${height}" rx="6" 
+                fill="${isSwitch ? '#18181b' : '#2b2b2f'}" 
+                stroke="${isSwitch ? '#00bcef' : (dev.parentId === 'ap_eg' ? '#38bdf8' : (dev.cat === 'guest' || dev.cat === 'gateways' ? '#f59e0b' : '#3f3f46'))}" 
+                stroke-width="${isSwitch ? '2' : '1'}"
+                filter="url(#node-shadow)" />
+          
+          <rect x="${offsetX}" y="0" width="${width}" height="3" fill="${dev.color}" rx="1"/>
+
+          <text x="${offsetX + 10}" y="17" font-family="Inter, sans-serif" font-size="${isSwitch ? '11' : '10'}" font-weight="600" fill="#ffffff">
+            ${dev.name.length > 16 ? dev.name.substring(0, 14) + '..' : dev.name}
+          </text>
+          
+          <text x="${offsetX + 10}" y="31" font-family="JetBrains Mono, monospace" font-size="9" fill="#a1a1aa">
+            ${dev.ip}
+          </text>
+
+          <text x="${offsetX + 10}" y="43" font-family="Inter, sans-serif" font-size="8.5" font-weight="600" fill="${dev.color}">
+            ${escapeHtml(getCategoryDisplayName(dev.cat).length > 20 ? getCategoryDisplayName(dev.cat).substring(0, 18) + '..' : getCategoryDisplayName(dev.cat))}
+          </text>
+
+          ${hasCredentials ? `
+            <g transform="translate(${offsetX + width - 18}, 10)">
+              <circle cx="6" cy="6" r="7" fill="#18181b" stroke="#f59e0b" stroke-width="1"/>
+              <text x="6" y="9.5" text-anchor="middle" font-family="FontAwesome" font-size="7" fill="#fbbf24">&#xf084;</text>
+            </g>
+          ` : ''}
+        `;
+
+        nodesLayer.appendChild(g);
+      });
+    }
+
+    function startFrameDrag(e, frame, element) {
+      if (!isLoggedIn || !isEditMode || isDrawFrameMode || resizingFrame) return;
+      e.stopPropagation();
+      draggingFrame = frame;
+      const coords = getSVGCoords(e);
+      frameDragOffset.x = coords.x - frame.x;
+      frameDragOffset.y = coords.y - frame.y;
+
+      window.onmousemove = (evt) => doFrameDrag(evt);
+      window.onmouseup = () => stopFrameDrag();
+    }
+
+    function doFrameDrag(e) {
+      if (!draggingFrame) return;
+      const coords = getSVGCoords(e);
+      draggingFrame.x = coords.x - frameDragOffset.x;
+      draggingFrame.y = coords.y - frameDragOffset.y;
+      renderTopologySVG();
+    }
+
+    function stopFrameDrag() {
+      if (draggingFrame) {
+        saveToLocalStorage();
+        draggingFrame = null;
+      }
+      window.onmousemove = null;
+      window.onmouseup = null;
+    }
+
+    function startFrameResize(e, frame) {
+      if (!isLoggedIn || !isEditMode) return;
+      e.stopPropagation();
+      resizingFrame = frame;
+
+      window.onmousemove = (evt) => doFrameResize(evt);
+      window.onmouseup = () => stopFrameResize();
+    }
+
+    function doFrameResize(e) {
+      if (!resizingFrame) return;
+      const coords = getSVGCoords(e);
+      resizingFrame.width = Math.max(120, coords.x - resizingFrame.x);
+      resizingFrame.height = Math.max(80, coords.y - resizingFrame.y);
+      renderTopologySVG();
+    }
+
+    function stopFrameResize() {
+      if (resizingFrame) {
+        saveToLocalStorage();
+        resizingFrame = null;
+      }
+      window.onmousemove = null;
+      window.onmouseup = null;
+    }
+
+    function toggleDrawFrameMode() {
+      if (!isLoggedIn) {
+        openAuthModal();
+        return;
+      }
+      isDrawFrameMode = !isDrawFrameMode;
+      const btnText = document.getElementById("draw-frame-btn-text");
+      const btn = document.getElementById("btn-draw-frame-mode");
+      const viewport = document.getElementById("svg-viewport");
+      const bannerText = document.getElementById("banner-status-text");
+
+      if (isDrawFrameMode) {
+        btnText.innerText = t("btn_draw_cancel");
+        btn.className = "bg-purple-600 hover:bg-purple-500 text-white font-bold px-2.5 py-1 rounded-lg border border-purple-300 transition flex items-center gap-1.5 shadow-md";
+        viewport.classList.add("drawing-canvas");
+        bannerText.innerHTML = `<strong>${t("banner_draw_active")}</strong>`;
+      } else {
+        btnText.innerText = t("btn_draw_frame");
+        btn.className = "bg-zinc-800 hover:bg-zinc-700 text-purple-400 font-semibold px-2.5 py-1 rounded-lg border border-purple-500/40 transition flex items-center gap-1.5 shadow-md";
+        viewport.classList.remove("drawing-canvas");
+        bannerText.innerHTML = `<strong>${t("banner_edit_active")}</strong>`;
+      }
+    }
+
+    function handleSVGMouseDown(e) {
+      if (!(isLoggedIn && isEditMode && isDrawFrameMode)) { startPan(e); return; }
+      const coords = getSVGCoords(e);
+      drawingStart = coords;
+
+      const rect = document.getElementById("draw-preview-rect");
+      rect.setAttribute("x", coords.x);
+      rect.setAttribute("y", coords.y);
+      rect.setAttribute("width", 0);
+      rect.setAttribute("height", 0);
+      rect.classList.remove("hidden");
+    }
+
+    function handleSVGMouseMove(e) {
+      if (!isLoggedIn || !isEditMode || !isDrawFrameMode || !drawingStart) return;
+      const coords = getSVGCoords(e);
+
+      const x = Math.min(drawingStart.x, coords.x);
+      const y = Math.min(drawingStart.y, coords.y);
+      const w = Math.abs(coords.x - drawingStart.x);
+      const h = Math.abs(coords.y - drawingStart.y);
+
+      const rect = document.getElementById("draw-preview-rect");
+      rect.setAttribute("x", x);
+      rect.setAttribute("y", y);
+      rect.setAttribute("width", w);
+      rect.setAttribute("height", h);
+    }
+
+    function handleSVGMouseUp(e) {
+      if (!isLoggedIn || !isEditMode || !isDrawFrameMode || !drawingStart) return;
+      const coords = getSVGCoords(e);
+
+      const x = Math.min(drawingStart.x, coords.x);
+      const y = Math.min(drawingStart.y, coords.y);
+      const w = Math.abs(coords.x - drawingStart.x);
+      const h = Math.abs(coords.y - drawingStart.y);
+
+      document.getElementById("draw-preview-rect").classList.add("hidden");
+      drawingStart = null;
+
+      if (w > 30 && h > 30) {
+        const title = prompt(currentLang === 'de' ? "Name/Titel für den neuen Rahmen eingeben:" : "Enter name/title for the new frame:", "Neue Zone");
+        if (title && title.trim() !== "") {
+          const newFrame = {
+            id: "frame_" + Date.now(),
+            title: title.trim(),
+            x: x, y: y, width: w, height: h,
+            strokeColor: "#c084fc", strokeDash: "4 4",
+            headerBg: "#3b0764", textColor: "#e9d5ff"
+          };
+          frames.push(newFrame);
+          saveToLocalStorage();
+          renderTopologySVG();
+          showNotification("Rahmen gezeichnet.");
+        }
+      }
+
+      toggleDrawFrameMode();
+    }
+
+    function startNodeDrag(e, dev, element) {
+      if (!isLoggedIn || !isEditMode || isDrawFrameMode) return;
+      e.stopPropagation();
+      draggingNode = { dev, element };
+      element.classList.add("dragging");
+      element.classList.remove("was-dragged");
+
+      const c0 = getSVGCoords(e);
+      dragOffset.x = c0.x - dev.pos.x;
+      dragOffset.y = c0.y - dev.pos.y;
+
+      window.onmousemove = (evt) => doNodeDrag(evt);
+      window.onmouseup = () => stopNodeDrag();
+    }
+
+    function doNodeDrag(e) {
+      if (!draggingNode) return;
+      draggingNode.element.classList.add("was-dragged");
+
+      const c1 = getSVGCoords(e);
+      let newX = c1.x - dragOffset.x;
+      let newY = c1.y - dragOffset.y;
+
+      draggingNode.dev.pos.x = Math.round(newX);
+      draggingNode.dev.pos.y = Math.round(newY);
+
+      draggingNode.element.setAttribute("transform", `translate(${draggingNode.dev.pos.x - 55}, ${draggingNode.dev.pos.y - 20})`);
+      renderTopologySVG();
+    }
+
+    function stopNodeDrag() {
+      if (draggingNode) {
+        draggingNode.element.classList.remove("dragging");
+        saveToLocalStorage();
+        draggingNode = null;
+      }
+      window.onmousemove = null;
+      window.onmouseup = null;
+    }
+
+    function openModal(dev) {
+      activeDevice = dev;
+      isPasswordVisible = false;
+      wlanVisible = {};
+
+      document.getElementById("modal-title-display").innerText = dev.name;
+      document.getElementById("modal-subtitle").innerText = getCategoryDisplayName(dev.cat);
+      document.getElementById("modal-ip").innerText = dev.ip;
+      document.getElementById("modal-subnet").innerText = dev.ip.startsWith("192.168.179") ? "192.168.179.0/24 (Gastnetz)" : globalConfig.subnet;
+      document.getElementById("modal-desc").innerText = dev.desc || "Keine Zusatzbeschreibung vorhanden.";
+      document.getElementById("modal-icon").className = `fa-solid ${dev.icon} text-2xl`;
+
+      const parentDev = devices.find(p => p.id === dev.parentId);
+      document.getElementById("modal-parent-display").innerText = parentDev ? `${parentDev.name} (${parentDev.ip})` : "Direkter Hauptswitch";
+      document.getElementById("modal-poe").innerHTML = dev.poe ? `<span class="text-emerald-400 font-bold"><i class="fa-solid fa-bolt"></i> Aktiv (PoE 802.3at)</span>` : `<span class="text-zinc-500">Inaktiv / Kein PoE</span>`;
+
+      const maskedView = document.getElementById("cred-view-masked");
+      const unlockedView = document.getElementById("cred-view-unlocked");
+      const credBadge = document.getElementById("cred-status-badge");
+
+      if (isLoggedIn && activeCryptoKey) {
+        maskedView.classList.add("hidden");
+        unlockedView.classList.remove("hidden");
+        credBadge.innerText = t("badge_unlocked");
+        credBadge.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800";
+        document.getElementById("modal-username").innerText = dev._unlockedUser || "—";
+        updatePasswordDisplay();
+      } else {
+        maskedView.classList.remove("hidden");
+        unlockedView.classList.add("hidden");
+        credBadge.innerText = t("badge_encrypted");
+        credBadge.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-zinc-800 text-zinc-400";
+      }
+
+      const parentSelect = document.getElementById("edit-parent");
+      parentSelect.innerHTML = `<option value="">Kein Eltern-Knoten (Zentralknoten)</option>`;
+      devices.forEach(d => {
+        if (d.id !== dev.id) {
+          parentSelect.innerHTML += `<option value="${d.id}" ${d.id === dev.parentId ? 'selected' : ''}>${d.name} (${d.ip})</option>`;
+        }
+      });
+
+      populateEditCategoryDropdown();
+      document.getElementById("edit-name").value = dev.name;
+      document.getElementById("edit-ip").value = dev.ip;
+      document.getElementById("edit-cat").value = dev.cat;
+      
+      setDeviceIconValue(dev.icon || "fa-network-wired");
+
+      document.getElementById("edit-color").value = dev.color;
+      document.getElementById("edit-poe").checked = dev.poe;
+      document.getElementById("edit-desc").value = dev.desc || "";
+
+      document.getElementById("edit-username").value = dev._unlockedUser || "";
+      document.getElementById("edit-password").value = dev._unlockedPass || "";
+
+      const showWlan = isRouterOrWlanAp(dev.cat, dev);
+      const wlanUnlocked = Boolean(isLoggedIn && activeCryptoKey);
+      
+      document.getElementById("wlan-view-block").classList.toggle("hidden", !showWlan);
+      if (showWlan) {
+        document.getElementById("wlan-view-masked").classList.toggle("hidden", wlanUnlocked);
+        document.getElementById("wlan-view-unlocked").classList.toggle("hidden", !wlanUnlocked);
+        const wlanBadge = document.getElementById("wlan-status-badge");
+        if (wlanUnlocked) {
+          wlanBadge.innerText = t("badge_unlocked");
+          wlanBadge.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800";
+        } else {
+          wlanBadge.innerText = t("badge_encrypted");
+          wlanBadge.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-zinc-800 text-zinc-400";
+        }
+        renderWlanView(dev);
+      }
+
+      document.getElementById("edit-wlan-container").classList.toggle("hidden", !showWlan);
+      if (showWlan) {
+        fillWlanEditRows(dev._unlockedWlan);
+      }
+
+      const viewContainer = document.getElementById("view-mode-container");
+      const editForm = document.getElementById("edit-mode-form");
+      const saveBtn = document.getElementById("modal-save-btn");
+      const deleteBtn = document.getElementById("btn-delete-device");
+
+      if (isEditMode && isLoggedIn) {
+        viewContainer.classList.add("hidden");
+        editForm.classList.remove("hidden");
+        saveBtn.classList.remove("hidden");
+        deleteBtn.classList.remove("hidden");
+      } else {
+        viewContainer.classList.remove("hidden");
+        editForm.classList.add("hidden");
+        saveBtn.classList.add("hidden");
+        deleteBtn.classList.add("hidden");
+      }
+
+      const modal = document.getElementById("device-modal");
+      modal.classList.remove("pointer-events-none", "opacity-0");
+      modal.classList.add("opacity-100");
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function renderWlanView(dev) {
+      const list = document.getElementById("wlan-view-list");
+      list.innerHTML = "";
+      const nets = Array.isArray(dev._unlockedWlan) ? dev._unlockedWlan : [];
+      if (nets.length === 0) {
+        list.innerHTML = `<div class="text-xs text-zinc-500 text-center py-1">Keine WLAN-SSID hinterlegt.</div>`;
+        return;
+      }
+      nets.forEach((net, idx) => {
+        const visible = Boolean(wlanVisible[idx]);
+        const box = document.createElement("div");
+        box.className = "bg-zinc-950/60 border border-zinc-800 rounded-lg p-2.5 space-y-1.5";
+        box.innerHTML = `
+          <div class="flex justify-between items-center text-xs">
+            <span class="text-zinc-400">SSID ${nets.length > 1 ? idx + 1 : ""}:</span>
+            <div class="flex items-center gap-1">
+              <span class="font-mono text-zinc-200 font-semibold">${net.ssid ? escapeHtml(net.ssid) : "—"}</span>
+              <button type="button" class="wlan-copy-ssid text-zinc-400 hover:text-ciscocyan p-1" title="Kopieren"><i class="fa-regular fa-copy"></i></button>
+            </div>
+          </div>
+          <div class="flex justify-between items-center text-xs">
+            <span class="text-zinc-400">${t("dev_label_pass")}</span>
+            <div class="flex items-center gap-1">
+              <span class="font-mono text-amber-400 font-semibold">${net.pass ? (visible ? escapeHtml(net.pass) : "••••••••") : "—"}</span>
+              <button type="button" class="wlan-toggle-pw text-zinc-400 hover:text-ciscocyan p-1" title="Anzeigen/Verbergen"><i class="fa-regular ${visible ? "fa-eye-slash" : "fa-eye"}"></i></button>
+              <button type="button" class="wlan-copy-pass text-zinc-400 hover:text-ciscocyan p-1" title="Kopieren"><i class="fa-regular fa-copy"></i></button>
+            </div>
+          </div>
+        `;
+        box.querySelector(".wlan-copy-ssid").onclick = () => copyTextToClipboard(net.ssid, "SSID kopiert!");
+        box.querySelector(".wlan-copy-pass").onclick = () => copyTextToClipboard(net.pass, "WLAN-Passwort kopiert!");
+        box.querySelector(".wlan-toggle-pw").onclick = () => {
+          wlanVisible[idx] = !wlanVisible[idx];
+          renderWlanView(dev);
+        };
+        list.appendChild(box);
+      });
+    }
+
+    function addWlanEditRow(ssid, pass) {
+      const list = document.getElementById("edit-wlan-list");
+      const row = document.createElement("div");
+      row.className = "wlan-edit-row bg-zinc-950/60 border border-zinc-800 rounded-lg p-2 grid grid-cols-[1fr_1fr_auto] gap-2 items-end";
+      row.innerHTML = `
+        <div>
+          <label class="block text-[11px] text-zinc-400 mb-1">SSID Name</label>
+          <input type="text" class="wlan-ssid-input w-full bg-zinc-950 border border-zinc-700 rounded-lg px-2.5 py-1.5 text-xs text-zinc-200 focus:outline-none focus:border-ciscocyan" placeholder="z.B. Bonner-WLAN">
+        </div>
+        <div>
+          <label class="block text-[11px] text-zinc-400 mb-1">${t("dev_label_pass")}</label>
+          <div class="relative flex items-center">
+            <input type="password" class="wlan-pass-input w-full bg-zinc-950 border border-zinc-700 rounded-lg pl-2.5 pr-8 py-1.5 text-xs text-amber-400 font-mono focus:outline-none focus:border-ciscocyan" placeholder="Passwort">
+            <button type="button" class="wlan-eye absolute right-2 text-zinc-400 hover:text-ciscocyan p-1 text-xs" title="Passwort anzeigen/verbergen"><i class="fa-regular fa-eye"></i></button>
+          </div>
+        </div>
+        <button type="button" class="wlan-remove bg-rose-950/80 hover:bg-rose-900 text-rose-300 border border-rose-800 rounded-lg px-2.5 py-1.5 text-xs transition" title="Entfernen"><i class="fa-solid fa-trash"></i></button>
+      `;
+      row.querySelector(".wlan-ssid-input").value = ssid || "";
+      row.querySelector(".wlan-pass-input").value = pass || "";
+      row.querySelector(".wlan-eye").onclick = () => {
+        const inp = row.querySelector(".wlan-pass-input");
+        const isPw = inp.type === "password";
+        inp.type = isPw ? "text" : "password";
+        row.querySelector(".wlan-eye i").className = isPw ? "fa-regular fa-eye-slash" : "fa-regular fa-eye";
+      };
+      row.querySelector(".wlan-remove").onclick = () => row.remove();
+      list.appendChild(row);
+    }
+
+    function fillWlanEditRows(nets) {
+      document.getElementById("edit-wlan-list").innerHTML = "";
+      const arr = Array.isArray(nets) ? nets : [];
+      if (arr.length === 0) addWlanEditRow("", "");
+      else arr.forEach(n => addWlanEditRow(n.ssid, n.pass));
+    }
+
+    function collectWlanEditRows() {
+      const nets = [];
+      document.querySelectorAll("#edit-wlan-list .wlan-edit-row").forEach(row => {
+        const ssid = row.querySelector(".wlan-ssid-input").value.trim();
+        const pass = row.querySelector(".wlan-pass-input").value;
+        if (ssid || pass) nets.push({ ssid, pass });
+      });
+      return nets;
+    }
+
+    function copyTextToClipboard(text, message) {
+      if (!text) return;
+      const dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = text;
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+      showNotification(message);
+    }
+
+    function updatePasswordDisplay() {
+      if (!activeDevice) return;
+      const pwElem = document.getElementById("modal-password");
+      const eyeIcon = document.getElementById("eye-icon");
+
+      if (isPasswordVisible) {
+        pwElem.innerText = activeDevice._unlockedPass || "—";
+        eyeIcon.className = "fa-regular fa-eye-slash";
+      } else {
+        pwElem.innerText = activeDevice._unlockedPass ? "••••••••" : "—";
+        eyeIcon.className = "fa-regular fa-eye";
+      }
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("device-modal");
+      modal.classList.remove("opacity-100");
+      modal.classList.add("opacity-0", "pointer-events-none");
+      activeDevice = null;
+    }
+
+    function copyUserToClipboard() {
+      if (!activeDevice || !isLoggedIn) return;
+      const text = activeDevice._unlockedUser || "";
+      if (!text) return;
+      const dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = text;
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+      showNotification("Benutzername kopiert!");
+    }
+
+    function copyPassToClipboard() {
+      if (!activeDevice || !isLoggedIn) return;
+      const text = activeDevice._unlockedPass || "";
+      if (!text) return;
+      const dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = text;
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+      showNotification("Passwort kopiert!");
+    }
+
+    async function saveDeviceChanges() {
+      if (!activeDevice || !isLoggedIn) return;
+
+      activeDevice.name = document.getElementById("edit-name").value || "Neues Gerät";
+      activeDevice.ip = document.getElementById("edit-ip").value || "192.168.178.X";
+      activeDevice.cat = document.getElementById("edit-cat").value;
+      activeDevice.parentId = document.getElementById("edit-parent").value || null;
+      activeDevice.icon = document.getElementById("edit-icon").value || "fa-network-wired";
+      activeDevice.color = document.getElementById("edit-color").value;
+      activeDevice.poe = document.getElementById("edit-poe").checked;
+      activeDevice.desc = document.getElementById("edit-desc").value;
+
+      if (isLoggedIn && activeCryptoKey) {
+        activeDevice._unlockedUser = document.getElementById("edit-username").value;
+        activeDevice._unlockedPass = document.getElementById("edit-password").value;
+        
+        activeDevice.loginUser = await encryptText(activeDevice._unlockedUser, activeCryptoKey);
+        activeDevice.loginPass = await encryptText(activeDevice._unlockedPass, activeCryptoKey);
+
+        if (!document.getElementById("edit-wlan-container").classList.contains("hidden")) {
+          activeDevice._unlockedWlan = collectWlanEditRows();
+          activeDevice.wlanNets = await encryptText(JSON.stringify(activeDevice._unlockedWlan), activeCryptoKey);
+        } else {
+          activeDevice._unlockedWlan = [];
+          activeDevice.wlanNets = await encryptText(JSON.stringify([]), activeCryptoKey);
+        }
+        delete activeDevice.wlanSsid;
+        delete activeDevice.wlanPass;
+      }
+
+      saveToLocalStorage();
+      renderDeviceList();
+      renderTopologySVG();
+      closeModal();
+      showNotification(t("notif_device_saved"));
+    }
+
+    function addNewDevice() {
+      if (!isLoggedIn) {
+        openAuthModal();
+        return;
+      }
+      const newId = "dev_" + Date.now();
+      const newDevice = {
+        id: newId,
+        parentId: "switch",
+        name: "Neues Gerät",
+        ip: "192.168.178." + (100 + Math.floor(Math.random() * 100)),
+        cat: "endgeraet",
+        icon: "fa-laptop",
+        color: "#06b6d4",
+        desc: "Manuell hinzugefügtes Netzwerkgerät.",
+        poe: false,
+        loginUser: "",
+        loginPass: "",
+        _unlockedUser: "",
+        _unlockedPass: "",
+        wlanNets: "",
+        _unlockedWlan: [],
+        pos: { x: 500, y: 500 }
+      };
+      devices.push(newDevice);
+      saveToLocalStorage();
+      renderDeviceList();
+      renderTopologySVG();
+      openModal(newDevice);
+      showNotification(t("notif_device_created"));
+    }
+
+    function deleteActiveDevice() {
+      if (!activeDevice || !isLoggedIn) return;
+      devices = devices.filter(d => d.id !== activeDevice.id);
+      devices.forEach(d => {
+        if (d.parentId === activeDevice.id) d.parentId = "switch";
+      });
+      saveToLocalStorage();
+      renderDeviceList();
+      renderTopologySVG();
+      closeModal();
+      showNotification(t("notif_device_deleted"));
+    }
+
+    function toggleEditMode() {
+      if (!isLoggedIn) {
+        openAuthModal();
+        return;
+      }
+
+      isEditMode = !isEditMode;
+      if (!isEditMode && isDrawFrameMode) toggleDrawFrameMode();
+
+      updateAuthUIState();
+      renderDeviceList();
+      renderTopologySVG();
+    }
+
+    function promptExportJSON() {
+      if (!isLoggedIn) { openAuthModal(); return; }
+      const modal = document.getElementById("export-warning-modal");
+      modal.classList.remove("pointer-events-none", "opacity-0");
+      modal.classList.add("opacity-100");
+    }
+
+    function closeExportWarningModal() {
+      const modal = document.getElementById("export-warning-modal");
+      modal.classList.remove("opacity-100");
+      modal.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    function executeJSONExport() {
+      closeExportWarningModal();
+      if (!isLoggedIn || !activeCryptoKey) { openAuthModal(); return; }
+      const exportDevices = serializableDevices().map((c, i) => {
+        const src = devices[i];
+        c.loginUser = src._unlockedUser || "";
+        c.loginPass = src._unlockedPass || "";
+        c.wlanNets = Array.isArray(src._unlockedWlan) ? src._unlockedWlan : [];
+        delete c.wlanSsid;
+        delete c.wlanPass;
+        return c;
+      });
+      const exportData = {
+        format: "kryptonetview-topology-v2-plaintext",
+        config: globalConfig,
+        categories: categories,
+        frames: frames,
+        devices: exportDevices
+      };
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
+      const a = document.createElement("a");
+      a.href = dataStr;
+      a.download = "KryptoNetView_Familie_Bonner_Config.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showNotification(t("notif_exported"));
+    }
+
+    async function handleDirectSaveFile() {
+      if (!isLoggedIn || !activeCryptoKey) { openAuthModal(); return; }
+      if (htmlFileStatus === "unsupported") { executeJSONExport(); return; }
+      if (!fileHandle || htmlFileStatus !== "on") {
+        await handleFileLinkClick();
+        return;
+      }
+      saveToLocalStorage();
+      await writeStateToHtmlFile();
+      if (htmlFileStatus === "on") showNotification(t("notif_file_saved"));
+    }
+
+    function ensureStandardCategories() {
+      ["router", "gateways", "wlan_ap", "switch", "server", "endgeraet"].forEach(id => {
+        if (!categories.some(c => c.id === id)) {
+          const def = defaultCategories.find(c => c.id === id);
+          if (def) categories.push({ ...def, name: t(def.nameKey) });
+        }
+      });
+      devices.forEach(d => {
+        if (d.cat && !categories.some(c => c.id === d.cat)) {
+          const def = defaultCategories.find(c => c.id === d.cat);
+          categories.push(def ? { ...def, name: t(def.nameKey) } : { id: d.cat, name: d.cat, icon: "fa-tag", color: "#38bdf8" });
+        }
+      });
+    }
+
+    function importJSON(e) {
+      if (!isLoggedIn || !activeCryptoKey) {
+        e.target.value = "";
+        openAuthModal();
+        return;
+      }
+      const input = e.target;
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        try {
+          const imported = JSON.parse(event.target.result);
+          let newDevices = null;
+          if (imported && Array.isArray(imported.devices)) {
+            newDevices = imported.devices;
+            if (imported.config) globalConfig = Object.assign({}, globalConfig, imported.config);
+            if (Array.isArray(imported.categories) && imported.categories.length) {
+              categories = imported.categories.filter(c => c && c.id).map(c => ({
+                id: c.id, nameKey: c.nameKey || null, name: c.name || c.id, icon: c.icon || "fa-tag", color: c.color || "#38bdf8"
+              }));
+            }
+            if (Array.isArray(imported.frames)) frames = imported.frames;
+          } else if (Array.isArray(imported)) {
+            newDevices = imported;
+          } else {
+            throw new Error("Unbekanntes Format");
+          }
+
+          const isPlain = imported && (imported.format === "kryptonetview-topology-v2-plaintext" || imported.format === "bonner-topology-v2-plaintext");
+          devices = newDevices.map(d => {
+            const dev = Object.assign({}, d);
+            Object.keys(dev).forEach(k => { if (k.startsWith("_")) delete dev[k]; });
+            if (!dev.pos) dev.pos = { x: 500, y: 500 };
+            if (isPlain) {
+              dev._unlockedUser = dev.loginUser || "";
+              dev._unlockedPass = dev.loginPass || "";
+              dev._unlockedWlan = Array.isArray(dev.wlanNets) ? dev.wlanNets : [];
+            }
+            return dev;
+          });
+
+          ensureStandardCategories();
+          currentFilterCat = "all";
+
+          if (isPlain) {
+            await encryptAllDevices(activeCryptoKey);
+          } else {
+            await decryptAllDevices(activeCryptoKey);
+          }
+          saveToLocalStorage();
+          renderHeaderSettings();
+          renderCategoryFiltersUI();
+          renderDeviceList();
+          renderTopologySVG();
+          showNotification(t("notif_imported"));
+        } catch (err) {
+          console.error(err);
+          showNotification("Fehler beim Laden der JSON-Datei.", true);
+        }
+        input.value = "";
+      };
+      reader.readAsText(file);
+    }
+
+    function setupEventListeners() {
+      document.getElementById("btn-lang-toggle").onclick = toggleLanguage;
+
+      document.getElementById("modal-close").onclick = closeModal;
+      document.getElementById("modal-close-btn").onclick = closeModal;
+      document.getElementById("modal-save-btn").onclick = saveDeviceChanges;
+      document.getElementById("btn-delete-device").onclick = deleteActiveDevice;
+      
+      document.getElementById("btn-toggle-edit").onclick = toggleEditMode;
+      document.getElementById("btn-draw-frame-mode").onclick = toggleDrawFrameMode;
+      document.getElementById("btn-add-device").onclick = addNewDevice;
+      
+      document.getElementById("btn-save-direct-file").onclick = handleDirectSaveFile;
+      document.getElementById("btn-file-link").onclick = handleFileLinkClick;
+      document.getElementById("btn-export-json").onclick = promptExportJSON;
+      document.getElementById("btn-cancel-export").onclick = closeExportWarningModal;
+      document.getElementById("btn-confirm-export").onclick = executeJSONExport;
+      document.getElementById("input-import-json").onchange = importJSON;
+
+      document.getElementById("btn-edit-header-settings").onclick = openHeaderSettingsModal;
+      document.getElementById("header-settings-close").onclick = closeHeaderSettingsModal;
+      document.getElementById("btn-cancel-header-settings").onclick = closeHeaderSettingsModal;
+      document.getElementById("btn-save-header-settings").onclick = saveHeaderSettings;
+
+      document.getElementById("btn-manage-categories").onclick = openCategoriesModal;
+      document.getElementById("sidebar-btn-manage-cats").onclick = openCategoriesModal;
+      document.getElementById("categories-modal-close").onclick = closeCategoriesModal;
+      document.getElementById("btn-close-categories-modal").onclick = closeCategoriesModal;
+      document.getElementById("btn-add-category").onclick = addNewCategory;
+
+      document.getElementById("btn-manage-frames").onclick = openFramesModal;
+      document.getElementById("frames-modal-close").onclick = closeFramesModal;
+      document.getElementById("btn-close-frames-modal").onclick = closeFramesModal;
+      document.getElementById("btn-add-new-frame").onclick = addNewFrame;
+
+      const svg = document.getElementById("topology-svg");
+      svg.onmousedown = (e) => handleSVGMouseDown(e);
+      svg.onmousemove = (e) => handleSVGMouseMove(e);
+      svg.onmouseup = (e) => handleSVGMouseUp(e);
+
+      document.getElementById("btn-copy-user").onclick = copyUserToClipboard;
+      document.getElementById("btn-copy-pass").onclick = copyPassToClipboard;
+
+      const setupPasswordToggle = (btnId, inputId) => {
+        const btn = document.getElementById(btnId);
+        const input = document.getElementById(inputId);
+        if (btn && input) {
+          btn.onclick = () => {
+            const isPw = input.type === "password";
+            input.type = isPw ? "text" : "password";
+            const icon = btn.querySelector("i");
+            if (icon) {
+              icon.className = isPw ? "fa-regular fa-eye-slash" : "fa-regular fa-eye";
+            }
+          };
+        }
+      };
+
+      setupPasswordToggle("btn-toggle-login-pw", "auth-password-input");
+      setupPasswordToggle("btn-toggle-change-old-pw", "change-pw-old");
+      setupPasswordToggle("btn-toggle-change-new-pw", "change-pw-new");
+      setupPasswordToggle("btn-toggle-change-confirm-pw", "change-pw-confirm");
+      setupPasswordToggle("btn-toggle-edit-pw", "edit-password");
+
+      document.getElementById("btn-trigger-login-modal-wlan").onclick = openAuthModal;
+      document.getElementById("btn-add-wlan-row").onclick = () => addWlanEditRow("", "");
+
+      const editCatSelect = document.getElementById("edit-cat");
+      editCatSelect.addEventListener("change", () => {
+        if (editCatSelect.value === "__new__") {
+          const name = prompt(currentLang === 'de' ? "Name der neuen Kategorie:" : "Name of new category:", "");
+          if (!name || !name.trim()) { editCatSelect.value = "endgeraet"; return; }
+          let id = name.trim().toLowerCase().replace(/[^a-z0-9_]/g, "") || "kategorie";
+          while (categories.some(c => c.id === id)) id += "_";
+          categories.push({ id, name: name.trim(), icon: "fa-tag", color: "#38bdf8" });
+          saveToLocalStorage();
+          renderCategoryFiltersUI();
+          editCatSelect.value = id;
+          showNotification(currentLang === 'de' ? "Neue Kategorie angelegt." : "New category created.");
+        }
+        const selectedCat = editCatSelect.value;
+        const showWlan = isRouterOrWlanAp(selectedCat, activeDevice);
+        document.getElementById("edit-wlan-container").classList.toggle("hidden", !showWlan);
+        if (showWlan && !document.querySelector("#edit-wlan-list .wlan-edit-row")) {
+          addWlanEditRow("", "");
+        }
+      });
+
+      document.getElementById("btn-auth-toggle").onclick = () => {
+        if (isLoggedIn) {
+          isLoggedIn = false;
+          isEditMode = false;
+          activeCryptoKey = null;
+          updateAuthUIState();
+          renderDeviceList();
+          renderTopologySVG();
+          showNotification(t("notif_logout"));
+        } else {
+          openAuthModal();
+        }
+      };
+      document.getElementById("auth-modal-close").onclick = closeAuthModal;
+      document.getElementById("btn-login-submit").onclick = handleLoginSubmit;
+      document.getElementById("btn-trigger-login-modal").onclick = openAuthModal;
+      
+      document.getElementById("btn-show-change-pw-view").onclick = showChangePwView;
+      document.getElementById("btn-change-pw-header").onclick = () => { openAuthModal(); showChangePwView(); };
+      document.getElementById("btn-cancel-change-pw").onclick = showLoginView;
+      document.getElementById("btn-submit-change-pw").onclick = submitChangeMasterPassword;
+
+      document.getElementById("btn-toggle-pw-visibility").onclick = () => {
+        isPasswordVisible = !isPasswordVisible;
+        updatePasswordDisplay();
+      };
+
+      document.getElementById("auth-password-input").addEventListener("keypress", (e) => {
+        if (e.key === "Enter") { e.preventDefault(); handleLoginSubmit(); }
+      });
+
+      document.getElementById("device-modal").onclick = (e) => {
+        if (e.target.id === "device-modal") closeModal();
+      };
+      document.getElementById("auth-modal").onclick = (e) => {
+        if (e.target.id === "auth-modal") closeAuthModal();
+      };
+      document.getElementById("header-settings-modal").onclick = (e) => {
+        if (e.target.id === "header-settings-modal") closeHeaderSettingsModal();
+      };
+      document.getElementById("categories-modal").onclick = (e) => {
+        if (e.target.id === "categories-modal") closeCategoriesModal();
+      };
+      document.getElementById("frames-modal").onclick = (e) => {
+        if (e.target.id === "frames-modal") closeFramesModal();
+      };
+      document.getElementById("export-warning-modal").onclick = (e) => {
+        if (e.target.id === "export-warning-modal") closeExportWarningModal();
+      };
+
+      const searchInput = document.getElementById("search-input");
+      searchInput.addEventListener("input", (e) => {
+        currentSearchTerm = e.target.value.toLowerCase();
+        renderDeviceList();
+        renderTopologySVG();
+      });
+
+      document.getElementById("btn-zoom-in").onclick = () => zoomCenter(0.8);
+      document.getElementById("btn-zoom-out").onclick = () => zoomCenter(1.25);
+      document.getElementById("btn-reset-view").onclick = () => { view = { ...DEFAULT_VIEW }; applyView(); };
+
+      svg.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        const p = getSVGCoords(e);
+        zoomAt(p.x, p.y, e.deltaY < 0 ? 0.88 : 1.14);
+      }, { passive: false });
+
+      svg.addEventListener("click", (e) => {
+        if (panMoved) { e.stopPropagation(); e.preventDefault(); }
+      }, true);
+    }
+  </script>
+</body>
+</html>
