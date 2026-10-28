@@ -1,4 +1,7 @@
-KryptoNetView (English)
+KryptoNetView
+
+
+🇬🇧 KryptoNetView (English)
 An offline-first, single-file HTML network topology application featuring zero-knowledge AES-256 encryption, an interactive SVG canvas, and bilingual support (German/English).
 
 📸 Preview
@@ -56,7 +59,10 @@ See the LICENSE file for details.
 
 Repository: \github\ulfenknulfen\kryptonetview
 
-KryptoNetView (Deutsch)
+
+
+
+🇩🇪 KryptoNetView (Deutsch)
 Eine autarke Single-File-HTML-Netzwerktopologie-Anwendung mit integrierter Zero-Knowledge-AES-256-Verschlüsselung, interaktiver SVG-Oberfläche und vollständiger Zweisprachigkeit (Deutsch/Englisch).
 
 📸 Vorschau
