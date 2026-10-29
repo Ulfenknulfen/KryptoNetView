@@ -38,16 +38,8 @@ Open kryptonetview.html (the ready-to-use application) or yourproject.html (the 
 
 Click Login to unlock the administrator vault, customize your network topology, and export your secure configuration.
 
-📂 Project Structure
-Plaintext
-kryptonetview/
-├── kryptonetview.html  # Complete standalone application (Ready to use)
-├── yourproject.html    # Empty starting template for custom setups
-├── LICENSE             # Custom MIT Non-Commercial & Attribution License
-├── README.md           # Project documentation
-└── docs/               # Screenshots and visual assets
-    ├── main.png
-    └── fritz.png
+
+
 📝 License
 This project is licensed under a modified MIT / Non-Commercial license.
 
@@ -99,16 +91,7 @@ Entweder kryptonetview.html (die fertige Anwendung) oder yourproject.html (die l
 
 Auf Anmelden klicken, um den Administrator-Vault zu entsperren, die Netzwerktopologie anzupassen und die sichere Konfiguration zu exportieren.
 
-📂 Projektstruktur
-Plaintext
-kryptonetview/
-├── kryptonetview.html  # Vollständige eigenständige Anwendung (Sofort einsatzbereit)
-├── yourproject.html    # Leere Startvorlage für eigene Setups
-├── LICENSE             # Modifizierte MIT Non-Commercial & Attribution Lizenz
-├── README.md           # Projektdokumentation
-└── docs/               # Screenshots und visuelle Assets
-    ├── main.png
-    └── fritz.png
+
 📝 Lizenz
 Dieses Projekt ist unter einer modifizierten MIT- / Non-Commercial-Lizenz lizenziert.
 
