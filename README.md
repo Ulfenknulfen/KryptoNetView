@@ -72,7 +72,7 @@ KryptoNetView is distributed under the project's customized license terms.
 - **Commercial Use:** Commercial use requires prior consultation and an agreement with the author. Voluntary donations are welcome but do not automatically grant commercial usage rights.
 - **Attribution:** Please credit the original author, `ulfenknulfen`.
 
-See the [`LICENSE`](LICENSE) file for the complete terms.
+See the [`License.txt`](LICENSE) file for the complete terms.
 
 ### 🔗 Repository
 
@@ -148,7 +148,7 @@ KryptoNetView wird unter den individuell angepassten Lizenzbedingungen des Proje
 - **Kommerzielle Nutzung:** Eine kommerzielle Nutzung erfordert eine vorherige Absprache und Vereinbarung mit dem Autor. Freiwillige Spenden sind willkommen, begründen jedoch nicht automatisch kommerzielle Nutzungsrechte.
 - **Namensnennung:** Bitte nenne `ulfenknulfen` als ursprünglichen Autor.
 
-Die vollständigen Bedingungen findest du in der Datei [`LICENSE`](LICENSE).
+Die vollständigen Bedingungen findest du in der Datei [`License.txt`](LICENSE)
 
 ### 🔗 Repository
 
