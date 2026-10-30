@@ -27,7 +27,7 @@ KryptoNetView is a self-contained, single-file HTML application for visualizing 
 
 ### 🙏 Thanks to Killerscan
 
-Special thanks to **Steve the Killer** for creating [Killerscan](https://github.com/steve-the-killer/killerscan).
+Special thanks to **Steve the Killer** for creating [Killerscan](https://github.com/SteveTheKiller/KillerScan).
 
 Killerscan 1.8.3 can be used to scan a network and export the results as a CSV file, which can then be imported directly into KryptoNetView.
 
@@ -50,7 +50,7 @@ KryptoNetView follows a local-first, zero-knowledge approach:
 
 2. Open the downloaded project directory.
 
-3. Open `kryptonetview.html` to use the ready-to-use application, or `yourproject.html` to start with the clean template.
+3. Open `your_Project.html` to use the ready-to-use application, or `Demo.html` to start with the clean template.
 
 4. Use a modern browser such as Chrome, Firefox, Edge, or Safari.
 
@@ -72,7 +72,7 @@ KryptoNetView is distributed under the project's customized license terms.
 - **Commercial Use:** Commercial use requires prior consultation and an agreement with the author. Voluntary donations are welcome but do not automatically grant commercial usage rights.
 - **Attribution:** Please credit the original author, `ulfenknulfen`.
 
-See the [`License.txt`](LICENSE) file for the complete terms.
+See the [`License.txt`](License.txt) file for the complete terms.
 
 ### 🔗 Repository
 
@@ -103,7 +103,7 @@ KryptoNetView ist eine autarke Single-File-HTML-Anwendung zur Visualisierung und
 
 ### 🙏 Dank an Killerscan
 
-Ein herzliches Dankeschön an **Steve the Killer** für die Entwicklung von [Killerscan](https://github.com/steve-the-killer/killerscan).
+Ein herzliches Dankeschön an **Steve the Killer** für die Entwicklung von [Killerscan](https://github.com/SteveTheKiller/KillerScan).
 
 Mit Killerscan 1.8.3 lässt sich ein Netzwerk scannen und das Ergebnis als CSV-Datei exportieren. Diese Datei kann anschließend direkt in KryptoNetView importiert werden.
 
@@ -126,7 +126,7 @@ KryptoNetView verfolgt einen lokalen, datenschutzorientierten Zero-Knowledge-Ans
 
 2. Öffne das heruntergeladene Projektverzeichnis.
 
-3. Öffne `kryptonetview.html` für die fertige Anwendung oder `yourproject.html`, wenn du mit der leeren Startvorlage beginnen möchtest.
+3. Öffne `your_Project.html` für die fertige Anwendung oder `Demo.html`, wenn du mit der leeren Startvorlage beginnen möchtest.
 
 4. Verwende einen modernen Browser wie Chrome, Firefox, Edge oder Safari.
 
@@ -148,7 +148,7 @@ KryptoNetView wird unter den individuell angepassten Lizenzbedingungen des Proje
 - **Kommerzielle Nutzung:** Eine kommerzielle Nutzung erfordert eine vorherige Absprache und Vereinbarung mit dem Autor. Freiwillige Spenden sind willkommen, begründen jedoch nicht automatisch kommerzielle Nutzungsrechte.
 - **Namensnennung:** Bitte nenne `ulfenknulfen` als ursprünglichen Autor.
 
-Die vollständigen Bedingungen findest du in der Datei [`License.txt`](LICENSE)
+Die vollständigen Bedingungen findest du in der Datei [`License.txt`](License.txt)
 
 ### 🔗 Repository
 
