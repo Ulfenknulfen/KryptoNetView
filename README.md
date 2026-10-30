@@ -10,7 +10,7 @@ KryptoNetView is a self-contained, single-file HTML application for visualizing 
 
 ### 📸 Preview
 
-| Main View | Detail View / Gateway Configuration |
+| Main View | Detail View / Device Configuration |
 |:---:|:---:|
 | ![KryptoNetView Main View](docs/Main.png) | ![KryptoNetView Detail View](docs/Fritz.png) |
 
@@ -86,7 +86,7 @@ KryptoNetView ist eine autarke Single-File-HTML-Anwendung zur Visualisierung und
 
 ### 📸 Vorschau
 
-| Gesamtansicht | Detailansicht / Gateway-Konfiguration |
+| Gesamtansicht | Detailansicht / Geräte-Konfiguration |
 |:---:|:---:|
 | ![KryptoNetView Gesamtansicht](docs/Main_de.png) | ![KryptoNetView Detailansicht](docs/Fritz_de.png) |
 
