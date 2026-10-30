@@ -1,0 +1,58 @@
+# KryptoNetView – Custom Restricted-Use License
+
+**Copyright © 2026 ulfenknulfen. All rights reserved.**
+
+## 1. Private Use
+
+Private, non-commercial use of KryptoNetView is permitted free of charge.
+
+Voluntary donations to support the development and maintenance of the software are welcome but are not a condition of permitted private use.
+
+## 2. Commercial Use
+
+Commercial use, including use in a business, commercial service, paid product, or other commercial activity, requires the author's prior written permission. Contact: ulfenknulfen@protonmail.com
+
+Please contact the author to discuss commercial licensing.
+
+## 3. Modification and Redistribution
+
+Without the author's prior written permission, you may not:
+
+- Modify, adapt, translate, or create derivative versions of the software for distribution.
+- Publish, redistribute, or make modified or unmodified copies of the software available to third parties.
+- Repackage the software or distribute it as part of another product or service.
+- Remove or alter copyright notices, author attribution, or license notices.
+
+Personal modifications for private, non-commercial use are permitted only if they are not distributed or published and do not violate other applicable terms.
+
+## 4. Copyright and Ownership
+
+The software and its original components remain protected by applicable copyright law. No ownership of the software is transferred to the user.
+
+Except for the permissions expressly granted by this license, all rights are reserved by the author.
+
+## 5. Third-Party Components
+
+Components, libraries, and other materials supplied by third parties may be subject to separate license terms. Those terms remain applicable to the relevant third-party materials.
+
+## 6. No Warranty
+
+The software is provided "as is", to the extent permitted by applicable law, without warranties of any kind, express or implied. The author does not guarantee that the software is error-free, secure, or suitable for a particular purpose.
+
+Nothing in this license excludes or limits liability where such exclusion or limitation is prohibited by applicable law.
+
+## 7. Permission Requests
+
+Requests for commercial use, modification, redistribution, publication, or other uses not expressly permitted by this license must be submitted to the author and require explicit written approval before the relevant activity begins.
+
+## 8. Governing Law
+
+The applicable law and jurisdiction shall be determined in accordance with the relevant mandatory legal provisions.
+
+---
+
+**Author:** ulfenknulfen  
+**Project:** KryptoNetView  
+**Repository:** https://github.com/ulfenknulfen/kryptonetview
+
+Contact: ulfenknulfen@protonmail.com
