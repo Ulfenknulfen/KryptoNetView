@@ -341,7 +341,7 @@
           <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-zinc-400 text-sm"></i>
           <input type="text" id="search-input" data-i18n-placeholder="search_placeholder" placeholder="Gerät, IP oder Hostname suchen..." class="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg pl-9 pr-4 py-2 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-ciscocyan transition">
         </div>
-        <select id="device-sort-select" onchange="renderDeviceList()" class="bg-zinc-900 border border-zinc-700/80 rounded-lg px-2.5 py-2 text-xs text-zinc-200 focus:outline-none focus:border-ciscocyan cursor-pointer" title="Geräteliste sortieren">
+        <select id="device-sort-select" onchange="saveDeviceSortPreference()" class="bg-zinc-900 border border-zinc-700/80 rounded-lg px-2.5 py-2 text-xs text-zinc-200 focus:outline-none focus:border-ciscocyan cursor-pointer" title="Geräteliste sortieren">
           <option value="name_asc">A–Z</option>
           <option value="name_desc">Z–A</option>
           <option value="ip_asc">IP ↑</option>
@@ -1782,6 +1782,7 @@
 
     document.addEventListener("DOMContentLoaded", async () => {
       loadStoredSettings();
+      loadDeviceSortPreference();
       renderHeaderSettings();
       await initializeCryptoState();
       buildNetColorSettings();
@@ -2849,6 +2850,20 @@
       renderFramesListEditor();
       renderTopologySVG();
       showNotification("Rahmen hinzugefügt.");
+    }
+
+    function saveDeviceSortPreference() {
+      const select = document.getElementById("device-sort-select");
+      if (select) localStorage.setItem("kryptonetview_device_sort", select.value);
+      renderDeviceList();
+    }
+
+    function loadDeviceSortPreference() {
+      const select = document.getElementById("device-sort-select");
+      const saved = localStorage.getItem("kryptonetview_device_sort");
+      if (select && saved && Array.from(select.options).some(option => option.value === saved)) {
+        select.value = saved;
+      }
     }
 
     function renderDeviceList() {
