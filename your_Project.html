@@ -159,9 +159,32 @@
     html.light ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     html.light #node-shadow feDropShadow { flood-opacity: 0.18; }
     html.light .edit-active-banner { background: linear-gradient(90deg, rgba(0,188,239,0.12), rgba(245,158,11,0.15)); }
+
+    /* ===== Druckansicht ===== */
+    #print-root { display: none; }
+    @media print {
+      html, body { background: #fff !important; color: #0f172a !important; height: auto !important; min-height: 0 !important; overflow: visible !important; display: block !important; }
+      body > *:not(#print-root) { display: none !important; }
+      #print-root { display: block !important; color: #0f172a; font-family: 'Inter', sans-serif; font-size: 10pt; }
+      #print-root, #print-root * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .pr-head { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #0369a1; padding-bottom: 6px; margin-bottom: 10px; }
+      .pr-head h1 { font-size: 15pt; font-weight: 700; margin: 0; color: #0f172a; }
+      .pr-sub { font-size: 9pt; color: #475569; }
+      .pr-break { page-break-before: always; break-before: page; }
+      .pr-svg-wrap { border: 1px solid #cbd5e1; border-radius: 6px; padding: 4px; background: #fff; }
+      .pr-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; font-size: 9pt; margin-top: 8px; color: #1e293b; }
+      .pr-cat { font-size: 11pt; font-weight: 700; margin: 12px 0 4px; color: #0f172a; page-break-after: avoid; break-after: avoid; }
+      .pr-table { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+      .pr-table th { background: #e2e8f0; text-align: left; padding: 3px 6px; border: 1px solid #94a3b8; color: #0f172a; }
+      .pr-table td { padding: 3px 6px; border: 1px solid #cbd5e1; color: #0f172a; vertical-align: top; }
+      .pr-table thead { display: table-header-group; }
+      .pr-table tr { page-break-inside: avoid; break-inside: avoid; }
+      .pr-mono { font-family: 'JetBrains Mono', monospace; }
+    }
   </style>
+  <style id="print-page-style"></style>
   <!-- KRYPTONETVIEW-EMBEDDED-STATE: wird automatisch beim Speichern ueberschrieben -->
-  <script id="embedded-state" type="application/json">{"format":"kryptonetview-embedded-v1","savedAt":1793370726363,"config":{"title":"Ulfenknulfen - LAN","subnet":"192.168.1.0/24","switchModel":"Cisco WS-C2960S-48LPS-L","switchIp":"192.168.1.1","netColors":{"lan":"#71717a","ethernet":"#00bcef","wlan":"#3b82f6","guest":"#f59e0b"},"netTypes":[{"id":"lan","builtin":true,"name":"","color":"#71717a","dash":"0"},{"id":"ethernet","builtin":true,"name":"","color":"#00bcef","dash":"0"},{"id":"wlan","builtin":true,"name":"Wireless LAN","color":"#3b82f6","dash":"3 3"},{"id":"guest","builtin":true,"name":"","color":"#f59e0b","dash":"4 3"}]},"categories":[{"id":"router","nameKey":"cat_label_router","name":"Router","icon":"fa-network-wired","color":"#00bcef"},{"id":"gateways","nameKey":"cat_label_gateways","name":"Gateways","icon":"fa-tower-broadcast","color":"#f59e0b"},{"id":"wlan_ap","nameKey":"cat_label_wlanap","name":"WLAN Access Point","icon":"fa-wifi","color":"#38bdf8"},{"id":"switch","nameKey":"cat_label_switch","name":"Switch","icon":"fa-sitemap","color":"#00bcef"},{"id":"server","nameKey":"cat_label_server","name":"Server","icon":"fa-server","color":"#818cf8"},{"id":"endgeraet","nameKey":"cat_label_endgeraet","name":"Endgerät","icon":"fa-laptop","color":"#06b6d4"},{"id":"infrastructure","nameKey":"cat_label_infra","name":"Infrastruktur","icon":"fa-sitemap","color":"#38bdf8"},{"id":"sensors","nameKey":"cat_label_sensors","name":"Sensoren","icon":"fa-gauge-high","color":"#10b981"},{"id":"voice","nameKey":"cat_label_voice","name":"VoIP Phones","icon":"fa-phone-flip","color":"#34d399"},{"id":"cameras","nameKey":"cat_label_cameras","name":"Smart IoT & Cam","icon":"fa-video","color":"#c084fc"},{"id":"printers","nameKey":"cat_label_printers","name":"Drucker","icon":"fa-print","color":"#f472b6"},{"id":"guest","nameKey":"cat_label_guest","name":"Gastnetz (179.x)","icon":"fa-shield-halved","color":"#f59e0b"},{"id":"smarttv","nameKey":"cat_label_smarttv","name":"Smart TVs & Streaming","icon":"fa-tv","color":"#38bdf8"},{"id":"gaming","nameKey":"cat_label_gaming","name":"Gaming & Konsolen","icon":"fa-gamepad","color":"#ec4899"},{"id":"smarthome","nameKey":"cat_label_smarthome","name":"Smart Home Hubs","icon":"fa-house-signal","color":"#f59e0b"},{"id":"nas","nameKey":"cat_label_nas","name":"NAS & Backup-Speicher","icon":"fa-database","color":"#6366f1"},{"id":"firewall","nameKey":"cat_label_firewall","name":"Firewall & Security","icon":"fa-shield-halved","color":"#ef4444"},{"id":"solar","nameKey":"cat_label_solar","name":"Solar & Photovoltaik","icon":"fa-solar-panel","color":"#eab308"},{"id":"wallbox","nameKey":"cat_label_wallbox","name":"Wallbox & E-Mobilität","icon":"fa-charging-station","color":"#10b981"},{"id":"audio","nameKey":"cat_label_audio","name":"Audio & Multiroom","icon":"fa-music","color":"#a855f7"}],"frames":[],"devices":[],"crypto":{"salt":"UHVd3rO0hLT+K13LqQ9k/g==","verifier":"elv6bdgWUgbClib68VUjsnZcrydRVgIg2KE0Wi/9rLU="}}</script>
+  <script id="embedded-state" type="application/json">{"format":"kryptonetview-embedded-v1","savedAt":1793524558949,"config":{"title":"Your LAN","subnet":"192.168.1.0/24","switchModel":"Your Router or Switch","switchIp":"192.168.1.1","netColors":{"lan":"#71717a","ethernet":"#00bcef","wlan":"#3b82f6","guest":"#f59e0b"},"netTypes":[{"id":"lan","builtin":true,"name":"Standard LAN","color":"#71717a","dash":"0"},{"id":"ethernet","builtin":true,"name":"","color":"#00bcef","dash":"0"},{"id":"wlan","builtin":true,"name":"Wireless LAN","color":"#3b82f6","dash":"3 3"},{"id":"guest","builtin":true,"name":"","color":"#f59e0b","dash":"4 3"}]},"categories":[{"id":"router","nameKey":"cat_label_router","name":"Router","icon":"fa-network-wired","color":"#00bcef"},{"id":"gateways","nameKey":"cat_label_gateways","name":"Gateways","icon":"fa-tower-broadcast","color":"#f59e0b"},{"id":"wlan_ap","nameKey":"cat_label_wlanap","name":"WLAN Access Point","icon":"fa-wifi","color":"#38bdf8"},{"id":"switch","nameKey":"cat_label_switch","name":"Switch","icon":"fa-sitemap","color":"#00bcef"},{"id":"server","nameKey":"cat_label_server","name":"Server","icon":"fa-server","color":"#818cf8"},{"id":"endgeraet","nameKey":"cat_label_endgeraet","name":"Endgerät","icon":"fa-laptop","color":"#06b6d4"},{"id":"infrastructure","nameKey":"cat_label_infra","name":"Infrastruktur","icon":"fa-sitemap","color":"#38bdf8"},{"id":"sensors","nameKey":"cat_label_sensors","name":"Sensoren","icon":"fa-gauge-high","color":"#10b981"},{"id":"voice","nameKey":"cat_label_voice","name":"VoIP Phones","icon":"fa-phone-flip","color":"#34d399"},{"id":"cameras","nameKey":"cat_label_cameras","name":"Smart IoT & Cam","icon":"fa-video","color":"#c084fc"},{"id":"printers","nameKey":"cat_label_printers","name":"Drucker","icon":"fa-print","color":"#f472b6"},{"id":"guest","nameKey":"cat_label_guest","name":"Gastnetz (179.x)","icon":"fa-shield-halved","color":"#f59e0b"},{"id":"smarttv","nameKey":"cat_label_smarttv","name":"Smart TVs & Streaming","icon":"fa-tv","color":"#38bdf8"},{"id":"gaming","nameKey":"cat_label_gaming","name":"Gaming & Konsolen","icon":"fa-gamepad","color":"#ec4899"},{"id":"smarthome","nameKey":"cat_label_smarthome","name":"Smart Home Hubs","icon":"fa-house-signal","color":"#f59e0b"},{"id":"nas","nameKey":"cat_label_nas","name":"NAS & Backup-Speicher","icon":"fa-database","color":"#6366f1"},{"id":"firewall","nameKey":"cat_label_firewall","name":"Firewall & Security","icon":"fa-shield-halved","color":"#ef4444"},{"id":"solar","nameKey":"cat_label_solar","name":"Solar & Photovoltaik","icon":"fa-solar-panel","color":"#eab308"},{"id":"wallbox","nameKey":"cat_label_wallbox","name":"Wallbox & E-Mobilität","icon":"fa-charging-station","color":"#10b981"},{"id":"audio","nameKey":"cat_label_audio","name":"Audio & Multiroom","icon":"fa-music","color":"#a855f7"}],"frames":[],"devices":[],"crypto":{"salt":"UHVd3rO0hLT+K13LqQ9k/g==","verifier":"elv6bdgWUgbClib68VUjsnZcrydRVgIg2KE0Wi/9rLU="}}</script>
 </head>
 <body class="bg-darkbg text-zinc-300 min-h-screen flex flex-col overflow-x-hidden">
 
@@ -192,13 +215,18 @@
       <!-- Language Toggle Button -->
       <button id="btn-lang-toggle" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold px-2 py-1 rounded-lg border border-zinc-700 transition flex items-center gap-1 shadow-md cursor-pointer" title="Sprache wechseln / Switch Language">
         <i class="fa-solid fa-globe text-ciscocyan"></i>
-        <span id="lang-btn-text" class="font-bold">DE</span>
+        <span id="lang-btn-text" class="font-bold">EN</span>
       </button>
 
       <!-- Hell/Dunkel Umschalter -->
       <button id="btn-theme-toggle" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold px-2 py-1 rounded-lg border border-zinc-700 transition flex items-center gap-1 shadow-md cursor-pointer" title="Ansicht wechseln">
         <i id="theme-icon" class="fa-solid fa-sun text-amber-400"></i>
         <span id="theme-btn-text" class="font-bold">Hell</span>
+      </button>
+
+      <!-- Drucken: Ansicht wählbar -->
+      <button id="btn-print" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold px-2.5 py-1 rounded-lg border border-zinc-700 transition flex items-center gap-1.5 shadow-md cursor-pointer" title="Drucken">
+        <i class="fa-solid fa-print text-ciscocyan"></i> <span data-i18n="btn_print">Drucken</span>
       </button>
 
       <!-- Datei-Verbindung: Aenderungen direkt in diese HTML-Datei speichern -->
@@ -358,11 +386,83 @@
           <a href="https://github.com/ulfenknulfen/kryptonetview" target="_blank" rel="noopener noreferrer" class="text-[11px] font-mono text-zinc-400 hover:text-ciscocyan transition flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="GitHub Repository">
             <i class="fa-brands fa-github text-sm"></i> \github\ulfenknulfen\kryptonetview
           </a>
-          <span id="app-version" class="text-[11px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="Version">v1.0.1</span>
+          <span id="app-version" class="text-[11px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="Version">v1.0.2</span>
         </div>
       </div>
     </main>
 
+  </div>
+
+  <!-- DRUCKBEREICH (nur beim Drucken sichtbar) -->
+  <div id="print-root"></div>
+
+  <!-- PRINT VIEW MODAL -->
+  <div id="print-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div class="w-full max-w-md bg-panelbg rounded-2xl border border-zinc-700 shadow-2xl p-6 relative max-h-[92vh] overflow-y-auto">
+      <button id="print-modal-close" class="absolute top-4 right-4 text-zinc-400 hover:text-white text-xl">×</button>
+      <div class="text-center mb-4">
+        <div class="w-10 h-10 bg-ciscocyan/10 text-ciscocyan rounded-xl flex items-center justify-center text-lg border border-ciscocyan/30 mx-auto mb-2">
+          <i class="fa-solid fa-print"></i>
+        </div>
+        <h3 class="text-base font-bold text-white" data-i18n="print_modal_title">Drucken</h3>
+        <p class="text-xs text-zinc-400 mt-0.5" data-i18n="print_modal_subtitle">Welche Ansicht soll gedruckt werden?</p>
+      </div>
+
+      <div class="space-y-2">
+        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+          <input type="radio" name="print-view" value="graph" checked class="mt-1 accent-cyan-500">
+          <span class="flex-1">
+            <span class="block text-xs font-bold text-white"><i class="fa-solid fa-diagram-project text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_graph">Topologie-Grafik</span></span>
+            <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_graph_d">Gesamte Grafik mit allen Geräten und Legende, passend auf eine Seite.</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+          <input type="radio" name="print-view" value="current" class="mt-1 accent-cyan-500">
+          <span class="flex-1">
+            <span class="block text-xs font-bold text-white"><i class="fa-solid fa-eye text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_current">Aktueller Bildschirmausschnitt</span></span>
+            <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_current_d">Grafik so, wie sie gerade angezeigt wird (Zoom, Verschiebung, Kategorie-Filter und Suche).</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+          <input type="radio" name="print-view" value="list" class="mt-1 accent-cyan-500">
+          <span class="flex-1">
+            <span class="block text-xs font-bold text-white"><i class="fa-solid fa-table-list text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_list">Geräteliste</span></span>
+            <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_list_d">Alle Geräte als Tabelle, nach IP-Adresse sortiert.</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+          <input type="radio" name="print-view" value="cat" class="mt-1 accent-cyan-500">
+          <span class="flex-1">
+            <span class="block text-xs font-bold text-white"><i class="fa-solid fa-layer-group text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_cat">Geräte nach Kategorie</span></span>
+            <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_cat_d">Geräte gruppiert nach Kategorie (Router, Switch, Drucker, ...).</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+          <input type="radio" name="print-view" value="both" class="mt-1 accent-cyan-500">
+          <span class="flex-1">
+            <span class="block text-xs font-bold text-white"><i class="fa-solid fa-copy text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_both">Grafik + Geräteliste</span></span>
+            <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_both_d">Topologie-Grafik auf Seite 1, danach die Geräteliste.</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="mt-3">
+        <label class="block text-xs font-semibold text-zinc-400 mb-1" for="print-orientation" data-i18n="print_orientation">Seitenausrichtung</label>
+        <select id="print-orientation" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-2.5 py-2 text-xs text-white focus:outline-none focus:border-ciscocyan">
+          <option value="landscape" data-i18n="print_landscape">Querformat</option>
+          <option value="portrait" data-i18n="print_portrait">Hochformat</option>
+        </select>
+      </div>
+
+      <p class="text-[11px] text-zinc-500 mt-3 leading-relaxed"><i class="fa-solid fa-shield-halved text-amber-400 mr-1"></i><span data-i18n="print_note">Zugangsdaten und WLAN-Passwörter werden nie mitgedruckt. Gedruckt wird immer im hellen Layout.</span></p>
+
+      <div class="pt-4 flex gap-2">
+        <button id="btn-cancel-print" class="w-1/2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 py-2.5 rounded-lg text-xs font-semibold transition" data-i18n="btn_cancel">Abbrechen</button>
+        <button id="btn-start-print" class="w-1/2 bg-ciscocyan hover:bg-cyan-400 text-zinc-950 font-bold py-2.5 rounded-lg text-xs transition shadow-md flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-print"></i> <span data-i18n="btn_print_now">Drucken</span>
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- JSON EXPORT WARNING MODAL -->
@@ -858,6 +958,38 @@
         btn_new_device: "Neues Gerät",
         btn_load: "Laden",
         btn_save_file: "Direkt speichern",
+        btn_print: "Drucken",
+        btn_print_now: "Jetzt drucken",
+        print_modal_title: "Drucken",
+        print_modal_subtitle: "Welche Ansicht soll gedruckt werden?",
+        print_opt_graph: "Topologie-Grafik",
+        print_opt_graph_d: "Gesamte Grafik mit allen Geräten und Legende, passend auf eine Seite.",
+        print_opt_current: "Aktueller Bildschirmausschnitt",
+        print_opt_current_d: "Grafik so, wie sie gerade angezeigt wird (Zoom, Verschiebung, Kategorie-Filter und Suche).",
+        print_opt_list: "Geräteliste",
+        print_opt_list_d: "Alle Geräte als Tabelle, nach IP-Adresse sortiert.",
+        print_opt_cat: "Geräte nach Kategorie",
+        print_opt_cat_d: "Geräte gruppiert nach Kategorie (Router, Switch, Drucker, ...).",
+        print_opt_both: "Grafik + Geräteliste",
+        print_opt_both_d: "Topologie-Grafik auf Seite 1, danach die Geräteliste.",
+        print_orientation: "Seitenausrichtung",
+        print_landscape: "Querformat",
+        print_portrait: "Hochformat",
+        print_note: "Zugangsdaten und WLAN-Passwörter werden nie mitgedruckt. Gedruckt wird immer im hellen Layout.",
+        print_devices_total: "Geräte gesamt",
+        print_view_graph: "Topologie-Grafik",
+        print_view_current: "Bildschirmausschnitt",
+        print_view_list: "Geräteliste",
+        print_view_cat: "Geräte nach Kategorie",
+        print_view_both: "Grafik + Geräteliste",
+        print_col_name: "Name",
+        print_col_ip: "IP-Adresse",
+        print_col_cat: "Kategorie",
+        print_col_host: "Hostname",
+        print_col_mac: "MAC",
+        print_col_vendor: "Hersteller",
+        print_col_parent: "Angebunden an",
+        print_col_poe: "PoE",
         banner_edit_active: "EDITIERMODUS AKTIV: Drag & Drop Knoten/Rahmen. Klicke auf '+ Rahmen aufziehen', um freie Zonen per Maus zu zeichnen.",
         banner_draw_active: "RAHMEN ZEICHNEN: Klicke und ziehe mit der Maus auf der Zeichenfläche, um einen neuen Rahmen aufzuspannen.",
         search_placeholder: "Gerät, IP oder Hostname suchen...",
@@ -1029,6 +1161,38 @@
         btn_new_device: "New Device",
         btn_load: "Load",
         btn_save_file: "Save Directly",
+        btn_print: "Print",
+        btn_print_now: "Print now",
+        print_modal_title: "Print",
+        print_modal_subtitle: "Which view do you want to print?",
+        print_opt_graph: "Topology graph",
+        print_opt_graph_d: "Complete graph with all devices and legend, fitted to one page.",
+        print_opt_current: "Current screen section",
+        print_opt_current_d: "Graph as currently displayed (zoom, pan, category filter and search).",
+        print_opt_list: "Device list",
+        print_opt_list_d: "All devices as a table, sorted by IP address.",
+        print_opt_cat: "Devices by category",
+        print_opt_cat_d: "Devices grouped by category (router, switch, printers, ...).",
+        print_opt_both: "Graph + device list",
+        print_opt_both_d: "Topology graph on page 1, followed by the device list.",
+        print_orientation: "Page orientation",
+        print_landscape: "Landscape",
+        print_portrait: "Portrait",
+        print_note: "Credentials and WLAN passwords are never printed. Printing always uses the light layout.",
+        print_devices_total: "Total devices",
+        print_view_graph: "Topology graph",
+        print_view_current: "Screen section",
+        print_view_list: "Device list",
+        print_view_cat: "Devices by category",
+        print_view_both: "Graph + device list",
+        print_col_name: "Name",
+        print_col_ip: "IP address",
+        print_col_cat: "Category",
+        print_col_host: "Hostname",
+        print_col_mac: "MAC",
+        print_col_vendor: "Vendor",
+        print_col_parent: "Connected to",
+        print_col_poe: "PoE",
         banner_edit_active: "EDIT MODE ACTIVE: Drag nodes/frames to move them. On touch devices, drag with one finger; pan the canvas outside objects and pinch with two fingers to zoom. Use '+ Draw Frame' to draw free zones.",
         banner_draw_active: "DRAW FRAME: Click and drag on the canvas to span a new visual frame.",
         search_placeholder: "Search device, IP or hostname...",
@@ -1204,7 +1368,7 @@
         const key = el.getAttribute("data-i18n-placeholder");
         el.placeholder = t(key);
       });
-      document.getElementById("lang-btn-text").innerText = currentLang.toUpperCase();
+      document.getElementById("lang-btn-text").innerText = (currentLang === "de" ? "en" : "de").toUpperCase();
       updateThemeButton();
       document.documentElement.setAttribute("lang", currentLang);
 
@@ -3354,6 +3518,7 @@
       }
 
       saveToLocalStorage();
+      renderCategoryFiltersUI();
       renderDeviceList();
       renderTopologySVG();
       closeModal();
@@ -3386,6 +3551,7 @@
       };
       devices.push(newDevice);
       saveToLocalStorage();
+      renderCategoryFiltersUI();
       renderDeviceList();
       renderTopologySVG();
       openModal(newDevice);
@@ -3399,6 +3565,7 @@
         if (d.parentId === activeDevice.id) d.parentId = "switch";
       });
       saveToLocalStorage();
+      renderCategoryFiltersUI();
       renderDeviceList();
       renderTopologySVG();
       closeModal();
@@ -4332,7 +4499,146 @@
       showNotification(t(next === "light" ? "theme_switched_light" : "theme_switched_dark"));
     }
 
+    // ===================== Drucken (Ansicht wählbar) =====================
+    function openPrintModal() {
+      const modal = document.getElementById("print-modal");
+      modal.classList.remove("pointer-events-none", "opacity-0");
+      modal.classList.add("opacity-100");
+    }
+
+    function closePrintModal() {
+      const modal = document.getElementById("print-modal");
+      modal.classList.remove("opacity-100");
+      modal.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    function ipSortKey(ip) {
+      return String(ip || "").split(".").reduce((a, p) => a * 256 + (parseInt(p, 10) || 0), 0);
+    }
+    function ipCompare(a, b) {
+      const d = ipSortKey(a.ip) - ipSortKey(b.ip);
+      return d || String(a.name).localeCompare(String(b.name));
+    }
+
+    function printLegendHtml() {
+      const used = new Set();
+      devices.forEach(d => {
+        if (!d.parentId || !devices.some(p => p.id === d.parentId)) return;
+        used.add(linkKindFor(d));
+      });
+      const items = netTypeList().filter(nt => used.has(nt.id)).map(nt =>
+        `<span style="display:inline-flex;align-items:center;gap:5px"><svg width="26" height="6" viewBox="0 0 26 6"><line x1="0" y1="3" x2="26" y2="3" stroke="${nt.color}" stroke-width="2.5" stroke-dasharray="${nt.dash || "0"}"></line></svg><span>${escapeHtml(netTypeName(nt))}</span></span>`);
+      return items.length ? `<div class="pr-legend"><strong>${escapeHtml(t("legend_title"))}</strong>${items.join("")}</div>` : "";
+    }
+
+    // Rendert die Grafik im hellen Layout und liefert sie als SVG-Markup (Bildschirm bleibt unverändert).
+    function capturePrintSvg(useCurrent, orient) {
+      const wasLight = isLight();
+      const saved = { cat: currentFilterCat, search: currentSearchTerm, edit: isEditMode };
+      try {
+        if (!wasLight) applyTheme("light", false);
+        isEditMode = false;
+        if (!useCurrent) { currentFilterCat = "all"; currentSearchTerm = ""; }
+        renderTopologySVG();
+
+        const clone = document.getElementById("topology-svg").cloneNode(true);
+        ["id", "class", "style", "width", "height"].forEach(a => clone.removeAttribute(a));
+        const pv = clone.querySelector("#draw-preview-rect");
+        if (pv) pv.remove();
+
+        let vb;
+        if (useCurrent) {
+          vb = [view.x, view.y, view.w, view.h];
+        } else {
+          let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+          const ext = (x1, y1, x2, y2) => { minX = Math.min(minX, x1); minY = Math.min(minY, y1); maxX = Math.max(maxX, x2); maxY = Math.max(maxY, y2); };
+          devices.forEach(d => { if (d.pos) ext(d.pos.x - 75, d.pos.y - 24, d.pos.x + 80, d.pos.y + 40); });
+          frames.forEach(f => ext(f.x, f.y, f.x + f.width, f.y + f.height));
+          vb = isFinite(minX) ? [minX - 16, minY - 16, maxX - minX + 32, maxY - minY + 32]
+                              : [DEFAULT_VIEW.x, DEFAULT_VIEW.y, DEFAULT_VIEW.w, DEFAULT_VIEW.h];
+        }
+        clone.setAttribute("viewBox", vb.map(n => Math.round(n)).join(" "));
+        clone.setAttribute("preserveAspectRatio", "xMidYMid meet");
+        const maxH = orient === "portrait" ? "225mm" : "135mm";
+        clone.setAttribute("style", `width:100%;height:auto;max-height:${maxH};display:block;`);
+        // Filter-ID umbenennen, damit sie nicht mit dem Original-SVG kollidiert
+        return clone.outerHTML.replace(/node-shadow/g, "pr-node-shadow");
+      } finally {
+        currentFilterCat = saved.cat;
+        currentSearchTerm = saved.search;
+        isEditMode = saved.edit;
+        if (!wasLight) applyTheme("dark", false);
+        renderTopologySVG();
+      }
+    }
+
+    function printTableHtml(list) {
+      const e = escapeHtml;
+      const parentName = (id) => { const p = devices.find(x => x.id === id); return p ? p.name : "—"; };
+      const cols = ["name", "ip", "cat", "host", "mac", "vendor", "parent", "poe"];
+      const head = cols.map(c => `<th>${e(t("print_col_" + c))}</th>`).join("");
+      const rows = list.map(d => `<tr>
+        <td><strong>${e(d.name)}</strong></td>
+        <td class="pr-mono">${e(d.ip)}</td>
+        <td>${e(getCategoryDisplayName(d.cat))}</td>
+        <td>${e(d.hostname || "")}</td>
+        <td class="pr-mono">${e(d.mac || "")}</td>
+        <td>${e(d.vendor || "")}</td>
+        <td>${e(d.parentId ? parentName(d.parentId) : "—")}</td>
+        <td>${d.poe ? "PoE" : ""}</td></tr>`).join("");
+      return `<table class="pr-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>`;
+    }
+
+    function buildPrintDocument(mode, orient) {
+      const e = escapeHtml;
+      const stamp = new Date().toLocaleString(currentLang === "de" ? "de-DE" : "en-GB");
+      const head = (label) => `<div class="pr-head"><div><h1>${e(globalConfig.title)}</h1><div class="pr-sub">${e(globalConfig.subnet)} · ${e(globalConfig.switchModel)} (${e(globalConfig.switchIp)})</div></div><div class="pr-sub" style="text-align:right"><strong>${e(label)}</strong><br>${e(stamp)}</div></div>`;
+      const graphPart = (useCurrent, label) => head(label) + `<div class="pr-svg-wrap">${capturePrintSvg(useCurrent, orient)}</div>` + printLegendHtml();
+      const listPart = (label) => head(label) + `<div class="pr-sub" style="margin-bottom:6px">${e(t("print_devices_total"))}: ${devices.length}</div>` + printTableHtml([...devices].sort(ipCompare));
+      const catPart = (label) => head(label) + categories.map(c => {
+        const l = devices.filter(d => d.cat === c.id).sort(ipCompare);
+        if (!l.length) return "";
+        return `<div class="pr-cat" style="border-left:4px solid ${c.color};padding-left:6px">${e(getCategoryDisplayName(c.id))} (${l.length})</div>` + printTableHtml(l);
+      }).join("");
+
+      if (mode === "current") return graphPart(true, t("print_view_current"));
+      if (mode === "list") return listPart(t("print_view_list"));
+      if (mode === "cat") return catPart(t("print_view_cat"));
+      if (mode === "both") return graphPart(false, t("print_view_both")) + `<div class="pr-break">${listPart(t("print_view_list"))}</div>`;
+      return graphPart(false, t("print_view_graph"));
+    }
+
+    function preparePrint(mode, orient) {
+      document.getElementById("print-root").innerHTML = buildPrintDocument(mode, orient);
+      document.getElementById("print-page-style").textContent = `@page { size: A4 ${orient}; margin: 10mm; }`;
+    }
+
+    function startPrint() {
+      const sel = document.querySelector('input[name="print-view"]:checked');
+      const mode = sel ? sel.value : "graph";
+      const orient = document.getElementById("print-orientation").value === "portrait" ? "portrait" : "landscape";
+      closePrintModal();
+      preparePrint(mode, orient);
+      setTimeout(() => window.print(), 150);
+    }
+
+    // Strg+P direkt im Browser: Grafik als Standard drucken; nach dem Druck aufräumen
+    window.addEventListener("beforeprint", () => {
+      const root = document.getElementById("print-root");
+      if (root && !root.innerHTML.trim()) preparePrint("graph", "landscape");
+    });
+    window.addEventListener("afterprint", () => {
+      const root = document.getElementById("print-root");
+      if (root) root.innerHTML = "";
+      const st = document.getElementById("print-page-style");
+      if (st) st.textContent = "";
+    });
+
     function setupEventListeners() {
+      document.getElementById("btn-print").onclick = openPrintModal;
+      document.getElementById("print-modal-close").onclick = closePrintModal;
+      document.getElementById("btn-cancel-print").onclick = closePrintModal;
+      document.getElementById("btn-start-print").onclick = startPrint;
       document.getElementById("btn-lang-toggle").onclick = toggleLanguage;
       document.getElementById("btn-theme-toggle").onclick = toggleTheme;
 
@@ -4471,6 +4777,7 @@
       bindBackdropClose("categories-modal", closeCategoriesModal);
       bindBackdropClose("frames-modal", closeFramesModal);
       bindBackdropClose("export-warning-modal", closeExportWarningModal);
+      bindBackdropClose("print-modal", closePrintModal);
 
       const searchInput = document.getElementById("search-input");
       searchInput.addEventListener("input", (e) => {
