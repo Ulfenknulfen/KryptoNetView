@@ -159,9 +159,32 @@
     html.light ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     html.light #node-shadow feDropShadow { flood-opacity: 0.18; }
     html.light .edit-active-banner { background: linear-gradient(90deg, rgba(0,188,239,0.12), rgba(245,158,11,0.15)); }
+
+    /* ===== Druckansicht ===== */
+    #print-root { display: none; }
+    @media print {
+      html, body { background: #fff !important; color: #0f172a !important; height: auto !important; min-height: 0 !important; overflow: visible !important; display: block !important; }
+      body > *:not(#print-root) { display: none !important; }
+      #print-root { display: block !important; color: #0f172a; font-family: 'Inter', sans-serif; font-size: 10pt; }
+      #print-root, #print-root * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .pr-head { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #0369a1; padding-bottom: 6px; margin-bottom: 10px; }
+      .pr-head h1 { font-size: 15pt; font-weight: 700; margin: 0; color: #0f172a; }
+      .pr-sub { font-size: 9pt; color: #475569; }
+      .pr-break { page-break-before: always; break-before: page; }
+      .pr-svg-wrap { border: 1px solid #cbd5e1; border-radius: 6px; padding: 4px; background: #fff; }
+      .pr-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; font-size: 9pt; margin-top: 8px; color: #1e293b; }
+      .pr-cat { font-size: 11pt; font-weight: 700; margin: 12px 0 4px; color: #0f172a; page-break-after: avoid; break-after: avoid; }
+      .pr-table { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+      .pr-table th { background: #e2e8f0; text-align: left; padding: 3px 6px; border: 1px solid #94a3b8; color: #0f172a; }
+      .pr-table td { padding: 3px 6px; border: 1px solid #cbd5e1; color: #0f172a; vertical-align: top; }
+      .pr-table thead { display: table-header-group; }
+      .pr-table tr { page-break-inside: avoid; break-inside: avoid; }
+      .pr-mono { font-family: 'JetBrains Mono', monospace; }
+    }
   </style>
+  <style id="print-page-style"></style>
   <!-- KRYPTONETVIEW-EMBEDDED-STATE: wird automatisch beim Speichern ueberschrieben -->
-  <script id="embedded-state" type="application/json">{"format":"kryptonetview-embedded-v1","savedAt":1793423081837,"config":{"title":"Ulfenknulfen - GBit LAN","subnet":"192.168.178.0/24","switchModel":"Cisco WS-C2960S-48LPS-L","switchIp":"192.168.178.8","netColors":{"lan":"#71717a","ethernet":"#00bcef","wlan":"#3b82f6","guest":"#f59e0b"},"netTypes":[{"id":"lan","builtin":true,"name":"","color":"#71717a","dash":"0"},{"id":"ethernet","builtin":true,"name":"","color":"#00bcef","dash":"0"},{"id":"wlan","builtin":true,"name":"","color":"#3b82f6","dash":"3 3"},{"id":"guest","builtin":true,"name":"","color":"#f59e0b","dash":"4 3"}]},"categories":[{"id":"router","nameKey":"cat_label_router","name":"Router","icon":"fa-network-wired","color":"#00bcef"},{"id":"gateways","nameKey":"cat_label_gateways","name":"Gateways","icon":"fa-tower-broadcast","color":"#f59e0b"},{"id":"wlan_ap","nameKey":"cat_label_wlanap","name":"WLAN Access Point","icon":"fa-wifi","color":"#38bdf8"},{"id":"switch","nameKey":"cat_label_switch","name":"Switch","icon":"fa-sitemap","color":"#00bcef"},{"id":"server","nameKey":"cat_label_server","name":"Server","icon":"fa-server","color":"#818cf8"},{"id":"endgeraet","nameKey":"cat_label_endgeraet","name":"Endgerät","icon":"fa-laptop","color":"#06b6d4"},{"id":"infrastructure","nameKey":"cat_label_infra","name":"Infrastruktur","icon":"fa-sitemap","color":"#38bdf8"},{"id":"sensors","nameKey":"cat_label_sensors","name":"Sensoren","icon":"fa-gauge-high","color":"#10b981"},{"id":"voice","nameKey":"cat_label_voice","name":"VoIP Phones","icon":"fa-phone-flip","color":"#34d399"},{"id":"cameras","nameKey":"cat_label_cameras","name":"Smart IoT & Cam","icon":"fa-video","color":"#c084fc"},{"id":"printers","nameKey":"cat_label_printers","name":"Drucker","icon":"fa-print","color":"#f472b6"},{"id":"guest","nameKey":"cat_label_guest","name":"Gastnetz (179.x)","icon":"fa-shield-halved","color":"#f59e0b"},{"id":"smarttv","nameKey":"cat_label_smarttv","name":"Smart TVs & Streaming","icon":"fa-tv","color":"#38bdf8"},{"id":"gaming","nameKey":"cat_label_gaming","name":"Gaming & Konsolen","icon":"fa-gamepad","color":"#ec4899"},{"id":"smarthome","nameKey":"cat_label_smarthome","name":"Smart Home Hubs","icon":"fa-house-signal","color":"#f59e0b"},{"id":"nas","nameKey":"cat_label_nas","name":"NAS & Backup-Speicher","icon":"fa-database","color":"#6366f1"},{"id":"firewall","nameKey":"cat_label_firewall","name":"Firewall & Security","icon":"fa-shield-halved","color":"#ef4444"},{"id":"solar","nameKey":"cat_label_solar","name":"Solar & Photovoltaik","icon":"fa-solar-panel","color":"#eab308"},{"id":"wallbox","nameKey":"cat_label_wallbox","name":"Wallbox & E-Mobilität","icon":"fa-charging-station","color":"#10b981"},{"id":"audio","nameKey":"cat_label_audio","name":"Audio & Multiroom","icon":"fa-music","color":"#a855f7"}],"frames":[{"id":"frame_apeg","title":"📡 AP-EG WLAN Hub (Xiaomi / Android / Sensoren)","x":1077,"y":-9,"width":352,"height":799,"strokeColor":"#00bcef","strokeDash":"5 3","headerBg":"#083344","textColor":"#38bdf8"},{"id":"frame_guest","title":"🛡️ GASTNETZ (VPN / VLAN 192.168.179.x)","x":723,"y":344,"width":343,"height":447,"strokeColor":"#f59e0b","strokeDash":"6 4","headerBg":"#78350f","textColor":"#fbbf24"}],"devices":[{"id":"switch","parentId":null,"name":"Cisco WS-C2960S-48LPS-L","ip":"192.168.178.8","cat":"switch","icon":"fa-sitemap","color":"#00bcef","desc":"Zentraler Gigabit 48-Port PoE+ Managed Switch\n","poe":true,"loginUser":"{\"iv\":\"ybnQ90oFHdVX4QVq\",\"ciphertext\":\"s3CN1+Mnkw5msneYAkmpe7n1kRb6\"}","loginPass":"{\"iv\":\"HatS/oH705N99EnS\",\"ciphertext\":\"5UIz7KgpZl4S1dMYKNTbdf8s9Kwv\"}","hostname":"","mac":"E8:ED:F3:73:C9:C0","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":413,"y":371},"netType":"ethernet","wlanNets":"{\"iv\":\"ZoI9240+NkLwbNvz\",\"ciphertext\":\"TyI7K5CtK+/xWvKaIo1nSu0E\"}"},{"id":"gateway_main","parentId":"switch","name":"Fritz!Box 7590","ip":"192.168.178.1","cat":"router","icon":"fa-network-wired","color":"#f59e0b","desc":"Haupt-Internet Gateway & VDSL-Router an Cisco Switch.","poe":false,"loginUser":"{\"iv\":\"3rwJJ0t/IvDjahO1\",\"ciphertext\":\"kg4vdN6fQuy51IMIhSHQ+NQdzdiZ\"}","loginPass":"{\"iv\":\"1EQWFhRvJroAEkzr\",\"ciphertext\":\"/jPb8Qrw9YymSuZCugURiWThfdBnXDewSCljytIsAyA7\"}","hostname":"fritz.box","mac":"E0:28:6D:69:E3:23","vendor":"AVM Audiovisuelles Marketing und Computersysteme GmbH","scanType":"Router/DNS","ports":"53, 80, 443","pos":{"x":445,"y":49},"linkColor":"","wlanNets":"{\"iv\":\"Mu78GHzs3s8q4qD7\",\"ciphertext\":\"OL4A4tIrCsKoeLNa+qU+SjGE\"}"},{"id":"router_core","parentId":"gateway_main","name":"Core Router","ip":"192.168.178.2","cat":"router","icon":"fa-network-wired","color":"#00bcef","desc":"Zentraler Core Router zur internen Subnetz-Verteilung.","poe":false,"loginUser":"{\"iv\":\"QiyxxgqZSRFWbOOw\",\"ciphertext\":\"ouzkjsQi5pvHdXz1EMiN0mJBSeql\"}","loginPass":"{\"iv\":\"mPWTdbvNuyYA/9MV\",\"ciphertext\":\"3nA3Wg5cvEUqKLS4P43zEyZrq+g3+5+GEo7lYkfqcTs=\"}","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":283,"y":49},"linkColor":"","wlanNets":"{\"iv\":\"195TkomOhgzWCIc8\",\"ciphertext\":\"mUy2hjPkSfwMmE0kgGKJd9sQYE63e1lNRjIoK+80aTxkr+zOQdDSOIC+nt972DCS4gsnxENh7t/Ii9qoOfzDHg==\"}"},{"id":"server_main","parentId":"switch","name":"Hauptserver","ip":"192.168.178.10","cat":"server","icon":"fa-server","color":"#818cf8","desc":"Zentraler Server & Speichersystem","poe":false,"loginUser":"{\"iv\":\"iDE0OqOvzfeSR5DB\",\"ciphertext\":\"++EOS9Dln6UclvAOIiXYE1SigtI=\"}","loginPass":"{\"iv\":\"njmQ3RKirROAOpSx\",\"ciphertext\":\"LJsSPfnprv1peyS5uLn7voFmR7u9dpsoQ26+71k=\"}","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":102,"y":199},"linkColor":"","wlanNets":"{\"iv\":\"xWLpyHjcIWPZiNfy\",\"ciphertext\":\"hLSVMNfqudoCobyF4WUc4eal\"}"},{"id":"server_ipmi","parentId":"switch","name":"IPMI Remote Mgmt","ip":"192.168.178.15","cat":"server","icon":"fa-server","color":"#818cf8","desc":"Out-of-Band Remote Management Controller.","poe":false,"loginUser":"{\"iv\":\"wE4pU2qkJApcnyNj\",\"ciphertext\":\"PR5OqmCIbYpRVBeGJpvkQhQ/3Z/V\"}","loginPass":"{\"iv\":\"Yz8M9pJSUpf3l7kj\",\"ciphertext\":\"vQfiJUXmy6boRQDDay3cBgTcF+0tXjsGn+FOw1+J5pM=\"}","hostname":"IPMI-Server.fritz.box","mac":"00:30:48:93:8F:1D","vendor":"Super Micro Computer, Inc.","scanType":"Linux/SSH","ports":"22, 80","pos":{"x":315,"y":143},"linkColor":"","wlanNets":"{\"iv\":\"TA/uN5qb3KcJILei\",\"ciphertext\":\"Yx7mpk4f4yk/0LwSZlF1/hS7\"}"},{"id":"ap_og","parentId":"switch","name":"Cisco AP OG","ip":"192.168.178.90","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Obergeschoss (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"EJmFy8Bzc3cp3uDg\",\"ciphertext\":\"ZEbA9quV5u37IR9SP5CUy4TN6lza\"}","loginPass":"{\"iv\":\"jMedR0u1zXnI0W7q\",\"ciphertext\":\"y2cS5NllnirQWFX16+5mA/DMG43L/HADO90=\"}","hostname":"Cisco-AP-OG.fritz.box","mac":"84:B2:61:D4:F0:58","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80","pos":{"x":100,"y":366},"linkColor":"","wlanNets":"{\"iv\":\"0pzHDOsMQzAHMDeP\",\"ciphertext\":\"Jya7JxM/Tc3HxWvUUtOmxaYDiO8g2Qu+Gf5HYEBDXBDrvx8WuFYW8/yy1CyTKC20gIyuJ0w=\"}"},{"id":"ap_eg","parentId":"switch","name":"Cisco AP EG","ip":"192.168.178.92","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Erdgeschoss (Zentraler WLAN Hub).","poe":true,"loginUser":"{\"iv\":\"Nptu7s+ma07ErBUh\",\"ciphertext\":\"xeWqdBCbwsQeUJ82QuEy9Wcy0ZSu\"}","loginPass":"{\"iv\":\"w2m0BJuZsT0hdW+r\",\"ciphertext\":\"vPmIeRIw9v7FSE3VmsrdIxmN+mLdbvl7YJA=\"}","hostname":"Cisco-AP-EG.fritz.box","mac":"84:B2:61:CB:01:E4","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80","pos":{"x":1239,"y":81},"linkColor":"","wlanNets":"{\"iv\":\"PTHBTSEndx9gPKwo\",\"ciphertext\":\"TiykocYvee563oVzdoKpRnqXctEwRTp57Zbpp3A/WEv92dCbNas05IMcdejQnFRrhzGzMZw=\"}"},{"id":"ap_gh","parentId":"switch","name":"Cisco AP GH","ip":"192.168.178.94","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Gartenhaus (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"2i8AFOzYsc1NPNpY\",\"ciphertext\":\"0fDiLOqFGjqA61s3QRUUbgRb8Z2x\"}","loginPass":"{\"iv\":\"thcIlczYPngI1Dgp\",\"ciphertext\":\"WL2XoHqrcf4kZ2yOMSCUzeDFCU46gJt/bLg=\"}","hostname":"Cisco-AP-GH.fritz.box","mac":"84:B2:61:C0:BF:78","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80","pos":{"x":99,"y":483},"linkColor":"","wlanNets":"{\"iv\":\"yHuOtRIWJp9XE+Iu\",\"ciphertext\":\"jPLvVHtSYoXtABqlH0idehecrup1/YRXnFRjsLp/MYTya+0qhg+zEJmnuPKwLvC5zEYs+XJhwGw6\"}"},{"id":"gas_sensor","parentId":"ap_eg","name":"GasSensor","ip":"192.168.178.100","cat":"sensors","icon":"fa-gauge-high","color":"#84cc16","desc":"Sicherheits-GasSensor. Drahtlos angebunden an Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1170,"y":170},"linkColor":"","wlanNets":"{\"iv\":\"IDNE9HPdibDovQOo\",\"ciphertext\":\"mkEKR51aG7ceGKpbEO73V4SY\"}"},{"id":"zisterne_sensor","parentId":"ap_eg","name":"Zisterne Sensor","ip":"192.168.178.101","cat":"sensors","icon":"fa-gauge-high","color":"#84cc16","desc":"Wasserstands-Zisterne Sensor. Drahtlos angebunden an Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1333,"y":168},"linkColor":"#84cc16","wlanNets":"{\"iv\":\"m20YLN0I7Kai42Cw\",\"ciphertext\":\"gb1JiBf2UBk1u+2R7ZG1TEjM\"}"},{"id":"poco_x4","parentId":"ap_eg","name":"POCO X4 Pro 5G","ip":"192.168.178.154","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"POCO X4 Pro Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1169,"y":280},"linkColor":"","wlanNets":"{\"iv\":\"UK8+uWXRfc3JDdFp\",\"ciphertext\":\"3ZV1odJmIfu4zTeYoAH/BjK+\"}"},{"id":"patrick_redmi9","parentId":"ap_eg","name":"Redmi 9","ip":"192.168.178.177","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"Patrick Redmi 9 Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"patrickredmi-9.fritz.box","mac":"1E:DA:AA:DF:49:5E","vendor":"(Randomized)","scanType":"Mobile","ports":"-","pos":{"x":1170,"y":388},"linkColor":"","wlanNets":"{\"iv\":\"5gRgn+A+CGs4p5XU\",\"ciphertext\":\"Ls7+fw1DLXd/L4PtgnVc3qPQ\"}"},{"id":"andrea_pocof1","parentId":"ap_eg","name":"POCO F1","ip":"192.168.178.241","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"Andrea Poco F1 Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"Andrea-PocoF1.fritz.box","mac":"A4:50:46:23:80:9D","vendor":"Xiaomi Communications Co Ltd","scanType":"Android","ports":"-","pos":{"x":1166,"y":499},"linkColor":"","wlanNets":"{\"iv\":\"vcCedEia9G5xqEpl\",\"ciphertext\":\"gbM3pC1dwO48e9ks1f3xDPWd\"}"},{"id":"andrea_nb_wlan","parentId":"ap_eg","name":"Notebook (WLAN)","ip":"192.168.178.190","cat":"endgeraet","icon":"fa-laptop","color":"#06b6d4","desc":"Andrea Notebook WLAN-Verbindung über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1174,"y":615},"linkColor":"","wlanNets":"{\"iv\":\"HcA/IHI3Szq7bCho\",\"ciphertext\":\"Z8vy89pNaUxK3EflOK2cS4M0\"}"},{"id":"lee_pad","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.233","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Lee Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1333,"y":281},"linkColor":"","wlanNets":"{\"iv\":\"6hqSBbcrdLJcOg/F\",\"ciphertext\":\"kUjXP/lFETeoTXleAKjD8JSg\"}"},{"id":"andrea_pad","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.234","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Andrea Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"andrearedmi-pad-2-pro.fritz.box","mac":"76:14:86:0D:B1:00","vendor":"(Randomized)","scanType":"Mobile","ports":"-","pos":{"x":1333,"y":390},"linkColor":"","wlanNets":"{\"iv\":\"r7+79z2ZsqpicYlR\",\"ciphertext\":\"SwkYzO7ClZbLz3AHUWqEq29j\"}"},{"id":"redmi_pad_se","parentId":"ap_eg","name":"Redmi Pad SE","ip":"192.168.178.235","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Redmi Pad SE Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"Redmi-Pad-SE.fritz.box","mac":"D2:13:84:B9:7C:41","vendor":"(Randomized)","scanType":"Mobile","ports":"-","pos":{"x":1328,"y":501},"linkColor":"","wlanNets":"{\"iv\":\"XG3HchIxSQibs1g/\",\"ciphertext\":\"TB87oRhxIRBIKJEt54OyoaVF\"}"},{"id":"redmi_pad_2pro","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.249","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1327,"y":618},"linkColor":"","wlanNets":"{\"iv\":\"WAXvrTaNxtjrwWDy\",\"ciphertext\":\"r7SqQuChznDoQHNRQuK9tYUe\"}"},{"id":"phone_gh","parentId":"switch","name":"Cisco Phone GH","ip":"192.168.178.80","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Gartenhaus (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-GH.fritz.box","mac":"64:A0:E7:15:AC:7E","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":100,"y":620},"linkColor":"","wlanNets":"{\"iv\":\"gqLQY5YlDm4sioen\",\"ciphertext\":\"NrfSOqlrUhug2ljU6XkD6Hal\"}"},{"id":"phone_sz","parentId":"switch","name":"Cisco Phone SZ","ip":"192.168.178.81","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Schlafzimmer (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-SZ.fritz.box","mac":"C8:F9:F9:D6:24:D5","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":230,"y":620},"linkColor":"","wlanNets":"{\"iv\":\"zHEP5MMcqeGEm/gb\",\"ciphertext\":\"EOfa/aPsjemKx7PkHmRfQHVX\"}"},{"id":"phone_wz2","parentId":"switch","name":"Cisco Phone WZ2","ip":"192.168.178.82","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Wohnzimmer 2 (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-WZ2.fritz.box","mac":"C8:F9:F9:D6:25:72","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":360,"y":620},"linkColor":"","wlanNets":"{\"iv\":\"UJ95K69yUw1+xdy+\",\"ciphertext\":\"CsWuLRrke9mOA/yVKcJKE4Vk\"}"},{"id":"phone_wz1","parentId":"switch","name":"Cisco Phone WZ1","ip":"192.168.178.83","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Wohnzimmer 1 (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-WZ1.fritz.box","mac":"DC:A5:F4:86:A1:6D","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80, 443","pos":{"x":490,"y":620},"linkColor":"","netType":"ethernet","wlanNets":"{\"iv\":\"OHoZ5OIZdLCcTnmp\",\"ciphertext\":\"3imHPSVZHcCKfhxCohJ2CGWN\"}"},{"id":"print_hp","parentId":"switch","name":"Drucker hp p3015","ip":"192.168.178.30","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"HP LaserJet P3015 Netzdrucker.","poe":false,"loginUser":"","loginPass":"","hostname":"hpp3015drucker.fritz.box","mac":"9C:B6:54:15:C0:4C","vendor":"Hewlett Packard","scanType":"Printer","ports":"21, 23, 80, 443, 515, 631, 9100","pos":{"x":100,"y":760},"linkColor":"","wlanNets":"{\"iv\":\"vKXb3CiuMAnZEXSH\",\"ciphertext\":\"I0wMjiutpH/0LMDkrdQ/TUF6\"}"},{"id":"print_ricoh","parentId":"switch","name":"Drucker-Ricoh","ip":"192.168.178.31","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"Ricoh Multifunktionsdrucker.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":230,"y":760},"linkColor":"","wlanNets":"{\"iv\":\"6Sguh6iogTGR/vRK\",\"ciphertext\":\"vvvlUWn8NZxLwlXtaBZ1Kc3K\"}"},{"id":"print_brother","parentId":"switch","name":"Drucker-BROTHER","ip":"192.168.178.32","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"Brother Netzdrucker.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":360,"y":760},"linkColor":"","wlanNets":"{\"iv\":\"QlJkd4Utw+6CXCvm\",\"ciphertext\":\"goUtOkD7NvDJmnhIBZt/8BBG\"}"},{"id":"cam_door","parentId":"switch","name":"Haustuer","ip":"192.168.178.20","cat":"cameras","icon":"fa-gauge-high","color":"#c084fc","desc":"IP-Kamera Haustür (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"oyOZ2SzSBSvQ6DGI\",\"ciphertext\":\"pTIPTLLygpLpSA/iacUUj7N5XOpF\"}","loginPass":"{\"iv\":\"E0YwzJcNzY/BAqEJ\",\"ciphertext\":\"sGYLognGxeXCXeZ3u9tMAfW0Py9mrqeBthg=\"}","hostname":"Cam-Haustuer.fritz.box","mac":"00:03:C5:0F:42:E2","vendor":"Mobotix AG","scanType":"Web Device","ports":"80, 443","pos":{"x":772,"y":196},"linkColor":"","wlanNets":"{\"iv\":\"gfyEj4f0+OJIJgOP\",\"ciphertext\":\"MAqvsTZjvLeFziFvNNRMLWa+\"}"},{"id":"cam_yard","parentId":"switch","name":"Hof","ip":"192.168.178.21","cat":"cameras","icon":"fa-gauge-high","color":"#c084fc","desc":"IP-Kamera Hof (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"OpDd8xKBg9V/+FiE\",\"ciphertext\":\"/6/Wf6MMtw4ijsgghysvF1Jxb56K\"}","loginPass":"{\"iv\":\"Q4GYc5Xg9NLHD3HA\",\"ciphertext\":\"k8GjTUQETGhgwOdb4kz3fw2OqCsB+9c9HDA=\"}","hostname":"Cam-Hof.fritz.box","mac":"00:03:C5:03:BF:B1","vendor":"Mobotix AG","scanType":"Web Device","ports":"80","pos":{"x":924,"y":198},"linkColor":"","wlanNets":"{\"iv\":\"tpFlABPJBaEDQKry\",\"ciphertext\":\"+EYmmHN8/fBguYzo0OMAvyud\"}"},{"id":"cam_gh","parentId":"switch","name":"Gartenhaus","ip":"192.168.178.22","cat":"cameras","icon":"fa-video","color":"#c084fc","desc":"IP-Kamera Gartenhaus (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"MIejpqS5s55sPj/O\",\"ciphertext\":\"asQQLw1jjkp4kfK0ObddXtnRkos6\"}","loginPass":"{\"iv\":\"p56X2npRO5EuWC3k\",\"ciphertext\":\"MI53icT28NtSfqnE0dL7YJ5HNz/Wg9QSTAY=\"}","hostname":"Cam-Gartenhaus.fritz.box","mac":"00:03:C5:05:94:36","vendor":"Mobotix AG","scanType":"Web Device","ports":"80","pos":{"x":921,"y":286},"linkColor":"","wlanNets":"{\"iv\":\"v00SM31Vq+VYfOcS\",\"ciphertext\":\"tW1cjtySF9QBtOHv8U+Xv/bv\"}"},{"id":"gateway_guest","parentId":"switch","name":"Fritz!Box Gast-Gateway","ip":"192.168.179.1","cat":"gateways","icon":"fa-tower-broadcast","color":"#f59e0b","desc":"Fritz!Box Gastnetz (VPN / Subnetz 192.168.179.1).","poe":false,"loginUser":"{\"iv\":\"9Kvjb0B95wTF72mE\",\"ciphertext\":\"YY7RG2JN+Uy/SGK+5f9jgE3wJ/9n\"}","loginPass":"{\"iv\":\"boq0U5pADDY3c87H\",\"ciphertext\":\"zEtcR2pXM2UXLPjb7r61iXA7lOFU\"}","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":900,"y":449},"linkColor":"","wlanNets":"{\"iv\":\"zuxCLEQyiDt5nTDs\",\"ciphertext\":\"P5DM+UIQNs7y9qyuoZEV+Z9W\"}"},{"id":"ap_eg_guest","parentId":"gateway_guest","name":"Cisco AP EG (Gast-Trunk)","ip":"192.168.179.20","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Gast-VLAN Trunk vom Cisco Switch an Cisco EG.","poe":true,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":900,"y":556},"linkColor":"","wlanNets":"{\"iv\":\"GLjL+l0bpDLhpg/J\",\"ciphertext\":\"K5vKN9U+Z1R8RTPfuK04rWKttLru1eYeOJSvnQxcWmh6QH6s+JvbdkgQYD1l7VmosoABJe9pL+ortIaDR0WZ\"}"},{"id":"school_tab_1","parentId":"ap_eg_guest","name":"Schultablet 1","ip":"192.168.179.20","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Schultablet 1 im Gastnetzwerk.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":817,"y":698},"linkColor":"","wlanNets":"{\"iv\":\"IGYMMDGFAuNpO9yS\",\"ciphertext\":\"vfFdOz9s4mBz43kT9FSkfxj0\"}"},{"id":"school_tab_2","parentId":"ap_eg_guest","name":"Schultablet 2","ip":"192.168.179.21","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Schultablet 2 im Gastnetzwerk.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":979,"y":696},"linkColor":"","wlanNets":"{\"iv\":\"tZDDcikpAv/NGAWg\",\"ciphertext\":\"NfOHFZph0ejPRgODtQG+T76x\"}"},{"id":"dev_1793258588876_2","parentId":"switch","name":"Power Schalter - Aussen","ip":"192.168.178.11","cat":"endgeraet","icon":"fa-bolt","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"00:10:F0:20:02:2C","vendor":"RITTAL-WERK RUDOLF LOH GmbH & Co.","scanType":"Web Device","ports":"21, 80","pos":{"x":106,"y":28},"linkColor":"","wlanNets":"{\"iv\":\"/VVNp2vwzkrT5FAq\",\"ciphertext\":\"mauMfSZw/rwzIq7K6cNUZT1j\"}"},{"id":"dev_1793258588877_3","parentId":"switch","name":"Power Schalter - Innen","ip":"192.168.178.12","cat":"endgeraet","icon":"fa-bolt","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"00:10:F0:20:1D:AF","vendor":"RITTAL-WERK RUDOLF LOH GmbH & Co.","scanType":"Web Device","ports":"21, 80","pos":{"x":104,"y":105},"linkColor":"","wlanNets":"{\"iv\":\"+u6wDwhvGu5SVVpt\",\"ciphertext\":\"jiblDAO7WTABNdH2AyVLi16G\"}"},{"id":"dev_1793258588877_5","parentId":"switch","name":"Oneac Corporation .16","ip":"192.168.178.16","cat":"endgeraet","icon":"fa-laptop","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"00:20:82:00:16:30","vendor":"Oneac Corporation","scanType":"Web Device","ports":"80","pos":{"x":505,"y":760},"linkColor":"","wlanNets":"{\"iv\":\"Fw3Nc0z1kulkOkPu\",\"ciphertext\":\"irznBJB+4K8bH1GXtE1j65dC\"}"},{"id":"dev_1793258588877_20","parentId":"switch","name":"net-a1-115C","ip":"192.168.178.180","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"net-a1-115C.fritz.box","mac":"AC:93:C4:E3:11:5C","vendor":"GD Midea Air-Conditioning Equipment Co.,Ltd.","scanType":"IoT","ports":"-","pos":{"x":693,"y":9},"linkColor":"","wlanNets":"{\"iv\":\"3Os+r0kGVidjbNXN\",\"ciphertext\":\"4usmmdYj9DCbrzNKqtWbUcDx\"}"},{"id":"dev_1793258588877_21","parentId":"switch","name":"ESP-E3F2CB","ip":"192.168.178.181","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"ESP-E3F2CB.fritz.box","mac":"E8:DB:84:E3:F2:CB","vendor":"Espressif Inc.","scanType":"IoT","ports":"-","pos":{"x":853,"y":10},"linkColor":"","wlanNets":"{\"iv\":\"JXoP9s50V8yCihAM\",\"ciphertext\":\"4k5dFPeTgcFKqn/60/p9DzYZ\"}"},{"id":"dev_1793258588877_22","parentId":"switch","name":"I16Plus","ip":"192.168.178.188","cat":"endgeraet","icon":"fa-desktop","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"I16Plus.fritz.box","mac":"8C:E9:EE:21:75:E6","vendor":"Intel Corporate","scanType":"Windows","ports":"135, 445","pos":{"x":637,"y":620},"linkColor":"","wlanNets":"{\"iv\":\"L2sWHJjdDaD8sGEi\",\"ciphertext\":\"O3dKiQRZMP8NwPXovIrYyPmB\"}"},{"id":"dev_1793258588877_23","parentId":"switch","name":"hoymilessolar","ip":"192.168.178.201","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"hoymilessolar.fritz.box","mac":"A4:E5:7C:3D:75:53","vendor":"Espressif Inc.","scanType":"IoT","ports":"-","pos":{"x":836,"y":107},"linkColor":"","wlanNets":"{\"iv\":\"rlCnBdbu0T9HSckA\",\"ciphertext\":\"jarQaE0659RQS2lisxwrHYeQ\"}"},{"id":"dev_1793258588877_27","parentId":"switch","name":"xiaomismarttv","ip":"192.168.178.247","cat":"smarttv","icon":"fa-tv","color":"#38bdf8","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"xiaomismarttv.fritz.box","mac":"94:62:6D:07:BA:D7","vendor":"Beijing Xiaomi Electronics Co.,Ltd","scanType":"Smart TV","ports":"-","pos":{"x":642,"y":760},"linkColor":"","wlanNets":"{\"iv\":\"xwwarFlLT3Ui1eAS\",\"ciphertext\":\"5ivP8ggvveD+f/GQz9tCeoyV\"}"},{"id":"dev_1793258588877_28","parentId":"switch","name":"buderusmx400","ip":"192.168.178.248","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"buderusmx400.fritz.box","mac":"F0:4A:3D:0A:01:B0","vendor":"Bosch Thermotechnik GmbH","scanType":"IoT","ports":"-","pos":{"x":988,"y":107},"linkColor":"","wlanNets":"{\"iv\":\"iBJrQOSrnvWkovoU\",\"ciphertext\":\"WsCn9VPUZQ7IrfcxYjHvWjBK\"}"}],"crypto":{"salt":"UHVd3rO0hLT+K13LqQ9k/g==","verifier":"elv6bdgWUgbClib68VUjsnZcrydRVgIg2KE0Wi/9rLU="}}</script>
+  <script id="embedded-state" type="application/json">{"format":"kryptonetview-embedded-v1","savedAt":1793523384363,"config":{"title":"Ulfenknulfen - GBit LAN","subnet":"192.168.178.0/24","switchModel":"Cisco WS-C2960S-48LPS-L","switchIp":"192.168.178.8","netColors":{"lan":"#71717a","ethernet":"#00bcef","wlan":"#3b82f6","guest":"#f59e0b"},"netTypes":[{"id":"lan","builtin":true,"name":"","color":"#71717a","dash":"0"},{"id":"ethernet","builtin":true,"name":"","color":"#00bcef","dash":"0"},{"id":"wlan","builtin":true,"name":"","color":"#3b82f6","dash":"3 3"},{"id":"guest","builtin":true,"name":"","color":"#f59e0b","dash":"4 3"}]},"categories":[{"id":"router","nameKey":"cat_label_router","name":"Router","icon":"fa-network-wired","color":"#00bcef"},{"id":"gateways","nameKey":"cat_label_gateways","name":"Gateways","icon":"fa-tower-broadcast","color":"#f59e0b"},{"id":"wlan_ap","nameKey":"cat_label_wlanap","name":"WLAN Access Point","icon":"fa-wifi","color":"#38bdf8"},{"id":"switch","nameKey":"cat_label_switch","name":"Switch","icon":"fa-sitemap","color":"#00bcef"},{"id":"server","nameKey":"cat_label_server","name":"Server","icon":"fa-server","color":"#818cf8"},{"id":"endgeraet","nameKey":"cat_label_endgeraet","name":"Endgerät","icon":"fa-laptop","color":"#06b6d4"},{"id":"infrastructure","nameKey":"cat_label_infra","name":"Infrastruktur","icon":"fa-sitemap","color":"#38bdf8"},{"id":"sensors","nameKey":"cat_label_sensors","name":"Sensoren","icon":"fa-gauge-high","color":"#10b981"},{"id":"voice","nameKey":"cat_label_voice","name":"VoIP Phones","icon":"fa-phone-flip","color":"#34d399"},{"id":"cameras","nameKey":"cat_label_cameras","name":"Smart IoT & Cam","icon":"fa-video","color":"#c084fc"},{"id":"printers","nameKey":"cat_label_printers","name":"Drucker","icon":"fa-print","color":"#f472b6"},{"id":"guest","nameKey":"cat_label_guest","name":"Gastnetz (179.x)","icon":"fa-shield-halved","color":"#f59e0b"},{"id":"smarttv","nameKey":"cat_label_smarttv","name":"Smart TVs & Streaming","icon":"fa-tv","color":"#38bdf8"},{"id":"gaming","nameKey":"cat_label_gaming","name":"Gaming & Konsolen","icon":"fa-gamepad","color":"#ec4899"},{"id":"smarthome","nameKey":"cat_label_smarthome","name":"Smart Home Hubs","icon":"fa-house-signal","color":"#f59e0b"},{"id":"nas","nameKey":"cat_label_nas","name":"NAS & Backup-Speicher","icon":"fa-database","color":"#6366f1"},{"id":"firewall","nameKey":"cat_label_firewall","name":"Firewall & Security","icon":"fa-shield-halved","color":"#ef4444"},{"id":"solar","nameKey":"cat_label_solar","name":"Solar & Photovoltaik","icon":"fa-solar-panel","color":"#eab308"},{"id":"wallbox","nameKey":"cat_label_wallbox","name":"Wallbox & E-Mobilität","icon":"fa-charging-station","color":"#10b981"},{"id":"audio","nameKey":"cat_label_audio","name":"Audio & Multiroom","icon":"fa-music","color":"#a855f7"}],"frames":[{"id":"frame_apeg","title":"📡 AP-EG WLAN Hub (Xiaomi / Android / Sensoren)","x":1077,"y":-9,"width":352,"height":799,"strokeColor":"#00bcef","strokeDash":"5 3","headerBg":"#083344","textColor":"#38bdf8"},{"id":"frame_guest","title":"🛡️ GASTNETZ (VPN / VLAN 192.168.179.x)","x":723,"y":344,"width":343,"height":447,"strokeColor":"#f59e0b","strokeDash":"6 4","headerBg":"#78350f","textColor":"#fbbf24"}],"devices":[{"id":"switch","parentId":null,"name":"Cisco WS-C2960S-48LPS-L","ip":"192.168.178.8","cat":"switch","icon":"fa-sitemap","color":"#00bcef","desc":"Zentraler Gigabit 48-Port PoE+ Managed Switch\n","poe":true,"loginUser":"{\"iv\":\"2658QAVD5DYbG5rs\",\"ciphertext\":\"k4dniL7vSmBXt3ovTwnFZW0qNgVc\"}","loginPass":"{\"iv\":\"d6brPcuQ+4+4Hcps\",\"ciphertext\":\"vLKungJlWVn4K3TJASmTI007J+rn\"}","hostname":"","mac":"E8:ED:F3:73:C9:C0","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":413,"y":371},"linkColor":"","netType":"ethernet","wlanNets":"{\"iv\":\"geG37kSDLammSvV0\",\"ciphertext\":\"Aee7uNREYidPO4ZOx6DcT5jK\"}"},{"id":"gateway_main","parentId":"switch","name":"Fritz!Box 7590","ip":"192.168.178.1","cat":"router","icon":"fa-network-wired","color":"#f59e0b","desc":"Haupt-Internet Gateway & VDSL-Router an Cisco Switch.","poe":false,"loginUser":"{\"iv\":\"DIfA93lYxz9xPj1p\",\"ciphertext\":\"xACENz0Km5pT0zUq0PuAkICo996i\"}","loginPass":"{\"iv\":\"GPU60ruPRzuDP2VT\",\"ciphertext\":\"i5K/pJjt7McaQuq76FWTibBNIxJVXWxfY8QrhcTqme0P\"}","hostname":"fritz.box","mac":"E0:28:6D:69:E3:23","vendor":"AVM Audiovisuelles Marketing und Computersysteme GmbH","scanType":"Router/DNS","ports":"53, 80, 443","pos":{"x":445,"y":49},"linkColor":"","wlanNets":"{\"iv\":\"MfG6NM3B1OZhamKx\",\"ciphertext\":\"Cn+yYz68TWB0qAJP9SXprZKX\"}"},{"id":"router_core","parentId":"gateway_main","name":"Core Router","ip":"192.168.178.2","cat":"router","icon":"fa-network-wired","color":"#00bcef","desc":"Zentraler Core Router zur internen Subnetz-Verteilung.","poe":false,"loginUser":"{\"iv\":\"ypxsXEb7jp0dz1VX\",\"ciphertext\":\"0AV5tc0nom6AP+tmTRv31XMx6SEv\"}","loginPass":"{\"iv\":\"OejjPG5uYn8P0U4R\",\"ciphertext\":\"5eOsNT/o1ZOuLo/rx0aiCzAzETBczyaQwHbmFcor34w=\"}","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":283,"y":49},"linkColor":"","wlanNets":"{\"iv\":\"OV8SFkl3+xce3gY5\",\"ciphertext\":\"uW529aqf71ZvhRMmMr69osKtdINHzSxeuWdqkVI5pRxF4iYkTmlYBiDKPEkioCWHBGcIF8q7iFwi7/661z1Yzg==\"}"},{"id":"server_main","parentId":"switch","name":"Hauptserver","ip":"192.168.178.10","cat":"server","icon":"fa-server","color":"#818cf8","desc":"Zentraler Server & Speichersystem","poe":false,"loginUser":"{\"iv\":\"QBfM9jEnT1RCrCaR\",\"ciphertext\":\"mHkzJ77hmTjIWPCGOa4b9RMZ1ao=\"}","loginPass":"{\"iv\":\"Jwz6eMQgGln421RX\",\"ciphertext\":\"sPot5YhbiIZRagVFc6ex2q1Yp+mqXPHU4O0kej8=\"}","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":102,"y":199},"linkColor":"","wlanNets":"{\"iv\":\"37ZECQ4y75DpnVFs\",\"ciphertext\":\"YRrurOZdQtEH+zL77kXDWqtU\"}"},{"id":"server_ipmi","parentId":"switch","name":"IPMI Remote Mgmt","ip":"192.168.178.15","cat":"server","icon":"fa-server","color":"#818cf8","desc":"Out-of-Band Remote Management Controller.","poe":false,"loginUser":"{\"iv\":\"i1mmk+9yVg0NMIoN\",\"ciphertext\":\"yjFTW7ltIky2ZRlJjSctzmhqW8Wh\"}","loginPass":"{\"iv\":\"0LXyWAeGPa20+sec\",\"ciphertext\":\"yHeGtD6noftxjfnGXBbypxEypO8F9eB5wFlOo+szfSI=\"}","hostname":"IPMI-Server.fritz.box","mac":"00:30:48:93:8F:1D","vendor":"Super Micro Computer, Inc.","scanType":"Linux/SSH","ports":"22, 80","pos":{"x":315,"y":143},"linkColor":"","wlanNets":"{\"iv\":\"g+jM8iiqJH/p0JK1\",\"ciphertext\":\"/N1ioqrU4dIoCQ6DsmjDKAel\"}"},{"id":"ap_og","parentId":"switch","name":"Cisco AP OG","ip":"192.168.178.90","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Obergeschoss (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"G+KluRjseOkIG1Q7\",\"ciphertext\":\"1Aciq1dMmge2E8dxdOE3qFd8zGpJ\"}","loginPass":"{\"iv\":\"jHwoKMcyJwbNlGv8\",\"ciphertext\":\"kBAknO662XNTagz2Oftsk0sTa5/be3LPV48=\"}","hostname":"Cisco-AP-OG.fritz.box","mac":"84:B2:61:D4:F0:58","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80","pos":{"x":100,"y":366},"linkColor":"","wlanNets":"{\"iv\":\"ZyniZWcP+NSPJpj4\",\"ciphertext\":\"0K9LGIjUpo0XIUAfswT4BA1GXSRdnwlzx2PPO4cWvbtS3KdUg7eHnO3KaFTXF1DTzwPcWvw=\"}"},{"id":"ap_eg","parentId":"switch","name":"Cisco AP EG","ip":"192.168.178.92","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Erdgeschoss (Zentraler WLAN Hub).","poe":true,"loginUser":"{\"iv\":\"1bW7ovU8c7suumme\",\"ciphertext\":\"/SSxQtxaS3hLDSi57SzeZMv3Pbn6\"}","loginPass":"{\"iv\":\"Gig9sEuGKJpkmHUP\",\"ciphertext\":\"4KQlImapWMYQpL6NP1azo78EGHeAyTjoy1I=\"}","hostname":"Cisco-AP-EG.fritz.box","mac":"84:B2:61:CB:01:E4","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80","pos":{"x":1239,"y":81},"linkColor":"","wlanNets":"{\"iv\":\"7e1FlcUxxnmBeN6+\",\"ciphertext\":\"w8BC1lqlifhjkNA1RNZQBn0fFq9Q+cDdEbspFvld+tffpUJyDFmjylH8qToOC0dClWUYSxE=\"}"},{"id":"ap_gh","parentId":"switch","name":"Cisco AP GH","ip":"192.168.178.94","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Gartenhaus (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"u3uB7iA8XGMJI7ac\",\"ciphertext\":\"Wv75yUm6G8X8oFP70CSHMRMFlkPW\"}","loginPass":"{\"iv\":\"xOgRPyzDcd4O4BpE\",\"ciphertext\":\"30gSyXQ8BUHnvta3J37auowlykJi1Tkjbew=\"}","hostname":"Cisco-AP-GH.fritz.box","mac":"84:B2:61:C0:BF:78","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80","pos":{"x":99,"y":483},"linkColor":"","wlanNets":"{\"iv\":\"OcUqdpFlw1BUAkf9\",\"ciphertext\":\"QnjMGDjqq32stvcN6azu8QllXYq99W20bPYxo8vIzFjSqzAVBqymsYJWT2VhyKEbVXBZyfmw70zg\"}"},{"id":"gas_sensor","parentId":"ap_eg","name":"GasSensor","ip":"192.168.178.100","cat":"sensors","icon":"fa-gauge-high","color":"#84cc16","desc":"Sicherheits-GasSensor. Drahtlos angebunden an Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1170,"y":170},"linkColor":"","wlanNets":"{\"iv\":\"cQJo3oS8j35U4RhJ\",\"ciphertext\":\"i6vf7lrI2aqWUKhK0367SpNq\"}"},{"id":"zisterne_sensor","parentId":"ap_eg","name":"Zisterne Sensor","ip":"192.168.178.101","cat":"sensors","icon":"fa-gauge-high","color":"#84cc16","desc":"Wasserstands-Zisterne Sensor. Drahtlos angebunden an Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1333,"y":168},"linkColor":"#84cc16","wlanNets":"{\"iv\":\"UTybTWaMizQhefp/\",\"ciphertext\":\"7DX1Pft9OCpiUc04t7GaHQ+V\"}"},{"id":"poco_x4","parentId":"ap_eg","name":"POCO X4 Pro 5G","ip":"192.168.178.154","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"POCO X4 Pro Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1169,"y":280},"linkColor":"","wlanNets":"{\"iv\":\"16L43+pG9FhgOWNR\",\"ciphertext\":\"h1xM2S73OGooTXaB3OJ4Qb7r\"}"},{"id":"patrick_redmi9","parentId":"ap_eg","name":"Redmi 9","ip":"192.168.178.177","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"Patrick Redmi 9 Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"patrickredmi-9.fritz.box","mac":"1E:DA:AA:DF:49:5E","vendor":"(Randomized)","scanType":"Mobile","ports":"-","pos":{"x":1170,"y":388},"linkColor":"","wlanNets":"{\"iv\":\"PSLX5HCJRXpRQ8C/\",\"ciphertext\":\"DBHFxh2piJzkSe/PLc7f1UJd\"}"},{"id":"andrea_pocof1","parentId":"ap_eg","name":"POCO F1","ip":"192.168.178.241","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"Andrea Poco F1 Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"Andrea-PocoF1.fritz.box","mac":"A4:50:46:23:80:9D","vendor":"Xiaomi Communications Co Ltd","scanType":"Android","ports":"-","pos":{"x":1166,"y":499},"linkColor":"","wlanNets":"{\"iv\":\"FEs2AqpQ6LR7Nt+D\",\"ciphertext\":\"BOtLg6mkcYgUFOKcPlZ9XMnI\"}"},{"id":"andrea_nb_wlan","parentId":"ap_eg","name":"Notebook (WLAN)","ip":"192.168.178.190","cat":"endgeraet","icon":"fa-laptop","color":"#06b6d4","desc":"Andrea Notebook WLAN-Verbindung über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1174,"y":615},"linkColor":"","wlanNets":"{\"iv\":\"lzDz3gqylJQ/u9wv\",\"ciphertext\":\"otAzDphGpY8SMzqxmF8SqTNg\"}"},{"id":"lee_pad","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.233","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Lee Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1333,"y":281},"linkColor":"","wlanNets":"{\"iv\":\"M4ZgUBqGHJd3TEVy\",\"ciphertext\":\"wuVpWOP9OkZaAooNEc7AYAX+\"}"},{"id":"andrea_pad","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.234","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Andrea Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"andrearedmi-pad-2-pro.fritz.box","mac":"76:14:86:0D:B1:00","vendor":"(Randomized)","scanType":"Mobile","ports":"-","pos":{"x":1333,"y":390},"linkColor":"","wlanNets":"{\"iv\":\"Csu6/guE8dnJZC3I\",\"ciphertext\":\"9ZWKQgXjANTnnnRLNd4YQH0F\"}"},{"id":"redmi_pad_se","parentId":"ap_eg","name":"Redmi Pad SE","ip":"192.168.178.235","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Redmi Pad SE Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"Redmi-Pad-SE.fritz.box","mac":"D2:13:84:B9:7C:41","vendor":"(Randomized)","scanType":"Mobile","ports":"-","pos":{"x":1328,"y":501},"linkColor":"","wlanNets":"{\"iv\":\"Tv8jFiLhb3xaCwDt\",\"ciphertext\":\"dscelEfO26NA355U5ERLaa1D\"}"},{"id":"redmi_pad_2pro","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.249","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1327,"y":618},"linkColor":"","wlanNets":"{\"iv\":\"zP1cCcqNA+ZX0Oj0\",\"ciphertext\":\"CA2CyNTGVPPjE3sDbEBfZk0V\"}"},{"id":"phone_gh","parentId":"switch","name":"Cisco Phone GH","ip":"192.168.178.80","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Gartenhaus (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-GH.fritz.box","mac":"64:A0:E7:15:AC:7E","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":100,"y":620},"linkColor":"","wlanNets":"{\"iv\":\"9dGaPY6HuMSimG5F\",\"ciphertext\":\"B84qb8HP+RoT6YpqjKzNOUFY\"}"},{"id":"phone_sz","parentId":"switch","name":"Cisco Phone SZ","ip":"192.168.178.81","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Schlafzimmer (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-SZ.fritz.box","mac":"C8:F9:F9:D6:24:D5","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":230,"y":620},"linkColor":"","wlanNets":"{\"iv\":\"EganmR3O06FWKKs6\",\"ciphertext\":\"v58TpPmsk3p0JHFrL4TdeDxW\"}"},{"id":"phone_wz2","parentId":"switch","name":"Cisco Phone WZ2","ip":"192.168.178.82","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Wohnzimmer 2 (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-WZ2.fritz.box","mac":"C8:F9:F9:D6:25:72","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":360,"y":620},"linkColor":"","wlanNets":"{\"iv\":\"XXRMah5JfZrjVygZ\",\"ciphertext\":\"8Qg50N+zh0P03LpUwpIyq70r\"}"},{"id":"phone_wz1","parentId":"switch","name":"Cisco Phone WZ1","ip":"192.168.178.83","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Wohnzimmer 1 (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-WZ1.fritz.box","mac":"DC:A5:F4:86:A1:6D","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80, 443","pos":{"x":490,"y":620},"linkColor":"","netType":"ethernet","wlanNets":"{\"iv\":\"ULu8z/U0fZLK9k8V\",\"ciphertext\":\"DvRX4YHmBB5aVpAsizukqfE8\"}"},{"id":"print_hp","parentId":"switch","name":"Drucker hp p3015","ip":"192.168.178.30","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"HP LaserJet P3015 Netzdrucker.","poe":false,"loginUser":"","loginPass":"","hostname":"hpp3015drucker.fritz.box","mac":"9C:B6:54:15:C0:4C","vendor":"Hewlett Packard","scanType":"Printer","ports":"21, 23, 80, 443, 515, 631, 9100","pos":{"x":100,"y":760},"linkColor":"","wlanNets":"{\"iv\":\"/y416FcW2aRRiZgg\",\"ciphertext\":\"VIHzOllkghnGjJVrIAzZKmW0\"}"},{"id":"print_ricoh","parentId":"switch","name":"Drucker-Ricoh","ip":"192.168.178.31","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"Ricoh Multifunktionsdrucker.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":230,"y":760},"linkColor":"","wlanNets":"{\"iv\":\"exv6mpWMDgxSlxX4\",\"ciphertext\":\"SGjf3kbPxqn2tJkkSFhoFlDi\"}"},{"id":"print_brother","parentId":"switch","name":"Drucker-BROTHER","ip":"192.168.178.32","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"Brother Netzdrucker.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":360,"y":760},"linkColor":"","wlanNets":"{\"iv\":\"5EMrn+sGvZvXSlIr\",\"ciphertext\":\"ncmhvFz23ExoA+G2G8Orm09U\"}"},{"id":"cam_door","parentId":"switch","name":"Haustuer","ip":"192.168.178.20","cat":"cameras","icon":"fa-gauge-high","color":"#c084fc","desc":"IP-Kamera Haustür (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"SKcJM8C3LdGkQXa0\",\"ciphertext\":\"z/dbtYXnUd4Y02QCwuujAhYewR8b\"}","loginPass":"{\"iv\":\"XYVwE7HiTEazTREn\",\"ciphertext\":\"hMFisTpQWcGPhT7NGiTEFH4NWGzbg6UuFFY=\"}","hostname":"Cam-Haustuer.fritz.box","mac":"00:03:C5:0F:42:E2","vendor":"Mobotix AG","scanType":"Web Device","ports":"80, 443","pos":{"x":772,"y":196},"linkColor":"","wlanNets":"{\"iv\":\"BnJPDm4aIG1ILuVy\",\"ciphertext\":\"YG7PRr9Aopk3pTb7HCJ4G4eA\"}"},{"id":"cam_yard","parentId":"switch","name":"Hof","ip":"192.168.178.21","cat":"cameras","icon":"fa-gauge-high","color":"#c084fc","desc":"IP-Kamera Hof (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"G40rbs0tPDY+3R6J\",\"ciphertext\":\"94VyzHAYbuPydYXQG7nROts+ijfI\"}","loginPass":"{\"iv\":\"ywwwuINgKUuHwFZI\",\"ciphertext\":\"T7PXNmZmbH6aW5hTms/xKMJpsy+gg7Z/JvU=\"}","hostname":"Cam-Hof.fritz.box","mac":"00:03:C5:03:BF:B1","vendor":"Mobotix AG","scanType":"Web Device","ports":"80","pos":{"x":924,"y":198},"linkColor":"","wlanNets":"{\"iv\":\"Myn2nFWTU0r3iMsk\",\"ciphertext\":\"+R5/fHfOaIqo/8UxRW1TWfnJ\"}"},{"id":"cam_gh","parentId":"switch","name":"Gartenhaus","ip":"192.168.178.22","cat":"cameras","icon":"fa-video","color":"#c084fc","desc":"IP-Kamera Gartenhaus (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"q7M509+tZamnCUeG\",\"ciphertext\":\"iMOnyOzFO9uTcrqs4XVf4eDCe4nx\"}","loginPass":"{\"iv\":\"tgVIKs9nPx0rncbV\",\"ciphertext\":\"KfJY9qKbzdETXuiQaqlzuNsvzmpmXMslq7I=\"}","hostname":"Cam-Gartenhaus.fritz.box","mac":"00:03:C5:05:94:36","vendor":"Mobotix AG","scanType":"Web Device","ports":"80","pos":{"x":921,"y":286},"linkColor":"","wlanNets":"{\"iv\":\"9TNHqEomgueB2hVl\",\"ciphertext\":\"407e8uE7z1n39weTUxihsCaH\"}"},{"id":"gateway_guest","parentId":"switch","name":"Fritz!Box Gast-Gateway","ip":"192.168.179.1","cat":"gateways","icon":"fa-tower-broadcast","color":"#f59e0b","desc":"Fritz!Box Gastnetz (VPN / Subnetz 192.168.179.1).","poe":false,"loginUser":"{\"iv\":\"Eyw6advRzm2zyjcD\",\"ciphertext\":\"REVJu/cA/WRqE65rn7nNOc3veGkN\"}","loginPass":"{\"iv\":\"gNaxZL3A5Kp0y2nd\",\"ciphertext\":\"mo3NtzgD9NM6QwkJp6DIK0WfwED8\"}","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":900,"y":449},"linkColor":"","wlanNets":"{\"iv\":\"OLn1MTmGhR+1K+Tm\",\"ciphertext\":\"3oFBf7r8zCZbnimmZk9RmMbO\"}"},{"id":"ap_eg_guest","parentId":"gateway_guest","name":"Cisco AP EG (Gast-Trunk)","ip":"192.168.179.20","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Gast-VLAN Trunk vom Cisco Switch an Cisco EG.","poe":true,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":900,"y":556},"linkColor":"","wlanNets":"{\"iv\":\"MmqJ/CdwMlS5I49s\",\"ciphertext\":\"KecHAVzSxOvkwK3HP2FEpjYpySqVQcRt+0GqjwARHFk0VDiMBCZQ7w2/EdPnPQWt5l1UkXFRa8hpkDZR+0dY\"}"},{"id":"school_tab_1","parentId":"ap_eg_guest","name":"Schultablet 1","ip":"192.168.179.20","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Schultablet 1 im Gastnetzwerk.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":817,"y":698},"linkColor":"","wlanNets":"{\"iv\":\"IiJrD5DcSOmN00h8\",\"ciphertext\":\"qNBMTD+QVhDTNGKCwndmm8kk\"}"},{"id":"school_tab_2","parentId":"ap_eg_guest","name":"Schultablet 2","ip":"192.168.179.21","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Schultablet 2 im Gastnetzwerk.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":979,"y":696},"linkColor":"","wlanNets":"{\"iv\":\"L2TWmD0FM7cZGWya\",\"ciphertext\":\"FfPJvs/RrQp9oDKq0Z8XFUij\"}"},{"id":"dev_1793258588876_2","parentId":"switch","name":"Power Schalter - Aussen","ip":"192.168.178.11","cat":"endgeraet","icon":"fa-bolt","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"00:10:F0:20:02:2C","vendor":"RITTAL-WERK RUDOLF LOH GmbH & Co.","scanType":"Web Device","ports":"21, 80","pos":{"x":106,"y":28},"linkColor":"","wlanNets":"{\"iv\":\"Jlsb8EByCN3sp7un\",\"ciphertext\":\"fDerTVN+9kAUuBmEhHZ2CMwl\"}"},{"id":"dev_1793258588877_3","parentId":"switch","name":"Power Schalter - Innen","ip":"192.168.178.12","cat":"endgeraet","icon":"fa-bolt","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"00:10:F0:20:1D:AF","vendor":"RITTAL-WERK RUDOLF LOH GmbH & Co.","scanType":"Web Device","ports":"21, 80","pos":{"x":104,"y":105},"linkColor":"","wlanNets":"{\"iv\":\"Q8lYD9pd7f72tabI\",\"ciphertext\":\"+dont4PI07+ZfwqzpYTC1KyD\"}"},{"id":"dev_1793258588877_5","parentId":"switch","name":"Oneac Corporation .16","ip":"192.168.178.16","cat":"endgeraet","icon":"fa-laptop","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"00:20:82:00:16:30","vendor":"Oneac Corporation","scanType":"Web Device","ports":"80","pos":{"x":505,"y":760},"linkColor":"","wlanNets":"{\"iv\":\"wR1IUcBYkN2dgHK2\",\"ciphertext\":\"Kzw3AkN+1QRVezMfHafIlyKV\"}"},{"id":"dev_1793258588877_20","parentId":"switch","name":"net-a1-115C","ip":"192.168.178.180","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"net-a1-115C.fritz.box","mac":"AC:93:C4:E3:11:5C","vendor":"GD Midea Air-Conditioning Equipment Co.,Ltd.","scanType":"IoT","ports":"-","pos":{"x":693,"y":9},"linkColor":"","wlanNets":"{\"iv\":\"hpXfEQ3LtfQX/giA\",\"ciphertext\":\"baoGxekaNl+/dBUpmoh9z4+E\"}"},{"id":"dev_1793258588877_21","parentId":"switch","name":"ESP-E3F2CB","ip":"192.168.178.181","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"ESP-E3F2CB.fritz.box","mac":"E8:DB:84:E3:F2:CB","vendor":"Espressif Inc.","scanType":"IoT","ports":"-","pos":{"x":853,"y":10},"linkColor":"","wlanNets":"{\"iv\":\"RM7/wZzKxTdSe8QX\",\"ciphertext\":\"yRVK9LSs/AldkFbdf245rHzQ\"}"},{"id":"dev_1793258588877_22","parentId":"switch","name":"I16Plus","ip":"192.168.178.188","cat":"endgeraet","icon":"fa-desktop","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"I16Plus.fritz.box","mac":"8C:E9:EE:21:75:E6","vendor":"Intel Corporate","scanType":"Windows","ports":"135, 445","pos":{"x":637,"y":620},"linkColor":"","wlanNets":"{\"iv\":\"MZELBV8DiBQBwZ4A\",\"ciphertext\":\"ExCMq4zNSMu0KBuJ9j+FojaR\"}"},{"id":"dev_1793258588877_23","parentId":"switch","name":"hoymilessolar","ip":"192.168.178.201","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"hoymilessolar.fritz.box","mac":"A4:E5:7C:3D:75:53","vendor":"Espressif Inc.","scanType":"IoT","ports":"-","pos":{"x":836,"y":107},"linkColor":"","wlanNets":"{\"iv\":\"7p7j6U5bYpzyraxd\",\"ciphertext\":\"DI8qI6UWrLuU442CF7OJd1q3\"}"},{"id":"dev_1793258588877_27","parentId":"switch","name":"xiaomismarttv","ip":"192.168.178.247","cat":"smarttv","icon":"fa-tv","color":"#38bdf8","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"xiaomismarttv.fritz.box","mac":"94:62:6D:07:BA:D7","vendor":"Beijing Xiaomi Electronics Co.,Ltd","scanType":"Smart TV","ports":"-","pos":{"x":642,"y":760},"linkColor":"","wlanNets":"{\"iv\":\"5p2aObsV39cFdem0\",\"ciphertext\":\"2SQuW5vLvufzCL+NnJv6zfIY\"}"},{"id":"dev_1793258588877_28","parentId":"switch","name":"buderusmx400","ip":"192.168.178.248","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"buderusmx400.fritz.box","mac":"F0:4A:3D:0A:01:B0","vendor":"Bosch Thermotechnik GmbH","scanType":"IoT","ports":"-","pos":{"x":988,"y":107},"linkColor":"","wlanNets":"{\"iv\":\"VJ5q7qym0PdF16u8\",\"ciphertext\":\"6dGMyn19ntwMHw284C1j7grA\"}"}],"crypto":{"salt":"UHVd3rO0hLT+K13LqQ9k/g==","verifier":"elv6bdgWUgbClib68VUjsnZcrydRVgIg2KE0Wi/9rLU="}}</script>
 </head>
 <body class="bg-darkbg text-zinc-300 min-h-screen flex flex-col overflow-x-hidden">
 
@@ -192,13 +215,18 @@
       <!-- Language Toggle Button -->
       <button id="btn-lang-toggle" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold px-2 py-1 rounded-lg border border-zinc-700 transition flex items-center gap-1 shadow-md cursor-pointer" title="Sprache wechseln / Switch Language">
         <i class="fa-solid fa-globe text-ciscocyan"></i>
-        <span id="lang-btn-text" class="font-bold">DE</span>
+        <span id="lang-btn-text" class="font-bold">EN</span>
       </button>
 
       <!-- Hell/Dunkel Umschalter -->
       <button id="btn-theme-toggle" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold px-2 py-1 rounded-lg border border-zinc-700 transition flex items-center gap-1 shadow-md cursor-pointer" title="Ansicht wechseln">
         <i id="theme-icon" class="fa-solid fa-sun text-amber-400"></i>
         <span id="theme-btn-text" class="font-bold">Hell</span>
+      </button>
+
+      <!-- Drucken: Ansicht wählbar -->
+      <button id="btn-print" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold px-2.5 py-1 rounded-lg border border-zinc-700 transition flex items-center gap-1.5 shadow-md cursor-pointer" title="Drucken">
+        <i class="fa-solid fa-print text-ciscocyan"></i> <span data-i18n="btn_print">Drucken</span>
       </button>
 
       <!-- Datei-Verbindung: Aenderungen direkt in diese HTML-Datei speichern -->
@@ -358,11 +386,83 @@
           <a href="https://github.com/ulfenknulfen/kryptonetview" target="_blank" rel="noopener noreferrer" class="text-[11px] font-mono text-zinc-400 hover:text-ciscocyan transition flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="GitHub Repository">
             <i class="fa-brands fa-github text-sm"></i> \github\ulfenknulfen\kryptonetview
           </a>
-          <span id="app-version" class="text-[11px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="Version">v1.0.1</span>
+          <span id="app-version" class="text-[11px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="Version">v1.0.2</span>
         </div>
       </div>
     </main>
 
+  </div>
+
+  <!-- DRUCKBEREICH (nur beim Drucken sichtbar) -->
+  <div id="print-root"></div>
+
+  <!-- PRINT VIEW MODAL -->
+  <div id="print-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div class="w-full max-w-md bg-panelbg rounded-2xl border border-zinc-700 shadow-2xl p-6 relative max-h-[92vh] overflow-y-auto">
+      <button id="print-modal-close" class="absolute top-4 right-4 text-zinc-400 hover:text-white text-xl">×</button>
+      <div class="text-center mb-4">
+        <div class="w-10 h-10 bg-ciscocyan/10 text-ciscocyan rounded-xl flex items-center justify-center text-lg border border-ciscocyan/30 mx-auto mb-2">
+          <i class="fa-solid fa-print"></i>
+        </div>
+        <h3 class="text-base font-bold text-white" data-i18n="print_modal_title">Drucken</h3>
+        <p class="text-xs text-zinc-400 mt-0.5" data-i18n="print_modal_subtitle">Welche Ansicht soll gedruckt werden?</p>
+      </div>
+
+      <div class="space-y-2">
+        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+          <input type="radio" name="print-view" value="graph" checked class="mt-1 accent-cyan-500">
+          <span class="flex-1">
+            <span class="block text-xs font-bold text-white"><i class="fa-solid fa-diagram-project text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_graph">Topologie-Grafik</span></span>
+            <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_graph_d">Gesamte Grafik mit allen Geräten und Legende, passend auf eine Seite.</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+          <input type="radio" name="print-view" value="current" class="mt-1 accent-cyan-500">
+          <span class="flex-1">
+            <span class="block text-xs font-bold text-white"><i class="fa-solid fa-eye text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_current">Aktueller Bildschirmausschnitt</span></span>
+            <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_current_d">Grafik so, wie sie gerade angezeigt wird (Zoom, Verschiebung, Kategorie-Filter und Suche).</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+          <input type="radio" name="print-view" value="list" class="mt-1 accent-cyan-500">
+          <span class="flex-1">
+            <span class="block text-xs font-bold text-white"><i class="fa-solid fa-table-list text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_list">Geräteliste</span></span>
+            <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_list_d">Alle Geräte als Tabelle, nach IP-Adresse sortiert.</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+          <input type="radio" name="print-view" value="cat" class="mt-1 accent-cyan-500">
+          <span class="flex-1">
+            <span class="block text-xs font-bold text-white"><i class="fa-solid fa-layer-group text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_cat">Geräte nach Kategorie</span></span>
+            <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_cat_d">Geräte gruppiert nach Kategorie (Router, Switch, Drucker, ...).</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+          <input type="radio" name="print-view" value="both" class="mt-1 accent-cyan-500">
+          <span class="flex-1">
+            <span class="block text-xs font-bold text-white"><i class="fa-solid fa-copy text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_both">Grafik + Geräteliste</span></span>
+            <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_both_d">Topologie-Grafik auf Seite 1, danach die Geräteliste.</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="mt-3">
+        <label class="block text-xs font-semibold text-zinc-400 mb-1" for="print-orientation" data-i18n="print_orientation">Seitenausrichtung</label>
+        <select id="print-orientation" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-2.5 py-2 text-xs text-white focus:outline-none focus:border-ciscocyan">
+          <option value="landscape" data-i18n="print_landscape">Querformat</option>
+          <option value="portrait" data-i18n="print_portrait">Hochformat</option>
+        </select>
+      </div>
+
+      <p class="text-[11px] text-zinc-500 mt-3 leading-relaxed"><i class="fa-solid fa-shield-halved text-amber-400 mr-1"></i><span data-i18n="print_note">Zugangsdaten und WLAN-Passwörter werden nie mitgedruckt. Gedruckt wird immer im hellen Layout.</span></p>
+
+      <div class="pt-4 flex gap-2">
+        <button id="btn-cancel-print" class="w-1/2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 py-2.5 rounded-lg text-xs font-semibold transition" data-i18n="btn_cancel">Abbrechen</button>
+        <button id="btn-start-print" class="w-1/2 bg-ciscocyan hover:bg-cyan-400 text-zinc-950 font-bold py-2.5 rounded-lg text-xs transition shadow-md flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-print"></i> <span data-i18n="btn_print_now">Drucken</span>
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- JSON EXPORT WARNING MODAL -->
@@ -858,6 +958,38 @@
         btn_new_device: "Neues Gerät",
         btn_load: "Laden",
         btn_save_file: "Direkt speichern",
+        btn_print: "Drucken",
+        btn_print_now: "Jetzt drucken",
+        print_modal_title: "Drucken",
+        print_modal_subtitle: "Welche Ansicht soll gedruckt werden?",
+        print_opt_graph: "Topologie-Grafik",
+        print_opt_graph_d: "Gesamte Grafik mit allen Geräten und Legende, passend auf eine Seite.",
+        print_opt_current: "Aktueller Bildschirmausschnitt",
+        print_opt_current_d: "Grafik so, wie sie gerade angezeigt wird (Zoom, Verschiebung, Kategorie-Filter und Suche).",
+        print_opt_list: "Geräteliste",
+        print_opt_list_d: "Alle Geräte als Tabelle, nach IP-Adresse sortiert.",
+        print_opt_cat: "Geräte nach Kategorie",
+        print_opt_cat_d: "Geräte gruppiert nach Kategorie (Router, Switch, Drucker, ...).",
+        print_opt_both: "Grafik + Geräteliste",
+        print_opt_both_d: "Topologie-Grafik auf Seite 1, danach die Geräteliste.",
+        print_orientation: "Seitenausrichtung",
+        print_landscape: "Querformat",
+        print_portrait: "Hochformat",
+        print_note: "Zugangsdaten und WLAN-Passwörter werden nie mitgedruckt. Gedruckt wird immer im hellen Layout.",
+        print_devices_total: "Geräte gesamt",
+        print_view_graph: "Topologie-Grafik",
+        print_view_current: "Bildschirmausschnitt",
+        print_view_list: "Geräteliste",
+        print_view_cat: "Geräte nach Kategorie",
+        print_view_both: "Grafik + Geräteliste",
+        print_col_name: "Name",
+        print_col_ip: "IP-Adresse",
+        print_col_cat: "Kategorie",
+        print_col_host: "Hostname",
+        print_col_mac: "MAC",
+        print_col_vendor: "Hersteller",
+        print_col_parent: "Angebunden an",
+        print_col_poe: "PoE",
         banner_edit_active: "EDITIERMODUS AKTIV: Drag & Drop Knoten/Rahmen. Klicke auf '+ Rahmen aufziehen', um freie Zonen per Maus zu zeichnen.",
         banner_draw_active: "RAHMEN ZEICHNEN: Klicke und ziehe mit der Maus auf der Zeichenfläche, um einen neuen Rahmen aufzuspannen.",
         search_placeholder: "Gerät, IP oder Hostname suchen...",
@@ -1029,6 +1161,38 @@
         btn_new_device: "New Device",
         btn_load: "Load",
         btn_save_file: "Save Directly",
+        btn_print: "Print",
+        btn_print_now: "Print now",
+        print_modal_title: "Print",
+        print_modal_subtitle: "Which view do you want to print?",
+        print_opt_graph: "Topology graph",
+        print_opt_graph_d: "Complete graph with all devices and legend, fitted to one page.",
+        print_opt_current: "Current screen section",
+        print_opt_current_d: "Graph as currently displayed (zoom, pan, category filter and search).",
+        print_opt_list: "Device list",
+        print_opt_list_d: "All devices as a table, sorted by IP address.",
+        print_opt_cat: "Devices by category",
+        print_opt_cat_d: "Devices grouped by category (router, switch, printers, ...).",
+        print_opt_both: "Graph + device list",
+        print_opt_both_d: "Topology graph on page 1, followed by the device list.",
+        print_orientation: "Page orientation",
+        print_landscape: "Landscape",
+        print_portrait: "Portrait",
+        print_note: "Credentials and WLAN passwords are never printed. Printing always uses the light layout.",
+        print_devices_total: "Total devices",
+        print_view_graph: "Topology graph",
+        print_view_current: "Screen section",
+        print_view_list: "Device list",
+        print_view_cat: "Devices by category",
+        print_view_both: "Graph + device list",
+        print_col_name: "Name",
+        print_col_ip: "IP address",
+        print_col_cat: "Category",
+        print_col_host: "Hostname",
+        print_col_mac: "MAC",
+        print_col_vendor: "Vendor",
+        print_col_parent: "Connected to",
+        print_col_poe: "PoE",
         banner_edit_active: "EDIT MODE ACTIVE: Drag nodes/frames to move them. On touch devices, drag with one finger; pan the canvas outside objects and pinch with two fingers to zoom. Use '+ Draw Frame' to draw free zones.",
         banner_draw_active: "DRAW FRAME: Click and drag on the canvas to span a new visual frame.",
         search_placeholder: "Search device, IP or hostname...",
@@ -1204,7 +1368,7 @@
         const key = el.getAttribute("data-i18n-placeholder");
         el.placeholder = t(key);
       });
-      document.getElementById("lang-btn-text").innerText = currentLang.toUpperCase();
+      document.getElementById("lang-btn-text").innerText = (currentLang === "de" ? "en" : "de").toUpperCase();
       updateThemeButton();
       document.documentElement.setAttribute("lang", currentLang);
 
@@ -4332,7 +4496,146 @@
       showNotification(t(next === "light" ? "theme_switched_light" : "theme_switched_dark"));
     }
 
+    // ===================== Drucken (Ansicht wählbar) =====================
+    function openPrintModal() {
+      const modal = document.getElementById("print-modal");
+      modal.classList.remove("pointer-events-none", "opacity-0");
+      modal.classList.add("opacity-100");
+    }
+
+    function closePrintModal() {
+      const modal = document.getElementById("print-modal");
+      modal.classList.remove("opacity-100");
+      modal.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    function ipSortKey(ip) {
+      return String(ip || "").split(".").reduce((a, p) => a * 256 + (parseInt(p, 10) || 0), 0);
+    }
+    function ipCompare(a, b) {
+      const d = ipSortKey(a.ip) - ipSortKey(b.ip);
+      return d || String(a.name).localeCompare(String(b.name));
+    }
+
+    function printLegendHtml() {
+      const used = new Set();
+      devices.forEach(d => {
+        if (!d.parentId || !devices.some(p => p.id === d.parentId)) return;
+        used.add(linkKindFor(d));
+      });
+      const items = netTypeList().filter(nt => used.has(nt.id)).map(nt =>
+        `<span style="display:inline-flex;align-items:center;gap:5px"><svg width="26" height="6" viewBox="0 0 26 6"><line x1="0" y1="3" x2="26" y2="3" stroke="${nt.color}" stroke-width="2.5" stroke-dasharray="${nt.dash || "0"}"></line></svg><span>${escapeHtml(netTypeName(nt))}</span></span>`);
+      return items.length ? `<div class="pr-legend"><strong>${escapeHtml(t("legend_title"))}</strong>${items.join("")}</div>` : "";
+    }
+
+    // Rendert die Grafik im hellen Layout und liefert sie als SVG-Markup (Bildschirm bleibt unverändert).
+    function capturePrintSvg(useCurrent, orient) {
+      const wasLight = isLight();
+      const saved = { cat: currentFilterCat, search: currentSearchTerm, edit: isEditMode };
+      try {
+        if (!wasLight) applyTheme("light", false);
+        isEditMode = false;
+        if (!useCurrent) { currentFilterCat = "all"; currentSearchTerm = ""; }
+        renderTopologySVG();
+
+        const clone = document.getElementById("topology-svg").cloneNode(true);
+        ["id", "class", "style", "width", "height"].forEach(a => clone.removeAttribute(a));
+        const pv = clone.querySelector("#draw-preview-rect");
+        if (pv) pv.remove();
+
+        let vb;
+        if (useCurrent) {
+          vb = [view.x, view.y, view.w, view.h];
+        } else {
+          let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+          const ext = (x1, y1, x2, y2) => { minX = Math.min(minX, x1); minY = Math.min(minY, y1); maxX = Math.max(maxX, x2); maxY = Math.max(maxY, y2); };
+          devices.forEach(d => { if (d.pos) ext(d.pos.x - 75, d.pos.y - 24, d.pos.x + 80, d.pos.y + 40); });
+          frames.forEach(f => ext(f.x, f.y, f.x + f.width, f.y + f.height));
+          vb = isFinite(minX) ? [minX - 16, minY - 16, maxX - minX + 32, maxY - minY + 32]
+                              : [DEFAULT_VIEW.x, DEFAULT_VIEW.y, DEFAULT_VIEW.w, DEFAULT_VIEW.h];
+        }
+        clone.setAttribute("viewBox", vb.map(n => Math.round(n)).join(" "));
+        clone.setAttribute("preserveAspectRatio", "xMidYMid meet");
+        const maxH = orient === "portrait" ? "225mm" : "135mm";
+        clone.setAttribute("style", `width:100%;height:auto;max-height:${maxH};display:block;`);
+        // Filter-ID umbenennen, damit sie nicht mit dem Original-SVG kollidiert
+        return clone.outerHTML.replace(/node-shadow/g, "pr-node-shadow");
+      } finally {
+        currentFilterCat = saved.cat;
+        currentSearchTerm = saved.search;
+        isEditMode = saved.edit;
+        if (!wasLight) applyTheme("dark", false);
+        renderTopologySVG();
+      }
+    }
+
+    function printTableHtml(list) {
+      const e = escapeHtml;
+      const parentName = (id) => { const p = devices.find(x => x.id === id); return p ? p.name : "—"; };
+      const cols = ["name", "ip", "cat", "host", "mac", "vendor", "parent", "poe"];
+      const head = cols.map(c => `<th>${e(t("print_col_" + c))}</th>`).join("");
+      const rows = list.map(d => `<tr>
+        <td><strong>${e(d.name)}</strong></td>
+        <td class="pr-mono">${e(d.ip)}</td>
+        <td>${e(getCategoryDisplayName(d.cat))}</td>
+        <td>${e(d.hostname || "")}</td>
+        <td class="pr-mono">${e(d.mac || "")}</td>
+        <td>${e(d.vendor || "")}</td>
+        <td>${e(d.parentId ? parentName(d.parentId) : "—")}</td>
+        <td>${d.poe ? "PoE" : ""}</td></tr>`).join("");
+      return `<table class="pr-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>`;
+    }
+
+    function buildPrintDocument(mode, orient) {
+      const e = escapeHtml;
+      const stamp = new Date().toLocaleString(currentLang === "de" ? "de-DE" : "en-GB");
+      const head = (label) => `<div class="pr-head"><div><h1>${e(globalConfig.title)}</h1><div class="pr-sub">${e(globalConfig.subnet)} · ${e(globalConfig.switchModel)} (${e(globalConfig.switchIp)})</div></div><div class="pr-sub" style="text-align:right"><strong>${e(label)}</strong><br>${e(stamp)}</div></div>`;
+      const graphPart = (useCurrent, label) => head(label) + `<div class="pr-svg-wrap">${capturePrintSvg(useCurrent, orient)}</div>` + printLegendHtml();
+      const listPart = (label) => head(label) + `<div class="pr-sub" style="margin-bottom:6px">${e(t("print_devices_total"))}: ${devices.length}</div>` + printTableHtml([...devices].sort(ipCompare));
+      const catPart = (label) => head(label) + categories.map(c => {
+        const l = devices.filter(d => d.cat === c.id).sort(ipCompare);
+        if (!l.length) return "";
+        return `<div class="pr-cat" style="border-left:4px solid ${c.color};padding-left:6px">${e(getCategoryDisplayName(c.id))} (${l.length})</div>` + printTableHtml(l);
+      }).join("");
+
+      if (mode === "current") return graphPart(true, t("print_view_current"));
+      if (mode === "list") return listPart(t("print_view_list"));
+      if (mode === "cat") return catPart(t("print_view_cat"));
+      if (mode === "both") return graphPart(false, t("print_view_both")) + `<div class="pr-break">${listPart(t("print_view_list"))}</div>`;
+      return graphPart(false, t("print_view_graph"));
+    }
+
+    function preparePrint(mode, orient) {
+      document.getElementById("print-root").innerHTML = buildPrintDocument(mode, orient);
+      document.getElementById("print-page-style").textContent = `@page { size: A4 ${orient}; margin: 10mm; }`;
+    }
+
+    function startPrint() {
+      const sel = document.querySelector('input[name="print-view"]:checked');
+      const mode = sel ? sel.value : "graph";
+      const orient = document.getElementById("print-orientation").value === "portrait" ? "portrait" : "landscape";
+      closePrintModal();
+      preparePrint(mode, orient);
+      setTimeout(() => window.print(), 150);
+    }
+
+    // Strg+P direkt im Browser: Grafik als Standard drucken; nach dem Druck aufräumen
+    window.addEventListener("beforeprint", () => {
+      const root = document.getElementById("print-root");
+      if (root && !root.innerHTML.trim()) preparePrint("graph", "landscape");
+    });
+    window.addEventListener("afterprint", () => {
+      const root = document.getElementById("print-root");
+      if (root) root.innerHTML = "";
+      const st = document.getElementById("print-page-style");
+      if (st) st.textContent = "";
+    });
+
     function setupEventListeners() {
+      document.getElementById("btn-print").onclick = openPrintModal;
+      document.getElementById("print-modal-close").onclick = closePrintModal;
+      document.getElementById("btn-cancel-print").onclick = closePrintModal;
+      document.getElementById("btn-start-print").onclick = startPrint;
       document.getElementById("btn-lang-toggle").onclick = toggleLanguage;
       document.getElementById("btn-theme-toggle").onclick = toggleTheme;
 
@@ -4471,6 +4774,7 @@
       bindBackdropClose("categories-modal", closeCategoriesModal);
       bindBackdropClose("frames-modal", closeFramesModal);
       bindBackdropClose("export-warning-modal", closeExportWarningModal);
+      bindBackdropClose("print-modal", closePrintModal);
 
       const searchInput = document.getElementById("search-input");
       searchInput.addEventListener("input", (e) => {
