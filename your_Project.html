@@ -46,6 +46,13 @@
       cursor: grabbing;
       filter: drop-shadow(0 0 12px rgba(0, 188, 239, 0.8));
     }
+    .node-element.list-highlight {
+      filter: drop-shadow(0 0 12px rgba(0, 188, 239, 0.95));
+    }
+    .node-element.list-highlight rect.node-box {
+      stroke: #00bcef !important;
+      stroke-width: 3 !important;
+    }
     .node-element:hover rect.node-box {
       stroke: #00bcef !important;
       filter: drop-shadow(0 0 8px rgba(0, 188, 239, 0.5));
@@ -174,7 +181,24 @@
       .pr-svg-wrap { border: 1px solid #cbd5e1; border-radius: 6px; padding: 4px; background: #fff; }
       .pr-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; font-size: 9pt; margin-top: 8px; color: #1e293b; }
       .pr-cat { font-size: 11pt; font-weight: 700; margin: 12px 0 4px; color: #0f172a; page-break-after: avoid; break-after: avoid; }
-      .pr-table { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+      .pr-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 8.5pt; }
+      .pr-table th, .pr-table td { overflow-wrap: anywhere; word-break: normal; }
+      .pr-table:not(.pr-credentials) th:nth-child(1), .pr-table:not(.pr-credentials) td:nth-child(1) { width: 17%; }
+      .pr-table:not(.pr-credentials) th:nth-child(2), .pr-table:not(.pr-credentials) td:nth-child(2) { width: 10%; }
+      .pr-table:not(.pr-credentials) th:nth-child(3), .pr-table:not(.pr-credentials) td:nth-child(3) { width: 12%; }
+      .pr-table:not(.pr-credentials) th:nth-child(4), .pr-table:not(.pr-credentials) td:nth-child(4) { width: 14%; }
+      .pr-table:not(.pr-credentials) th:nth-child(5), .pr-table:not(.pr-credentials) td:nth-child(5) { width: 12%; }
+      .pr-table:not(.pr-credentials) th:nth-child(6), .pr-table:not(.pr-credentials) td:nth-child(6) { width: 13%; }
+      .pr-table:not(.pr-credentials) th:nth-child(7), .pr-table:not(.pr-credentials) td:nth-child(7) { width: 14%; }
+      .pr-table:not(.pr-credentials) th:nth-child(8), .pr-table:not(.pr-credentials) td:nth-child(8) { width: 8%; }
+      .pr-credentials th, .pr-credentials td { overflow-wrap: anywhere; }
+      .pr-credentials th:nth-child(1), .pr-credentials td:nth-child(1) { width: 14%; }
+      .pr-credentials th:nth-child(2), .pr-credentials td:nth-child(2) { width: 10%; }
+      .pr-credentials th:nth-child(3), .pr-credentials td:nth-child(3) { width: 12%; }
+      .pr-credentials th:nth-child(4), .pr-credentials td:nth-child(4) { width: 14%; }
+      .pr-credentials th:nth-child(5), .pr-credentials td:nth-child(5) { width: 16%; }
+      .pr-credentials th:nth-child(6), .pr-credentials td:nth-child(6) { width: 15%; }
+      .pr-credentials th:nth-child(7), .pr-credentials td:nth-child(7) { width: 19%; }
       .pr-table th { background: #e2e8f0; text-align: left; padding: 3px 6px; border: 1px solid #94a3b8; color: #0f172a; }
       .pr-table td { padding: 3px 6px; border: 1px solid #cbd5e1; color: #0f172a; vertical-align: top; }
       .pr-table thead { display: table-header-group; }
@@ -184,7 +208,7 @@
   </style>
   <style id="print-page-style"></style>
   <!-- KRYPTONETVIEW-EMBEDDED-STATE: wird automatisch beim Speichern ueberschrieben -->
-  <script id="embedded-state" type="application/json">{"format":"kryptonetview-embedded-v1","savedAt":1793524558949,"config":{"title":"Your LAN","subnet":"192.168.1.0/24","switchModel":"Your Router or Switch","switchIp":"192.168.1.1","netColors":{"lan":"#71717a","ethernet":"#00bcef","wlan":"#3b82f6","guest":"#f59e0b"},"netTypes":[{"id":"lan","builtin":true,"name":"Standard LAN","color":"#71717a","dash":"0"},{"id":"ethernet","builtin":true,"name":"","color":"#00bcef","dash":"0"},{"id":"wlan","builtin":true,"name":"Wireless LAN","color":"#3b82f6","dash":"3 3"},{"id":"guest","builtin":true,"name":"","color":"#f59e0b","dash":"4 3"}]},"categories":[{"id":"router","nameKey":"cat_label_router","name":"Router","icon":"fa-network-wired","color":"#00bcef"},{"id":"gateways","nameKey":"cat_label_gateways","name":"Gateways","icon":"fa-tower-broadcast","color":"#f59e0b"},{"id":"wlan_ap","nameKey":"cat_label_wlanap","name":"WLAN Access Point","icon":"fa-wifi","color":"#38bdf8"},{"id":"switch","nameKey":"cat_label_switch","name":"Switch","icon":"fa-sitemap","color":"#00bcef"},{"id":"server","nameKey":"cat_label_server","name":"Server","icon":"fa-server","color":"#818cf8"},{"id":"endgeraet","nameKey":"cat_label_endgeraet","name":"Endgerät","icon":"fa-laptop","color":"#06b6d4"},{"id":"infrastructure","nameKey":"cat_label_infra","name":"Infrastruktur","icon":"fa-sitemap","color":"#38bdf8"},{"id":"sensors","nameKey":"cat_label_sensors","name":"Sensoren","icon":"fa-gauge-high","color":"#10b981"},{"id":"voice","nameKey":"cat_label_voice","name":"VoIP Phones","icon":"fa-phone-flip","color":"#34d399"},{"id":"cameras","nameKey":"cat_label_cameras","name":"Smart IoT & Cam","icon":"fa-video","color":"#c084fc"},{"id":"printers","nameKey":"cat_label_printers","name":"Drucker","icon":"fa-print","color":"#f472b6"},{"id":"guest","nameKey":"cat_label_guest","name":"Gastnetz (179.x)","icon":"fa-shield-halved","color":"#f59e0b"},{"id":"smarttv","nameKey":"cat_label_smarttv","name":"Smart TVs & Streaming","icon":"fa-tv","color":"#38bdf8"},{"id":"gaming","nameKey":"cat_label_gaming","name":"Gaming & Konsolen","icon":"fa-gamepad","color":"#ec4899"},{"id":"smarthome","nameKey":"cat_label_smarthome","name":"Smart Home Hubs","icon":"fa-house-signal","color":"#f59e0b"},{"id":"nas","nameKey":"cat_label_nas","name":"NAS & Backup-Speicher","icon":"fa-database","color":"#6366f1"},{"id":"firewall","nameKey":"cat_label_firewall","name":"Firewall & Security","icon":"fa-shield-halved","color":"#ef4444"},{"id":"solar","nameKey":"cat_label_solar","name":"Solar & Photovoltaik","icon":"fa-solar-panel","color":"#eab308"},{"id":"wallbox","nameKey":"cat_label_wallbox","name":"Wallbox & E-Mobilität","icon":"fa-charging-station","color":"#10b981"},{"id":"audio","nameKey":"cat_label_audio","name":"Audio & Multiroom","icon":"fa-music","color":"#a855f7"}],"frames":[],"devices":[],"crypto":{"salt":"UHVd3rO0hLT+K13LqQ9k/g==","verifier":"elv6bdgWUgbClib68VUjsnZcrydRVgIg2KE0Wi/9rLU="}}</script>
+  <script id="embedded-state" type="application/json">{"format":"kryptonetview-embedded-v1","savedAt":1793534164767,"config":{"title":"Your Network","subnet":"192.168.178.0/24","switchModel":"your Switch or Router","switchIp":"192.168.178.8","netColors":{"lan":"#71717a","ethernet":"#00bcef","wlan":"#3b82f6","guest":"#f59e0b"},"netTypes":[{"id":"lan","builtin":true,"name":"","color":"#71717a","dash":"0"},{"id":"ethernet","builtin":true,"name":"","color":"#00bcef","dash":"0"},{"id":"wlan","builtin":true,"name":"Wireless Lan","color":"#3b82f6","dash":"3 3"},{"id":"guest","builtin":true,"name":"","color":"#f59e0b","dash":"4 3"}]},"categories":[{"id":"router","nameKey":"cat_label_router","name":"Router","icon":"fa-network-wired","color":"#00bcef"},{"id":"gateways","nameKey":"cat_label_gateways","name":"Gateways","icon":"fa-tower-broadcast","color":"#f59e0b"},{"id":"wlan_ap","nameKey":"cat_label_wlanap","name":"WLAN Access Point","icon":"fa-wifi","color":"#38bdf8"},{"id":"switch","nameKey":"cat_label_switch","name":"Switch","icon":"fa-sitemap","color":"#00bcef"},{"id":"server","nameKey":"cat_label_server","name":"Server","icon":"fa-server","color":"#818cf8"},{"id":"endgeraet","nameKey":"cat_label_endgeraet","name":"Endgerät","icon":"fa-laptop","color":"#06b6d4"}],"frames":[],"devices":[],"crypto":{"salt":"UHVd3rO0hLT+K13LqQ9k/g==","verifier":"elv6bdgWUgbClib68VUjsnZcrydRVgIg2KE0Wi/9rLU="}}</script>
 </head>
 <body class="bg-darkbg text-zinc-300 min-h-screen flex flex-col overflow-x-hidden">
 
@@ -205,7 +229,7 @@
         </div>
         <p class="text-[11px] text-zinc-400 flex items-center gap-2 mt-0.5">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block pulse-glow"></span>
-          <span data-i18n="header_central_switch">Zentralswitch</span>: <strong id="header-switch-model" class="text-white font-mono">Cisco WS-C2960S-48LPS-L</strong> (<span id="header-switch-ip" class="font-mono">192.168.178.8</span>) | AES-256 Vault
+          <span data-i18n="header_central_switch">Zentralswitch</span>: <strong id="header-switch-model" class="text-white font-mono">Cisco WS-C2960S-48LPS-L</strong> (<span id="header-switch-ip" class="font-mono">192.168.178.8</span>) AES-256 Vault
         </p>
       </div>
     </div>
@@ -281,7 +305,6 @@
         <i class="fa-solid fa-plus"></i> <span data-i18n="btn_new_device">Neues Gerät</span>
       </button>
 
-      <div class="h-4 w-px bg-zinc-700/80 mx-0.5 hidden sm:block"></div>
 
       <!-- File System Access API & JSON Actions -->
       <button id="btn-save-direct-file" class="bg-zinc-800/50 text-zinc-500 px-2.5 py-1 rounded-lg border border-zinc-800 transition flex items-center gap-1.5 shadow-md cursor-not-allowed" title="Direkt in die lokale Datei speichern (File System API)" disabled>
@@ -312,10 +335,19 @@
 
     <!-- Sidebar Filter & Device Navigation -->
     <aside class="w-full lg:w-96 bg-panelbg border-r border-zinc-800 p-4 flex flex-col space-y-4 max-h-screen lg:max-h-[calc(100vh-53px)] overflow-y-auto">
-      <!-- Search Input -->
-      <div class="relative">
-        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-zinc-400 text-sm"></i>
-        <input type="text" id="search-input" data-i18n-placeholder="search_placeholder" placeholder="Gerät, IP oder Hostname suchen..." class="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg pl-9 pr-4 py-2 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-ciscocyan transition">
+      <!-- Search Input & Sort Selector -->
+      <div class="flex gap-2">
+        <div class="relative flex-1">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-zinc-400 text-sm"></i>
+          <input type="text" id="search-input" data-i18n-placeholder="search_placeholder" placeholder="Gerät, IP oder Hostname suchen..." class="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg pl-9 pr-4 py-2 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-ciscocyan transition">
+        </div>
+        <select id="device-sort-select" onchange="saveDeviceSortPreference()" class="bg-zinc-900 border border-zinc-700/80 rounded-lg px-2.5 py-2 text-xs text-zinc-200 focus:outline-none focus:border-ciscocyan cursor-pointer" title="Geräteliste sortieren">
+          <option value="name_asc">A–Z</option>
+          <option value="name_desc">Z–A</option>
+          <option value="ip_asc">IP ↑</option>
+          <option value="ip_desc">IP ↓</option>
+          <option value="cat">Kategorie</option>
+        </select>
       </div>
 
       <!-- Category Filters -->
@@ -409,39 +441,47 @@
       </div>
 
       <div class="space-y-2">
-        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+        <label class="flex items-start gap-3 w-full box-border bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
           <input type="radio" name="print-view" value="graph" checked class="mt-1 accent-cyan-500">
           <span class="flex-1">
             <span class="block text-xs font-bold text-white"><i class="fa-solid fa-diagram-project text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_graph">Topologie-Grafik</span></span>
             <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_graph_d">Gesamte Grafik mit allen Geräten und Legende, passend auf eine Seite.</span>
           </span>
         </label>
-        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+        <label class="flex items-start gap-3 w-full box-border bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
           <input type="radio" name="print-view" value="current" class="mt-1 accent-cyan-500">
           <span class="flex-1">
             <span class="block text-xs font-bold text-white"><i class="fa-solid fa-eye text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_current">Aktueller Bildschirmausschnitt</span></span>
             <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_current_d">Grafik so, wie sie gerade angezeigt wird (Zoom, Verschiebung, Kategorie-Filter und Suche).</span>
           </span>
         </label>
-        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+        <label class="flex items-start gap-3 w-full box-border bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
           <input type="radio" name="print-view" value="list" class="mt-1 accent-cyan-500">
           <span class="flex-1">
             <span class="block text-xs font-bold text-white"><i class="fa-solid fa-table-list text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_list">Geräteliste</span></span>
             <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_list_d">Alle Geräte als Tabelle, nach IP-Adresse sortiert.</span>
           </span>
         </label>
-        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+        <label class="flex items-start gap-3 w-full box-border bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
           <input type="radio" name="print-view" value="cat" class="mt-1 accent-cyan-500">
           <span class="flex-1">
             <span class="block text-xs font-bold text-white"><i class="fa-solid fa-layer-group text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_cat">Geräte nach Kategorie</span></span>
             <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_cat_d">Geräte gruppiert nach Kategorie (Router, Switch, Drucker, ...).</span>
           </span>
         </label>
-        <label class="flex items-start gap-3 bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
+
+        <label class="flex items-start gap-3 w-full box-border bg-zinc-900 border border-zinc-700/80 hover:border-ciscocyan has-[:checked]:border-ciscocyan rounded-xl p-3 cursor-pointer transition">
           <input type="radio" name="print-view" value="both" class="mt-1 accent-cyan-500">
           <span class="flex-1">
             <span class="block text-xs font-bold text-white"><i class="fa-solid fa-copy text-ciscocyan mr-1.5"></i><span data-i18n="print_opt_both">Grafik + Geräteliste</span></span>
             <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_both_d">Topologie-Grafik auf Seite 1, danach die Geräteliste.</span>
+          </span>
+        </label>
+        <label id="print-credentials-option" class="flex items-start gap-3 w-full box-border bg-zinc-900 border border-amber-700/80 hover:border-amber-400 has-[:checked]:border-amber-400 rounded-xl p-3 cursor-pointer transition" style="display:none">
+          <input type="radio" name="print-view" value="credentials" class="mt-1 accent-amber-500">
+          <span class="flex-1">
+            <span class="block text-xs font-bold text-white"><i class="fa-solid fa-key text-amber-400 mr-1.5"></i><span data-i18n="print_opt_credentials">Geräte mit Zugangsdaten</span></span>
+            <span class="block text-[11px] text-zinc-400 mt-0.5" data-i18n="print_opt_credentials_d">Nur Geräte mit hinterlegten Login- oder WLAN-Daten; Zugangsdaten werden mitgedruckt.</span>
           </span>
         </label>
       </div>
@@ -970,12 +1010,20 @@
         print_opt_list_d: "Alle Geräte als Tabelle, nach IP-Adresse sortiert.",
         print_opt_cat: "Geräte nach Kategorie",
         print_opt_cat_d: "Geräte gruppiert nach Kategorie (Router, Switch, Drucker, ...).",
+        print_opt_credentials: "Geräte mit Zugangsdaten",
+        print_opt_credentials_d: "Nur Geräte mit hinterlegten Login- oder WLAN-Daten; Zugangsdaten werden mitgedruckt.",
+        print_view_credentials: "Geräte mit Zugangsdaten",
+        print_col_login_user: "Login-Benutzer",
+        print_col_login_pass: "Login-Passwort",
+        print_col_ssid: "WLAN-SSID",
+        print_col_wlan_pass: "WLAN-Passwort",
+        print_no_credentials: "Keine Geräte mit hinterlegten Zugangsdaten gefunden.",
         print_opt_both: "Grafik + Geräteliste",
         print_opt_both_d: "Topologie-Grafik auf Seite 1, danach die Geräteliste.",
         print_orientation: "Seitenausrichtung",
         print_landscape: "Querformat",
         print_portrait: "Hochformat",
-        print_note: "Zugangsdaten und WLAN-Passwörter werden nie mitgedruckt. Gedruckt wird immer im hellen Layout.",
+        print_note: "Zugangsdaten werden nur über die separate Passwort-Druckoption ausgegeben. Gedruckt wird immer im hellen Layout.",
         print_devices_total: "Geräte gesamt",
         print_view_graph: "Topologie-Grafik",
         print_view_current: "Bildschirmausschnitt",
@@ -1173,12 +1221,20 @@
         print_opt_list_d: "All devices as a table, sorted by IP address.",
         print_opt_cat: "Devices by category",
         print_opt_cat_d: "Devices grouped by category (router, switch, printers, ...).",
+        print_opt_credentials: "Devices with credentials",
+        print_opt_credentials_d: "Only devices with saved login or WLAN data; credentials will be printed.",
+        print_view_credentials: "Devices with credentials",
+        print_col_login_user: "Login user",
+        print_col_login_pass: "Login password",
+        print_col_ssid: "WLAN SSID",
+        print_col_wlan_pass: "WLAN password",
+        print_no_credentials: "No devices with saved credentials were found.",
         print_opt_both: "Graph + device list",
         print_opt_both_d: "Topology graph on page 1, followed by the device list.",
         print_orientation: "Page orientation",
         print_landscape: "Landscape",
         print_portrait: "Portrait",
-        print_note: "Credentials and WLAN passwords are never printed. Printing always uses the light layout.",
+        print_note: "Credentials are printed only through the separate password-print option. Printing always uses the light layout.",
         print_devices_total: "Total devices",
         print_view_graph: "Topology graph",
         print_view_current: "Screen section",
@@ -1368,6 +1424,8 @@
         const key = el.getAttribute("data-i18n-placeholder");
         el.placeholder = t(key);
       });
+      const sortCategoryOption = document.querySelector('#device-sort-select option[value="cat"]');
+      if (sortCategoryOption) sortCategoryOption.textContent = currentLang === "de" ? "Kategorie" : "Category";
       document.getElementById("lang-btn-text").innerText = (currentLang === "de" ? "en" : "de").toUpperCase();
       updateThemeButton();
       document.documentElement.setAttribute("lang", currentLang);
@@ -1724,6 +1782,7 @@
 
     document.addEventListener("DOMContentLoaded", async () => {
       loadStoredSettings();
+      loadDeviceSortPreference();
       renderHeaderSettings();
       await initializeCryptoState();
       buildNetColorSettings();
@@ -1873,7 +1932,12 @@
         if (h) {
           fileHandle = h;
           const perm = await h.queryPermission({ mode: "readwrite" });
+          // Grün nur bei bestätigtem Schreibzugriff; bei "prompt"/"denied"
+          // bleibt der Button orange, bis der Nutzer die Freigabe anklickt.
           htmlFileStatus = perm === "granted" ? "on" : "perm";
+        } else {
+          fileHandle = null;
+          htmlFileStatus = "off";
         }
       } catch (e) { console.error(e); }
       updateFileStatusUI();
@@ -1924,10 +1988,19 @@
           } catch (e) {
             reason = (e && e.name ? e.name : "Fehler") + (e && e.message ? " – " + e.message : "");
           }
-          console.warn("KryptoNetView: gemerkte Datei nicht nutzbar (" + reason + "), frage nach dem Pfad");
-          await forgetFileHandle();
-          showNotification("Gemerkte Datei nicht nutzbar (" + reason + "). Bitte einmal erneut auf den Knopf klicken und die Datei wählen.", true);
-          return; // Der Dateidialog braucht einen frischen Klick (Browser-Vorgabe).
+          // Den gespeicherten Handle behalten: Bei einer fehlenden/abgelaufenen
+          // Berechtigung reicht ein erneuter Klick, um sie wieder anzufragen.
+          // Nur wenn der Handle tatsächlich ungültig ist, soll neu gewählt werden.
+          htmlFileStatus = "perm";
+          updateFileStatusUI();
+          const handleInvalid = /NotFoundError|InvalidStateError|DataError/i.test(reason);
+          if (handleInvalid) {
+            await forgetFileHandle();
+            showNotification("Die gemerkte Datei ist nicht mehr verfügbar. Bitte erneut klicken und die Datei wählen.", true);
+          } else {
+            showNotification("Schreibzugriff konnte nicht bestätigt werden (" + reason + "). Bitte erneut klicken, um die Berechtigung anzufragen.", true);
+          }
+          return;
         }
         // Keine (funktionierende) Datei gemerkt -> einmal nach dem Pfad fragen.
         const expectedName = currentHtmlFileName();
@@ -2477,6 +2550,17 @@
 
     function updateAuthUIState() {
       updateJsonButtonsState();
+      const printCredentialsOption = document.getElementById("print-credentials-option");
+      if (printCredentialsOption) {
+        printCredentialsOption.style.display = isLoggedIn ? "flex" : "none";
+        if (!isLoggedIn) {
+          const credentialsRadio = printCredentialsOption.querySelector('input[name="print-view"]');
+          if (credentialsRadio && credentialsRadio.checked) {
+            const graphRadio = document.querySelector('input[name="print-view"][value="graph"]');
+            if (graphRadio) graphRadio.checked = true;
+          }
+        }
+      }
       const pwBtn = document.getElementById("btn-change-pw-header");
       if (pwBtn) {
         pwBtn.classList.toggle("hidden", !isLoggedIn);
@@ -2782,6 +2866,20 @@
       showNotification("Rahmen hinzugefügt.");
     }
 
+    function saveDeviceSortPreference() {
+      const select = document.getElementById("device-sort-select");
+      if (select) localStorage.setItem("kryptonetview_device_sort", select.value);
+      renderDeviceList();
+    }
+
+    function loadDeviceSortPreference() {
+      const select = document.getElementById("device-sort-select");
+      const saved = localStorage.getItem("kryptonetview_device_sort");
+      if (select && saved && Array.from(select.options).some(option => option.value === saved)) {
+        select.value = saved;
+      }
+    }
+
     function renderDeviceList() {
       const container = document.getElementById("device-list-container");
       container.innerHTML = "";
@@ -2796,6 +2894,18 @@
         );
       }
 
+      // Sortierung wie in KryptoNetView
+      const sortSelect = document.getElementById("device-sort-select");
+      const sortMode = sortSelect ? sortSelect.value : "name_asc";
+      filtered.sort((a, b) => {
+        if (sortMode === "name_asc") return a.name.localeCompare(b.name);
+        if (sortMode === "name_desc") return b.name.localeCompare(a.name);
+        if (sortMode === "ip_asc") return ipSortKey(a.ip) - ipSortKey(b.ip);
+        if (sortMode === "ip_desc") return ipSortKey(b.ip) - ipSortKey(a.ip);
+        if (sortMode === "cat") return getCategoryDisplayName(a.cat).localeCompare(getCategoryDisplayName(b.cat));
+        return 0;
+      });
+
       document.getElementById("total-count").innerText = devices.length;
 
       if (filtered.length === 0) {
@@ -2807,6 +2917,8 @@
         const item = document.createElement("div");
         item.className = "bg-cardbg hover:bg-zinc-700/70 border border-zinc-700/60 p-2.5 rounded-lg cursor-pointer transition flex items-center justify-between group";
         item.onclick = () => openModal(dev);
+        item.addEventListener("mouseenter", () => setDeviceListHighlight(dev.id, true));
+        item.addEventListener("mouseleave", () => setDeviceListHighlight(dev.id, false));
 
         const parentDev = devices.find(p => p.id === dev.parentId);
         const hasCredentials = Boolean((dev._unlockedPass && dev._unlockedPass.trim() !== "") || (dev.loginPass && dev.loginPass.trim() !== ""));
@@ -2832,6 +2944,12 @@
         `;
         container.appendChild(item);
       });
+    }
+
+    function setDeviceListHighlight(deviceId, highlighted) {
+      const node = Array.from(document.querySelectorAll("#nodes-layer .node-element"))
+        .find(el => el.getAttribute("data-device-id") === String(deviceId));
+      if (node) node.classList.toggle("list-highlight", highlighted);
     }
 
     const DEFAULT_VIEW = { x: 0, y: 0, w: 1480, h: 960 };
@@ -4589,12 +4707,47 @@
       return `<table class="pr-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>`;
     }
 
+    function printCredentialsTableHtml(list) {
+      const e = escapeHtml;
+      const cols = ["name", "ip", "cat", "login_user", "login_pass", "ssid", "wlan_pass"];
+      const head = cols.map(c => `<th>${e(t("print_col_" + c))}</th>`).join("");
+      const rows = list.map(d => {
+        const wlan = Array.isArray(d._unlockedWlan) ? d._unlockedWlan : [];
+        const ssids = wlan.map(n => n && n.ssid ? String(n.ssid) : "").filter(Boolean);
+        const wlanPasses = wlan.map(n => n && n.pass ? String(n.pass) : "").filter(Boolean);
+        return `<tr>
+          <td><strong>${e(d.name || "")}</strong></td>
+          <td class="pr-mono">${e(d.ip || "")}</td>
+          <td>${e(getCategoryDisplayName(d.cat))}</td>
+          <td>${e(d._unlockedUser || "")}</td>
+          <td>${e(d._unlockedPass || "")}</td>
+          <td>${ssids.map(e).join("<br>")}</td>
+          <td>${wlanPasses.map(e).join("<br>")}</td>
+        </tr>`;
+      }).join("");
+      return `<table class="pr-table pr-credentials"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>`;
+    }
+
+    function deviceHasPrintableCredentials(d) {
+      const nonEmpty = v => typeof v === "string" && v.trim() !== "";
+      const wlan = Array.isArray(d._unlockedWlan) ? d._unlockedWlan : [];
+      return nonEmpty(d._unlockedUser) || nonEmpty(d._unlockedPass) ||
+        wlan.some(n => n && (nonEmpty(n.ssid) || nonEmpty(n.pass)));
+    }
+
     function buildPrintDocument(mode, orient) {
       const e = escapeHtml;
-      const stamp = new Date().toLocaleString(currentLang === "de" ? "de-DE" : "en-GB");
+      const stamp = new Date().toLocaleString(currentLang === "de" ? "de-DE" : "en-US");
       const head = (label) => `<div class="pr-head"><div><h1>${e(globalConfig.title)}</h1><div class="pr-sub">${e(globalConfig.subnet)} · ${e(globalConfig.switchModel)} (${e(globalConfig.switchIp)})</div></div><div class="pr-sub" style="text-align:right"><strong>${e(label)}</strong><br>${e(stamp)}</div></div>`;
       const graphPart = (useCurrent, label) => head(label) + `<div class="pr-svg-wrap">${capturePrintSvg(useCurrent, orient)}</div>` + printLegendHtml();
       const listPart = (label) => head(label) + `<div class="pr-sub" style="margin-bottom:6px">${e(t("print_devices_total"))}: ${devices.length}</div>` + printTableHtml([...devices].sort(ipCompare));
+      const credentialsPart = () => {
+        if (!isLoggedIn) return head(t("print_view_credentials")) + `<p>${e(t("print_no_credentials"))}</p>`;
+        const list = devices.filter(deviceHasPrintableCredentials).sort(ipCompare);
+        return head(t("print_view_credentials")) +
+          `<div class="pr-sub" style="margin-bottom:6px">${e(t("print_devices_total"))}: ${list.length}</div>` +
+          (list.length ? printCredentialsTableHtml(list) : `<p>${e(t("print_no_credentials"))}</p>`);
+      };
       const catPart = (label) => head(label) + categories.map(c => {
         const l = devices.filter(d => d.cat === c.id).sort(ipCompare);
         if (!l.length) return "";
@@ -4604,6 +4757,7 @@
       if (mode === "current") return graphPart(true, t("print_view_current"));
       if (mode === "list") return listPart(t("print_view_list"));
       if (mode === "cat") return catPart(t("print_view_cat"));
+      if (mode === "credentials") return credentialsPart();
       if (mode === "both") return graphPart(false, t("print_view_both")) + `<div class="pr-break">${listPart(t("print_view_list"))}</div>`;
       return graphPart(false, t("print_view_graph"));
     }
@@ -4617,6 +4771,10 @@
       const sel = document.querySelector('input[name="print-view"]:checked');
       const mode = sel ? sel.value : "graph";
       const orient = document.getElementById("print-orientation").value === "portrait" ? "portrait" : "landscape";
+      if (mode === "credentials" && !isLoggedIn) {
+        alert(currentLang === "de" ? "Für den Passwortdruck musst du als Administrator angemeldet sein." : "You must be logged in as administrator to print credentials.");
+        return;
+      }
       closePrintModal();
       preparePrint(mode, orient);
       setTimeout(() => window.print(), 150);
