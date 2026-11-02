@@ -120,6 +120,59 @@
       .fixed.inset-0 > div { max-height: 92dvh; overflow-y: auto; padding: 1rem !important; }
     }
 
+
+    /* ===== Mobile / Tablet Bedienung ===== */
+    #mobile-sidebar-toggle { display:none; }
+    @media (max-width: 1023px) {
+      #mobile-sidebar-toggle { display:flex; align-items:center; justify-content:center; gap:.55rem; width:100%; min-height:44px; border:1px solid rgba(0,188,239,.35); border-radius:.7rem; background:rgba(8,47,73,.35); color:#7dd3fc; font-size:13px; font-weight:600; }
+      aside { flex:0 0 auto; width:100% !important; padding:.65rem !important; gap:.65rem !important; }
+      aside #device-list-container { max-height:28vh; }
+      aside #category-filters { max-height:18vh !important; }
+      aside.mobile-collapsed #device-list-container,
+      aside.mobile-collapsed #category-filters { display:none !important; }
+      aside.mobile-collapsed { padding-bottom:.55rem !important; }
+      main { flex:1 1 auto; min-height:0 !important; height:56vh; padding:.55rem !important; }
+      #svg-viewport { min-height:0 !important; }
+      #topology-svg { min-height:0 !important; }
+      #canvas-header-title { display:none; }
+      #btn-zoom-in, #btn-zoom-out, #btn-reset-view, #btn-reset-layout, #btn-auto-layout { min-width:40px; min-height:40px; }
+      #svg-viewport + div { padding:.65rem !important; }
+      #device-modal { align-items:flex-end; }
+      #device-modal #modal-content { width:100% !important; max-width:none !important; height:min(88dvh, 760px) !important; border-left:0 !important; border-top:1px solid rgba(113,113,122,.65); border-radius:1.1rem 1.1rem 0 0; padding:1rem !important; padding-bottom:max(1rem, env(safe-area-inset-bottom)) !important; }
+      #device-modal #modal-close { min-width:44px; min-height:44px; font-size:30px; }
+      #device-modal button, .fixed.inset-0 button { min-height:40px; }
+      input, select, textarea { font-size:16px !important; }
+    }
+    @media (max-width: 640px) {
+      header { padding:.6rem !important; }
+      header > div:last-child { display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)); }
+      header > div:last-child > button, header > div:last-child > label { justify-content:center; min-width:0; font-size:11px; }
+      .flex-1.flex.flex-col.lg\:flex-row { overflow:visible !important; }
+      main { height:58vh; min-height:340px !important; }
+      aside:not(.mobile-collapsed) #device-list-container { max-height:24vh; }
+      #svg-viewport { border-radius:.65rem; }
+      #topology-svg { min-height:0 !important; }
+      #canvas-header-title { display:none !important; }
+      #btn-reset-layout, #btn-auto-layout { display:none; }
+      #graph-view-select { max-width:118px; min-height:40px; }
+      #svg-viewport + div { gap:.5rem; }
+      #svg-viewport + div > div { gap:.55rem !important; }
+      #footer-hint { font-size:10px; }
+      #block-fall-panel > div:nth-child(2) { gap:.5rem; }
+      #block-fall-canvas { width:min(52vw, 200px); height:auto; aspect-ratio:1/2; }
+    }
+    @media (min-width: 700px) and (max-width: 1023px) and (orientation: landscape) {
+      .flex-1.flex.flex-col.lg\:flex-row { flex-direction:row !important; min-height:0; }
+      .flex-1.flex.flex-col.lg\:flex-row > aside { width:285px !important; max-width:36vw; height:100%; overflow-y:auto !important; border-right:1px solid #27272a; border-bottom:0; }
+      .flex-1.flex.flex-col.lg\:flex-row > main { height:auto !important; min-height:0 !important; flex:1 1 0%; }
+      aside #device-list-container { max-height:35vh; }
+      #mobile-sidebar-toggle { min-height:40px; }
+    }
+    @media (hover:none) and (pointer:coarse) {
+      .node-element, .frame-element { -webkit-tap-highlight-color:transparent; }
+      button, label, select { -webkit-tap-highlight-color:transparent; }
+    }
+
     /* ===== Heller Ansichtsmodus ===== */
     html.light { color-scheme: light; }
     html.dark { color-scheme: dark; }
@@ -212,7 +265,22 @@
 </style>
   <style id="print-page-style"></style>
   <!-- KRYPTONETVIEW-EMBEDDED-STATE: wird automatisch beim Speichern ueberschrieben -->
-  <script id="embedded-state" type="application/json">{"format":"kryptonetview-embedded-v1","savedAt":1793619986274,"config":{"title":"your Project","subnet":"192.168.1.0/24","switchModel":"your Switch","switchIp":"192.168.1.8","netColors":{"lan":"#71717a","ethernet":"#00bcef","wlan":"#3b82f6","guest":"#f59e0b"},"netTypes":[{"id":"lan","builtin":true,"name":"","color":"#71717a","dash":"0"},{"id":"ethernet","builtin":true,"name":"","color":"#00bcef","dash":"0"},{"id":"wlan","builtin":true,"name":"Wireless LAN","color":"#3b82f6","dash":"3 3"},{"id":"guest","builtin":true,"name":"","color":"#f59e0b","dash":"4 3"}]},"categories":[{"id":"router","nameKey":"cat_label_router","name":"Router","icon":"fa-network-wired","color":"#00bcef"},{"id":"gateways","nameKey":"cat_label_gateways","name":"Gateways","icon":"fa-tower-broadcast","color":"#f59e0b"},{"id":"wlan_ap","nameKey":"cat_label_wlanap","name":"WLAN Access Point","icon":"fa-wifi","color":"#38bdf8"},{"id":"switch","nameKey":"cat_label_switch","name":"Switch","icon":"fa-sitemap","color":"#00bcef"},{"id":"server","nameKey":"cat_label_server","name":"Server","icon":"fa-server","color":"#818cf8"},{"id":"endgeraet","nameKey":"cat_label_endgeraet","name":"End Device","icon":"fa-laptop","color":"#06b6d4"},{"id":"infrastructure","nameKey":"cat_label_infra","name":"Infrastructure","icon":"fa-sitemap","color":"#38bdf8"},{"id":"sensors","nameKey":"cat_label_sensors","name":"Sensors","icon":"fa-gauge-high","color":"#10b981"},{"id":"voice","nameKey":"cat_label_voice","name":"VoIP Phones","icon":"fa-phone-flip","color":"#34d399"},{"id":"cameras","nameKey":"cat_label_cameras","name":"Smart IoT & Cam","icon":"fa-video","color":"#c084fc"},{"id":"printers","nameKey":"cat_label_printers","name":"Printers","icon":"fa-print","color":"#f472b6"},{"id":"guest","nameKey":"cat_label_guest","name":"Guest Network (179.x)","icon":"fa-shield-halved","color":"#f59e0b"},{"id":"smarttv","nameKey":"cat_label_smarttv","name":"Smart TVs & Streaming","icon":"fa-tv","color":"#38bdf8"},{"id":"gaming","nameKey":"cat_label_gaming","name":"Gaming & Consoles","icon":"fa-gamepad","color":"#ec4899"},{"id":"smarthome","nameKey":"cat_label_smarthome","name":"Smart Home Hubs","icon":"fa-house-signal","color":"#f59e0b"},{"id":"nas","nameKey":"cat_label_nas","name":"NAS & Backup Storage","icon":"fa-database","color":"#6366f1"},{"id":"firewall","nameKey":"cat_label_firewall","name":"Firewall & Security","icon":"fa-shield-halved","color":"#ef4444"},{"id":"solar","nameKey":"cat_label_solar","name":"Solar & Photovoltaic","icon":"fa-solar-panel","color":"#eab308"},{"id":"wallbox","nameKey":"cat_label_wallbox","name":"Wallbox & E-Mobility","icon":"fa-charging-station","color":"#10b981"},{"id":"audio","nameKey":"cat_label_audio","name":"Audio & Multiroom","icon":"fa-music","color":"#a855f7"}],"frames":[],"devices":[],"viewState":{"net":{"view":{"x":0,"y":0,"w":1480,"h":960},"circleRadius":300,"positions":{}},"circle":{"manualRadius":true,"circleRadius":412,"view":{"x":0,"y":0,"w":1480,"h":960}},"tree":{"positions":{"switch":{"x":663,"y":80},"ap_og":{"x":125,"y":198},"ap_gh":{"x":255,"y":198},"server_main":{"x":385,"y":198},"server_ipmi":{"x":515,"y":198},"dev_1793258588876_2":{"x":645,"y":198},"dev_1793258588877_3":{"x":775,"y":198},"dev_1793258588877_5":{"x":905,"y":198},"dev_1793258588877_22":{"x":1035,"y":198},"phone_gh":{"x":125,"y":270},"phone_sz":{"x":255,"y":270},"phone_wz2":{"x":385,"y":270},"phone_wz1":{"x":515,"y":270},"cam_door":{"x":645,"y":270},"cam_yard":{"x":775,"y":270},"cam_gh":{"x":905,"y":270},"print_hp":{"x":1035,"y":270},"print_ricoh":{"x":125,"y":342},"print_brother":{"x":255,"y":342},"dev_1793258588877_27":{"x":385,"y":342},"dev_1793258588877_20":{"x":515,"y":342},"dev_1793258588877_21":{"x":645,"y":342},"dev_1793258588877_23":{"x":775,"y":342},"dev_1793258588877_28":{"x":905,"y":342},"gateway_main":{"x":1201,"y":198},"router_core":{"x":1201,"y":316},"ap_eg":{"x":1614,"y":126},"poco_x4":{"x":1419,"y":244},"patrick_redmi9":{"x":1549,"y":244},"andrea_nb_wlan":{"x":1679,"y":244},"lee_pad":{"x":1809,"y":244},"andrea_pad":{"x":1419,"y":316},"redmi_pad_se":{"x":1549,"y":316},"andrea_pocof1":{"x":1679,"y":316},"redmi_pad_2pro":{"x":1809,"y":316},"gas_sensor":{"x":1419,"y":388},"zisterne_sensor":{"x":1549,"y":388},"gateway_guest":{"x":2110,"y":126},"ap_eg_guest":{"x":2110,"y":244},"school_tab_1":{"x":2045,"y":362},"school_tab_2":{"x":2175,"y":362}},"frames":[],"view":{"x":0,"y":0,"w":1480,"h":960},"circleRadius":200},"room":{"positions":{"ap_eg":{"x":143,"y":116},"poco_x4":{"x":273,"y":116},"patrick_redmi9":{"x":403,"y":116},"andrea_nb_wlan":{"x":533,"y":116},"lee_pad":{"x":663,"y":116},"andrea_pad":{"x":143,"y":188},"redmi_pad_se":{"x":273,"y":188},"andrea_pocof1":{"x":403,"y":188},"redmi_pad_2pro":{"x":533,"y":188},"gas_sensor":{"x":663,"y":188},"zisterne_sensor":{"x":143,"y":260},"gateway_guest":{"x":873,"y":116},"ap_eg_guest":{"x":1003,"y":116},"school_tab_1":{"x":1133,"y":116},"school_tab_2":{"x":873,"y":188},"gateway_main":{"x":613,"y":644},"router_core":{"x":743,"y":644},"ap_og":{"x":953,"y":644},"ap_gh":{"x":1083,"y":644},"switch":{"x":143,"y":800},"server_main":{"x":1293,"y":644},"server_ipmi":{"x":1423,"y":644},"dev_1793258588876_2":{"x":1343,"y":116},"dev_1793258588877_3":{"x":1473,"y":116},"dev_1793258588877_5":{"x":1603,"y":116},"dev_1793258588877_22":{"x":1343,"y":188},"phone_gh":{"x":143,"y":416},"phone_sz":{"x":273,"y":416},"phone_wz2":{"x":403,"y":416},"phone_wz1":{"x":143,"y":488},"cam_door":{"x":1083,"y":416},"cam_yard":{"x":1213,"y":416},"cam_gh":{"x":1343,"y":416},"print_hp":{"x":143,"y":644},"print_ricoh":{"x":273,"y":644},"print_brother":{"x":403,"y":644},"dev_1793258588877_27":{"x":1633,"y":644},"dev_1793258588877_20":{"x":613,"y":416},"dev_1793258588877_21":{"x":743,"y":416},"dev_1793258588877_23":{"x":873,"y":416},"dev_1793258588877_28":{"x":613,"y":488}},"frames":[],"view":{"x":0,"y":0,"w":1480,"h":960},"circleRadius":200}},"crypto":{"salt":"UHVd3rO0hLT+K13LqQ9k/g==","verifier":"elv6bdgWUgbClib68VUjsnZcrydRVgIg2KE0Wi/9rLU="}}</script>
+  <script id="embedded-state" type="application/json">{"format":"kryptonetview-embedded-v1","savedAt":1793636669754,"config":{"title":"your LAN","subnet":"192.168.1.0/24","switchModel":"your Switch","switchIp":"192.168.1.8","netColors":{"lan":"#71717a","ethernet":"#00bcef","wlan":"#3b82f6","guest":"#f59e0b"},"netTypes":[{"id":"lan","builtin":true,"name":"","color":"#71717a","dash":"0"},{"id":"ethernet","builtin":true,"name":"","color":"#00bcef","dash":"0"},{"id":"wlan","builtin":true,"name":"Wireless-LAN","color":"#3b82f6","dash":"3 3"},{"id":"guest","builtin":true,"name":"","color":"#f59e0b","dash":"4 3"}]},"categories":[{"id":"router","nameKey":"cat_label_router","name":"Router","icon":"fa-network-wired","color":"#00bcef"},{"id":"gateways","nameKey":"cat_label_gateways","name":"Gateways","icon":"fa-tower-broadcast","color":"#f59e0b"},{"id":"wlan_ap","nameKey":"cat_label_wlanap","name":"WLAN Access Point","icon":"fa-wifi","color":"#38bdf8"},{"id":"switch","nameKey":"cat_label_switch","name":"Switch","icon":"fa-sitemap","color":"#00bcef"},{"id":"server","nameKey":"cat_label_server","name":"Server","icon":"fa-server","color":"#818cf8"},{"id":"endgeraet","nameKey":"cat_label_endgeraet","name":"Endgerät","icon":"fa-laptop","color":"#06b6d4"}],"frames":[],"devices":[],"viewState":{"net":{"view":{"x":0,"y":0,"w":1480,"h":960},"circleRadius":300,"positions":{}},"circle":{"manualRadius":true,"circleRadius":294.3794569790102,"positions":{},"view":{"x":0,"y":0,"w":1480,"h":960}},"tree":{"positions":{"switch":{"x":663,"y":80},"ap_og":{"x":125,"y":198},"ap_gh":{"x":255,"y":198},"server_main":{"x":385,"y":198},"server_ipmi":{"x":515,"y":198},"dev_1793258588876_2":{"x":645,"y":198},"dev_1793258588877_3":{"x":775,"y":198},"dev_1793258588877_5":{"x":905,"y":198},"dev_1793258588877_22":{"x":1035,"y":198},"phone_gh":{"x":125,"y":270},"phone_sz":{"x":255,"y":270},"phone_wz2":{"x":385,"y":270},"phone_wz1":{"x":515,"y":270},"cam_door":{"x":645,"y":270},"cam_yard":{"x":775,"y":270},"cam_gh":{"x":905,"y":270},"print_hp":{"x":1035,"y":270},"print_ricoh":{"x":125,"y":342},"print_brother":{"x":255,"y":342},"dev_1793258588877_27":{"x":385,"y":342},"dev_1793258588877_20":{"x":515,"y":342},"dev_1793258588877_21":{"x":645,"y":342},"dev_1793258588877_23":{"x":775,"y":342},"dev_1793258588877_28":{"x":905,"y":342},"gateway_main":{"x":1201,"y":198},"router_core":{"x":1201,"y":316},"ap_eg":{"x":1614,"y":126},"poco_x4":{"x":1419,"y":244},"patrick_redmi9":{"x":1549,"y":244},"andrea_nb_wlan":{"x":1679,"y":244},"lee_pad":{"x":1809,"y":244},"andrea_pad":{"x":1419,"y":316},"redmi_pad_se":{"x":1549,"y":316},"andrea_pocof1":{"x":1679,"y":316},"redmi_pad_2pro":{"x":1809,"y":316},"gas_sensor":{"x":1419,"y":388},"zisterne_sensor":{"x":1549,"y":388},"gateway_guest":{"x":2110,"y":126},"ap_eg_guest":{"x":2110,"y":244},"school_tab_1":{"x":2045,"y":362},"school_tab_2":{"x":2175,"y":362}},"frames":[],"view":{"x":0,"y":0,"w":1480,"h":960},"circleRadius":200},"room":{"positions":{"ap_eg":{"x":143,"y":116},"poco_x4":{"x":273,"y":116},"patrick_redmi9":{"x":403,"y":116},"andrea_nb_wlan":{"x":533,"y":116},"lee_pad":{"x":663,"y":116},"andrea_pad":{"x":143,"y":188},"redmi_pad_se":{"x":273,"y":188},"andrea_pocof1":{"x":403,"y":188},"redmi_pad_2pro":{"x":533,"y":188},"gas_sensor":{"x":663,"y":188},"zisterne_sensor":{"x":143,"y":260},"gateway_guest":{"x":873,"y":116},"ap_eg_guest":{"x":1003,"y":116},"school_tab_1":{"x":1133,"y":116},"school_tab_2":{"x":873,"y":188},"gateway_main":{"x":613,"y":644},"router_core":{"x":743,"y":644},"ap_og":{"x":953,"y":644},"ap_gh":{"x":1083,"y":644},"switch":{"x":143,"y":800},"server_main":{"x":1293,"y":644},"server_ipmi":{"x":1423,"y":644},"dev_1793258588876_2":{"x":1343,"y":116},"dev_1793258588877_3":{"x":1473,"y":116},"dev_1793258588877_5":{"x":1603,"y":116},"dev_1793258588877_22":{"x":1343,"y":188},"phone_gh":{"x":143,"y":416},"phone_sz":{"x":273,"y":416},"phone_wz2":{"x":403,"y":416},"phone_wz1":{"x":143,"y":488},"cam_door":{"x":1083,"y":416},"cam_yard":{"x":1213,"y":416},"cam_gh":{"x":1343,"y":416},"print_hp":{"x":143,"y":644},"print_ricoh":{"x":273,"y":644},"print_brother":{"x":403,"y":644},"dev_1793258588877_27":{"x":1633,"y":644},"dev_1793258588877_20":{"x":613,"y":416},"dev_1793258588877_21":{"x":743,"y":416},"dev_1793258588877_23":{"x":873,"y":416},"dev_1793258588877_28":{"x":613,"y":488}},"frames":[],"view":{"x":0,"y":0,"w":1480,"h":960},"circleRadius":200},"list":{"view":{"x":35.700128043629334,"y":-29.729013419540152,"w":1319.1509103007388,"h":855.6654553302089},"circleRadius":200,"positions":{"gateway_main":{"x":125,"y":70},"router_core":{"x":125,"y":136},"ap_og":{"x":125,"y":202},"ap_gh":{"x":125,"y":268},"switch":{"x":125,"y":334},"server_main":{"x":125,"y":400},"server_ipmi":{"x":125,"y":466},"dev_1793258588876_2":{"x":275,"y":70},"dev_1793258588877_3":{"x":275,"y":136},"dev_1793258588877_5":{"x":275,"y":202},"dev_1793258588877_22":{"x":275,"y":268},"dev_1793631793907":{"x":275,"y":334},"phone_gh":{"x":275,"y":400},"phone_sz":{"x":275,"y":466},"phone_wz2":{"x":425,"y":70},"phone_wz1":{"x":425,"y":136},"cam_door":{"x":425,"y":202},"cam_yard":{"x":425,"y":268},"cam_gh":{"x":425,"y":334},"print_hp":{"x":425,"y":400},"print_ricoh":{"x":425,"y":466},"print_brother":{"x":575,"y":70},"dev_1793258588877_27":{"x":575,"y":136},"dev_1793258588877_20":{"x":575,"y":202},"dev_1793258588877_21":{"x":575,"y":268},"dev_1793258588877_23":{"x":575,"y":334},"dev_1793258588877_28":{"x":575,"y":400},"ap_eg":{"x":732,"y":116},"poco_x4":{"x":732,"y":182},"patrick_redmi9":{"x":732,"y":248},"andrea_nb_wlan":{"x":732,"y":314},"lee_pad":{"x":732,"y":380},"andrea_pad":{"x":882,"y":116},"redmi_pad_se":{"x":882,"y":182},"andrea_pocof1":{"x":882,"y":248},"redmi_pad_2pro":{"x":882,"y":314},"gas_sensor":{"x":882,"y":380},"zisterne_sensor":{"x":1032,"y":116},"gateway_guest":{"x":1208,"y":124},"ap_eg_guest":{"x":1208,"y":190},"school_tab_1":{"x":1208,"y":256},"school_tab_2":{"x":1208,"y":322}},"frames":[]}},"crypto":{"salt":"UHVd3rO0hLT+K13LqQ9k/g==","verifier":"elv6bdgWUgbClib68VUjsnZcrydRVgIg2KE0Wi/9rLU="}}</script>
+<style>
+/* Mobile: let the document scroll even when the graph fills the visible area. */
+@media (max-width: 1023px) {
+  html, body { height:auto !important; min-height:100%; overflow-y:auto !important; }
+  body { overscroll-behavior-y:auto !important; }
+  .flex-1.flex.flex-col.lg\:flex-row { height:auto !important; min-height:100dvh; overflow:visible !important; }
+  main { height:auto !important; min-height:0 !important; overflow:visible !important; flex:none !important; }
+  #svg-viewport { height: min(65dvh, 620px) !important; min-height:280px !important; flex:none !important; touch-action:pan-y pinch-zoom !important; overscroll-behavior: auto !important; }
+  #topology-svg { touch-action:pan-y pinch-zoom !important; }
+  #svg-viewport + div { flex-wrap:wrap; }
+}
+@media (max-width: 640px) {
+  #svg-viewport { height: min(58dvh, 520px) !important; min-height:250px !important; }
+}
+</style>
 </head>
 <body class="bg-darkbg text-zinc-300 min-h-screen flex flex-col overflow-x-hidden">
 
@@ -337,6 +405,7 @@
 
     <!-- Sidebar Filter & Device Navigation -->
     <aside class="w-full lg:w-96 bg-panelbg border-r border-zinc-800 p-4 flex flex-col space-y-4 max-h-screen lg:max-h-[calc(100vh-53px)] overflow-y-auto">
+      <button type="button" id="mobile-sidebar-toggle" aria-expanded="true" aria-controls="device-list-container category-filters"><i class="fa-solid fa-list"></i><span id="mobile-sidebar-toggle-label">Geräteliste &amp; Filter</span><i id="mobile-sidebar-toggle-icon" class="fa-solid fa-chevron-up"></i></button>
       <!-- Search Input & Sort Selector -->
       <div class="flex gap-2">
         <div class="relative flex-1">
@@ -787,7 +856,7 @@
         <div id="block-fall-panel" class="hidden mb-4 bg-zinc-900 p-4 rounded-xl border border-zinc-700/60 space-y-3 select-none">
           <div class="flex justify-between items-center text-xs">
             <span class="font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-gamepad text-pink-400"></i> <span data-i18n="block_fall_title">Block Fall</span></span>
-            <span class="font-mono text-zinc-400"><span data-i18n="block_fall_score">Punkte</span> <strong id="block-fall-score" class="text-ciscocyan">0</strong> · <span data-i18n="block_fall_lines">Zeilen</span> <strong id="block-fall-lines" class="text-ciscocyan">0</strong> · <span data-i18n="block_fall_level">Level</span> <strong id="block-fall-level" class="text-ciscocyan">1</strong></span>
+            <span class="font-mono text-zinc-400"><span>High Score:</span> <strong id="block-fall-high-score" class="text-ciscocyan">0</strong> · <span data-i18n="block_fall_score">Punkte</span> <strong id="block-fall-score" class="text-ciscocyan">0</strong> · <span data-i18n="block_fall_lines">Zeilen</span> <strong id="block-fall-lines" class="text-ciscocyan">0</strong> · <span data-i18n="block_fall_level">Level</span> <strong id="block-fall-level" class="text-ciscocyan">1</strong></span>
           </div>
           <div class="flex gap-3 justify-center items-start">
             <div class="relative">
@@ -1504,6 +1573,7 @@
     }
 
     function updateAllTranslations() {
+      document.documentElement.lang = currentLang === "en" ? "en" : "de";
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
         el.innerHTML = t(key);
@@ -1881,6 +1951,36 @@
       return false;
     }
 
+    function setupMobileSidebar() {
+      const aside = document.querySelector(".flex-1.flex.flex-col.lg\\:flex-row > aside");
+      const button = document.getElementById("mobile-sidebar-toggle");
+      const label = document.getElementById("mobile-sidebar-toggle-label");
+      const icon = document.getElementById("mobile-sidebar-toggle-icon");
+      if (!aside || !button || button.dataset.ready) return;
+      button.dataset.ready = "1";
+      const mobile = window.matchMedia("(max-width: 1023px)");
+      const updateLabel = () => {
+        const expanded = !aside.classList.contains("mobile-collapsed");
+        const de = currentLang !== "en";
+        label.textContent = expanded ? (de ? "Geräteliste & Filter" : "Devices & filters") : (de ? "Geräte anzeigen" : "Show devices");
+        button.title = expanded ? (de ? "Geräteliste einklappen" : "Collapse device list") : (de ? "Geräteliste anzeigen" : "Show device list");
+        button.setAttribute("aria-expanded", String(expanded));
+        icon.className = expanded ? "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down";
+      };
+      button.addEventListener("click", () => { aside.classList.toggle("mobile-collapsed"); updateLabel(); });
+      const sync = () => {
+        if (mobile.matches) aside.classList.add("mobile-collapsed");
+        else aside.classList.remove("mobile-collapsed");
+        updateLabel();
+      };
+      if (mobile.addEventListener) mobile.addEventListener("change", sync); else mobile.addListener(sync);
+      sync();
+      // Keep the toggle language in sync when the application language changes.
+      const langObserver = new MutationObserver(updateLabel);
+      langObserver.observe(document.documentElement, { attributes:true, attributeFilter:["lang"] });
+      document.addEventListener("click", () => { if (label) updateLabel(); }, true);
+    }
+
     document.addEventListener("DOMContentLoaded", async () => {
       loadStoredSettings();
       loadDeviceSortPreference();
@@ -1892,6 +1992,7 @@
       setupColorPalettes();
       updateAllTranslations();
       setupEventListeners();
+      setupMobileSidebar();
       updateAuthUIState();
       setupCustomIconDropdowns();
       await restoreFileHandle();
@@ -2091,18 +2192,11 @@
           } catch (e) {
             reason = (e && e.name ? e.name : "Fehler") + (e && e.message ? " – " + e.message : "");
           }
-          // Den gespeicherten Handle behalten: Bei einer fehlenden/abgelaufenen
-          // Berechtigung reicht ein erneuter Klick, um sie wieder anzufragen.
-          // Nur wenn der Handle tatsächlich ungültig ist, soll neu gewählt werden.
-          htmlFileStatus = "perm";
-          updateFileStatusUI();
-          const handleInvalid = /NotFoundError|InvalidStateError|DataError/i.test(reason);
-          if (handleInvalid) {
-            await forgetFileHandle();
-            showNotification("Die gemerkte Datei ist nicht mehr verfügbar. Bitte erneut klicken und die Datei wählen.", true);
-          } else {
-            showNotification("Schreibzugriff konnte nicht bestätigt werden (" + reason + "). Bitte erneut klicken, um die Berechtigung anzufragen.", true);
-          }
+          // Wenn die erneute Freigabe oder der Schreibtest scheitert, den alten
+          // Handle verwerfen. Beim nächsten Klick wird die Dateiauswahl neu geöffnet;
+          // so bleibt Edge nicht in einer Schleife mit einem unbrauchbaren Handle.
+          await forgetFileHandle();
+          showNotification("Der gespeicherte Dateizugriff funktioniert nicht (" + reason + "). Bitte erneut auf den Datei-Button klicken und die geöffnete HTML-Datei auswählen.", true);
           return;
         }
         // Keine (funktionierende) Datei gemerkt -> einmal nach dem Pfad fragen.
@@ -4128,6 +4222,7 @@
     };
     const BLOCK_FALL_COLORS = { I: "#00bcef", O: "#eab308", T: "#a855f7", S: "#10b981", Z: "#ef4444", J: "#3b82f6", L: "#f97316" };
     const BLOCK_FALL = { shown: false, state: "idle", board: null, piece: null, next: null, score: 0, lines: 0, level: 1, timer: null, bound: false };
+    document.getElementById("block-fall-high-score").textContent = localStorage.getItem("block-fall-high-score") || "0";
 
     function isBlockFallHost(dev) {
       // Deliberately require the complete value; "Ulfenknulfen" alone must not reveal the game.
@@ -4262,6 +4357,9 @@
         s.forEach((row, r) => row.forEach((v, c) => { if (v) blockFallCell(nx, ox + c, oy + r, BLOCK_FALL_COLORS[BLOCK_FALL.next.k], 20); }));
       }
       document.getElementById("block-fall-score").textContent = BLOCK_FALL.score;
+      const highScore = Math.max(Number(localStorage.getItem("block-fall-high-score") || 0), BLOCK_FALL.score);
+      localStorage.setItem("block-fall-high-score", String(highScore));
+      document.getElementById("block-fall-high-score").textContent = highScore;
       document.getElementById("block-fall-lines").textContent = BLOCK_FALL.lines;
       document.getElementById("block-fall-level").textContent = BLOCK_FALL.level;
     }
