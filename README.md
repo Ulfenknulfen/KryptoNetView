@@ -1,6 +1,6 @@
 # KryptoNetView
 
-**Offline-First Network Mapping · AES-256 Encryption · German & English**
+**Offline Network Mapping with Device Login and SSID Manager · AES-256 Encryption · German & English**
 
 ---
 
