@@ -3,14 +3,6 @@
   ============================================================================
   KryptoNetView – Heimnetzwerk-Topologie (leere Vorlage)
   ============================================================================
-  Eine einzelne HTML-Datei ohne Server. Geräte, Rahmen, Kategorien und
-  Anordnungen werden während der Sitzung im Browser (localStorage) gehalten und –
-  nach dem einmaligen Verbinden mit der Datei – direkt in den Block
-  <script id="embedded-state"> dieser Datei zurückgeschrieben.
-  WICHTIG: Beim Start zählt ausschließlich der Inhalt der geöffneten Datei. Was nur im
-  Browser, aber nicht in der Datei gespeichert ist, wird verworfen (der Browser warnt
-  vorher). Daher: "Mit Datei verbinden" nutzen oder regelmäßig CSV exportieren.
-
   Erste Schritte
     1. Anmelden (Standard-Master-Passwort: admin) und sofort ändern.
     2. "Titel & Switch" öffnen und Titel, Subnetz und Switch eintragen.
@@ -23,6 +15,14 @@
     3. <body>      Kopfzeile, Seitenleiste, Grafik, Dialoge (Modals)
     4. <script>    Übersetzungen, Verschlüsselung, Datei-Speicherung,
                    Layout-Algorithmen, Rendering, Import/Export, Druck
+
+    Bitte beachten Sie die Lizensbestimmungen auf Github
+    Please check license on Github
+
+    contact: Ulfenknulfen@protonmail.com
+    github/ulfenknulfen/KryptoNetView
+
+    Patrick Bonner
   ============================================================================
 -->
 <html lang="de" class="dark">
@@ -2078,9 +2078,14 @@
       setupMobileSidebar();
       updateAuthUIState();
       setupCustomIconDropdowns();
-      // Ohne gespeicherten Ausschnitt: Grafik beim Start auf den Inhalt einpassen (links/oben bündig).
-      const startState = perViewState[activeGraphView];
-      if (!(startState && startState.view)) fitViewToContent();
+      // Startausschnitt: Grafik auf den Inhalt einpassen. Das Layout (Tailwind, Schriften) steht beim Start
+      // oft noch nicht endgültig fest, deshalb wird mehrfach geprüft, bis der Nutzer selbst zoomt/verschiebt.
+      ensureNodesVisible();
+      window.addEventListener("load", ensureNodesVisible);
+      setTimeout(ensureNodesVisible, 400);
+      setTimeout(ensureNodesVisible, 1200);
+      ["pointerdown", "wheel", "touchstart"].forEach(ev =>
+        document.getElementById("topology-svg").addEventListener(ev, () => { userAdjustedView = true; }, { passive: true }));
       await restoreFileHandle();
       appReady = true;
     });
@@ -3778,6 +3783,21 @@
 
     // Passt den sichtbaren Ausschnitt gleichmaessig (oben/unten/links/rechts) an die Knoten an.
     // Sichtbaren Ausschnitt gleichmäßig an den Inhalt anpassen (Button "Zentrieren").
+    // Beim Start: Ausschnitt einpassen, wenn keiner gespeichert ist oder Symbole angeschnitten sind
+    // (z. B. weil ein gespeicherter Ausschnitt nicht mehr zur Fenstergröße passt).
+    let userAdjustedView = false;
+    function ensureNodesVisible() {
+      if (userAdjustedView) return;
+      const svgEl = document.getElementById("topology-svg");
+      const sv = svgEl.getBoundingClientRect();
+      const saved = perViewState[activeGraphView];
+      let clipped = false;
+      document.querySelectorAll("#nodes-layer .node-element").forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.left < sv.left - 1 || r.top < sv.top - 1 || r.right > sv.right + 1 || r.bottom > sv.bottom + 1) clipped = true;
+      });
+      if (!(saved && saved.view) || clipped) fitViewToContent();
+    }
     function fitViewToContent() {
       renderTopologySVG();
       const svgEl = document.getElementById("topology-svg");
