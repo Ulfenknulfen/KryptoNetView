@@ -330,7 +330,7 @@
     Gespeicherter Zustand (Geräte, Rahmen, Kategorien, Ansichten, Passwort-Prüfwert).
     Der Block wird beim Speichern automatisch überschrieben. "null" = leere Vorlage.
   -->
-  <script id="embedded-state" type="application/json">null</script>
+  <script id="embedded-state" type="application/json">{"format":"kryptonetview-embedded-v1","savedAt":1793796472304,"config":{"title":"Mein Netzwerk – Topologie","subnet":"192.168.1.0/24","switchModel":"Switch","switchIp":"192.168.1.2","netColors":{"lan":"#71717a","ethernet":"#00bcef","wlan":"#38bdf8","guest":"#f59e0b"},"netTypes":[{"id":"lan","builtin":true,"name":"","color":"#71717a","dash":"0"},{"id":"ethernet","builtin":true,"name":"","color":"#00bcef","dash":"0"},{"id":"wlan","builtin":true,"name":"","color":"#38bdf8","dash":"3 3"},{"id":"guest","builtin":true,"name":"","color":"#f59e0b","dash":"4 3"}]},"categories":[{"id":"router","nameKey":"cat_label_router","name":"Router","icon":"fa-network-wired","color":"#00bcef"},{"id":"gateways","nameKey":"cat_label_gateways","name":"Gateways","icon":"fa-tower-broadcast","color":"#f59e0b"},{"id":"wlan_ap","nameKey":"cat_label_wlanap","name":"WLAN Access Point","icon":"fa-wifi","color":"#38bdf8"},{"id":"switch","nameKey":"cat_label_switch","name":"Switch","icon":"fa-sitemap","color":"#00bcef"},{"id":"server","nameKey":"cat_label_server","name":"Server","icon":"fa-server","color":"#818cf8"},{"id":"endgeraet","nameKey":"cat_label_endgeraet","name":"Endgerät","icon":"fa-laptop","color":"#06b6d4"},{"id":"infrastructure","nameKey":"cat_label_infra","name":"Infrastruktur","icon":"fa-sitemap","color":"#38bdf8"},{"id":"sensors","nameKey":"cat_label_sensors","name":"Sensoren","icon":"fa-gauge-high","color":"#10b981"},{"id":"voice","nameKey":"cat_label_voice","name":"VoIP Phones","icon":"fa-phone-flip","color":"#34d399"},{"id":"cameras","nameKey":"cat_label_cameras","name":"Smart IoT & Cam","icon":"fa-video","color":"#c084fc"},{"id":"printers","nameKey":"cat_label_printers","name":"Drucker","icon":"fa-print","color":"#f472b6"},{"id":"guest","nameKey":"cat_label_guest","name":"Gastnetz","icon":"fa-shield-halved","color":"#f59e0b"},{"id":"smarttv","nameKey":"cat_label_smarttv","name":"Smart TVs & Streaming","icon":"fa-tv","color":"#38bdf8"},{"id":"gaming","nameKey":"cat_label_gaming","name":"Gaming & Konsolen","icon":"fa-gamepad","color":"#ec4899"},{"id":"smarthome","nameKey":"cat_label_smarthome","name":"Smart Home Hubs","icon":"fa-house-signal","color":"#f59e0b"},{"id":"nas","nameKey":"cat_label_nas","name":"NAS & Backup-Speicher","icon":"fa-database","color":"#6366f1"},{"id":"firewall","nameKey":"cat_label_firewall","name":"Firewall & Security","icon":"fa-shield-halved","color":"#ef4444"},{"id":"solar","nameKey":"cat_label_solar","name":"Solar & Photovoltaik","icon":"fa-solar-panel","color":"#eab308"},{"id":"wallbox","nameKey":"cat_label_wallbox","name":"Wallbox & E-Mobilität","icon":"fa-charging-station","color":"#10b981"},{"id":"audio","nameKey":"cat_label_audio","name":"Audio & Multiroom","icon":"fa-music","color":"#a855f7"}],"frames":[],"devices":[{"id":"switch","parentId":null,"name":"Switch","ip":"192.168.1.2","cat":"switch","icon":"fa-sitemap","color":"#00bcef","desc":"Zentraler Switch.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":740,"y":300}}],"viewState":{},"crypto":{"salt":"K1JeQ0jB3IO4WX2G63EbEA==","verifier":"4LRNWHlbQGcIHISd7zsWh4+gahMc+7QBWrljhHnPNhY="}}</script>
 </head>
 <body class="bg-darkbg text-zinc-300 min-h-screen flex flex-col overflow-x-hidden">
 
@@ -1377,6 +1377,9 @@
         file_link_unsupported_tip: "Dieser Browser kann Dateien nicht direkt überschreiben (nur Chrome/Edge). Nutze den CSV-Export als Sicherung.",
         notif_file_linked: "Datei verbunden. Änderungen werden ab jetzt automatisch direkt in der HTML-Datei gespeichert.",
         notif_file_wrong: "Das ist keine KryptoNetView-HTML-Datei. Bitte die richtige Datei auswählen.",
+        notif_file_other: "Der gemerkte Dateizugriff gehört zu einer anderen Datei (anderer Name, Ordner oder Inhalt). Es wurde NICHTS überschrieben. Bitte auf \"Mit Datei verbinden\" klicken und genau diese geöffnete Datei wählen.",
+        notif_file_arm: "Bitte einmal irgendwo klicken, dann die geöffnete HTML-Datei wählen: Sie wird zum automatischen Speichern verbunden.",
+        notif_file_unsaved: "Achtung: Änderungen sind noch NICHT in der Datei gespeichert. Bitte auf \"Mit Datei verbinden\" bzw. \"Schreibzugriff freigeben\" klicken.",
         notif_file_write_error: "Speichern in die HTML-Datei fehlgeschlagen. Bitte Datei neu verbinden.",
         cat_label_router: "Router",
         cat_label_gateways: "Gateways",
@@ -1611,6 +1614,9 @@
         file_link_unsupported_tip: "This browser cannot overwrite files directly (Chrome/Edge only). Use the CSV export as a backup.",
         notif_file_linked: "File linked. Changes are now saved automatically directly into the HTML file.",
         notif_file_wrong: "This is not a KryptoNetView HTML file. Please choose the correct file.",
+        notif_file_other: "The remembered file access belongs to a different file (other name, folder or content). NOTHING was overwritten. Please click \"Link to file\" and choose exactly the file you opened.",
+        notif_file_arm: "Please click anywhere once, then choose the HTML file you opened: it will be linked for automatic saving.",
+        notif_file_unsaved: "Warning: changes are NOT yet saved to the file. Please click \"Link to file\" or \"Allow write access\".",
         notif_file_write_error: "Saving to the HTML file failed. Please link the file again.",
         cat_label_router: "Router",
         cat_label_gateways: "Gateways",
@@ -2208,6 +2214,27 @@
       return typeof window.showOpenFilePicker === "function";
     }
 
+    // --- Zuordnung: Der gemerkte Dateizugriff muss zu GENAU DIESER geöffneten Datei gehören ---
+    // Der Dateizugriff wird je Dateiname gemerkt (nicht mehr global). Zusätzlich muss der Datenblock der
+    // Datei auf der Platte mit dem Stand übereinstimmen, der beim Öffnen geladen wurde. So kann nie in
+    // eine andere Datei (z. B. frühere demo.html in einem anderen Ordner) geschrieben werden.
+    function handleStorageKey() { return "htmlHandle:" + (currentHtmlFileName() || "default"); }
+    let expectedEmbeddedRaw = (function () {
+      const el = document.getElementById("embedded-state");
+      return el ? el.textContent.trim() : "";
+    })();
+    function embeddedRawFromHtml(html) {
+      const m = html.match(/<script id="embedded-state" type="application\/json">([\s\S]*?)<\/script>/);
+      return m ? m[1].trim() : null;
+    }
+    async function handleBelongsToThisDocument(h) {
+      try {
+        const name = currentHtmlFileName();
+        if (name && h.name !== name) return false;
+        return embeddedRawFromHtml(await (await h.getFile()).text()) === expectedEmbeddedRaw;
+      } catch (e) { return false; }
+    }
+
     // Button "Mit Datei verbinden" je nach Status darstellen: off | on | perm (Freigabe nötig) | unsupported.
     function updateFileStatusUI() {
       const btn = document.getElementById("btn-file-link");
@@ -2249,13 +2276,15 @@
         return;
       }
       try {
-        const h = await idbGet("htmlHandle");
+        const h = await idbGet(handleStorageKey());
         if (h) {
           fileHandle = h;
           const perm = await h.queryPermission({ mode: "readwrite" });
           // Grün nur bei bestätigtem Schreibzugriff; bei "prompt"/"denied"
           // bleibt der Button orange, bis der Nutzer die Freigabe anklickt.
           htmlFileStatus = perm === "granted" ? "on" : "perm";
+          // Mit Schreibrecht sofort prüfen, ob der Zugriff zu dieser Datei gehört; sonst verwerfen.
+          if (perm === "granted" && !(await handleBelongsToThisDocument(h))) await forgetFileHandle();
         } else {
           fileHandle = null;
           htmlFileStatus = "off";
@@ -2267,7 +2296,6 @@
     // Der Browser erlaubt aus Sicherheitsgründen keinen Schreibzugriff allein über den Pfad der URL.
     // Deshalb: einmalig die Datei im Öffnen-Dialog wählen (verändert die Datei nicht).
     // Der Ordner wird über die "id" gemerkt, der Dialog öffnet beim nächsten Mal dort.
-    // Datei-Auswahldialog öffnen (verändert die Datei nicht).
     async function pickHtmlFileHandle(expectedName, hint) {
       const types = [{ description: "KryptoNetView HTML", accept: { "text/html": [".html", ".htm"] } }];
       try {
@@ -2283,11 +2311,10 @@
     async function forgetFileHandle() {
       fileHandle = null;
       htmlFileStatus = "off";
-      try { await idbSet("htmlHandle", null); } catch (e) {}
+      try { await idbSet(handleStorageKey(), null); } catch (e) {}
       updateFileStatusUI();
     }
 
-    // Klick auf den Datei-Button: verbinden bzw. Schreibzugriff erneut freigeben
     // Klick auf den Datei-Button: verbinden bzw. Schreibzugriff erneut freigeben; prüft mit einem Schreibtest.
     async function handleFileLinkClick() {
       if (htmlFileStatus === "unsupported") return;
@@ -2297,6 +2324,12 @@
           let reason = "";
           try {
             const perm = await fileHandle.requestPermission({ mode: "readwrite" });
+            if (perm === "granted" && !(await handleBelongsToThisDocument(fileHandle))) {
+              // Gemerkte Datei ist eine andere als die geöffnete: verwerfen und neu auswählen lassen.
+              await forgetFileHandle();
+              showNotification(t("notif_file_other"), true);
+              return;
+            }
             if (perm === "granted") {
               htmlFileStatus = "on";
               if (await writeStateToHtmlFile()) {
@@ -2335,10 +2368,14 @@
           showNotification(t("notif_file_wrong"), true);
           return;
         }
+        if (embeddedRawFromHtml(txt) !== expectedEmbeddedRaw) {
+          showNotification(t("notif_file_other"), true);
+          return;
+        }
         fileHandle = h;
         htmlFileStatus = "on";
         if (await writeStateToHtmlFile()) {
-          try { await idbSet("htmlHandle", h); } catch (e) { console.warn(e); }
+          try { await idbSet(handleStorageKey(), h); } catch (e) { console.warn(e); }
           updateFileStatusUI();
           showNotification(t("notif_file_linked"));
         } else {
@@ -2354,7 +2391,25 @@
       }
     }
 
-    // Schreibt den aktuellen Stand in den Datenblock der verbundenen HTML-Datei
+    // Automatisches Verbinden: Der Browser erlaubt Dateizugriff nur nach einer Nutzeraktion. Deshalb wird
+    // der Dialog bzw. die Freigabe beim ersten Klick im Fenster ausgelöst (einmal je Seitenaufruf und
+    // Versuch), damit alle Änderungen immer in dieser Datei landen.
+    let autoLinkArmed = false;
+    function armAutoFileLink(showHint) {
+      if (autoLinkArmed || !fileApiSupported() || htmlFileStatus === "on" || htmlFileStatus === "unsupported") return;
+      autoLinkArmed = true;
+      if (showHint) showNotification(t("notif_file_arm") + (currentHtmlFileName() ? " (" + currentHtmlFileName() + ")" : ""), true);
+      const onFirstClick = (e) => {
+        document.removeEventListener("click", onFirstClick, true);
+        autoLinkArmed = false;
+        if (htmlFileStatus === "on") return;
+        if (e.target && e.target.closest && e.target.closest("#btn-file-link")) return;   // der Button erledigt das selbst
+        handleFileLinkClick();
+      };
+      document.addEventListener("click", onFirstClick, true);
+    }
+    let lastUnsavedHint = 0;
+
     // Schreibt den aktuellen Stand in den Datenblock der verbundenen HTML-Datei.
     // Aufrufe werden hintereinander abgearbeitet (fileSaveChain), damit sich Schreibvorgänge nicht überholen.
     let lastFileError = "";
@@ -2377,6 +2432,14 @@
             return false;
           }
           const html = await (await fileHandle.getFile()).text();
+          // Schutz: nur schreiben, wenn der Datenblock der Datei dem zuletzt geladenen/geschriebenen Stand entspricht.
+          // Sonst ist es eine andere Datei oder sie wurde extern geändert – dann nichts überschreiben.
+          if (embeddedRawFromHtml(html) !== expectedEmbeddedRaw) {
+            lastFileError = "Datei gehört nicht zu diesem Dokument oder wurde extern geändert";
+            await forgetFileHandle();
+            showNotification(t("notif_file_other"), true);
+            return false;
+          }
           const json = JSON.stringify(collectPersistState()).replace(/</g, "\\u003c");
           const block = '<script id="embedded-state" type="application/json">' + json + '<' + '/script>';
           const re = /<script id="embedded-state" type="application\/json">[\s\S]*?<\/script>/;
@@ -2386,6 +2449,7 @@
           const w = await fileHandle.createWritable();
           await w.write(out);
           await w.close();
+          expectedEmbeddedRaw = json.trim();
           lastFileSaveTime = new Date();
           unsavedToFile = false;
           htmlFileStatus = "on";
@@ -2406,7 +2470,15 @@
 
     // Schreibvorgang entprellen: viele Änderungen kurz hintereinander ergeben nur einen Schreibzugriff.
     function scheduleFileSave() {
-      if (appReady) unsavedToFile = true;   // erst nach dem Start zählen Änderungen
+      // Nur im angemeldeten Zustand (Änderungen an Daten) zählt das als ungespeichert;
+      // reines Zoomen/Verschieben ohne Anmeldung löst keine Dateiabfrage aus.
+      if (appReady && isLoggedIn) unsavedToFile = true;
+      // Nicht verbunden bzw. keine Freigabe: hinweisen und beim nächsten Klick erneut verbinden lassen.
+      if (appReady && isLoggedIn && htmlFileStatus !== "on" && fileApiSupported() && Date.now() - lastUnsavedHint > 30000) {
+        lastUnsavedHint = Date.now();
+        showNotification(t("notif_file_unsaved"), true);
+        armAutoFileLink(false);
+      }
       if (!fileHandle) return;
       clearTimeout(fileSaveTimer);
       fileSaveTimer = setTimeout(writeStateToHtmlFile, 300);
@@ -2895,8 +2967,12 @@
 
     // Gesamte Bedienoberfläche an den Login-/Editierstatus anpassen: Buttons freischalten oder sperren,
     // Hinweisleiste und Fußzeile umschalten.
+    let autoLinkOffered = false;
     function updateAuthUIState() {
       updateCsvButtonsState();
+      // Nach der Anmeldung einmal anbieten, die Datei zum automatischen Speichern zu verbinden.
+      if (isLoggedIn && !autoLinkOffered) { autoLinkOffered = true; if (typeof armAutoFileLink === "function") armAutoFileLink(true); }
+      if (!isLoggedIn) autoLinkOffered = false;
       const printCredentialsOption = document.getElementById("print-credentials-option");
       if (printCredentialsOption) {
         printCredentialsOption.style.display = isLoggedIn ? "flex" : "none";
