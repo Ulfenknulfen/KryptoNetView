@@ -330,7 +330,7 @@
     Gespeicherter Zustand (Geräte, Rahmen, Kategorien, Ansichten, Passwort-Prüfwert).
     Der Block wird beim Speichern automatisch überschrieben. "null" = leere Vorlage.
   -->
-  <script id="embedded-state" type="application/json">{"format":"kryptonetview-embedded-v1","savedAt":1793796472304,"config":{"title":"Mein Netzwerk – Topologie","subnet":"192.168.1.0/24","switchModel":"Switch","switchIp":"192.168.1.2","netColors":{"lan":"#71717a","ethernet":"#00bcef","wlan":"#38bdf8","guest":"#f59e0b"},"netTypes":[{"id":"lan","builtin":true,"name":"","color":"#71717a","dash":"0"},{"id":"ethernet","builtin":true,"name":"","color":"#00bcef","dash":"0"},{"id":"wlan","builtin":true,"name":"","color":"#38bdf8","dash":"3 3"},{"id":"guest","builtin":true,"name":"","color":"#f59e0b","dash":"4 3"}]},"categories":[{"id":"router","nameKey":"cat_label_router","name":"Router","icon":"fa-network-wired","color":"#00bcef"},{"id":"gateways","nameKey":"cat_label_gateways","name":"Gateways","icon":"fa-tower-broadcast","color":"#f59e0b"},{"id":"wlan_ap","nameKey":"cat_label_wlanap","name":"WLAN Access Point","icon":"fa-wifi","color":"#38bdf8"},{"id":"switch","nameKey":"cat_label_switch","name":"Switch","icon":"fa-sitemap","color":"#00bcef"},{"id":"server","nameKey":"cat_label_server","name":"Server","icon":"fa-server","color":"#818cf8"},{"id":"endgeraet","nameKey":"cat_label_endgeraet","name":"Endgerät","icon":"fa-laptop","color":"#06b6d4"},{"id":"infrastructure","nameKey":"cat_label_infra","name":"Infrastruktur","icon":"fa-sitemap","color":"#38bdf8"},{"id":"sensors","nameKey":"cat_label_sensors","name":"Sensoren","icon":"fa-gauge-high","color":"#10b981"},{"id":"voice","nameKey":"cat_label_voice","name":"VoIP Phones","icon":"fa-phone-flip","color":"#34d399"},{"id":"cameras","nameKey":"cat_label_cameras","name":"Smart IoT & Cam","icon":"fa-video","color":"#c084fc"},{"id":"printers","nameKey":"cat_label_printers","name":"Drucker","icon":"fa-print","color":"#f472b6"},{"id":"guest","nameKey":"cat_label_guest","name":"Gastnetz","icon":"fa-shield-halved","color":"#f59e0b"},{"id":"smarttv","nameKey":"cat_label_smarttv","name":"Smart TVs & Streaming","icon":"fa-tv","color":"#38bdf8"},{"id":"gaming","nameKey":"cat_label_gaming","name":"Gaming & Konsolen","icon":"fa-gamepad","color":"#ec4899"},{"id":"smarthome","nameKey":"cat_label_smarthome","name":"Smart Home Hubs","icon":"fa-house-signal","color":"#f59e0b"},{"id":"nas","nameKey":"cat_label_nas","name":"NAS & Backup-Speicher","icon":"fa-database","color":"#6366f1"},{"id":"firewall","nameKey":"cat_label_firewall","name":"Firewall & Security","icon":"fa-shield-halved","color":"#ef4444"},{"id":"solar","nameKey":"cat_label_solar","name":"Solar & Photovoltaik","icon":"fa-solar-panel","color":"#eab308"},{"id":"wallbox","nameKey":"cat_label_wallbox","name":"Wallbox & E-Mobilität","icon":"fa-charging-station","color":"#10b981"},{"id":"audio","nameKey":"cat_label_audio","name":"Audio & Multiroom","icon":"fa-music","color":"#a855f7"}],"frames":[],"devices":[{"id":"switch","parentId":null,"name":"Switch","ip":"192.168.1.2","cat":"switch","icon":"fa-sitemap","color":"#00bcef","desc":"Zentraler Switch.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":740,"y":300}}],"viewState":{},"crypto":{"salt":"K1JeQ0jB3IO4WX2G63EbEA==","verifier":"4LRNWHlbQGcIHISd7zsWh4+gahMc+7QBWrljhHnPNhY="}}</script>
+  <script id="embedded-state" type="application/json">null</script>
 </head>
 <body class="bg-darkbg text-zinc-300 min-h-screen flex flex-col overflow-x-hidden">
 
@@ -4076,7 +4076,38 @@
     // Nur im Editiermodus. Beim Verschieben eines Rahmens wandern alle darin liegenden Geräte mit.
     // =====================================================================
     // Rahmen verschieben: Start, Bewegung, Ende.
-    function startFrameDrag(e, frame, element) {
+    // Touch: Der SVG-Baum darf während der Geste NICHT neu aufgebaut werden. Sonst wird das berührte
+    // Element entfernt, der Browser liefert keine touchmove-Ereignisse mehr, und der Rahmen bewegt sich
+    // nur "stückchenweise". Deshalb werden Rahmen, Geräte und Linien im Touch-Modus direkt verschoben
+    // (wie bei Geräte-Knoten); erst am Ende wird neu gezeichnet.
+    let frameTouchMode = false;
+    function updateFrameDragInPlace() {
+      const g = document.getElementById("frame_group_" + draggingFrame.id);
+      const dx = draggingFrame.x - frameDragStart.x, dy = draggingFrame.y - frameDragStart.y;
+      if (g) g.setAttribute("transform", `translate(${dx}, ${dy})`);
+      frameDragMembers.forEach(m => {
+        const pos = { x: m.x + dx, y: m.y + dy };
+        const el = [...document.querySelectorAll("#nodes-layer .node-element")].find(n => n.getAttribute("data-device-id") === String(m.d.id));
+        if (el) el.setAttribute("transform", `translate(${pos.x - 55}, ${pos.y - 20})`);
+        updateDeviceConnectionLines(m.d, pos);
+      });
+    }
+    function updateFrameResizeInPlace() {
+      const f = resizingFrame;
+      const g = document.getElementById("frame_group_" + f.id);
+      if (!g) return;
+      const rects = g.querySelectorAll(":scope > rect");
+      if (rects[0]) { rects[0].setAttribute("width", f.width); rects[0].setAttribute("height", f.height); }
+      if (rects[1]) rects[1].setAttribute("width", Math.max(20, f.width - 30));
+      const handle = g.querySelector(".frame-resize-handle");
+      if (handle) {
+        const hr = handle.querySelector("rect"), ht = handle.querySelector("text");
+        if (hr) { hr.setAttribute("x", f.x + f.width - 16); hr.setAttribute("y", f.y + f.height - 16); }
+        if (ht) { ht.setAttribute("x", f.x + f.width - 8); ht.setAttribute("y", f.y + f.height - 4); }
+      }
+    }
+
+    function startFrameDrag(e, frame, element, touchMode = false) {
       if (!isLoggedIn || !isEditMode || isDrawFrameMode || resizingFrame || !isFrameView(activeGraphView)) return;
       e.stopPropagation();
       frame = editableFrame(frame);
@@ -4089,6 +4120,7 @@
         .filter(m => m.p && m.p.x >= frame.x && m.p.x <= frame.x + frame.width && m.p.y >= frame.y && m.p.y <= frame.y + frame.height)
         .map(m => ({ d: m.d, x: m.p.x, y: m.p.y }));
       frameDragStart = { x: frame.x, y: frame.y };
+      frameTouchMode = touchMode;
 
       window.onmousemove = (evt) => doFrameDrag(evt);
       window.onmouseup = () => stopFrameDrag();
@@ -4103,7 +4135,7 @@
         const dx = draggingFrame.x - frameDragStart.x, dy = draggingFrame.y - frameDragStart.y;
         frameDragMembers.forEach(m => setMemberPos(m.d, m.x + dx, m.y + dy));
       }
-      renderTopologySVG();
+      if (frameTouchMode) updateFrameDragInPlace(); else renderTopologySVG();
     }
 
     function stopFrameDrag() {
@@ -4112,16 +4144,19 @@
         draggingFrame = null;
         frameDragMembers = [];
         frameDragStart = null;
+        if (frameTouchMode) renderTopologySVG();   // am Ende der Touch-Geste sauber neu zeichnen
+        frameTouchMode = false;
       }
       window.onmousemove = null;
       window.onmouseup = null;
     }
 
     // Rahmengröße über den Griff unten rechts ändern.
-    function startFrameResize(e, frame) {
+    function startFrameResize(e, frame, touchMode = false) {
       if (!isLoggedIn || !isEditMode || !isFrameView(activeGraphView)) return;
       e.stopPropagation();
       resizingFrame = editableFrame(frame);
+      frameTouchMode = touchMode;
 
       window.onmousemove = (evt) => doFrameResize(evt);
       window.onmouseup = () => stopFrameResize();
@@ -4132,13 +4167,15 @@
       const coords = getSVGCoords(e);
       resizingFrame.width = Math.max(120, coords.x - resizingFrame.x);
       resizingFrame.height = Math.max(80, coords.y - resizingFrame.y);
-      renderTopologySVG();
+      if (frameTouchMode) updateFrameResizeInPlace(); else renderTopologySVG();
     }
 
     function stopFrameResize() {
       if (resizingFrame) {
         persistFrames();
         resizingFrame = null;
+        if (frameTouchMode) renderTopologySVG();
+        frameTouchMode = false;
       }
       window.onmousemove = null;
       window.onmouseup = null;
@@ -6315,7 +6352,7 @@
             const frame = renderedFrames.find(f => String(f.id) === id);
             if (frame) {
               e.preventDefault(); e.stopPropagation();
-              startFrameResize(evt, frame);
+              startFrameResize(evt, frame, true);
               touchGesture = { type: "object-drag", object: "resize" };
               return;
             }
@@ -6324,7 +6361,7 @@
             const frame = renderedFrames.find(f => String(f.id) === id);
             if (frame) {
               e.preventDefault(); e.stopPropagation();
-              startFrameDrag(evt, frame, target);
+              startFrameDrag(evt, frame, target, true);
               touchGesture = { type: "object-drag", object: "frame" };
               return;
             }
