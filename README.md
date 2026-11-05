@@ -50,7 +50,7 @@ KryptoNetView follows a local-first, zero-knowledge approach:
 
 2. Open the downloaded project directory.
 
-3. Open `your_Project.html` to use the ready-to-use application, or `Demo.html` to start with the clean template.
+3. Open `Demo.html` to use the ready-to-use application, or `your_Project.html` to start with the clean template.
 
 4. Use a modern browser such as Chrome, Firefox, Edge, or Safari.
 
@@ -126,7 +126,7 @@ KryptoNetView verfolgt einen lokalen, datenschutzorientierten Zero-Knowledge-Ans
 
 2. Öffne das heruntergeladene Projektverzeichnis.
 
-3. Öffne `your_Project.html` für die fertige Anwendung oder `Demo.html`, wenn du mit der leeren Startvorlage beginnen möchtest.
+3. Öffne `Demo.html` für die fertige Anwendung oder `your_Project.html`, wenn du mit der leeren Startvorlage beginnen möchtest.
 
 4. Verwende einen modernen Browser wie Chrome, Firefox, Edge oder Safari.
 
