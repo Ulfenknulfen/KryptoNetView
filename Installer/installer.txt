@@ -1,0 +1,2 @@
+This is an Windows installer for your_project.html
+with a Desktop shortcut.
