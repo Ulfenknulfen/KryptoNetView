@@ -148,8 +148,4 @@ KryptoNetView wird unter den individuell angepassten Lizenzbedingungen des Proje
 - **Kommerzielle Nutzung:** Eine kommerzielle Nutzung erfordert eine vorherige Absprache und Vereinbarung mit dem Autor. Freiwillige Spenden sind willkommen, begründen jedoch nicht automatisch kommerzielle Nutzungsrechte.
 - **Namensnennung:** Bitte nenne `ulfenknulfen` als ursprünglichen Autor.
 
-Die vollständigen Bedingungen findest du in der Datei [`License.txt`](License.txt)
-
-### 🔗 Repository
-
-[github.com/ulfenknulfen/kryptonetview](https://github.com/ulfenknulfen/kryptonetview)
+Die vollständigen Bedingungen findest du in der Datei [`License.txt`](License.txt).
