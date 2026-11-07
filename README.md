@@ -56,6 +56,8 @@ KryptoNetView follows a local-first, zero-knowledge approach:
 
 5. Unlock the administrator vault, configure your network, or import a compatible CSV file.
 
+6. If you're Windows User and unsure to install, feel free to use the Windows installer.
+
 **Tip:** Keep regular backups of your network configuration and store your master password securely.
 
 ### ⚠️ Disclaimer
@@ -131,6 +133,8 @@ KryptoNetView verfolgt einen lokalen, datenschutzorientierten Zero-Knowledge-Ans
 4. Verwende einen modernen Browser wie Chrome, Firefox, Edge oder Safari.
 
 5. Entsperre den Administrator-Vault, konfiguriere dein Netzwerk oder importiere eine kompatible CSV-Datei.
+   
+6. Wenn Sie Windows Benutzer sind, und unsicher wie die html zu installieren ist, können Sie auch den Windows installer nutzen.
 
 **Tipp:** Erstelle regelmäßig Sicherungskopien deiner Netzwerkkonfiguration und bewahre dein Master-Passwort sicher auf.
 
