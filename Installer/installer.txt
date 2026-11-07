@@ -1,2 +1,7 @@
 This is an Windows installer for your_project.html
 with a Desktop shortcut.
+
+Standard installation folder is:
+c:\KryptoNetView\my_network.html
+
+deinstallation via Windows Deinstaller
