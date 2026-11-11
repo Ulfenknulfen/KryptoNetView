@@ -246,7 +246,7 @@
 
       /* Zusatzfunktion im Gerätedialog */
       #block-fall-panel > div:nth-child(2) { gap: .5rem; }
-      #block-fall-canvas { width: min(52vw, 200px); height: auto; aspect-ratio: 1/2; }
+      #block-fall-canvas { width: min(52vw, 200px); height: auto; aspect-ratio: 11/21; }
     }
 
     /* 5d) Tablet im Querformat: Seitenleiste links, Grafik rechts */
@@ -544,7 +544,7 @@
           <a href="https://github.com/ulfenknulfen/kryptonetview" target="_blank" rel="noopener noreferrer" class="text-[11px] font-mono text-zinc-400 hover:text-ciscocyan transition flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="GitHub Repository">
             <i class="fa-brands fa-github text-sm"></i> github.com/ulfenknulfen/kryptonetview
           </a>
-          <span id="app-version" class="text-[11px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="Version">v1.0.4</span>
+          <span id="app-version" class="text-[11px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="Version">v1.0.5</span>
         </div>
       </div>
     </main>
@@ -910,7 +910,7 @@
           </div>
           <div class="flex gap-3 justify-center items-start">
             <div class="relative">
-              <canvas id="block-fall-canvas" width="200" height="400" class="rounded-lg border border-zinc-700" style="background:#0b0b0e;touch-action:none"></canvas>
+              <canvas id="block-fall-canvas" width="220" height="420" class="rounded-lg border border-zinc-700" style="background:#0b0b0e;touch-action:none"></canvas>
               <div id="block-fall-overlay" class="absolute inset-0 flex flex-col items-center justify-center rounded-lg text-center text-xs font-semibold text-white" style="background:rgba(0,0,0,.65)">
                 <span id="block-fall-overlay-text">Bereit?</span>
                 <button type="button" id="block-fall-start" class="mt-2 bg-ciscocyan hover:bg-cyan-400 text-zinc-950 font-bold px-4 py-1.5 rounded-lg text-xs transition">Start</button>
@@ -4592,13 +4592,17 @@
     // Kleines Spiel im Gerätedialog. Erscheint nur, wenn der Hostname eines Geräts exakt dem
     // Auslöser in isBlockFallHost() entspricht. Hat keinen Einfluss auf die Topologie.
     // =====================================================================
-    const BLOCK_FALL_W = 10, BLOCK_FALL_H = 20, BLOCK_FALL_CELL = 20;
+    const BLOCK_FALL_W = 11, BLOCK_FALL_H = 21, BLOCK_FALL_CELL = 20;
     const BLOCK_FALL_SHAPES = {
       I: [[1,1,1,1]], O: [[1,1],[1,1]], T: [[0,1,0],[1,1,1]], S: [[0,1,1],[1,1,0]],
-      Z: [[1,1,0],[0,1,1]], J: [[1,0,0],[1,1,1]], L: [[0,0,1],[1,1,1]]
+      Z: [[1,1,0],[0,1,1]], J: [[1,0,0],[1,1,1]], L: [[0,0,1],[1,1,1]],
+      U: [[1,0,1],[1,1,1]], D: [[0,1,1],[1,0,0]], D2: [[1,1,0],[0,0,1]]
     };
-    const BLOCK_FALL_COLORS = { I: "#00bcef", O: "#eab308", T: "#a855f7", S: "#10b981", Z: "#ef4444", J: "#3b82f6", L: "#f97316" };
-    const BLOCK_FALL = { shown: false, state: "idle", board: null, piece: null, next: null, score: 0, lines: 0, level: 1, timer: null, bound: false };
+    const BLOCK_FALL_COLORS = {
+      I: "#00E5FF", O: "#FF2D95", T: "#C6FF00", S: "#B388FF", Z: "#FF7A00",
+      J: "#4169E1", L: "#F5D547", U: "#00D084", D: "#FF4D4D", D2: "#FF4D4D"
+    };
+    const BLOCK_FALL = { shown: false, state: "idle", board: null, piece: null, next: null, pieceCount: 0, score: 0, lines: 0, level: 1, timer: null, bound: false };
     document.getElementById("block-fall-high-score").textContent = localStorage.getItem("block-fall-high-score") || "0";
 
     function isBlockFallHost(dev) {
@@ -4606,7 +4610,9 @@
       return !!dev && String(dev.hostname || "").trim().toLocaleLowerCase("de-DE") === "ulfenknulfen=patrick bonner";
     }
     function blockFallRandom() {
-      const k = Object.keys(BLOCK_FALL_SHAPES)[Math.floor(Math.random() * 7)];
+      // Alle zehn Steinformen haben dieselbe Wahrscheinlichkeit.
+      BLOCK_FALL.pieceCount++;
+      const k = ["I", "O", "T", "S", "Z", "J", "L", "U", "D", "D2"][Math.floor(Math.random() * 10)];
       return { k, shape: BLOCK_FALL_SHAPES[k].map(r => r.slice()), x: 0, y: 0 };
     }
     function blockFallCollide(shape, x, y) {
@@ -4690,7 +4696,7 @@
     }
     function blockFallNewGame() {
       BLOCK_FALL.board = Array.from({ length: BLOCK_FALL_H }, () => new Array(BLOCK_FALL_W).fill(null));
-      BLOCK_FALL.score = 0; BLOCK_FALL.lines = 0; BLOCK_FALL.level = 1; BLOCK_FALL.next = null;
+      BLOCK_FALL.score = 0; BLOCK_FALL.lines = 0; BLOCK_FALL.level = 1; BLOCK_FALL.next = null; BLOCK_FALL.pieceCount = 0;
       BLOCK_FALL.state = "running";
       blockFallSpawn();
       blockFallOverlay("");
