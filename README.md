@@ -23,6 +23,12 @@ The application combines an interactive SVG network map with device management, 
 - **Bilingual interface** – German and English.
 - **CSV compatibility** – compatible with CSV data from Killerscan 1.8.3.
 
+### Screenshots
+
+| Main view | FRITZ!Box example |
+|---|---|
+| ![KryptoNetView main view](docs/Main.png) | ![KryptoNetView FRITZ!Box example](docs/Fritz.png) |
+
 ### Encryption and data protection
 
 Stored device credentials are protected using **AES-256-GCM**.
@@ -89,16 +95,11 @@ KryptoNetView is designed to run locally. For important data, keep a separate ba
 
 KryptoNetView supports CSV data compatible with Killerscan 1.8.3. Check imported data after import and correct any information that does not match your actual network.
 
-### Screenshots
-
-Application screenshots are located in the `docs` directory:
-
-- `docs/Main.png`
-- `docs/Fritz.png`
+Project repository: [github.com/ulfenknulfen/kryptonetview](https://github.com/ulfenknulfen/kryptonetview)
 
 ### Acknowledgements
 
-Thanks to the developers and contributors of Killerscan for their work and for the CSV compatibility that helps with importing network information.
+Thanks to the developers and contributors of [Killerscan](https://github.com/SteveTheKiller/KillerScan) for their work and for the CSV compatibility that helps with importing network information.
 
 ### Disclaimer
 
@@ -106,7 +107,16 @@ KryptoNetView is a documentation and network-planning tool. Its diagnostic funct
 
 The user is responsible for the accuracy of the documented data, the protection of the computer on which the application is used, and the creation of suitable backups.
 
+### License & Terms
+
+See [License.txt](License.txt) in the repository.
+
+### Repository
+
+[KryptoNetView on GitHub](https://github.com/ulfenknulfen/kryptonetview)
+
 ---
+
 
 ## 🇩🇪 Deutsch
 
@@ -122,6 +132,14 @@ The user is responsible for the accuracy of the documented data, the protection 
 - **Drucken und Export** – Ausgabe der Netzwerkkarte, Gerätelisten, Kategorien, Berichte und weiterer Dokumentationsansichten.
 - **Zweisprachige Oberfläche** – Deutsch und Englisch.
 - **CSV-Kompatibilität** – kompatibel mit CSV-Daten aus Killerscan 1.8.3.
+
+### Screenshots
+
+| Hauptansicht | FRITZ!Box-Beispiel |
+|---|---|
+| ![KryptoNetView Hauptansicht](docs/Main_de.png) | ![KryptoNetView FRITZ!Box-Beispiel](docs/Fritz_de.png) |
+
+Projekt-Repository: [github.com/ulfenknulfen/kryptonetview](https://github.com/ulfenknulfen/kryptonetview)
 
 ### Verschlüsselung und Datenschutz
 
@@ -189,19 +207,21 @@ KryptoNetView ist für den lokalen Betrieb ausgelegt. Bewahre wichtige Daten zus
 
 KryptoNetView unterstützt CSV-Daten, die mit Killerscan 1.8.3 kompatibel sind. Prüfe importierte Daten nach dem Import und korrigiere Angaben, die nicht mit dem tatsächlichen Netzwerk übereinstimmen.
 
-### Screenshots
-
-Screenshots der Anwendung befinden sich im Verzeichnis `docs`:
-
-- `docs/Main.png`
-- `docs/Fritz.png`
 
 ### Danksagung
 
-Vielen Dank an die Entwickler und Mitwirkenden von Killerscan für ihre Arbeit und die CSV-Kompatibilität, die den Import von Netzwerkinformationen unterstützt.
+Vielen Dank an die Entwickler und Mitwirkenden von [Killerscan](https://github.com/SteveTheKiller/KillerScan) für ihre Arbeit und die CSV-Kompatibilität, die den Import von Netzwerkinformationen unterstützt.
 
 ### Haftungsausschluss
 
 KryptoNetView ist ein Werkzeug zur Netzwerkdokumentation und Netzwerkplanung. Die Prüffunktionen bewerten die vom Benutzer eingetragenen Informationen. Sie ersetzen weder eine professionelle Netzwerküberwachung noch ein Sicherheitsaudit oder einen aktiven Scan der Infrastruktur.
 
 Der Benutzer ist selbst für die Richtigkeit der dokumentierten Daten, den Schutz des verwendeten Computers und die Erstellung geeigneter Sicherungskopien verantwortlich.
+
+### Nutzungsbedingungen
+
+Siehe [License.txt](License.txt) im Repository.
+
+### Repository
+
+[KryptoNetView auf GitHub](https://github.com/ulfenknulfen/kryptonetview)
