@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
   ============================================================================
-  KryptoNetView – Heimnetzwerk-Topologie (leere Vorlage) V:2.0.2
+  KryptoNetView – Heimnetzwerk-Topologie (leere Vorlage) V:2.0.3
   ============================================================================
   Erste Schritte
     1. Anmelden (Standard-Master-Passwort: admin) und sofort ändern.
@@ -569,7 +569,7 @@
           <a href="https://github.com/ulfenknulfen/kryptonetview" target="_blank" rel="noopener noreferrer" class="text-[11px] font-mono text-zinc-400 hover:text-ciscocyan transition flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="GitHub Repository">
             <i class="fa-brands fa-github text-sm"></i> github.com/ulfenknulfen/kryptonetview
           </a>
-          <span id="app-version" class="text-[11px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="Version">v2.0.2</span>
+          <span id="app-version" class="text-[11px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="Version">v2.0.3</span>
         </div>
       </div>
     </main>
@@ -1048,6 +1048,16 @@
               <span id="cred-status-badge" class="text-[10px] px-2 py-0.5 rounded font-semibold bg-zinc-800 text-zinc-400" data-i18n="badge_encrypted">AES Verschlüsselt</span>
             </div>
 
+            <!-- Öffnen-Buttons nebeneinander: URL immer sichtbar, "mit Zugangsdaten" nur wenn Benutzername/Passwort vorhanden -->
+            <div id="view-open-wrap" class="flex gap-2 mb-2">
+              <button type="button" id="btn-view-open-url" class="flex-1 bg-zinc-800 hover:bg-zinc-700 text-ciscocyan border border-cyan-500/30 px-3 py-2 rounded-lg text-xs font-semibold transition inline-flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="btn_open_device_url">Geräte-URL öffnen</span>
+              </button>
+              <button type="button" id="btn-view-open-primary" class="hidden flex-1 bg-amber-600/15 hover:bg-amber-600/25 text-amber-300 border border-amber-500/40 px-3 py-2 rounded-lg text-xs font-semibold transition inline-flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-key"></i> <span data-i18n="btn_open_device_auth_url">Gerät mit Zugangsdaten öffnen</span>
+              </button>
+            </div>
+
             <div id="cred-view-masked" class="text-center py-3 space-y-2">
               <p class="text-xs text-zinc-400"><i class="fa-solid fa-lock mr-1 text-amber-400"></i> <span data-i18n="dev_enc_msg">Zugangsdaten per AES-256 geschützt.</span></p>
               <button id="btn-trigger-login-modal" class="bg-zinc-800 hover:bg-zinc-700 text-amber-400 border border-amber-500/30 px-3 py-1.5 rounded-lg text-xs font-semibold transition inline-flex items-center gap-1.5">
@@ -1056,28 +1066,20 @@
             </div>
 
             <div id="cred-view-unlocked" class="hidden space-y-2.5">
-              <div class="flex justify-between items-center text-xs">
+              <div id="cred-row-user" class="flex justify-between items-center text-xs">
                 <span class="text-zinc-400" data-i18n="dev_label_username">Benutzername:</span>
                 <div class="flex items-center gap-1">
                   <span id="modal-username" class="font-mono text-zinc-200 font-semibold">—</span>
                   <button id="btn-copy-user" class="text-zinc-400 hover:text-ciscocyan p-1" title="Kopieren" data-i18n-title="tip_copy"><i class="fa-regular fa-copy"></i></button>
                 </div>
               </div>
-              <div class="flex justify-between items-center text-xs">
+              <div id="cred-row-pass" class="flex justify-between items-center text-xs">
                 <span class="text-zinc-400" data-i18n="dev_label_pass">Passwort:</span>
                 <div class="flex items-center gap-1">
                   <span id="modal-password" class="font-mono text-amber-400 font-semibold">••••••••</span>
                   <button id="btn-toggle-pw-visibility" class="text-zinc-400 hover:text-ciscocyan p-1" title="Anzeigen/Verbergen" data-i18n-title="tip_show_hide"><i id="eye-icon" class="fa-regular fa-eye"></i></button>
                   <button id="btn-copy-pass" class="text-zinc-400 hover:text-ciscocyan p-1" title="Kopieren" data-i18n-title="tip_copy"><i class="fa-regular fa-copy"></i></button>
                 </div>
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-zinc-800">
-                <button type="button" id="btn-view-open-url" class="bg-zinc-800 hover:bg-zinc-700 text-ciscocyan border border-cyan-500/30 px-3 py-2 rounded-lg text-xs font-semibold transition inline-flex items-center justify-center gap-1.5">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="btn_open_device_url">Geräte-URL öffnen</span>
-                </button>
-                <button type="button" id="btn-view-open-primary" class="bg-amber-600/15 hover:bg-amber-600/25 text-amber-300 border border-amber-500/40 px-3 py-2 rounded-lg text-xs font-semibold transition inline-flex items-center justify-center gap-1.5">
-                  <i class="fa-solid fa-key"></i> <span data-i18n="btn_open_device_auth_url">Gerät mit Zugangsdaten öffnen</span>
-                </button>
               </div>
               <div id="cred-extra-list" class="space-y-2 pt-1"></div>
             </div>
@@ -1126,11 +1128,21 @@
             </div>
           </div>
 
-          <div class="bg-zinc-900/90 p-3 rounded-xl border border-zinc-700/80 space-y-3">
-            <label class="block text-xs font-bold text-amber-400 flex items-center justify-between">
+          <div id="edit-login-container" class="bg-zinc-900/90 p-3 rounded-xl border border-amber-500/30 space-y-3">
+            <label class="flex items-center space-x-2 text-xs font-bold text-amber-400">
               <span data-i18n="edit_label_loginedit"><i class="fa-solid fa-key mr-1"></i> Login Zugangsdaten bearbeiten:</span>
             </label>
-            <div class="grid grid-cols-2 gap-3">
+            <div id="edit-login-fields" class="space-y-2">
+            <div id="edit-open-row" class="flex gap-2">
+              <button type="button" id="btn-open-device-url" class="flex-1 bg-zinc-800 hover:bg-zinc-700 text-ciscocyan border border-cyan-500/30 px-3 py-2 rounded-lg text-xs font-semibold transition inline-flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="btn_open_device_url">Geräte-URL öffnen</span>
+              </button>
+              <button type="button" id="btn-open-device-auth-url" class="hidden flex-1 bg-amber-600/15 hover:bg-amber-600/25 text-amber-300 border border-amber-500/40 px-3 py-2 rounded-lg text-xs font-semibold transition inline-flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-key"></i> <span data-i18n="btn_open_device_auth_url">Gerät mit Zugangsdaten öffnen</span>
+              </button>
+            </div>
+            <div id="edit-login-primary" class="hidden bg-zinc-950/60 border border-zinc-800 rounded-lg p-2 space-y-2">
+            <div class="grid grid-cols-[1fr_1fr_auto] gap-2 items-end">
               <div>
                 <label class="block text-[11px] text-zinc-400 mb-1" data-i18n="dev_label_username">Benutzername</label>
                 <input type="text" id="edit-username" placeholder="z.B. admin" data-i18n-placeholder="ph_username" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-3 py-1.5 text-xs text-zinc-200 focus:outline-none focus:border-ciscocyan">
@@ -1144,14 +1156,7 @@
                   </button>
                 </div>
               </div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-zinc-800">
-              <button type="button" id="btn-open-device-url" class="bg-zinc-800 hover:bg-zinc-700 text-ciscocyan border border-cyan-500/30 px-3 py-2 rounded-lg text-xs font-semibold transition inline-flex items-center justify-center gap-1.5">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="btn_open_device_url">Geräte-URL öffnen</span>
-              </button>
-              <button type="button" id="btn-open-device-auth-url" class="bg-amber-600/15 hover:bg-amber-600/25 text-amber-300 border border-amber-500/40 px-3 py-2 rounded-lg text-xs font-semibold transition inline-flex items-center justify-center gap-1.5">
-                <i class="fa-solid fa-key"></i> <span data-i18n="btn_open_device_auth_url">Gerät mit Zugangsdaten öffnen</span>
-              </button>
+              <button type="button" id="btn-remove-primary-login" class="bg-rose-950/80 hover:bg-rose-900 text-rose-300 border border-rose-800 rounded-lg px-2.5 py-1.5 text-xs transition" title="Entfernen" data-i18n-title="tip_remove"><i class="fa-solid fa-trash"></i></button>
             </div>
             <div class="space-y-2 pt-1">
               <label class="block text-[10px] font-semibold text-zinc-400" for="edit-login-method" data-i18n="login_method_label">Login-Verfahren</label>
@@ -1166,7 +1171,8 @@
                 <option value="rdp" data-i18n="login_method_rdp">RDP-Link (rdp://)</option>
                 <option value="vnc" data-i18n="login_method_vnc">VNC-Link (vnc://)</option>
                 <option value="smb" data-i18n="login_method_smb">SMB-Freigabe (smb://)</option>
-                <option value="telnet" data-i18n="login_method_telnet">Telnet-Link (telnet://)</option>
+                <option value="supermicro" data-i18n="login_method_supermicro">Supermicro IPMI (eRIC/Daughter Card)</option>
+          <option value="telnet" data-i18n="login_method_telnet">Telnet-Link (telnet://)</option>
                 <option value="clipboard" data-i18n="login_method_clipboard">Nur Zwischenablage (Benutzer und Passwort kopieren)</option>
               </select>
               <p id="login-method-hint" class="text-[10px] text-amber-300/80 leading-relaxed hidden"></p>
@@ -1181,14 +1187,13 @@
                 </div>
               </details>
             </div>
-            <div class="pt-2 border-t border-zinc-800 space-y-2">
-              <label class="block text-[11px] font-semibold text-amber-400"><i class="fa-solid fa-users-gear mr-1"></i> <span data-i18n="login_sets_title">Weitere Zugangsdaten (z. B. Web-Oberfläche + SSH)</span></label>
-              <div id="edit-logins-list" class="space-y-2"></div>
-              <button type="button" id="btn-add-login-row" class="w-full bg-zinc-800 hover:bg-zinc-700 text-amber-400 border border-amber-500/30 rounded-lg py-1.5 text-xs font-semibold transition flex items-center justify-center gap-1.5">
-                <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_login">Weitere Zugangsdaten hinzufügen</span>
-              </button>
-            </div>
             <p class="text-[10px] text-zinc-500 leading-relaxed" data-i18n="device_url_security_hint">Zugangsdaten in URLs können im Browserverlauf oder in Protokollen landen. Manche Browser ignorieren diese Anmeldeform.</p>
+            </div>
+            <div id="edit-logins-list" class="space-y-2"></div>
+            <button type="button" id="btn-add-login-row" class="w-full bg-zinc-800 hover:bg-zinc-700 text-amber-400 border border-amber-500/30 rounded-lg py-1.5 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-plus"></i> <span id="btn-add-login-label" data-i18n="btn_add_login_first">Zugangsdaten hinzufügen</span>
+            </button>
+            </div>
           </div>
 
           <!-- SSID/WLAN-Konfiguration bearbeiten (nur bei Router und WLAN Access Point) -->
@@ -1199,7 +1204,7 @@
             <div id="edit-wlan-fields" class="space-y-2">
               <div id="edit-wlan-list" class="space-y-2"></div>
               <button type="button" id="btn-add-wlan-row" class="w-full bg-zinc-800 hover:bg-zinc-700 text-sky-400 border border-sky-500/30 rounded-lg py-1.5 text-xs font-semibold transition flex items-center justify-center gap-1.5">
-                <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_ssid">Weitere SSID hinzufügen</span>
+                <i class="fa-solid fa-plus"></i> <span id="btn-add-ssid-label" data-i18n="btn_add_ssid_first">SSID hinzufügen</span>
               </button>
             </div>
           </div>
@@ -1336,6 +1341,12 @@
         ph_username: "z.B. admin",
         ph_password: "Passwort",
         tip_remove: "Entfernen",
+        confirm_del_device: "Gerät wirklich löschen?",
+        confirm_del_category: "Kategorie wirklich löschen? Zugeordnete Geräte wechseln zu „Endgerät“.",
+        confirm_del_frame: "Rahmen wirklich löschen?",
+        confirm_del_wlan: "WLAN-Eintrag wirklich entfernen?",
+        confirm_del_login: "Zugangsdaten-Eintrag wirklich entfernen?",
+        confirm_del_nettype: "Netzwerktyp wirklich löschen?",
         ph_ssid: "z.B. Mein-WLAN",
         lbl_ssid_name: "SSID Name",
         tip_pw_saved: "Passwort hinterlegt",
@@ -1553,11 +1564,13 @@
         login_method_vnc: "VNC-Link (vnc://)",
         login_method_smb: "SMB-Freigabe (smb://)",
         login_method_telnet: "Telnet-Link (telnet://)",
+        login_method_supermicro: "Supermicro IPMI (eRIC/Daughter Card)",
         ph_login_token: "Token-Feld der Antwort (token)",
         ph_login_port: "Port (z. B. 22)",
         ph_login_label: "Bezeichnung (z. B. SSH)",
         login_sets_title: "Weitere Zugangsdaten (z. B. Web-Oberfläche + SSH)",
         btn_add_login: "Weitere Zugangsdaten hinzufügen",
+        btn_add_login_first: "Zugangsdaten hinzufügen",
         btn_open_login: "Öffnen",
         login_done_query: "Gerät mit URL-Parametern geöffnet. Passwort liegt zusätzlich in der Zwischenablage.",
         login_done_json: "JSON-Login erfolgreich, Gerät geöffnet.",
@@ -1567,6 +1580,7 @@
         login_hint_json: "Sendet {Benutzerfeld, Passwortfeld} als JSON an den Login-Pfad. Funktioniert von file:// nur, wenn das Gerät CORS erlaubt; sonst Rückfall auf Zwischenablage. Token-Feld (z. B. data.token) wird als URL-Parameter angehängt.",
         login_hint_form: "Sendet ein Formular per POST an den Login-Pfad (Standardfelder: username / password).",
         login_hint_proto: "Übergibt ssh://, vnc://, smb:// bzw. telnet:// an das Betriebssystem; ein Handler (z. B. Terminal, Viewer) muss registriert sein. Port unter „Erweitert“. Das Passwort wird in die Zwischenablage kopiert.",
+        login_hint_supermicro: "Meldet sich per Formular-POST an /auth.asp an (Felder login und password), z. B. für Supermicro-Daughter-Cards von ca. 2013. Adresse mit http:// eintragen (HTTPS wird von der alten Firmware oft nicht unterstützt); Popups erlauben.",
         login_hint_rdp: "Der rdp://-Link wird nur von manchen Clients verstanden (z. B. Microsoft Remote Desktop auf macOS/iOS/Android); unter Windows bitte die Zwischenablage nutzen. Port unter „Erweitert“.",
         login_method_advanced: "Erweitert (Formular-Login: Pfad und Feldnamen)",
         ph_login_path: "Login-Pfad, z.B. /login",
@@ -1585,6 +1599,7 @@
         edit_label_loginedit: "Login Zugangsdaten bearbeiten:",
         edit_label_wlanedit: "SSID & WLAN-Konfiguration (Router / AP)",
         btn_add_ssid: "Weitere SSID hinzufügen",
+        btn_add_ssid_first: "SSID hinzufügen",
         edit_label_parent: "Angebunden an (Eltern-Knoten):",
         edit_label_icon: "Icon (FontAwesome)",
         edit_label_color: "Akzentfarbe",
@@ -1692,6 +1707,12 @@
         ph_username: "e.g. admin",
         ph_password: "Password",
         tip_remove: "Remove",
+        confirm_del_device: "Really delete this device?",
+        confirm_del_category: "Really delete this category? Assigned devices will move to \"End device\".",
+        confirm_del_frame: "Really delete this frame?",
+        confirm_del_wlan: "Really remove this Wi-Fi entry?",
+        confirm_del_login: "Really remove this credentials entry?",
+        confirm_del_nettype: "Really delete this network type?",
         ph_ssid: "e.g. My-WLAN",
         lbl_ssid_name: "SSID name",
         tip_pw_saved: "Password saved",
@@ -1909,11 +1930,13 @@
         login_method_vnc: "VNC link (vnc://)",
         login_method_smb: "SMB share (smb://)",
         login_method_telnet: "Telnet link (telnet://)",
+        login_method_supermicro: "Supermicro IPMI (eRIC/Daughter Card)",
         ph_login_token: "Token field in response (token)",
         ph_login_port: "Port (e.g. 22)",
         ph_login_label: "Label (e.g. SSH)",
         login_sets_title: "Additional credentials (e.g. web UI + SSH)",
         btn_add_login: "Add more credentials",
+        btn_add_login_first: "Add credentials",
         btn_open_login: "Open",
         login_done_query: "Device opened with URL parameters. The password is also in the clipboard.",
         login_done_json: "JSON login succeeded, device opened.",
@@ -1923,6 +1946,7 @@
         login_hint_json: "Sends {user field, password field} as JSON to the login path. From file:// this only works if the device allows CORS; otherwise it falls back to the clipboard. A token field (e.g. data.token) is appended as a URL parameter.",
         login_hint_form: "Sends a form via POST to the login path (default fields: username / password).",
         login_hint_proto: "Hands ssh://, vnc://, smb:// or telnet:// to the operating system; a handler (terminal, viewer) must be registered. Port under “Advanced”. The password is copied to the clipboard.",
+        login_hint_supermicro: "Logs in via form POST to /auth.asp (fields login and password), e.g. for Supermicro daughter cards from around 2013. Enter the address with http:// (old firmware often does not support modern HTTPS); allow popups.",
         login_hint_rdp: "The rdp:// link is only understood by some clients (e.g. Microsoft Remote Desktop on macOS/iOS/Android); on Windows please use the clipboard. Port under “Advanced”.",
         login_method_advanced: "Advanced (form login: path and field names)",
         ph_login_path: "Login path, e.g. /login",
@@ -1941,6 +1965,7 @@
         edit_label_loginedit: "Edit Login Credentials:",
         edit_label_wlanedit: "SSID & WLAN Configuration (Router / AP)",
         btn_add_ssid: "Add Another SSID",
+        btn_add_ssid_first: "Add SSID",
         edit_label_parent: "Connected to (Parent Node):",
         edit_label_icon: "Icon (FontAwesome)",
         edit_label_color: "Accent Color",
@@ -2045,7 +2070,9 @@
       document.documentElement.lang = currentLang === "en" ? "en" : "de";
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
-        el.innerHTML = t(key);
+        // Ein führendes Icon (<i class="fa-...">) bleibt erhalten, nur der Text wird übersetzt.
+        const lead = (el.firstElementChild && el.firstElementChild.tagName === "I") ? el.firstElementChild.outerHTML + " " : "";
+        el.innerHTML = lead + t(key);
       });
       document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
         const key = el.getAttribute("data-i18n-placeholder");
@@ -3382,6 +3409,7 @@
         return;
       }
 
+      if (!confirm(t("confirm_del_category"))) return;
       categories = categories.filter(c => c.id !== catId);
       devices.forEach(d => {
         if (d.cat === catId) {
@@ -3866,6 +3894,7 @@
     }
 
     function deleteFrame(frameId) {
+      if (!confirm(t("confirm_del_frame"))) return;
       if (activeGraphView === "net") frames = frames.filter(f => f.id !== frameId);
       else { editFrames(); perViewState[activeGraphView].frames = perViewState[activeGraphView].frames.filter(f => f.id !== frameId); }
       persistFrames();
@@ -4962,7 +4991,12 @@
         credBadge.className = "text-[10px] px-2 py-0.5 rounded font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800";
         document.getElementById("modal-username").innerText = dev._unlockedUser || "—";
         updatePasswordDisplay();
+        // Leere Felder nicht anzeigen; "mit Zugangsdaten öffnen" nur, wenn es Zugangsdaten gibt.
+        document.getElementById("cred-row-user").classList.toggle("hidden", !dev._unlockedUser);
+        document.getElementById("cred-row-pass").classList.toggle("hidden", !dev._unlockedPass);
+        document.getElementById("btn-view-open-primary").classList.toggle("hidden", !(dev._unlockedUser || dev._unlockedPass));
       } else {
+        document.getElementById("btn-view-open-primary").classList.add("hidden");
         maskedView.classList.remove("hidden");
         unlockedView.classList.add("hidden");
         credBadge.innerText = t("badge_encrypted");
@@ -5001,6 +5035,7 @@
       document.getElementById("edit-login-tokenfield").value = dev.tokenField || "";
       document.getElementById("edit-login-port").value = dev.loginPort || "";
       updateLoginMethodHint();
+      setLoginPrimaryVisible(hasPrimaryLoginData());
       fillLoginEditRows(dev._unlockedLogins);
       renderLoginsView(dev);
 
@@ -5106,9 +5141,12 @@
         </div>
         <div>
           <label class="block text-[11px] text-zinc-400 mb-1">${t("dev_label_pass")}</label>
-          <div class="relative flex items-center">
+          <div class="flex items-center gap-1.5">
+          <div class="relative flex items-center flex-1 min-w-0">
             <input type="password" class="wlan-pass-input w-full bg-zinc-950 border border-zinc-700 rounded-lg pl-2.5 pr-8 py-1.5 text-xs text-amber-400 font-mono focus:outline-none focus:border-ciscocyan" placeholder="${t("ph_password")}">
             <button type="button" class="wlan-eye absolute right-2 text-zinc-400 hover:text-ciscocyan p-1 text-xs" title="${t("tip_pw_toggle")}"><i class="fa-regular fa-eye"></i></button>
+          </div>
+          <button type="button" class="wlan-copy-edit bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg px-2.5 py-1.5 text-xs transition shrink-0" title="${t("tip_copy")}" aria-label="${t("tip_copy")}"><i class="fa-regular fa-copy"></i></button>
           </div>
         </div>
         <button type="button" class="wlan-remove bg-rose-950/80 hover:bg-rose-900 text-rose-300 border border-rose-800 rounded-lg px-2.5 py-1.5 text-xs transition" title="${t("tip_remove")}"><i class="fa-solid fa-trash"></i></button>
@@ -5121,15 +5159,37 @@
         inp.type = isPw ? "text" : "password";
         row.querySelector(".wlan-eye i").className = isPw ? "fa-regular fa-eye-slash" : "fa-regular fa-eye";
       };
-      row.querySelector(".wlan-remove").onclick = () => row.remove();
+      row.querySelector(".wlan-copy-edit").onclick = () => {
+        const val = row.querySelector(".wlan-pass-input").value;
+        if (!val) return;
+        copyTextToClipboard(val, t("wlan_pw_copied"));
+        const ico = row.querySelector(".wlan-copy-edit i");
+        ico.className = "fa-solid fa-check text-emerald-400";
+        setTimeout(() => { ico.className = "fa-regular fa-copy"; }, 1200);
+      };
+      row.querySelector(".wlan-remove").onclick = () => {
+        const empty = !row.querySelector(".wlan-ssid-input").value.trim() && !row.querySelector(".wlan-pass-input").value;
+        if (empty || confirm(t("confirm_del_wlan"))) { row.remove(); updateWlanAddLabel(); }
+      };
       list.appendChild(row);
+      updateWlanAddLabel();
+    }
+
+    // Beschriftung des Hinzufügen-Buttons: ohne Zeile "SSID hinzufügen", sonst "Weitere SSID hinzufügen".
+    function updateWlanAddLabel() {
+      const lbl = document.getElementById("btn-add-ssid-label");
+      if (!lbl) return;
+      const key = document.querySelector("#edit-wlan-list .wlan-edit-row") ? "btn_add_ssid" : "btn_add_ssid_first";
+      lbl.setAttribute("data-i18n", key);
+      lbl.innerHTML = t(key);
     }
 
     function fillWlanEditRows(nets) {
       document.getElementById("edit-wlan-list").innerHTML = "";
       const arr = Array.isArray(nets) ? nets : [];
-      if (arr.length === 0) addWlanEditRow("", "");
-      else arr.forEach(n => addWlanEditRow(n.ssid, n.pass));
+      // Keine automatische Leerzeile: ein gelöschter letzter Eintrag bleibt gelöscht (Hinzufügen über „+“).
+      arr.forEach(n => addWlanEditRow(n.ssid, n.pass));
+      updateWlanAddLabel();
     }
 
     function collectWlanEditRows() {
@@ -5143,7 +5203,7 @@
     }
 
     // ---- Weitere Zugangsdaten (mehrere Logins pro Gerät) ----
-    const LOGIN_METHODS = ["auto", "basic", "form", "sid", "query", "json", "ssh", "rdp", "vnc", "smb", "telnet", "clipboard"];
+    const LOGIN_METHODS = ["auto", "basic", "form", "sid", "query", "json", "ssh", "rdp", "vnc", "smb", "telnet", "supermicro", "clipboard"];
     const LOGIN_PROTO_PORTS = { ssh: "22", rdp: "3389", vnc: "5900", smb: "445", telnet: "23" };
 
     function loginMethodLabel(m) { return t("login_method_" + m); }
@@ -5152,9 +5212,43 @@
       const el = document.getElementById("login-method-hint");
       if (!el) return;
       const m = document.getElementById("edit-login-method").value;
-      const key = (m === "query" || m === "json" || m === "form" || m === "rdp" || LOGIN_PROTO_PORTS[m]) ? "login_hint_" + (LOGIN_PROTO_PORTS[m] && m !== "rdp" ? "proto" : m) : "";
+      const key = (m === "supermicro" || m === "query" || m === "json" || m === "form" || m === "rdp" || LOGIN_PROTO_PORTS[m]) ? "login_hint_" + (LOGIN_PROTO_PORTS[m] && m !== "rdp" ? "proto" : m) : "";
       el.textContent = key ? t(key) : "";
       el.classList.toggle("hidden", !key);
+    }
+
+    // Primäre Zugangsdaten im Bearbeiten-Formular: ohne Daten eingeklappt, Anlegen über „+“ (wie beim WLAN).
+    function hasPrimaryLoginData() {
+      const v = id => (document.getElementById(id).value || "").trim();
+      return Boolean(v("edit-username") || document.getElementById("edit-password").value ||
+        v("edit-login-path") || v("edit-login-userfield") || v("edit-login-passfield") ||
+        v("edit-login-tokenfield") || v("edit-login-port") ||
+        (document.getElementById("edit-login-method").value || "auto") !== "auto");
+    }
+
+    // "Gerät mit Zugangsdaten öffnen" nur, wenn Benutzername oder Passwort eingetragen ist.
+    function updateEditOpenButtons() {
+      const prim = document.getElementById("edit-login-primary");
+      const has = !prim.classList.contains("hidden") &&
+        Boolean(document.getElementById("edit-username").value || document.getElementById("edit-password").value);
+      document.getElementById("btn-open-device-auth-url").classList.toggle("hidden", !has);
+    }
+
+    function setLoginPrimaryVisible(show) {
+      document.getElementById("edit-login-primary").classList.toggle("hidden", !show);
+      const lbl = document.getElementById("btn-add-login-label");
+      const key = show ? "btn_add_login" : "btn_add_login_first";
+      lbl.setAttribute("data-i18n", key);
+      lbl.innerHTML = t(key);
+      updateEditOpenButtons();
+    }
+
+    function clearPrimaryLogin() {
+      ["edit-username", "edit-password", "edit-login-path", "edit-login-userfield",
+       "edit-login-passfield", "edit-login-tokenfield", "edit-login-port"].forEach(id => { document.getElementById(id).value = ""; });
+      document.getElementById("edit-login-method").value = "auto";
+      updateLoginMethodHint();
+      setLoginPrimaryVisible(false);
     }
 
     function addLoginEditRow(entry) {
@@ -5195,7 +5289,11 @@
         i.type = isPw ? "text" : "password";
         q(".login-eye i").className = isPw ? "fa-regular fa-eye-slash" : "fa-regular fa-eye";
       };
-      q(".login-remove").onclick = () => row.remove();
+      q(".login-remove").onclick = () => {
+        const x = readLoginRow(row);
+        const empty = !(x.label || x.user || x.pass || x.port || x.path || x.userField || x.passField || x.tokenField) && x.method === "auto";
+        if (empty || confirm(t("confirm_del_login"))) row.remove();
+      };
       q(".login-open").onclick = () => openDeviceWithCredentials(readLoginRow(row));
       list.appendChild(row);
     }
@@ -5606,10 +5704,17 @@
       const plain = buildDeviceUrl(false);
       if (!plain) return;
       const username = entry.user, password = entry.pass;
-      const loginPath = entry.path, userField = entry.userField, passField = entry.passField;
+      let loginPath = entry.path, userField = entry.userField, passField = entry.passField;
       if (!username && !password) { showNotification(t("device_url_missing_credentials")); return; }
       let method = entry.method || "auto";
       const base = new URL(plain);
+      if (method === "supermicro") {
+        // Supermicro-Daughter-Card (eRIC-BMC): Formular-POST an /auth.asp mit den Feldern login und password
+        loginPath = loginPath || "/auth.asp";
+        userField = userField || "login";
+        passField = passField || "password";
+        method = "form";
+      }
       if (method === "auto") method = (loginPath || userField || passField) ? "form" : "basic";
 
       // Protokoll-Links: Passwort in die Zwischenablage, dann an das Betriebssystem übergeben
@@ -5688,6 +5793,7 @@
         const add = (n, v) => { const i = document.createElement("input"); i.type = "hidden"; i.name = n; i.value = v; form.appendChild(i); };
         add(userField || "username", username);
         add(passField || "password", password);
+        if (entry.method === "supermicro") { add("nickname", ""); add("action_login", "Login"); }
         document.body.appendChild(form);
         form.submit();
         form.remove();
@@ -5791,6 +5897,7 @@
     // Gerät löschen; seine Kinder hängen danach direkt am Switch.
     function deleteActiveDevice() {
       if (!activeDevice || !isLoggedIn) return;
+      if (!confirm(t("confirm_del_device"))) return;
       devices = devices.filter(d => d.id !== activeDevice.id);
       devices.forEach(d => {
         if (d.parentId === activeDevice.id) d.parentId = "switch";
@@ -6509,7 +6616,7 @@
             const list = users.slice(0, 8).map(d => "• " + d.name + " (" + d.ip + ")").join("\n") + (users.length > 8 ? "\n… +" + (users.length - 8) : "");
             const msg = tf("nettype_del_warn", { n: users.length, name: nm }) + "\n\n" + list + "\n\n" + t("nettype_del_confirm");
             if (!confirm(msg)) return;
-          }
+          } else if (!confirm(t("confirm_del_nettype"))) return;
           netTypesDraft = netTypesDraft.filter(x => x.id !== nt.id);
           renderNetTypeRows();
         };
@@ -6753,8 +6860,7 @@
     // ----- Scan-Felder im Gerätedialog (Hostname, MAC, Hersteller, Typ, Ports) -----
     // Scan-Felder in den Gerätedialog einbauen (wird beim Start per Skript erzeugt).
     function buildScanFieldUI() {
-      const loginInput = document.getElementById("edit-username");
-      const loginBlock = loginInput && loginInput.parentElement.parentElement.parentElement;
+      const loginBlock = document.getElementById("edit-login-container");
       if (loginBlock) {
         const blk = document.createElement("div");
         blk.id = "edit-scan-block";
@@ -7432,7 +7538,18 @@
 
       document.getElementById("btn-trigger-login-modal-wlan").onclick = openAuthModal;
       document.getElementById("btn-add-wlan-row").onclick = () => addWlanEditRow("", "");
-      document.getElementById("btn-add-login-row").onclick = () => addLoginEditRow({});
+      document.getElementById("btn-add-login-row").onclick = () => {
+        if (document.getElementById("edit-login-primary").classList.contains("hidden")) {
+          setLoginPrimaryVisible(true);
+          document.getElementById("edit-username").focus();
+        } else {
+          addLoginEditRow({});
+        }
+      };
+      ["edit-username", "edit-password"].forEach(id => document.getElementById(id).addEventListener("input", updateEditOpenButtons));
+      document.getElementById("btn-remove-primary-login").onclick = () => {
+        if (!hasPrimaryLoginData() || confirm(t("confirm_del_login"))) clearPrimaryLogin();
+      };
       document.getElementById("edit-login-method").onchange = updateLoginMethodHint;
       document.getElementById("btn-view-open-url").onclick = () => openDeviceUrl(false);
       document.getElementById("btn-view-open-primary").onclick = () => openDeviceWithCredentials();
