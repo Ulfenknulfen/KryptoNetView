@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
   ============================================================================
-  KryptoNetView – Heimnetzwerk-Topologie (Demo) V:2.0.4
+  KryptoNetView – Heimnetzwerk-Topologie (Demo) V:2.0.5
   ============================================================================
   Erste Schritte
     1. Anmelden (Standard-Master-Passwort: admin) und sofort ändern.
@@ -339,7 +339,7 @@
     Gespeicherter Zustand (Geräte, Rahmen, Kategorien, Ansichten, Passwort-Prüfwert).
     Der Block wird beim Speichern automatisch überschrieben. "null" = leere Vorlage.
   -->
-  <script id="embedded-state" type="application/json">{"format":"kryptonetview-embedded-v1","savedAt":1795078443769,"config":{"title":"Ulfenknulfen - GBit LAN","subnet":"192.168.178.0/24","switchModel":"Cisco WS-C2960S-48LPS-L","switchIp":"192.168.178.8","netColors":{"lan":"#71717a","ethernet":"#00bcef","wlan":"#3b82f6","guest":"#f59e0b"},"netTypes":[{"id":"lan","builtin":true,"name":"","color":"#71717a","dash":"0"},{"id":"ethernet","builtin":true,"name":"","color":"#00bcef","dash":"0"},{"id":"wlan","builtin":true,"name":"","color":"#3b82f6","dash":"3 3"},{"id":"guest","builtin":true,"name":"","color":"#f59e0b","dash":"4 3"}]},"categories":[{"id":"router","nameKey":"cat_label_router","name":"Router","icon":"fa-network-wired","color":"#00bcef"},{"id":"gateways","nameKey":"cat_label_gateways","name":"Gateways","icon":"fa-tower-broadcast","color":"#f59e0b"},{"id":"wlan_ap","nameKey":"cat_label_wlanap","name":"WLAN Access Point","icon":"fa-wifi","color":"#38bdf8"},{"id":"switch","nameKey":"cat_label_switch","name":"Switch","icon":"fa-sitemap","color":"#00bcef"},{"id":"server","nameKey":"cat_label_server","name":"Server","icon":"fa-server","color":"#818cf8"},{"id":"endgeraet","nameKey":"cat_label_endgeraet","name":"Endgerät","icon":"fa-laptop","color":"#06b6d4"},{"id":"infrastructure","nameKey":"cat_label_infra","name":"Infrastruktur","icon":"fa-sitemap","color":"#38bdf8"},{"id":"sensors","nameKey":"cat_label_sensors","name":"Sensoren","icon":"fa-gauge-high","color":"#10b981"},{"id":"voice","nameKey":"cat_label_voice","name":"VoIP Phones","icon":"fa-phone-flip","color":"#34d399"},{"id":"cameras","nameKey":"cat_label_cameras","name":"Smart IoT & Cam","icon":"fa-video","color":"#c084fc"},{"id":"printers","nameKey":"cat_label_printers","name":"Drucker","icon":"fa-print","color":"#f472b6"},{"id":"guest","nameKey":"cat_label_guest","name":"Gastnetz","icon":"fa-shield-halved","color":"#f59e0b"},{"id":"smarttv","nameKey":"cat_label_smarttv","name":"Smart TVs & Streaming","icon":"fa-tv","color":"#38bdf8"},{"id":"gaming","nameKey":"cat_label_gaming","name":"Gaming & Konsolen","icon":"fa-gamepad","color":"#ec4899"},{"id":"smarthome","nameKey":"cat_label_smarthome","name":"Smart Home Hubs","icon":"fa-house-signal","color":"#f59e0b"},{"id":"nas","nameKey":"cat_label_nas","name":"NAS & Backup-Speicher","icon":"fa-database","color":"#6366f1"},{"id":"firewall","nameKey":"cat_label_firewall","name":"Firewall & Security","icon":"fa-shield-halved","color":"#ef4444"},{"id":"solar","nameKey":"cat_label_solar","name":"Solar & Photovoltaik","icon":"fa-solar-panel","color":"#eab308"},{"id":"wallbox","nameKey":"cat_label_wallbox","name":"Wallbox & E-Mobilität","icon":"fa-charging-station","color":"#10b981"},{"id":"audio","nameKey":"cat_label_audio","name":"Audio & Multiroom","icon":"fa-music","color":"#a855f7"}],"frames":[{"id":"frame_apeg","title":"📡 AP-EG WLAN Hub (Xiaomi / Android / Sensoren)","x":1056,"y":-13,"width":346,"height":777,"strokeColor":"#00bcef","strokeDash":"5 3","headerBg":"#083344","textColor":"#38bdf8"},{"id":"frame_guest","title":"🛡️ GASTNETZ (VPN / VLAN 192.168.179.x)","x":711,"y":338,"width":330,"height":425,"strokeColor":"#f59e0b","strokeDash":"6 4","headerBg":"#78350f","textColor":"#fbbf24"}],"devices":[{"id":"print_hp","parentId":"switch","name":"Drucker hp p3015","ip":"192.168.178.30","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"HP LaserJet P3015 Netzdrucker.","poe":false,"loginUser":"","loginPass":"","hostname":"hpp3015drucker.fritz.box","mac":"9C:B6:00:00:00:00","vendor":"Hewlett Packard","scanType":"Printer","ports":"21, 23, 80, 443, 515, 631, 9100","pos":{"x":89,"y":696},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"QFTGwKFHlKleEfj0\",\"ciphertext\":\"e6aUs8hpBfxGdbB9AcGKMTuj\"}","loginSets":"{\"iv\":\"ZyjvjzZKsp+Z6vfl\",\"ciphertext\":\"hRdsDz3d1ngib5jUVIHlNJYL\"}"},{"id":"print_ricoh","parentId":"switch","name":"Drucker-Ricoh","ip":"192.168.178.31","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"Ricoh Multifunktionsdrucker.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":219,"y":696},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"pyvfLRN5i9UtgHz1\",\"ciphertext\":\"J5w1gawgLtg6K1SiXqDAtnBe\"}","loginSets":"{\"iv\":\"WQ30HObY6LkfDa5A\",\"ciphertext\":\"Ua+dF9zDufTjXhD9l8/mzjs7\"}"},{"id":"print_brother","parentId":"switch","name":"Drucker-BROTHER","ip":"192.168.178.32","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"Brother Netzdrucker.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":349,"y":696},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"O4XZit2NBUzS+W5Z\",\"ciphertext\":\"yIs37JX7RdRA43S8qWa4DqO3\"}","loginSets":"{\"iv\":\"LJhlo60rKcTrZp0P\",\"ciphertext\":\"/8Kp7ZBoSxP9jRGNIH0ZPYog\"}"},{"id":"dev_1793258588876_2","parentId":"switch","name":"Power Schalter - Aussen","ip":"192.168.178.11","cat":"endgeraet","icon":"fa-bolt","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"00:10:00:00:00:00","vendor":"RITTAL-WERK RUDOLF LOH GmbH & Co.","scanType":"Web Device","ports":"21, 80","pos":{"x":96,"y":6},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"JnfDslcSeXF4dzua\",\"ciphertext\":\"bznqKhlrl8CM6cuiCmf/BDOz\"}","loginSets":"{\"iv\":\"RQ/uBCwsSCbd7fcI\",\"ciphertext\":\"STLkBUvlkbe3I7vHGIl8jkvx\"}"},{"id":"dev_1793258588877_3","parentId":"switch","name":"Power Schalter - Innen","ip":"192.168.178.12","cat":"endgeraet","icon":"fa-bolt","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"00:10:00:00:00:00","vendor":"RITTAL-WERK RUDOLF LOH GmbH & Co.","scanType":"Web Device","ports":"21, 80","pos":{"x":96,"y":95},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"5zP6wLGZo07A/AsK\",\"ciphertext\":\"773q4q3CSQlLDnVhhwARArOT\"}","loginSets":"{\"iv\":\"SZri/UMZFJGGMRqG\",\"ciphertext\":\"7TAEOvH72Jx22vHiVp18sO1H\"}"},{"id":"dev_1793258588877_5","parentId":"switch","name":"Oneac Corporation .16","ip":"192.168.178.16","cat":"endgeraet","icon":"fa-laptop","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"00:20:00:00:00:00","vendor":"Oneac Corporation","scanType":"Web Device","ports":"80","pos":{"x":494,"y":696},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"IqmB5hsrQKB66SZn\",\"ciphertext\":\"ueVVH64ksyMYN+vUhkrvSkCj\"}","loginSets":"{\"iv\":\"gIwo+BZQBBj6lBRM\",\"ciphertext\":\"ONW8N5aZ7YQ/Vs45kFjhl+57\"}"},{"id":"poco_x4","parentId":"ap_eg","name":"POCO X4 Pro 5G","ip":"192.168.178.154","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"POCO X4 Pro Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1148,"y":276},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"mJxRWHMUXI+MnBYh\",\"ciphertext\":\"tQd57E1tMGYnonRglFkkxaLh\"}","loginSets":"{\"iv\":\"xl910jV31+LbV54s\",\"ciphertext\":\"jJw703CLdawksIPrEorigVnJ\"}"},{"id":"patrick_redmi9","parentId":"ap_eg","name":"Redmi 9","ip":"192.168.178.177","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"Patrick Redmi 9 Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"patrickredmi-9.fritz.box","mac":"1E:DA:00:00:00:00","vendor":"(Randomized)","scanType":"Mobile","ports":"-","pos":{"x":1149,"y":384},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"DWHdeXQffGsrZmWF\",\"ciphertext\":\"qJ6d/XyeGZBaAD4WBITFgsfY\"}","loginSets":"{\"iv\":\"4olKBgAzaUeZzy+Z\",\"ciphertext\":\"vUJMgTlX3H+MsNgAvstx5hMa\"}"},{"id":"dev_1793258588877_22","parentId":"switch","name":"I16Plus","ip":"192.168.178.188","cat":"endgeraet","icon":"fa-desktop","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"I16Plus.fritz.box","mac":"8C:E9:00:00:00:00","vendor":"Intel Corporate","scanType":"Windows","ports":"135, 445","pos":{"x":626,"y":556},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"9qJqVv0IkYh+NTtE\",\"ciphertext\":\"H1eEMPcQTdgKZwxgkEfMiHei\"}","loginSets":"{\"iv\":\"9UPgzcEXZyeZzxhq\",\"ciphertext\":\"u/D9ibe2PkMCUGce5JYi7pxG\"}"},{"id":"andrea_nb_wlan","parentId":"ap_eg","name":"Notebook (WLAN)","ip":"192.168.178.190","cat":"endgeraet","icon":"fa-laptop","color":"#06b6d4","desc":"Andrea Notebook WLAN-Verbindung über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1153,"y":611},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"GtY3YNNsY07vitUk\",\"ciphertext\":\"XHRcL02nhaCPWHdm9Nie6FVD\"}","loginSets":"{\"iv\":\"W4AZfUbBAgv7AoAJ\",\"ciphertext\":\"ZLjEgAbmm7tHAocmdeweE+Xo\"}"},{"id":"lee_pad","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.233","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Lee Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1312,"y":277},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"OesmgbGiAfFS1V/T\",\"ciphertext\":\"ixbp2IJacMhnCz4seM++HS17\"}","loginSets":"{\"iv\":\"+41UzGDnb1tZnS1z\",\"ciphertext\":\"W98VqjY2JP9GUiqKwzrfsevL\"}"},{"id":"andrea_pad","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.234","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Andrea Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"andrearedmi-pad-2-pro.fritz.box","mac":"76:14:00:00:00:00","vendor":"(Randomized)","scanType":"Mobile","ports":"-","pos":{"x":1312,"y":386},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"mhmkZcfGyL7TETWy\",\"ciphertext\":\"WsQrqN4hG3t/0KIrHew8F63k\"}","loginSets":"{\"iv\":\"+D9Zyhy/v6zbJG6/\",\"ciphertext\":\"xcmsgX4vD1Botbqp8Wvz0Xt2\"}"},{"id":"redmi_pad_se","parentId":"ap_eg","name":"Redmi Pad SE","ip":"192.168.178.235","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Redmi Pad SE Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"Redmi-Pad-SE.fritz.box","mac":"D2:13:00:00:00:00","vendor":"(Randomized)","scanType":"Mobile","ports":"-","pos":{"x":1307,"y":497},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"2Ftz5pttTq+z4y4Q\",\"ciphertext\":\"VWBDt2heH9j4ZaqGHLTeOOgl\"}","loginSets":"{\"iv\":\"/Uxj9kpnfZU07N2O\",\"ciphertext\":\"knz3ixTqNUxBTi0e+GilTLJr\"}"},{"id":"andrea_pocof1","parentId":"ap_eg","name":"POCO F1","ip":"192.168.178.241","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"Andrea Poco F1 Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"Andrea-PocoF1.fritz.box","mac":"A4:50:00:00:00:00","vendor":"Xiaomi Communications Co Ltd","scanType":"Android","ports":"-","pos":{"x":1145,"y":495},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"x7GApKPQFJTrkHNP\",\"ciphertext\":\"bcOmbAgYOoHNV2ROnojEtoE1\"}","loginSets":"{\"iv\":\"yOmrmQGPiJTwmZhv\",\"ciphertext\":\"Lcav/4Re2ZiGShCrVIXRtaXS\"}"},{"id":"redmi_pad_2pro","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.249","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1306,"y":614},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"0YUgrxfjzp+N2Luz\",\"ciphertext\":\"gcbg3sAUv9BgsBxZO7rAByYX\"}","loginSets":"{\"iv\":\"uyKp7SBzavyVU4wJ\",\"ciphertext\":\"N4FbdFxWAD038/qC+LjogN6j\"}"},{"id":"school_tab_1","parentId":"ap_eg_guest","name":"Schultablet 1","ip":"192.168.179.20","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Schultablet 1 im Gastnetzwerk.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":805,"y":692},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"Hg59nt/llB7ks/Og\",\"ciphertext\":\"sPFVnsJGMWWixahk2uWLhnD1\"}","loginSets":"{\"iv\":\"reXAmjlKcQRUz9wh\",\"ciphertext\":\"v3QxNI6JXkRGVt28Vk0O1dwl\"}"},{"id":"school_tab_2","parentId":"ap_eg_guest","name":"Schultablet 2","ip":"192.168.179.21","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Schultablet 2 im Gastnetzwerk.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":967,"y":690},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"NXs1lgx82NljDoSN\",\"ciphertext\":\"sYhdPCsvQKGpkuI7UNiIkNGf\"}","loginSets":"{\"iv\":\"MTuuANPhf+gSGXKR\",\"ciphertext\":\"T93ZH0E0hx09du/3A+Os4FZu\"}"},{"id":"gateway_guest","parentId":"switch","name":"Fritz!Box Gast-Gateway","ip":"192.168.179.1","cat":"gateways","icon":"fa-tower-broadcast","color":"#f59e0b","desc":"Fritz!Box Gastnetz (VPN / Subnetz 192.168.179.1).","poe":false,"loginUser":"{\"iv\":\"U+vADwypFzwuFzfU\",\"ciphertext\":\"VXpepES7F2Vm6N/LeRogVIEjlgiz\"}","loginPass":"{\"iv\":\"1rxkAxzj2r5ZEAYR\",\"ciphertext\":\"LeLDnX8v9AyVD0obhO17nuPmMg4h\"}","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":888,"y":443},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"+Mr++NpUJOmQ8hby\",\"ciphertext\":\"Af7R4+1xYwzVtafcp32M0CzV\"}","loginSets":"{\"iv\":\"AaMqN9C8LTlkO2NQ\",\"ciphertext\":\"Jvxbpgs/IgAgve2rbbiOBJzu\"}"},{"id":"gateway_main","parentId":"switch","name":"Fritz!Box 7590","ip":"192.168.178.1","cat":"router","icon":"fa-network-wired","color":"#f59e0b","desc":"Haupt-Internet Gateway & VDSL-Router an Cisco Switch.","poe":false,"loginUser":"{\"iv\":\"YIY9qisP7HdJ/mq5\",\"ciphertext\":\"vuZxCNkF5R8OXZcd/rQfnGfIuVPM\"}","loginPass":"{\"iv\":\"ZJDyqoEOY5vgbnlq\",\"ciphertext\":\"p+dV36YDIp1rHwE67EwAuXVl40r1+M3+idWzYK4HAWof\"}","hostname":"fritz.box","mac":"E0:28:00:00:00:00","vendor":"AVM Audiovisuelles Marketing und Computersysteme GmbH","scanType":"Router/DNS","ports":"53, 80, 443","pos":{"x":516,"y":5},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"1dOtg1z2S41EsX8i\",\"ciphertext\":\"SKCYDpt4OB7zOamftMh6hSth\"}","loginSets":"{\"iv\":\"AaDsO2v8eLpRfNE7\",\"ciphertext\":\"WtnGze8kkbDQ/F0wVzyzYv84\"}"},{"id":"router_core","parentId":"gateway_main","name":"Core Router","ip":"192.168.178.2","cat":"router","icon":"fa-network-wired","color":"#00bcef","desc":"Zentraler Core Router zur internen Subnetz-Verteilung.","poe":false,"loginUser":"{\"iv\":\"04zfUqY1VJlVAkz+\",\"ciphertext\":\"Tx/o8qGouqsitFXOOVVNzrxdGUID\"}","loginPass":"{\"iv\":\"2krrGL3hOKrLMvIH\",\"ciphertext\":\"Abuibo35Yyt51m0qUoaIH7Lg/a9bDG2fibbrmm0sMRU=\"}","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":296,"y":7},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"/1RN81+Jk1LQtbRi\",\"ciphertext\":\"iN68vmOsydy0iTf9lQQISJ6Zf/PpsqSB+Wf2rOmUXW53qDW+c/ha1oIer5TwJaod2H0TC8YMUXK7SKnZKCTykA==\"}","loginSets":"{\"iv\":\"v8L/br2qUaqOTh0h\",\"ciphertext\":\"KcCpEuS7mJfNwy4rJVLxrpqc\"}"},{"id":"gas_sensor","parentId":"ap_eg","name":"GasSensor","ip":"192.168.178.100","cat":"sensors","icon":"fa-gauge-high","color":"#84cc16","desc":"Sicherheits-GasSensor. Drahtlos angebunden an Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1149,"y":166},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"9mx9Xx7pwx+oQyc9\",\"ciphertext\":\"x1VO6v/gq0jqc8DiRVCopE3Z\"}","loginSets":"{\"iv\":\"ETwbE9R2VTBpcRwE\",\"ciphertext\":\"JiXxj+LrkSsfEFpmXogtSsgm\"}"},{"id":"zisterne_sensor","parentId":"ap_eg","name":"Zisterne Sensor","ip":"192.168.178.101","cat":"sensors","icon":"fa-gauge-high","color":"#84cc16","desc":"Wasserstands-Zisterne Sensor. Drahtlos angebunden an Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1312,"y":164},"linkColor":"#84cc16","vlan":"","wlanNets":"{\"iv\":\"nJQ93zIntSgy26b3\",\"ciphertext\":\"sdkr5w5+voEHECQ58/NwqHOs\"}","loginSets":"{\"iv\":\"zEJu0ijd9vvSwHwK\",\"ciphertext\":\"KUVnOFif48oxOZmFnvhaLviU\"}"},{"id":"server_main","parentId":"switch","name":"Hauptserver","ip":"192.168.178.10","cat":"server","icon":"fa-server","color":"#818cf8","desc":"Zentraler Server & Speichersystem","poe":false,"loginUser":"{\"iv\":\"VJ0MVNVCiX93C0B+\",\"ciphertext\":\"/YqoTGUGAdzPZ1X1evvVv2eJ7+s=\"}","loginPass":"{\"iv\":\"kIkTqd4czqdJ2xYv\",\"ciphertext\":\"6iZpJsx1tuTvBB6m9FSF0efngfaObc4GfzXhSCw=\"}","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":95,"y":199},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"K6FTIbHJGgrXH+e1\",\"ciphertext\":\"mVfonueFslUACISNM7tQAJym\"}","loginSets":"{\"iv\":\"t6WoH9AiJISWGjZA\",\"ciphertext\":\"f1BtLzMz4K2E07Cu+OfDpfjm\"}"},{"id":"server_ipmi","parentId":"switch","name":"IPMI Remote Mgmt","ip":"192.168.178.15","cat":"server","icon":"fa-server","color":"#818cf8","desc":"Out-of-Band Remote Management Controller.","poe":false,"loginUser":"{\"iv\":\"OO33yczHe9gv/BAm\",\"ciphertext\":\"RoZMfl1LU8Tma+dycLAR63rNTYy8\"}","loginPass":"{\"iv\":\"Fh4z2S+is46DKcpF\",\"ciphertext\":\"ezP6IKp6Q45EaZ2rx3Y6eB1g6eiSHZTzjk9vsIOcjYA=\"}","hostname":"IPMI-Server.fritz.box","mac":"00:30:00:00:00:00","vendor":"Super Micro Computer, Inc.","scanType":"Linux/SSH","ports":"22, 80","pos":{"x":294,"y":143},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"l+aufWG+s1iULhkp\",\"ciphertext\":\"e+WhxO8zU151h6rMyS2ooFu8\"}","loginSets":"{\"iv\":\"RF5vmm8eJcvWHdqq\",\"ciphertext\":\"YqyOqK6WPfDOt8SyteRFF7sa\"}"},{"id":"dev_1793258588877_20","parentId":"switch","name":"net-a1-115C","ip":"192.168.178.180","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"net-a1-115C.fritz.box","mac":"AC:93:00:00:00:00","vendor":"GD Midea Air-Conditioning Equipment Co.,Ltd.","scanType":"IoT","ports":"-","pos":{"x":722,"y":6},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"IejRThK//xuNWdUE\",\"ciphertext\":\"goKSEWHf4Vu49ZBRWfauSkdC\"}","loginSets":"{\"iv\":\"vtv9JcM+JUTPf+Oy\",\"ciphertext\":\"28ma06PZebx8S74XXu60l8+n\"}"},{"id":"dev_1793258588877_21","parentId":"switch","name":"ESP-E3F2CB","ip":"192.168.178.181","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"ESP-E3F2CB.fritz.box","mac":"E8:DB:00:00:00:00","vendor":"Espressif Inc.","scanType":"IoT","ports":"-","pos":{"x":890,"y":6},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"IbahLWOd+rFHKzUu\",\"ciphertext\":\"52T154WG+w17eLWW67jf/7Tn\"}","loginSets":"{\"iv\":\"fHt348Dmzu8tGh+j\",\"ciphertext\":\"NI5TzGlCfpEYEzLWQ7otegk1\"}"},{"id":"dev_1793258588877_23","parentId":"switch","name":"hoymilessolar","ip":"192.168.178.201","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"hoymilessolar.fritz.box","mac":"A4:E5:00:00:00:00","vendor":"Espressif Inc.","scanType":"IoT","ports":"-","pos":{"x":791,"y":101},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"uG059Z2pvRvxlG6m\",\"ciphertext\":\"FaA6Cwn0ofKviyEUjLAx1jWC\"}","loginSets":"{\"iv\":\"RW+N42k1f7RfY6il\",\"ciphertext\":\"jkUFOSo9oZ4vTxk06Es2gWrP\"}"},{"id":"dev_1793258588877_28","parentId":"switch","name":"buderusmx400","ip":"192.168.178.248","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"buderusmx400.fritz.box","mac":"F0:4A:00:00:00:00","vendor":"Bosch Thermotechnik GmbH","scanType":"IoT","ports":"-","pos":{"x":946,"y":103},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"9zE4HqxDYwVQILzL\",\"ciphertext\":\"xcTwKKwxCJQzNCnQBkvw1ywH\"}","loginSets":"{\"iv\":\"Yq075lxPpZ7Hp253\",\"ciphertext\":\"D/ejQXiBWOH07LGTRVQYAesf\"}"},{"id":"cam_door","parentId":"switch","name":"Haustuer","ip":"192.168.178.20","cat":"cameras","icon":"fa-gauge-high","color":"#c084fc","desc":"IP-Kamera Haustür (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"NC7ipinjDRqX1WPl\",\"ciphertext\":\"DffvyGVBmaSHPXUcPeQcuJigZ6Yu\"}","loginPass":"{\"iv\":\"s5QtWeFoRlaD3hDp\",\"ciphertext\":\"AIG0VtBPDzFhZJLxOxZmCwUS8xDnbxPf088=\"}","hostname":"Cam-Haustuer.fritz.box","mac":"00:03:00:00:00:00","vendor":"Mobotix AG","scanType":"Web Device","ports":"80, 443","pos":{"x":792,"y":193},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"TvAUy3Se2II/4dom\",\"ciphertext\":\"wowTMUgJRE424mRJgTvsb58X\"}","loginSets":"{\"iv\":\"8iNq4DM96AUSKMt6\",\"ciphertext\":\"34W+U5Ej/FvqWjv/G7GXQZWG\"}"},{"id":"cam_yard","parentId":"switch","name":"Hof","ip":"192.168.178.21","cat":"cameras","icon":"fa-gauge-high","color":"#c084fc","desc":"IP-Kamera Hof (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"auqqfO9zyWD74im1\",\"ciphertext\":\"3dZxP0h88M1xc+rpSSdj+VktaRsn\"}","loginPass":"{\"iv\":\"drMZc7ADcQs1OvcU\",\"ciphertext\":\"ZRaCuJH2O8TRqk2kTuTj2L/PArSRI3mBe98=\"}","hostname":"Cam-Hof.fritz.box","mac":"00:03:00:00:00:00","vendor":"Mobotix AG","scanType":"Web Device","ports":"80","pos":{"x":942,"y":190},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"+a+lYlPm+tYNHoTx\",\"ciphertext\":\"1qOgLeaYJr9GG/LixfLa0K0i\"}","loginSets":"{\"iv\":\"TLfb712bkChyTTe7\",\"ciphertext\":\"FD9Ns4t4AYIwvdGMcHr4Ldis\"}"},{"id":"cam_gh","parentId":"switch","name":"Gartenhaus","ip":"192.168.178.22","cat":"cameras","icon":"fa-video","color":"#c084fc","desc":"IP-Kamera Gartenhaus (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"fsSKDeRxqwmEQebN\",\"ciphertext\":\"BHNJY/rTlR4GIGPXx4RjjdNTc3fH\"}","loginPass":"{\"iv\":\"CyLj+LfoD2f4UZZ/\",\"ciphertext\":\"3qThjLduXyDFIoLf1tMi4iSqTlfSUlL9EeQ=\"}","hostname":"Cam-Gartenhaus.fritz.box","mac":"00:03:00:00:00:00","vendor":"Mobotix AG","scanType":"Web Device","ports":"80","pos":{"x":940,"y":267},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"XpseZmQV4MI30VW8\",\"ciphertext\":\"4mhhuObdSfgrrmnJWuVCtNvT\"}","loginSets":"{\"iv\":\"iUpW2uVh2OS/hmaJ\",\"ciphertext\":\"dClHIxvqwPEpY/MTpf0H9iuA\"}"},{"id":"dev_1793258588877_27","parentId":"switch","name":"xiaomismarttv","ip":"192.168.178.247","cat":"smarttv","icon":"fa-tv","color":"#38bdf8","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"xiaomismarttv.fritz.box","mac":"94:62:00:00:00:00","vendor":"Beijing Xiaomi Electronics Co.,Ltd","scanType":"Smart TV","ports":"-","pos":{"x":631,"y":696},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"63nnJ3leMj/wLcb7\",\"ciphertext\":\"Rdful6OHfcgdxMvhrkksKq7N\"}","loginSets":"{\"iv\":\"buiHyFgyfvyfYVoq\",\"ciphertext\":\"ZzrC758PAuYqCN2ex8bBlRf5\"}"},{"id":"switch","parentId":null,"name":"Cisco WS-C2960S-48LPS-L","ip":"192.168.178.8","cat":"switch","icon":"fa-sitemap","color":"#00bcef","desc":"Zentraler Gigabit 48-Port PoE+ Managed Switch\n","poe":true,"loginUser":"{\"iv\":\"Pi8sDFCX3SkUMPu2\",\"ciphertext\":\"2UmYoVmtUYdRVGRnHK0jDnF7CZ2t\"}","loginPass":"{\"iv\":\"gmy5SErRYPFHyFBV\",\"ciphertext\":\"RB0WYy2GN5Gky0Sp69xinDpM3IdK\"}","hostname":"","mac":"E8:ED:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":464,"y":305},"linkColor":"","netType":"ethernet","vlan":"","wlanNets":"{\"iv\":\"qzu7mcz8V+B5jrRa\",\"ciphertext\":\"MFweuWiGuwL68evR/qazlwaW\"}","loginSets":"{\"iv\":\"2nr4xzui9jvLnZvJ\",\"ciphertext\":\"xSVJRuGgaa5x+w8pfmzc/ec3\"}"},{"id":"phone_gh","parentId":"switch","name":"Cisco Phone GH","ip":"192.168.178.80","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Gartenhaus (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-GH.fritz.box","mac":"64:A0:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":89,"y":556},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"mhG6WrO0a4OoUca8\",\"ciphertext\":\"W1heoQ+0YsE8frkGX5eLUvIJ\"}","loginSets":"{\"iv\":\"eHSn6QCGP9TVQSFr\",\"ciphertext\":\"R9rd8yVzf2BHix9GQHrh8VOX\"}"},{"id":"phone_sz","parentId":"switch","name":"Cisco Phone SZ","ip":"192.168.178.81","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Schlafzimmer (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-SZ.fritz.box","mac":"C8:F9:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":219,"y":556},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"93ytMgtNhtxiCYDY\",\"ciphertext\":\"aFX/RmGisreUYFs+W0Mc0IeG\"}","loginSets":"{\"iv\":\"3CZA9eNm1RlJiLR8\",\"ciphertext\":\"08XMI2/9gdpQHV+yUiz6azCZ\"}"},{"id":"phone_wz2","parentId":"switch","name":"Cisco Phone WZ2","ip":"192.168.178.82","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Wohnzimmer 2 (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-WZ2.fritz.box","mac":"C8:F9:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":349,"y":556},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"UmFyxq87M9K6f80K\",\"ciphertext\":\"yovD3kG5GRo80LigDhw5vieG\"}","loginSets":"{\"iv\":\"juYn7nhAeMBRagzl\",\"ciphertext\":\"4xANihp+NzwoK643gbo91AwN\"}"},{"id":"phone_wz1","parentId":"switch","name":"Cisco Phone WZ1","ip":"192.168.178.83","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Wohnzimmer 1 (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-WZ1.fritz.box","mac":"DC:A5:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80, 443","pos":{"x":479,"y":556},"linkColor":"","netType":"ethernet","vlan":"","wlanNets":"{\"iv\":\"c4i9MJF6W23i71vG\",\"ciphertext\":\"C7vueFBkd7qlZhnYvduWlBTF\"}","loginSets":"{\"iv\":\"TaBRi/+IhRKypj13\",\"ciphertext\":\"oAKMncbzScAIvVbc9eJ8yxtG\"}"},{"id":"ap_og","parentId":"switch","name":"Cisco AP OG","ip":"192.168.178.90","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Obergeschoss (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"ihP8NoZlHWjGcMzH\",\"ciphertext\":\"eDNhjSsaC/c3ryzdxYrgjSm2ewwy\"}","loginPass":"{\"iv\":\"qpdEzHjpmMJWuuuN\",\"ciphertext\":\"Q27Kg5Bbr63U5YKnkRtNH7RZ/9Gj/qN/S9U=\"}","hostname":"Cisco-AP-OG.fritz.box","mac":"84:B2:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80","pos":{"x":98,"y":317},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"yui5rXBCT9oXJOGg\",\"ciphertext\":\"ow7tcM92Ff6NpbgSnQKDQbVinN1KksWJg0MzAOk5aaQgx9M9VdE89nNndbFnucf2x6FGVYY=\"}","loginSets":"{\"iv\":\"ZXMp59KbPjReBhXH\",\"ciphertext\":\"XrXNCCykgOFJ+7VaClQ3f78K\"}"},{"id":"ap_eg","parentId":"switch","name":"Cisco AP EG","ip":"192.168.178.92","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Erdgeschoss (Zentraler WLAN Hub).","poe":true,"loginUser":"{\"iv\":\"bB8bK9U/LeDN5Sl6\",\"ciphertext\":\"obcK306sNPN+YarDUVXe12/yOOxI\"}","loginPass":"{\"iv\":\"KKufpSClntSj3Il+\",\"ciphertext\":\"zURtzOqPjDnRVDLoMOBbrBy1+XSsEN/qRms=\"}","hostname":"Cisco-AP-EG.fritz.box","mac":"84:B2:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80","pos":{"x":1218,"y":77},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"L2W5oSXSrgzArtQH\",\"ciphertext\":\"SPD1lzsS1fZCRHhPl/d9+2flORsQcIlabuOK+OlnPfNjJtCozdbfau8Oy1lRO5XQsmmLUgw=\"}","loginSets":"{\"iv\":\"nNCWt6app3KyhWnO\",\"ciphertext\":\"gdFv995Tn3RfRqRGHXX+Z2Ny\"}"},{"id":"ap_gh","parentId":"switch","name":"Cisco AP GH","ip":"192.168.178.94","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Gartenhaus (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"AyFzv0C7N3GWHxmK\",\"ciphertext\":\"CiWKF/kv6Hc3RswsylG4Uj7+Ll1l\"}","loginPass":"{\"iv\":\"BXE+mo6FACl91UJb\",\"ciphertext\":\"txlwHWYLQE9Td5K8Ng74KvZSz9TsgmkiBwE=\"}","hostname":"Cisco-AP-GH.fritz.box","mac":"84:B2:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80","pos":{"x":98,"y":392},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"aq9GqsUuSsqAwsKD\",\"ciphertext\":\"HJ3Eo1IAVKyY+QOEGUY06JeAMt+wPEveHxfsYz0Zt5mC7Jr19nAUVWlOQJGdhvJFDosNRlmQoW8R\"}","loginSets":"{\"iv\":\"Bt7uuLRxJJWuUXmz\",\"ciphertext\":\"nKFjbyqurXEyLa/d3cX9w8U4\"}"},{"id":"ap_eg_guest","parentId":"gateway_guest","name":"Cisco AP EG (Gast-Trunk)","ip":"192.168.179.20","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Gast-VLAN Trunk vom Cisco Switch an Cisco EG.","poe":true,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":888,"y":550},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"laTdAFtWqyFaLHdc\",\"ciphertext\":\"4AhZjvQtEOOdIqnLmzj5mQZ0ORyz1vtvUYRVl1Oy0kb0OHnkDwd50YnQW+Kmsl1tg5fFE0jC34/C1Eg9Cp/D\"}","loginSets":"{\"iv\":\"6vx2RaavP4Aeuh3D\",\"ciphertext\":\"66rQHYR1P0NQK1Z1IEcT2Zh0\"}"}],"viewState":{"net":{"view":{"x":-5.999988555908203,"y":-95.11938282959608,"w":1447.9999885559082,"h":939.2387437246829},"circleRadius":200,"n":41},"circle":{"manualRadius":true,"circleRadius":430},"__meta":{"active":"net"}},"crypto":{"salt":"ofZtivS4tq3uAP87MKtfaw==","verifier":"PHlSmmbe5E4sbErgE77qcTe5e80YqCt3YDSFbZ+dXbY=","version":2}}</script>
+  <script id="embedded-state" type="application/json">{"format":"kryptonetview-embedded-v1","savedAt":1795161093758,"config":{"title":"Ulfenknulfen - GBit LAN","subnet":"192.168.178.0/24","switchModel":"Cisco WS-C2960S-48LPS-L","switchIp":"192.168.178.8","netColors":{"lan":"#71717a","ethernet":"#00bcef","wlan":"#3b82f6","guest":"#f59e0b"},"netTypes":[{"id":"lan","builtin":true,"name":"","color":"#71717a","dash":"0"},{"id":"ethernet","builtin":true,"name":"","color":"#00bcef","dash":"0"},{"id":"wlan","builtin":true,"name":"","color":"#3b82f6","dash":"3 3"},{"id":"guest","builtin":true,"name":"","color":"#f59e0b","dash":"4 3"}]},"categories":[{"id":"router","nameKey":"cat_label_router","name":"Router","icon":"fa-network-wired","color":"#00bcef"},{"id":"gateways","nameKey":"cat_label_gateways","name":"Gateways","icon":"fa-tower-broadcast","color":"#f59e0b"},{"id":"wlan_ap","nameKey":"cat_label_wlanap","name":"WLAN Access Point","icon":"fa-wifi","color":"#38bdf8"},{"id":"switch","nameKey":"cat_label_switch","name":"Switch","icon":"fa-sitemap","color":"#00bcef"},{"id":"server","nameKey":"cat_label_server","name":"Server","icon":"fa-server","color":"#818cf8"},{"id":"endgeraet","nameKey":"cat_label_endgeraet","name":"Endgerät","icon":"fa-laptop","color":"#06b6d4"},{"id":"infrastructure","nameKey":"cat_label_infra","name":"Infrastruktur","icon":"fa-sitemap","color":"#38bdf8"},{"id":"sensors","nameKey":"cat_label_sensors","name":"Sensoren","icon":"fa-gauge-high","color":"#10b981"},{"id":"voice","nameKey":"cat_label_voice","name":"VoIP Phones","icon":"fa-phone-flip","color":"#34d399"},{"id":"cameras","nameKey":"cat_label_cameras","name":"Smart IoT & Cam","icon":"fa-video","color":"#c084fc"},{"id":"printers","nameKey":"cat_label_printers","name":"Drucker","icon":"fa-print","color":"#f472b6"},{"id":"guest","nameKey":"cat_label_guest","name":"Gastnetz","icon":"fa-shield-halved","color":"#f59e0b"},{"id":"smarttv","nameKey":"cat_label_smarttv","name":"Smart TVs & Streaming","icon":"fa-tv","color":"#38bdf8"},{"id":"gaming","nameKey":"cat_label_gaming","name":"Gaming & Konsolen","icon":"fa-gamepad","color":"#ec4899"},{"id":"smarthome","nameKey":"cat_label_smarthome","name":"Smart Home Hubs","icon":"fa-house-signal","color":"#f59e0b"},{"id":"nas","nameKey":"cat_label_nas","name":"NAS & Backup-Speicher","icon":"fa-database","color":"#6366f1"},{"id":"firewall","nameKey":"cat_label_firewall","name":"Firewall & Security","icon":"fa-shield-halved","color":"#ef4444"},{"id":"solar","nameKey":"cat_label_solar","name":"Solar & Photovoltaik","icon":"fa-solar-panel","color":"#eab308"},{"id":"wallbox","nameKey":"cat_label_wallbox","name":"Wallbox & E-Mobilität","icon":"fa-charging-station","color":"#10b981"},{"id":"audio","nameKey":"cat_label_audio","name":"Audio & Multiroom","icon":"fa-music","color":"#a855f7"}],"frames":[{"id":"frame_apeg","title":"📡 AP-EG WLAN Hub (Xiaomi / Android / Sensoren)","x":1056,"y":-13,"width":346,"height":777,"strokeColor":"#00bcef","strokeDash":"5 3","headerBg":"#083344","textColor":"#38bdf8"},{"id":"frame_guest","title":"🛡️ GASTNETZ (VPN / VLAN 192.168.179.x)","x":711,"y":338,"width":330,"height":425,"strokeColor":"#f59e0b","strokeDash":"6 4","headerBg":"#78350f","textColor":"#fbbf24"}],"devices":[{"id":"gateway_main","parentId":"switch","name":"Fritz!Box 7590","ip":"192.168.178.1","cat":"router","icon":"fa-network-wired","color":"#f59e0b","desc":"Haupt-Internet Gateway & VDSL-Router an Cisco Switch.","poe":false,"loginUser":"{\"iv\":\"zbi2nMPkrxKq6rvi\",\"ciphertext\":\"BGwNfpn/oS6aQok3PiSIqiNU6HN2\"}","loginPass":"{\"iv\":\"B2Rixxi66VQJe8oF\",\"ciphertext\":\"F/bzkFyzB7unjxG2IMqA+6GJEqR9D/U2ElBr00CHGKHc\"}","hostname":"fritz.box","mac":"E0:28:00:00:00:00","vendor":"AVM Audiovisuelles Marketing und Computersysteme GmbH","scanType":"Router/DNS","ports":"53, 80, 443","pos":{"x":516,"y":5},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"3u2TMZSeREJa/vfE\",\"ciphertext\":\"zQ3Y5cCC8R0Q4vKgex/WN2QS\"}","loginSets":"{\"iv\":\"cziEQAa8DOC1tyif\",\"ciphertext\":\"IkBlnF2XIVrT2IvUoc2Msdpn\"}"},{"id":"router_core","parentId":"gateway_main","name":"Core Router","ip":"192.168.178.2","cat":"router","icon":"fa-network-wired","color":"#00bcef","desc":"Zentraler Core Router zur internen Subnetz-Verteilung.","poe":false,"loginUser":"{\"iv\":\"r/sO1rRZEIVohp6q\",\"ciphertext\":\"9hBj6IyjkWoPa7MY1I9MZ7Y26eDJ\"}","loginPass":"{\"iv\":\"1RYcpjv+4VjK6ScN\",\"ciphertext\":\"D3hhs6r3A0QVX7X4VsScDFjjETPurjARVkAgxDOTmHY=\"}","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":296,"y":7},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"U0k8wPBFGlAcxBHT\",\"ciphertext\":\"ha0VAzc7/+gEe/a8vzZLjmU8qLlZ+zjdgccnTcF+t7Yr1klxo9CEaQ0hOAtwzPRKFIMgr7Pe5mbDwXDt7IqyLg==\"}","loginSets":"{\"iv\":\"aqpeFOCrfs2QxuLn\",\"ciphertext\":\"u1Be5afabzHxBhA5hKjVCqhl\"}"},{"id":"switch","parentId":null,"name":"Cisco WS-C2960S-48LPS-L","ip":"192.168.178.8","cat":"switch","icon":"fa-sitemap","color":"#00bcef","desc":"Zentraler Gigabit 48-Port PoE+ Managed Switch\n","poe":true,"loginUser":"{\"iv\":\"+c4pA10aaq8lPZk5\",\"ciphertext\":\"sjnlxQcIAzPvJpm2xLxOy8JvVFjr\"}","loginPass":"{\"iv\":\"x5T2cGbx9CnLzyc5\",\"ciphertext\":\"Djo1SERF4or8ZUWDatmfgyg5i/FK\"}","hostname":"","mac":"E8:ED:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":464,"y":305},"linkColor":"","netType":"ethernet","vlan":"","wlanNets":"{\"iv\":\"Q7kl02n8afQpxY9d\",\"ciphertext\":\"HpbjoOsnVIr2o6WotuGrkVEr\"}","loginSets":"{\"iv\":\"tqdQa/YcT40p8bkC\",\"ciphertext\":\"bCz099eOa+nML6UR71xixnAG\"}"},{"id":"server_main","parentId":"switch","name":"Hauptserver","ip":"192.168.178.10","cat":"server","icon":"fa-server","color":"#818cf8","desc":"Zentraler Server & Speichersystem","poe":false,"loginUser":"{\"iv\":\"034Rx7Oe7Nj2gUym\",\"ciphertext\":\"3DfvcODzysMMESwOZcsCKZSDr5I=\"}","loginPass":"{\"iv\":\"52OaoceoAF94JGUm\",\"ciphertext\":\"+LtLew14Fe0lGBv0M7pm0F8DMDqJbGssuzjieig=\"}","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":95,"y":199},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"PqtzA9JWMx/VGRcP\",\"ciphertext\":\"WJJuVo+vY2UuX7HvS9jQQFeW\"}","loginSets":"{\"iv\":\"rKX5cyv7LujvuSrT\",\"ciphertext\":\"4/87NP0Jk9mTVrHZ9pfD3RKA\"}"},{"id":"dev_1793258588876_2","parentId":"switch","name":"Power Schalter - Aussen","ip":"192.168.178.11","cat":"endgeraet","icon":"fa-bolt","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"00:10:00:00:00:00","vendor":"RITTAL-WERK RUDOLF LOH GmbH & Co.","scanType":"Web Device","ports":"21, 80","pos":{"x":96,"y":6},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"uQb6cgCL/jNsZ1eN\",\"ciphertext\":\"eGlNqulgE0FXRA6OOu5ZSOX1\"}","loginSets":"{\"iv\":\"Od6ktPMTFxnW4PLb\",\"ciphertext\":\"2p3U3C4RVKtg4WHsa3UDMi+/\"}"},{"id":"dev_1793258588877_3","parentId":"switch","name":"Power Schalter - Innen","ip":"192.168.178.12","cat":"endgeraet","icon":"fa-bolt","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"00:10:00:00:00:00","vendor":"RITTAL-WERK RUDOLF LOH GmbH & Co.","scanType":"Web Device","ports":"21, 80","pos":{"x":96,"y":95},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"aPB1wXqCn0YV1MCQ\",\"ciphertext\":\"QdZwiexGdlqLssWi6jXq4Uft\"}","loginSets":"{\"iv\":\"vhKDsAZwrG1SiKN8\",\"ciphertext\":\"9xKcb4mkE0C1OKfWZePxssOX\"}"},{"id":"server_ipmi","parentId":"switch","name":"IPMI Remote Mgmt","ip":"192.168.178.15","cat":"server","icon":"fa-server","color":"#818cf8","desc":"Out-of-Band Remote Management Controller.","poe":false,"loginUser":"{\"iv\":\"88c4aLEvR/gjm1i8\",\"ciphertext\":\"YXEqT6eTfdKFqIgKlbGI8w047IzQ\"}","loginPass":"{\"iv\":\"Yg+G2FTIfsbG+Abf\",\"ciphertext\":\"LsPixKkvWKiCLNnCXrmchTVXsk/aBiIvd+nXhyRf9oo=\"}","hostname":"IPMI-Server.fritz.box","mac":"00:30:00:00:00:00","vendor":"Super Micro Computer, Inc.","scanType":"Linux/SSH","ports":"22, 80","pos":{"x":294,"y":143},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"SDhvHgjiEe5SEcgb\",\"ciphertext\":\"h13e1HeNss6h8uH7xlXLieON\"}","loginSets":"{\"iv\":\"d0jH9sMSc+XEUtbf\",\"ciphertext\":\"QiSyg3ZWw0vAerV5UzMgoTb9\"}"},{"id":"dev_1793258588877_5","parentId":"switch","name":"Oneac Corporation .16","ip":"192.168.178.16","cat":"endgeraet","icon":"fa-laptop","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"00:20:00:00:00:00","vendor":"Oneac Corporation","scanType":"Web Device","ports":"80","pos":{"x":494,"y":696},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"pAuoYMjhbyHLGRCo\",\"ciphertext\":\"U3j+Jj9t7bE/0LH/SK7Wnhcn\"}","loginSets":"{\"iv\":\"Dp1ES3b/yCAbva4b\",\"ciphertext\":\"Ye8PPqfQYzO3xBD6an8uIe7w\"}"},{"id":"cam_door","parentId":"switch","name":"Haustuer","ip":"192.168.178.20","cat":"cameras","icon":"fa-gauge-high","color":"#c084fc","desc":"IP-Kamera Haustür (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"M+mH4ZBZ3Ge/EiAV\",\"ciphertext\":\"rLQi9F2b0pb+qKE5WyX68zzuLo3L\"}","loginPass":"{\"iv\":\"yDswenyvpeaRCb3V\",\"ciphertext\":\"zLegQtAAE6ZZ0bKi5QTG1GlTIKppHwaAuy8=\"}","hostname":"Cam-Haustuer.fritz.box","mac":"00:03:00:00:00:00","vendor":"Mobotix AG","scanType":"Web Device","ports":"80, 443","pos":{"x":792,"y":193},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"ehYqxjssyLHWHmm8\",\"ciphertext\":\"YUzswYFOgbv/PVGFngs4DDgJ\"}","loginSets":"{\"iv\":\"7B7ok0It40j+PBiT\",\"ciphertext\":\"w9tETNeKd1QA5EM22rwDOvnF\"}"},{"id":"cam_yard","parentId":"switch","name":"Hof","ip":"192.168.178.21","cat":"cameras","icon":"fa-gauge-high","color":"#c084fc","desc":"IP-Kamera Hof (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"+umg/Wo+Q/F3KD0z\",\"ciphertext\":\"0lYD2JfUYcZGjSP8paf3P8Q9yLEF\"}","loginPass":"{\"iv\":\"QnGjNHNsjL8tnqVW\",\"ciphertext\":\"xQm7WZJnbYL936gs0z5StokfNaalrA9zBQQ=\"}","hostname":"Cam-Hof.fritz.box","mac":"00:03:00:00:00:00","vendor":"Mobotix AG","scanType":"Web Device","ports":"80","pos":{"x":942,"y":190},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"fozBkHHEHFZ4YVE0\",\"ciphertext\":\"tEaWFcx6iLixX7T0NtXG6eLj\"}","loginSets":"{\"iv\":\"S5Z90tEKMnUxUsWP\",\"ciphertext\":\"FEkLELwhdHWKfLAMH3fZqvSu\"}"},{"id":"cam_gh","parentId":"switch","name":"Gartenhaus","ip":"192.168.178.22","cat":"cameras","icon":"fa-video","color":"#c084fc","desc":"IP-Kamera Gartenhaus (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"s/ihJYtCRXrp1Sqr\",\"ciphertext\":\"TljJ6hrv5EGmTCmUd9uBmo3s+xgZ\"}","loginPass":"{\"iv\":\"GbqAbc2jHsI2B4Kn\",\"ciphertext\":\"P/tk2cjW0WVt/yqSS2zlQCGzDkc9sbqS1vE=\"}","hostname":"Cam-Gartenhaus.fritz.box","mac":"00:03:00:00:00:00","vendor":"Mobotix AG","scanType":"Web Device","ports":"80","pos":{"x":940,"y":267},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"yZIqjQUbb4b2LgA1\",\"ciphertext\":\"dcN2EAb3N6i7ZTEgSnx5xO1z\"}","loginSets":"{\"iv\":\"Tg+6j3+aFDWiIeZA\",\"ciphertext\":\"IEbm48CYIpJGMtkeYN8Xys+S\"}"},{"id":"print_hp","parentId":"switch","name":"Drucker hp p3015","ip":"192.168.178.30","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"HP LaserJet P3015 Netzdrucker.","poe":false,"loginUser":"","loginPass":"","hostname":"hpp3015drucker.fritz.box","mac":"9C:B6:00:00:00:00","vendor":"Hewlett Packard","scanType":"Printer","ports":"21, 23, 80, 443, 515, 631, 9100","pos":{"x":89,"y":696},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"lzK5yG8CmSAHLxY4\",\"ciphertext\":\"V/f8aORZrC9YCPjY8mgeyl6X\"}","loginSets":"{\"iv\":\"ZNNqiZwvOxDj8kFa\",\"ciphertext\":\"xZUvJdG2PRs9Gx+xiFzWB/nE\"}"},{"id":"print_ricoh","parentId":"switch","name":"Drucker-Ricoh","ip":"192.168.178.31","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"Ricoh Multifunktionsdrucker.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":219,"y":696},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"v57aTWe1/BGCogL8\",\"ciphertext\":\"bIGeDUaxTMCm7vgYZ8g/t1iK\"}","loginSets":"{\"iv\":\"oOEargtshzLv+Od2\",\"ciphertext\":\"DKMy6PMxf7RQhMMEmzWSONrS\"}"},{"id":"print_brother","parentId":"switch","name":"Drucker-BROTHER","ip":"192.168.178.32","cat":"printers","icon":"fa-print","color":"#f472b6","desc":"Brother Netzdrucker.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":349,"y":696},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"JWnq0o2zk7xcR3vF\",\"ciphertext\":\"D5o3Yn6fiskl+VyB4ZQK8GhJ\"}","loginSets":"{\"iv\":\"u1nqJnQgvbhx61Kk\",\"ciphertext\":\"Z6Gru/vDoyx8n95ZhPIL53kW\"}"},{"id":"phone_gh","parentId":"switch","name":"Cisco Phone GH","ip":"192.168.178.80","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Gartenhaus (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-GH.fritz.box","mac":"64:A0:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":89,"y":556},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"L3upC4lnWP8ZLLHW\",\"ciphertext\":\"po0Y2s8rAbNxuYna+U0cSGYf\"}","loginSets":"{\"iv\":\"MKgLJpcTbaSDQwJB\",\"ciphertext\":\"Kh5mxa9Ol963D0k0oHCpq/Tl\"}"},{"id":"phone_sz","parentId":"switch","name":"Cisco Phone SZ","ip":"192.168.178.81","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Schlafzimmer (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-SZ.fritz.box","mac":"C8:F9:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":219,"y":556},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"9LJ2IsDf8YYMFAJM\",\"ciphertext\":\"clcS4Cr251L2ZBG/S60szwF/\"}","loginSets":"{\"iv\":\"2t/HBFrQTdkov2XW\",\"ciphertext\":\"kx8I/ozqpcxb0ozJfGnesf1A\"}"},{"id":"phone_wz2","parentId":"switch","name":"Cisco Phone WZ2","ip":"192.168.178.82","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Wohnzimmer 2 (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-WZ2.fritz.box","mac":"C8:F9:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"22, 80, 443","pos":{"x":349,"y":556},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"72w/ddI11VYqow/E\",\"ciphertext\":\"NYKVHCEa4ahefT3Rn+fv9uKD\"}","loginSets":"{\"iv\":\"SDXaE3gM2DQwNH84\",\"ciphertext\":\"QIxumpvg8X5JOaXFsNGZJfWP\"}"},{"id":"phone_wz1","parentId":"switch","name":"Cisco Phone WZ1","ip":"192.168.178.83","cat":"voice","icon":"fa-phone-flip","color":"#34d399","desc":"Cisco SIP Telefon Wohnzimmer 1 (PoE am Switch).","poe":true,"loginUser":"","loginPass":"","hostname":"Cisco-Phone-WZ1.fritz.box","mac":"DC:A5:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80, 443","pos":{"x":479,"y":556},"linkColor":"","netType":"ethernet","vlan":"","wlanNets":"{\"iv\":\"hZdJ/V8xo0v1/95t\",\"ciphertext\":\"LAImCrwMdmd8qtVFYuS3cntH\"}","loginSets":"{\"iv\":\"pily9pK5U8KpOfAt\",\"ciphertext\":\"mnEf4AUCur6D7kE1rCXj2oDD\"}"},{"id":"ap_og","parentId":"switch","name":"Cisco AP OG","ip":"192.168.178.90","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Obergeschoss (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"UKTGIsbOEnQF2/Uc\",\"ciphertext\":\"3qBDTr4Nu3LnRqTNcT5AuEZSwhrS\"}","loginPass":"{\"iv\":\"r1rDMlHHuDGGr5DM\",\"ciphertext\":\"fGFA19fjx/6rrTNSaQhY5Eyg4ZREkad9m1w=\"}","hostname":"Cisco-AP-OG.fritz.box","mac":"84:B2:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80","pos":{"x":98,"y":317},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"hQREzyb8L4qWktYU\",\"ciphertext\":\"SzGImRj+jGIq+HYNrZbSiDYmaVvpvDy8922c7sBL1r0pTJM5o/a3DX8gHXD8AyjEqklvcNU=\"}","loginSets":"{\"iv\":\"swMsckgExx+AcDox\",\"ciphertext\":\"PVU/dHTp+EAnuRX2tXU9okS4\"}"},{"id":"ap_eg","parentId":"switch","name":"Cisco AP EG","ip":"192.168.178.92","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Erdgeschoss (Zentraler WLAN Hub).","poe":true,"loginUser":"{\"iv\":\"7bDOMTGVrMnc8VCn\",\"ciphertext\":\"q0HUCpQqdKoJANCzzJZA7k0YPpdm\"}","loginPass":"{\"iv\":\"ue3bo3YlFkQbCkID\",\"ciphertext\":\"6GjW/luYLH5nIlL+8X7rKVjGiqghlfdPHRE=\"}","hostname":"Cisco-AP-EG.fritz.box","mac":"84:B2:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80","pos":{"x":1218,"y":77},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"cAPJlvxGsyQqaYN6\",\"ciphertext\":\"1+tqj1xwRWwjoQZGXUrSnWZJiAXkxwdcgthQ5Rv8euapDLnw6taCcxGJmBCW/nwG6jSD2wI=\"}","loginSets":"{\"iv\":\"huJiq80dvTBgN7o9\",\"ciphertext\":\"h7jhRAyWxnT8OcwbzQm0PWo3\"}"},{"id":"ap_gh","parentId":"switch","name":"Cisco AP GH","ip":"192.168.178.94","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Cisco Access Point Gartenhaus (PoE am Switch).","poe":true,"loginUser":"{\"iv\":\"knSmgPygu1tQan/x\",\"ciphertext\":\"wWKfuU7RpniCCn5fPtx43o9WbM00\"}","loginPass":"{\"iv\":\"ecB5Nhkj8g2hNM6B\",\"ciphertext\":\"vOfJGZ0daKR+dfkQ10WzAw4Ib8FzEfYWzdk=\"}","hostname":"Cisco-AP-GH.fritz.box","mac":"84:B2:00:00:00:00","vendor":"Cisco Systems, Inc","scanType":"Switch/AP","ports":"80","pos":{"x":98,"y":392},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"bzYHdwGcH/iUKf7q\",\"ciphertext\":\"OAT4Cnqz8I6giKsaxrrc2aRFFjIgTxGYezKikcdHpnnF3YLEQfoJdjbHvu7Kfq+Z8YBUPZ/ZrStG\"}","loginSets":"{\"iv\":\"hVeF8X/bRoG4ArnW\",\"ciphertext\":\"NKMEo6CV+urMlfEir4VYmmLr\"}"},{"id":"gas_sensor","parentId":"ap_eg","name":"GasSensor","ip":"192.168.178.100","cat":"sensors","icon":"fa-gauge-high","color":"#84cc16","desc":"Sicherheits-GasSensor. Drahtlos angebunden an Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1149,"y":166},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"RkemQbH06HiE57kH\",\"ciphertext\":\"w1eVh7NQEkA1VrQgSixBHQiU\"}","loginSets":"{\"iv\":\"pjiyVgfUzEydJjQx\",\"ciphertext\":\"VCoU+R2gGLyt7nb3dptQOBTH\"}"},{"id":"zisterne_sensor","parentId":"ap_eg","name":"Zisterne Sensor","ip":"192.168.178.101","cat":"sensors","icon":"fa-gauge-high","color":"#84cc16","desc":"Wasserstands-Zisterne Sensor. Drahtlos angebunden an Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1312,"y":164},"linkColor":"#84cc16","vlan":"","wlanNets":"{\"iv\":\"RuhxfeG5VY5KBR82\",\"ciphertext\":\"P6OlPY+tIftamXch2HcT8cF7\"}","loginSets":"{\"iv\":\"qC8dMXezCQskPNBv\",\"ciphertext\":\"ELT+TiolV5CEPKmY88db9/Lc\"}"},{"id":"poco_x4","parentId":"ap_eg","name":"POCO X4 Pro 5G","ip":"192.168.178.154","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"POCO X4 Pro Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1148,"y":276},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"/3xKPkCFWWMlqDrR\",\"ciphertext\":\"dhCuADrVJYVPVX647dwzn77f\"}","loginSets":"{\"iv\":\"0eDqivwKqmt20cYi\",\"ciphertext\":\"6fc4DKJH4t8RK8lLX4gHv4s+\"}"},{"id":"patrick_redmi9","parentId":"ap_eg","name":"Redmi 9","ip":"192.168.178.177","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"Patrick Redmi 9 Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"patrickredmi-9.fritz.box","mac":"1E:DA:00:00:00:00","vendor":"(Randomized)","scanType":"Mobile","ports":"-","pos":{"x":1149,"y":384},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"r2B8gSeiLib9+L+7\",\"ciphertext\":\"XAOotVF6YJnMLM2/pJuXxEbR\"}","loginSets":"{\"iv\":\"J+r48hXz+glBOqjO\",\"ciphertext\":\"luG+p1wOWd8FExERVOTys/JJ\"}"},{"id":"dev_1793258588877_20","parentId":"switch","name":"net-a1-115C","ip":"192.168.178.180","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"net-a1-115C.fritz.box","mac":"AC:93:00:00:00:00","vendor":"GD Midea Air-Conditioning Equipment Co.,Ltd.","scanType":"IoT","ports":"-","pos":{"x":722,"y":6},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"MHdS7w2Eu8i1ogsy\",\"ciphertext\":\"vtGj8kw6nlPjlNbstR+c8rfZ\"}","loginSets":"{\"iv\":\"6sqqe/svm4Iu6GGl\",\"ciphertext\":\"bAyZ+ZKl7dKpsd4hkyMsy6Wb\"}"},{"id":"dev_1793258588877_21","parentId":"switch","name":"ESP-E3F2CB","ip":"192.168.178.181","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"ESP-E3F2CB.fritz.box","mac":"E8:DB:00:00:00:00","vendor":"Espressif Inc.","scanType":"IoT","ports":"-","pos":{"x":890,"y":6},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"FuKJRrXwH1CU0fZg\",\"ciphertext\":\"HBNpMgVGEyA+EtxKMrDjSLWr\"}","loginSets":"{\"iv\":\"SXUSevQwFJyApYxJ\",\"ciphertext\":\"A5SwpKrTxUBS+5l4LQ/Ylx6t\"}"},{"id":"dev_1793258588877_22","parentId":"switch","name":"I16Plus","ip":"192.168.178.188","cat":"endgeraet","icon":"fa-desktop","color":"#06b6d4","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"I16Plus.fritz.box","mac":"8C:E9:00:00:00:00","vendor":"Intel Corporate","scanType":"Windows","ports":"135, 445","pos":{"x":626,"y":556},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"urPwQnsyuCyeC/5i\",\"ciphertext\":\"OT7S4sJ1EsKwfTrMUl0Js1+B\"}","loginSets":"{\"iv\":\"z2st89Es3ksHzqcs\",\"ciphertext\":\"RqGlR9YDfb4vzUI+ARkN5hUF\"}"},{"id":"andrea_nb_wlan","parentId":"ap_eg","name":"Notebook (WLAN)","ip":"192.168.178.190","cat":"endgeraet","icon":"fa-laptop","color":"#06b6d4","desc":"Andrea Notebook WLAN-Verbindung über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1153,"y":611},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"RnoyXB2Fi5NC9S39\",\"ciphertext\":\"7u8u9Y6A0sltlgV0jY8nwV+t\"}","loginSets":"{\"iv\":\"pJYoUPxc0lBzJNCh\",\"ciphertext\":\"5Hn4KjUMEFXuK1dpdb8tuFk9\"}"},{"id":"dev_1793258588877_23","parentId":"switch","name":"hoymilessolar","ip":"192.168.178.201","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"hoymilessolar.fritz.box","mac":"A4:E5:00:00:00:00","vendor":"Espressif Inc.","scanType":"IoT","ports":"-","pos":{"x":791,"y":101},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"AiiNB+7NeAkb9V7p\",\"ciphertext\":\"2pu/DFuxueXvHkGu6Fcg+L+2\"}","loginSets":"{\"iv\":\"3COCs+Wj/6BlQMMX\",\"ciphertext\":\"eRa6z8uw051fIsn3ySUFjii7\"}"},{"id":"lee_pad","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.233","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Lee Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1312,"y":277},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"GhK/MN3lPlrFI6Qa\",\"ciphertext\":\"lbtksyLdbMqBS3/hmGr2lYVR\"}","loginSets":"{\"iv\":\"DtYY8rQ9fOKU8I9J\",\"ciphertext\":\"wen9oS0vEFFUFndAYRFS43oi\"}"},{"id":"andrea_pad","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.234","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Andrea Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"andrearedmi-pad-2-pro.fritz.box","mac":"76:14:00:00:00:00","vendor":"(Randomized)","scanType":"Mobile","ports":"-","pos":{"x":1312,"y":386},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"epiy60KsU1sKeO0B\",\"ciphertext\":\"15eUQPntPBxGKG1maiEwT4U0\"}","loginSets":"{\"iv\":\"JI5dLupOFRqCQngg\",\"ciphertext\":\"aMkPzgbVagAuMMKiYiXxpCz8\"}"},{"id":"redmi_pad_se","parentId":"ap_eg","name":"Redmi Pad SE","ip":"192.168.178.235","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Redmi Pad SE Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"Redmi-Pad-SE.fritz.box","mac":"D2:13:00:00:00:00","vendor":"(Randomized)","scanType":"Mobile","ports":"-","pos":{"x":1307,"y":497},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"rh1WF5tMoDB/wAL+\",\"ciphertext\":\"rXal6Z8R9OU4WjrjLoGBVx7+\"}","loginSets":"{\"iv\":\"CBBbysqInP2XV0sA\",\"ciphertext\":\"wr7wOxKi++VwtcwPfBrZdjp5\"}"},{"id":"andrea_pocof1","parentId":"ap_eg","name":"POCO F1","ip":"192.168.178.241","cat":"endgeraet","icon":"fa-mobile-screen-button","color":"#06b6d4","desc":"Andrea Poco F1 Smartphone. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"Andrea-PocoF1.fritz.box","mac":"A4:50:00:00:00:00","vendor":"Xiaomi Communications Co Ltd","scanType":"Android","ports":"-","pos":{"x":1145,"y":495},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"xm8Y2kr0xOpFznM4\",\"ciphertext\":\"O3T9iBBQBuEmC+Q24E3uU3Ex\"}","loginSets":"{\"iv\":\"Xl0zqkRUv4LfFMC9\",\"ciphertext\":\"CwWEj4cwKnGk1jZVJUaBImZv\"}"},{"id":"dev_1793258588877_27","parentId":"switch","name":"xiaomismarttv","ip":"192.168.178.247","cat":"smarttv","icon":"fa-tv","color":"#38bdf8","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"xiaomismarttv.fritz.box","mac":"94:62:00:00:00:00","vendor":"Beijing Xiaomi Electronics Co.,Ltd","scanType":"Smart TV","ports":"-","pos":{"x":631,"y":696},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"zPXpNXO++Cu5I/0w\",\"ciphertext\":\"hv8O35SmzDM5PHEWDODwHszC\"}","loginSets":"{\"iv\":\"yoGKVh18WpgNWfqD\",\"ciphertext\":\"Ce6rRf4BgtRDIZ7YO0mpqLME\"}"},{"id":"dev_1793258588877_28","parentId":"switch","name":"buderusmx400","ip":"192.168.178.248","cat":"smarthome","icon":"fa-house-signal","color":"#f59e0b","desc":"Per KillerScan-Import hinzugefügt.","poe":false,"loginUser":"","loginPass":"","hostname":"buderusmx400.fritz.box","mac":"F0:4A:00:00:00:00","vendor":"Bosch Thermotechnik GmbH","scanType":"IoT","ports":"-","pos":{"x":946,"y":103},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"2Iet+APmkq14QzJ8\",\"ciphertext\":\"zRRJsQaTyBReT2lMump2wt4+\"}","loginSets":"{\"iv\":\"PTf3p/0tAJzfyqY2\",\"ciphertext\":\"T6WnCyb105b2ZVZKaMEj+K2O\"}"},{"id":"redmi_pad_2pro","parentId":"ap_eg","name":"Redmi Pad 2 Pro","ip":"192.168.178.249","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Redmi Pad 2 Pro Tablet. Drahtlos über Cisco AP-EG.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":1306,"y":614},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"ZeIopF605sz4saKx\",\"ciphertext\":\"UQmVQp3zLjBxrcMosJL3eqyP\"}","loginSets":"{\"iv\":\"fDgeqoUBUyZHPTUr\",\"ciphertext\":\"uX8O5hkYt5/0XOyTPdiFedMn\"}"},{"id":"gateway_guest","parentId":"switch","name":"Fritz!Box Gast-Gateway","ip":"192.168.179.1","cat":"gateways","icon":"fa-tower-broadcast","color":"#f59e0b","desc":"Fritz!Box Gastnetz (VPN / Subnetz 192.168.179.1).","poe":false,"loginUser":"{\"iv\":\"bQfJIAF043CQzdOE\",\"ciphertext\":\"KD8oiDH7MYDpLa7xWetH/9qq2n9x\"}","loginPass":"{\"iv\":\"ahs91xe0nLadfXva\",\"ciphertext\":\"6tjrGjlGqBpa5QgaqR2YuxUKu7mO\"}","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":888,"y":443},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"XJCbLHEBxpmynemI\",\"ciphertext\":\"YcFxlHgpZoS2wzruQpDi4jHc\"}","loginSets":"{\"iv\":\"yDPsfZb+Wm2IYxi3\",\"ciphertext\":\"HYsrj0KayeJTM3FUFJochlHF\"}"},{"id":"ap_eg_guest","parentId":"gateway_guest","name":"Cisco AP EG (Gast-Trunk)","ip":"192.168.179.20","cat":"wlan_ap","icon":"fa-wifi","color":"#38bdf8","desc":"Gast-VLAN Trunk vom Cisco Switch an Cisco EG.","poe":true,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":888,"y":550},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"WfjspnyJEfxV13TZ\",\"ciphertext\":\"mgqXkDYdcKJyMS/Y/hZXn/BtDHWZ36Lxg4MYkeN49oO5VLSFriHHNz7BP7i9qBaNGqdS7/pMLn+Axh2OXuSu\"}","loginSets":"{\"iv\":\"4iAODMQHE5buCKxY\",\"ciphertext\":\"6BcT8aiXuXyDVbcmJ1nPVmCI\"}"},{"id":"school_tab_1","parentId":"ap_eg_guest","name":"Schultablet 1","ip":"192.168.179.20","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Schultablet 1 im Gastnetzwerk.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":805,"y":692},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"4OTBSgRso3aB9Dfs\",\"ciphertext\":\"yQTgbiZSiSbws/tCswrBYk1a\"}","loginSets":"{\"iv\":\"niDvr7uqI2Y79Gsp\",\"ciphertext\":\"wQYDcwec586kI22FbQdIuHfP\"}"},{"id":"school_tab_2","parentId":"ap_eg_guest","name":"Schultablet 2","ip":"192.168.179.21","cat":"endgeraet","icon":"fa-tablet-screen-button","color":"#06b6d4","desc":"Schultablet 2 im Gastnetzwerk.","poe":false,"loginUser":"","loginPass":"","hostname":"","mac":"","vendor":"","scanType":"","ports":"","pos":{"x":967,"y":690},"linkColor":"","vlan":"","wlanNets":"{\"iv\":\"l1ggN6VQJXtqxP5B\",\"ciphertext\":\"Or/nY4VWYnxxMYFYSa4zKm8y\"}","loginSets":"{\"iv\":\"NU4FZyyMr7ew6t0u\",\"ciphertext\":\"PxCfeFPY95Z7kI0d1sNGN1RN\"}"}],"viewState":{"net":{"view":{"x":7.175629538436146,"y":-62.148046341094584,"w":1447.999984741211,"h":939.1742394206956},"circleRadius":200,"n":41},"__meta":{"active":"net"},"circle":{"manualRadius":true,"circleRadius":430}},"crypto":{"salt":"fqxFs5E0WAEpmrNPOC2ggg==","verifier":"+hpq1Fhh+SHW0NPCsV4n7S1ylRESaajJOil56z5HBbw=","version":2}}</script>
 
   <style id="hide-native-password-reveal">
     /* Browser-eigenes, erst bei Eingabe erscheinendes Passwort-Auge ausblenden.
@@ -569,7 +569,7 @@
           <a href="https://github.com/ulfenknulfen/kryptonetview" target="_blank" rel="noopener noreferrer" class="text-[11px] font-mono text-zinc-400 hover:text-ciscocyan transition flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="GitHub Repository">
             <i class="fa-brands fa-github text-sm"></i> github.com/ulfenknulfen/kryptonetview
           </a>
-          <span id="app-version" class="text-[11px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="Version">v2.0.4</span>
+          <span id="app-version" class="text-[11px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-lg shadow-inner" title="Version">v2.0.5</span>
         </div>
       </div>
     </main>
@@ -681,6 +681,23 @@
         <button id="btn-confirm-export" class="w-1/2 bg-amber-600 hover:bg-amber-500 text-white font-bold py-2.5 rounded-lg text-xs transition shadow-md flex items-center justify-center gap-1.5">
           <i class="fa-solid fa-file-export"></i> <span data-i18n="btn_confirm_export">Dennoch Exportieren</span>
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIALOG: Hinweis nach Passwortwechsel – Änderung ist noch nicht in der HTML-Datei gesichert -->
+  <div id="pw-save-hint-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div class="w-full max-w-md bg-panelbg rounded-2xl border border-amber-500/50 shadow-2xl p-6 relative">
+      <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-2xl flex items-center justify-center text-xl border border-amber-500/30 mx-auto mb-3">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <h3 id="pwhint-title" class="text-base font-bold text-white text-center mb-1"></h3>
+      <p id="pwhint-text" class="text-xs text-zinc-300 text-center mb-4 leading-relaxed"></p>
+      <div class="flex flex-col gap-2">
+        <button id="pwhint-btn-action" type="button" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-2.5 rounded-lg text-xs transition shadow-md flex items-center justify-center gap-1.5">
+          <i id="pwhint-action-icon" class="fa-solid fa-link"></i> <span id="pwhint-action-text"></span>
+        </button>
+        <button id="pwhint-btn-continue" type="button" class="w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 py-2.5 rounded-lg text-xs font-semibold transition"></button>
       </div>
     </div>
   </div>
@@ -860,7 +877,7 @@
           <div>
             <label class="block text-xs font-semibold text-zinc-400 mb-1" data-i18n="auth_label_pw">Master-Passwort</label>
             <div class="relative flex items-center">
-              <input type="password" id="auth-password-input" data-i18n-placeholder="auth_ph_pw" placeholder="Passwort eingeben..." class="w-full bg-zinc-900 border border-zinc-700 rounded-lg pl-3 pr-10 py-2 text-xs text-white focus:outline-none focus:border-ciscocyan">
+              <input type="password" id="auth-password-input" autocomplete="current-password" data-i18n-placeholder="auth_ph_pw" placeholder="Passwort eingeben..." class="w-full bg-zinc-900 border border-zinc-700 rounded-lg pl-3 pr-10 py-2 text-xs text-white focus:outline-none focus:border-ciscocyan">
               <button type="button" id="btn-toggle-login-pw" class="absolute right-2.5 text-zinc-400 hover:text-ciscocyan p-1 text-xs" title="Passwort anzeigen/verbergen" data-i18n-title="tip_pw_toggle">
                 <i class="fa-regular fa-eye"></i>
               </button>
@@ -894,7 +911,7 @@
           <div>
             <label class="block text-[11px] font-semibold text-zinc-400 mb-1" data-i18n="changepw_old">Aktuelles Passwort</label>
             <div class="relative flex items-center">
-              <input type="password" id="change-pw-old" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg pl-3 pr-10 py-1.5 text-xs text-white focus:outline-none focus:border-ciscocyan">
+              <input type="password" id="change-pw-old" autocomplete="current-password" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg pl-3 pr-10 py-1.5 text-xs text-white focus:outline-none focus:border-ciscocyan">
               <button type="button" id="btn-toggle-change-old-pw" class="absolute right-2.5 text-zinc-400 hover:text-ciscocyan p-1 text-xs" title="Passwort anzeigen/verbergen" data-i18n-title="tip_pw_toggle">
                 <i class="fa-regular fa-eye"></i>
               </button>
@@ -903,7 +920,7 @@
           <div>
             <label class="block text-[11px] font-semibold text-zinc-400 mb-1" data-i18n="changepw_new">Neues Master-Passwort</label>
             <div class="relative flex items-center">
-              <input type="password" id="change-pw-new" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg pl-3 pr-10 py-1.5 text-xs text-white focus:outline-none focus:border-ciscocyan">
+              <input type="password" id="change-pw-new" autocomplete="new-password" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg pl-3 pr-10 py-1.5 text-xs text-white focus:outline-none focus:border-ciscocyan">
               <button type="button" id="btn-toggle-change-new-pw" class="absolute right-2.5 text-zinc-400 hover:text-ciscocyan p-1 text-xs" title="Passwort anzeigen/verbergen" data-i18n-title="tip_pw_toggle">
                 <i class="fa-regular fa-eye"></i>
               </button>
@@ -912,7 +929,7 @@
           <div>
             <label class="block text-[11px] font-semibold text-zinc-400 mb-1" data-i18n="changepw_confirm">Neues Passwort bestätigen</label>
             <div class="relative flex items-center">
-              <input type="password" id="change-pw-confirm" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg pl-3 pr-10 py-1.5 text-xs text-white focus:outline-none focus:border-ciscocyan">
+              <input type="password" id="change-pw-confirm" autocomplete="new-password" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg pl-3 pr-10 py-1.5 text-xs text-white focus:outline-none focus:border-ciscocyan">
               <button type="button" id="btn-toggle-change-confirm-pw" class="absolute right-2.5 text-zinc-400 hover:text-ciscocyan p-1 text-xs" title="Passwort anzeigen/verbergen" data-i18n-title="tip_pw_toggle">
                 <i class="fa-regular fa-eye"></i>
               </button>
@@ -1565,6 +1582,10 @@
         auth_label_pw: "Master-Passwort",
         auth_ph_pw: "Passwort eingeben...",
         auth_err_wrong: "Falsches Master-Passwort!",
+        pw_err_same: "Neues Passwort muss sich vom aktuellen unterscheiden.",
+        pw_err_wait: "Bitte warten: {s} s",
+        pw_err_decrypt: "Entschlüsselung fehlgeschlagen – es wurde nichts geändert.",
+        pw_warn_default: "Du nutzt noch das Standard-Passwort. Bitte ändere es über \"Passwort ändern\".",
         auth_btn_submit: "Anmelden & Editiermodus Freischalten",
         auth_link_changepw: "Master-Passwort ändern",
         changepw_title: "Master-Passwort ändern",
@@ -1669,6 +1690,14 @@
         notif_logout: "Erfolgreich abgemeldet.",
         notif_saved: "Konfiguration gespeichert.",
         notif_pw_changed: "Master-Passwort wurde erfolgreich geändert!",
+        notif_pw_changed_saved: "Master-Passwort geändert und in der Datei gespeichert. Bitte neu anmelden.",
+        pwhint_title: "Passwort geändert – noch NICHT in der Datei gesichert",
+        pwhint_text_notconnected: "Du bist noch nicht mit der HTML-Datei verbunden. Das neue Passwort steht bisher nur im Browser-Speicher. Beim nächsten Öffnen der Datei gilt weiterhin das alte Passwort, solange du die Datei nicht verbindest und speicherst.",
+        pwhint_text_failed: "Das neue Passwort konnte nicht in die verbundene HTML-Datei geschrieben werden. Es steht bisher nur im Browser-Speicher. Beim nächsten Öffnen der Datei gilt weiterhin das alte Passwort. Bitte Verbindung erneut herstellen.",
+        pwhint_text_unsupported: "Dieser Browser kann die HTML-Datei nicht direkt überschreiben (nur Chrome/Edge). Das neue Passwort steht nur im Browser-Speicher. Bitte sichere jetzt die HTML-Datei (Download) und ersetze die alte Datei damit, sonst gilt beim nächsten Öffnen das alte Passwort.",
+        pwhint_btn_connect: "Jetzt mit Datei verbinden",
+        pwhint_btn_download: "HTML jetzt herunterladen",
+        pwhint_btn_continue: "Ohne Sichern zur Anmeldung",
         notif_device_saved: "Gerätedetails gespeichert.",
         notif_device_created: "Neues Gerät erstellt.",
         notif_device_deleted: "Gerät gelöscht.",
@@ -1946,6 +1975,10 @@
         auth_label_pw: "Master Password",
         auth_ph_pw: "Enter password...",
         auth_err_wrong: "Incorrect master password!",
+        pw_err_same: "The new password must differ from the current one.",
+        pw_err_wait: "Please wait: {s} s",
+        pw_err_decrypt: "Decryption failed – nothing was changed.",
+        pw_warn_default: "You are still using the default password. Please change it via \"Change password\".",
         auth_btn_submit: "Login & Unlock Edit Mode",
         auth_link_changepw: "Change Master Password",
         changepw_title: "Change Master Password",
@@ -2050,6 +2083,14 @@
         notif_logout: "Successfully logged out.",
         notif_saved: "Configuration saved.",
         notif_pw_changed: "Master password successfully changed!",
+        notif_pw_changed_saved: "Master password changed and saved to the file. Please log in again.",
+        pwhint_title: "Password changed – NOT yet saved to the file",
+        pwhint_text_notconnected: "You are not connected to the HTML file yet. The new password only exists in browser storage so far. The next time you open the file, the old password still applies until you connect and save the file.",
+        pwhint_text_failed: "The new password could not be written to the connected HTML file. It only exists in browser storage so far. The next time you open the file, the old password still applies. Please reconnect to the file.",
+        pwhint_text_unsupported: "This browser cannot overwrite the HTML file directly (Chrome/Edge only). The new password only exists in browser storage. Please save the HTML file now (download) and replace the old file with it, otherwise the old password applies the next time you open it.",
+        pwhint_btn_connect: "Connect to file now",
+        pwhint_btn_download: "Download HTML now",
+        pwhint_btn_continue: "Continue to login without saving",
         notif_device_saved: "Device details saved.",
         notif_device_created: "New device created.",
         notif_device_deleted: "Device deleted.",
@@ -2525,6 +2566,41 @@
           try { const parsed = JSON.parse(rawSets); if (Array.isArray(parsed)) sets = parsed.map(normalizeLoginEntry); } catch (e) {}
         }
         dev._unlockedLogins = sets;
+      }
+    }
+
+    // Strenge Entschlüsselung: wirft bei falschem Schlüssel/beschädigten Daten (statt still Müll zurückzugeben).
+    async function decryptTextStrict(s, key) {
+      if (!s || !key) return s;
+      let d;
+      try { d = JSON.parse(s); } catch (_) { return s; }   // Klartext-Altbestand
+      if (!d || !d.iv || !d.ciphertext) return s;
+      const buf = await crypto.subtle.decrypt(
+        { name: "AES-GCM", iv: new Uint8Array(base64ToBuffer(d.iv)) }, key, base64ToBuffer(d.ciphertext));
+      return new TextDecoder().decode(buf);
+    }
+
+    // Wie decryptAllDevices, aber strikt: jeder Fehler bricht ab, bevor irgendetwas verändert wurde.
+    async function decryptAllDevicesStrict(key) {
+      const out = [];
+      for (const dev of devices) {
+        const r = { dev };
+        r.user = await decryptTextStrict(dev.loginUser, key);
+        r.pass = await decryptTextStrict(dev.loginPass, key);
+        let nets = [];
+        const rawNets = await decryptTextStrict(dev.wlanNets, key);
+        if (rawNets) { const parsed = JSON.parse(rawNets); if (Array.isArray(parsed)) nets = parsed; }
+        r.nets = nets;
+        let sets = [];
+        const rawSets = await decryptTextStrict(dev.loginSets, key);
+        if (rawSets) { const parsed = JSON.parse(rawSets); if (Array.isArray(parsed)) sets = parsed.map(normalizeLoginEntry); }
+        r.sets = sets;
+        out.push(r);
+      }
+      // Erst jetzt, nach vollständigem Erfolg, die Laufzeit-Felder setzen.
+      for (const r of out) {
+        r.dev._unlockedUser = r.user; r.dev._unlockedPass = r.pass;
+        r.dev._unlockedWlan = r.nets; r.dev._unlockedLogins = r.sets;
       }
     }
 
@@ -3538,6 +3614,27 @@
       }
     }
 
+    // Live-Countdown der Sperre: aktualisiert den Text jede halbe Sekunde, blendet ihn nach Ablauf aus
+    // und sperrt währenddessen die Buttons. Ein neuer Aufruf ersetzt den laufenden Countdown.
+    function showLockCountdown(errEl, textEl, btnIds) {
+      clearInterval(window.__lockTimer);
+      const btns = (btnIds || []).map(id => document.getElementById(id)).filter(Boolean);
+      const tick = () => {
+        const ms = (window.__loginLockUntil || 0) - Date.now();
+        if (ms <= 0) {
+          clearInterval(window.__lockTimer);
+          errEl.classList.add("hidden");
+          btns.forEach(b => { b.disabled = false; b.classList.remove("opacity-60", "cursor-not-allowed"); });
+          return;
+        }
+        textEl.textContent = t("pw_err_wait").replace("{s}", Math.ceil(ms / 1000));
+        errEl.classList.remove("hidden");
+        btns.forEach(b => { b.disabled = true; b.classList.add("opacity-60", "cursor-not-allowed"); });
+      };
+      tick();
+      window.__lockTimer = setInterval(tick, 500);
+    }
+
     // Login prüfen: Passwort -> Prüfwert vergleichen -> Schlüssel behalten -> alle Geräte entschlüsseln.
     async function handleLoginSubmit() {
       if (window.__loginBusy) return;
@@ -3548,8 +3645,7 @@
       // Bremse gegen automatisches Durchprobieren: nach 3 Fehlversuchen steigt die Wartezeit (bis 30 s).
       const waitMs = (window.__loginLockUntil || 0) - Date.now();
       if (waitMs > 0) {
-        errorMsg.querySelector("span").textContent = (currentLang === 'de' ? "Bitte warten: " : "Please wait: ") + Math.ceil(waitMs / 1000) + " s";
-        errorMsg.classList.remove("hidden");
+        showLockCountdown(errorMsg, errorMsg.querySelector("span"), ["btn-login-submit"]);
         return;
       }
       window.__loginBusy = true;
@@ -3557,6 +3653,7 @@
 
       let ok = false;
       let migrated = false;
+      const usedDefaultPw = (inputPw === "admin");
       try {
         const derived = await deriveKeyAndVerifier(inputPw, cryptoSalt, cryptoVersion);
         if (verifiersEqual(derived.verifier, authVerifierHash)) {
@@ -3587,12 +3684,17 @@
           window.__loginLockUntil = Date.now() + Math.min(30000, 1000 * Math.pow(2, window.__loginFails - 3));
         }
         window.__loginBusy = false;
-        errorMsg.querySelector("span").textContent = t("auth_err_wrong");
-        errorMsg.classList.remove("hidden");
+        if ((window.__loginLockUntil || 0) > Date.now()) {
+          showLockCountdown(errorMsg, errorMsg.querySelector("span"), ["btn-login-submit"]);
+        } else {
+          errorMsg.querySelector("span").textContent = t("auth_err_wrong");
+          errorMsg.classList.remove("hidden");
+        }
         return;
       }
       window.__loginFails = 0;
       window.__loginLockUntil = 0;
+      clearInterval(window.__lockTimer);
 
       isLoggedIn = true;
       isEditMode = false;
@@ -3605,6 +3707,7 @@
         renderDeviceList();
         renderTopologySVG();
         showNotification(t("notif_login_ok"));
+        if (usedDefaultPw) setTimeout(() => showNotification(t("pw_warn_default")), 2500);
       } catch (err) {
         console.error(err);
       }
@@ -3778,6 +3881,14 @@
       const modal = document.getElementById("auth-modal");
       modal.classList.remove("opacity-100");
       modal.classList.add("opacity-0", "pointer-events-none");
+      // Passwortfelder wieder verdecken (Augen-Schalter zurücksetzen)
+      ["auth-password-input", "change-pw-old", "change-pw-new", "change-pw-confirm"].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.type = "password";
+        const ic = el.parentElement && el.parentElement.querySelector("button i");
+        if (ic) ic.className = "fa-regular fa-eye";
+      });
     }
 
     function showLoginView() {
@@ -3792,7 +3903,36 @@
 
     // Master-Passwort ändern: altes prüfen, alle Geräte entschlüsseln, neues Salz und neuen Schlüssel erzeugen,
     // alles neu verschlüsseln und speichern.
+    // Wrapper: Doppelklick sperren, Wartehinweis zeigen (die Schlüsselableitung dauert einige Sekunden), Fehler sichtbar machen.
     async function submitChangeMasterPassword() {
+      if (window.__changePwBusy) return;
+      window.__changePwBusy = true;
+      const btn = document.getElementById("btn-submit-change-pw");
+      const oldLabel = btn.innerHTML;
+      btn.disabled = true;
+      btn.classList.add("opacity-60", "cursor-wait");
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> ' + (currentLang === "de" ? "Bitte warten …" : "Please wait …");
+      try {
+        await changeMasterPasswordCore();
+      } catch (err) {
+        console.error(err);
+        const em = document.getElementById("change-pw-error-msg");
+        document.getElementById("change-pw-error-text").innerText = (currentLang === "de" ? "Passwortwechsel fehlgeschlagen: " : "Password change failed: ") + (err && err.message ? err.message : err);
+        em.classList.remove("hidden");
+      } finally {
+        window.__changePwBusy = false;
+        btn.classList.remove("cursor-wait");
+        btn.innerHTML = oldLabel;
+        // Läuft gerade die Sperre, bleibt der Button bis zum Ablauf des Countdowns deaktiviert.
+        if ((window.__loginLockUntil || 0) > Date.now()) {
+          btn.disabled = true; btn.classList.add("opacity-60", "cursor-not-allowed");
+        } else {
+          btn.disabled = false; btn.classList.remove("opacity-60", "cursor-not-allowed");
+        }
+      }
+    }
+
+    async function changeMasterPasswordCore() {
       const oldPw = document.getElementById("change-pw-old").value;
       const newPw = document.getElementById("change-pw-new").value;
       const confirmPw = document.getElementById("change-pw-confirm").value;
@@ -3802,36 +3942,144 @@
       errorMsg.classList.add("hidden");
 
       if (!oldPw) return fail(currentLang === 'de' ? "Bitte aktuelles Passwort eingeben." : "Please enter current password.");
-      const derivedOld = await deriveKeyAndVerifier(oldPw, cryptoSalt, cryptoVersion);
-      if (!verifiersEqual(derivedOld.verifier, authVerifierHash)) return fail(currentLang === 'de' ? "Aktuelles Passwort ist falsch." : "Current password is incorrect.");
+      // Gleiche Bremse wie beim Login: nach 3 Fehlversuchen steigt die Wartezeit.
+      const waitMs = (window.__loginLockUntil || 0) - Date.now();
+      if (waitMs > 0) return showLockCountdown(errorMsg, errorText, ["btn-submit-change-pw"]);
+      // Neue Passwort-Regeln zuerst prüfen (billig, vor der teuren Schlüsselableitung).
       if (!newPw || newPw.trim() === "") return fail(currentLang === 'de' ? "Neues Passwort darf nicht leer sein." : "New password cannot be empty.");
       if (newPw !== confirmPw) return fail(currentLang === 'de' ? "Passwörter stimmen nicht überein." : "Passwords do not match.");
+      if (newPw === oldPw) return fail(t("pw_err_same"));
 
-      await decryptAllDevices(derivedOld.key);
-      const newDerived = await deriveKeyAndVerifier(newPw, null, CRYPTO_VERSION_CURRENT);
-      cryptoSalt = newDerived.salt;
-      authVerifierHash = newDerived.verifier;
-      cryptoVersion = newDerived.version;
-      await encryptAllDevices(newDerived.key);
-      storeCryptoParams();
+      const derivedOld = await deriveKeyAndVerifier(oldPw, cryptoSalt, cryptoVersion);
+      if (!verifiersEqual(derivedOld.verifier, authVerifierHash)) {
+        window.__loginFails = (window.__loginFails || 0) + 1;
+        if (window.__loginFails >= 3) {
+          window.__loginLockUntil = Date.now() + Math.min(30000, 1000 * Math.pow(2, window.__loginFails - 3));
+        }
+        if ((window.__loginLockUntil || 0) > Date.now()) return showLockCountdown(errorMsg, errorText, ["btn-submit-change-pw"]);
+        return fail(currentLang === 'de' ? "Aktuelles Passwort ist falsch." : "Current password is incorrect.");
+      }
+      window.__loginFails = 0;
+      window.__loginLockUntil = 0;
 
-      localStorage.setItem("kryptonetview_savedAt", String(Date.now()));
-      scheduleFileSave();
+      // Strikt entschlüsseln: schlägt etwas fehl, ist noch nichts verändert worden.
+      try {
+        await decryptAllDevicesStrict(derivedOld.key);
+      } catch (err) {
+        console.error(err);
+        return fail(t("pw_err_decrypt"));
+      }
 
-      if (isLoggedIn) {
-        activeCryptoKey = newDerived.key;
-      } else {
-        activeCryptoKey = null;
-        devices.forEach(d => Object.keys(d).forEach(k => { if (k.startsWith("_")) delete d[k]; }));
+      // Snapshot für Rollback, falls das Neuverschlüsseln oder Speichern scheitert.
+      const snap = {
+        salt: cryptoSalt, verifier: authVerifierHash, version: cryptoVersion, key: activeCryptoKey,
+        devs: devices.map(d => ({ d, loginUser: d.loginUser, loginPass: d.loginPass, wlanNets: d.wlanNets, loginSets: d.loginSets }))
+      };
+      try {
+        const newDerived = await deriveKeyAndVerifier(newPw, null, CRYPTO_VERSION_CURRENT);
+        cryptoSalt = newDerived.salt;
+        authVerifierHash = newDerived.verifier;
+        cryptoVersion = newDerived.version;
+        await encryptAllDevices(newDerived.key);
+        storeCryptoParams();   // erst nach erfolgreichem Neuverschlüsseln
+        localStorage.setItem("kryptonetview_savedAt", String(Date.now()));
+
+        // Schlüssel für die laufende Sitzung setzen (bei Nicht-Angemeldeten bleibt er leer).
+        if (isLoggedIn) {
+          activeCryptoKey = newDerived.key;
+        } else {
+          activeCryptoKey = null;
+          devices.forEach(d => Object.keys(d).forEach(k => { if (k.startsWith("_")) delete d[k]; }));
+        }
+      } catch (err) {
+        // Rollback auf den alten, konsistenten Zustand
+        cryptoSalt = snap.salt; authVerifierHash = snap.verifier; cryptoVersion = snap.version; activeCryptoKey = snap.key;
+        snap.devs.forEach(x => { x.d.loginUser = x.loginUser; x.d.loginPass = x.loginPass; x.d.wlanNets = x.wlanNets; x.d.loginSets = x.loginSets; });
+        try { storeCryptoParams(); saveToLocalStorage(); } catch (e2) { console.error(e2); }
+        throw err;
       }
 
       ["change-pw-old", "change-pw-new", "change-pw-confirm"].forEach(id => { document.getElementById(id).value = ""; });
       errorMsg.classList.add("hidden");
-      showNotification(t("notif_pw_changed"));
-      showLoginView();
       closeAuthModal();
-      updateAuthUIState();
-      renderDeviceList();
+
+      // Neues Passwort sofort in die HTML-Datei schreiben – nur möglich, wenn der Browser es kann UND die Datei verbunden ist.
+      clearTimeout(fileSaveTimer);
+      let hint = null;   // null = gesichert, sonst: "unsupported" | "notconnected" | "failed"
+      if (!fileApiSupported() || htmlFileStatus === "unsupported") {
+        hint = "unsupported";
+      } else if (fileHandle && htmlFileStatus === "on") {
+        const ok = await writeStateToHtmlFile();
+        if (!ok) hint = "failed";
+      } else {
+        hint = "notconnected";
+      }
+
+      if (hint) {
+        unsavedToFile = true;       // Browser warnt beim Schließen der Seite
+        openPwSaveHintModal(hint);  // danach geht es über finishPasswordChangeFlow() zur Anmeldung
+      } else {
+        unsavedToFile = false;
+        finishPasswordChangeFlow(t("notif_pw_changed_saved"));
+      }
+    }
+
+    // Nach dem Passwortwechsel: abmelden und zurück zum Anmeldeschirm.
+    function finishPasswordChangeFlow(message) {
+      isLoggedIn = false;
+      isEditMode = false;
+      activeCryptoKey = null;
+      devices.forEach(d => Object.keys(d).forEach(k => { if (k.startsWith("_")) delete d[k]; }));
+      try {
+        updateAuthUIState();
+        renderDeviceList();
+        renderTopologySVG();
+      } catch (err) { console.error(err); }
+      if (message) showNotification(message);
+      openAuthModal();   // zeigt die Login-Ansicht
+      const pwInput = document.getElementById("auth-password-input");
+      if (pwInput) { pwInput.value = ""; setTimeout(() => pwInput.focus(), 50); }
+    }
+
+    // Hinweisdialog: Passwort ist geändert, aber noch nicht in der Datei gesichert.
+    let pwSaveHintKind = null;
+    function openPwSaveHintModal(kind) {
+      pwSaveHintKind = kind;
+      const key = kind === "unsupported" ? "pwhint_text_unsupported" : (kind === "failed" ? "pwhint_text_failed" : "pwhint_text_notconnected");
+      document.getElementById("pwhint-title").textContent = t("pwhint_title");
+      document.getElementById("pwhint-text").textContent = t(key);
+      document.getElementById("pwhint-action-text").textContent = t(kind === "unsupported" ? "pwhint_btn_download" : "pwhint_btn_connect");
+      document.getElementById("pwhint-action-icon").className = kind === "unsupported" ? "fa-solid fa-file-export" : "fa-solid fa-link";
+      document.getElementById("pwhint-btn-continue").textContent = t("pwhint_btn_continue");
+      const modal = document.getElementById("pw-save-hint-modal");
+      modal.classList.remove("pointer-events-none", "opacity-0");
+      modal.classList.add("opacity-100");
+    }
+
+    function closePwSaveHintModal() {
+      const modal = document.getElementById("pw-save-hint-modal");
+      modal.classList.remove("opacity-100");
+      modal.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    // Aktion im Hinweisdialog: Datei verbinden bzw. HTML herunterladen. Erst bei Erfolg geht es weiter zur Anmeldung.
+    async function handlePwSaveHintAction() {
+      let ok = false;
+      if (pwSaveHintKind === "unsupported") {
+        ok = downloadUpdatedHtml() === true;
+      } else {
+        await handleFileLinkClick();   // verbindet und schreibt den kompletten Stand inkl. neuem Passwort
+        ok = (htmlFileStatus === "on" && !unsavedToFile);
+      }
+      if (ok) {
+        closePwSaveHintModal();
+        finishPasswordChangeFlow(t("notif_pw_changed_saved"));
+      }
+    }
+
+    function handlePwSaveHintContinue() {
+      closePwSaveHintModal();
+      finishPasswordChangeFlow(null);
     }
 
     // =====================================================================
@@ -6297,6 +6545,9 @@
       renderCategoryFiltersUI();
       renderDeviceList();
       renderTopologySVG();
+      // Nach dem CSV-Import automatisch die Ansicht zentrieren (wie Button "Zentrieren").
+      fitViewToContent();
+      saveActiveViewState(true);
       showNotification(message);
     }
 
@@ -7872,6 +8123,11 @@
       document.getElementById("btn-change-pw-header").onclick = () => { openAuthModal(); showChangePwView(); };
       document.getElementById("btn-cancel-change-pw").onclick = showLoginView;
       document.getElementById("btn-submit-change-pw").onclick = submitChangeMasterPassword;
+      ["change-pw-old", "change-pw-new", "change-pw-confirm"].forEach(id => {
+        document.getElementById(id).addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); submitChangeMasterPassword(); } });
+      });
+      document.getElementById("pwhint-btn-action").onclick = handlePwSaveHintAction;
+      document.getElementById("pwhint-btn-continue").onclick = handlePwSaveHintContinue;
 
       document.getElementById("btn-toggle-pw-visibility").onclick = () => {
         isPasswordVisible = !isPasswordVisible;
